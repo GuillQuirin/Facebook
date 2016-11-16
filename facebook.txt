@@ -1,0 +1,49 @@
+-Installer Debian 7 en ligne de commande
+-OVH
+-Envoyer à YSC le nom du groupe + adresse IP de OVH
+
++Connecter en SSH sur sa machine
++apt get update/upgrade
++install apache2
++Vérifier que l’adresse IP fonctionne sur le navigateur (avec ifconfig)
++les fichiers sont stockés dans /var/www
++install php5
++install mysql-server
++install php5-mysql
++install phpmyadmin
++selectionner apache2
++ln -s /usr/share/phpmyadmin /var/www/phpmyadmin
++egl.fbdev.fr
++objectif: créer un dossier propre au sous-domaine
++ cd /etc/apache2/sites-available
++mettre le virtualHost du diaporama
+	-postmaster@egl.fbdev.fr
+	ServerName egl.fbdev.fr
+
++nano egl.fbdev.fr.conf
++a2ensite egl.fbdev.fr.conf
++service apache2 reload
+
+
+
++Mettre en HTTPS le certificat SSL
++crontab -e
++mettre la ligne du diapo dans le fichier
++install git
+
++Créer un repository publique pour github
++Créer une clé SSH: ssh-keygen -b 4096
++Valider tout
++cd ~/.ssh/
++cat id_rsa.pub
++copier coller dans une nouvelle clé SSH de github
++Faire le tuto de README…..
++Mettre les nom/email avec git config
+
+
+
+OAuth: on donne des identifiants de connexion, et l’API rend un ticket “access token” pendant 2h on peut demander ce qu’on veut sans redemander à l’API
+
+
+Concours Photo: plus de like possible, mettre des like à 0 avec un social plugin
+Modifier l’URL pour que l’id soit nouveau et créer un autre bouton like
