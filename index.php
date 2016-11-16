@@ -16,7 +16,7 @@ $fb = new Facebook\Facebook([
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DEVELOPPEMENT FB</title>
+	<title>DEVELOPPEMENT FACEBOOK</title>
 	<meta charset="utf-8">
 	<script type="text/javascript" src="public/js/jquery.js"></script>
 	<!--<script type="text/javascript" src="public/js/script.js"></script>-->
