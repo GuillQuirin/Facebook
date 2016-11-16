@@ -146,13 +146,13 @@ $fb = new Facebook\Facebook([
 		/* --ENVOI DE DONNEES PAR L'UTILISATEUR-- */
 		if(isset($_POST)){
 			//Poster une image sur le mur de l'utilisateur
-			if(isset($_POST['url'])){
+			if(isset($_POST['url']) && !empty($_POST['url'])){
 				$image['url'] = $_POST['url'];
 				$response = $fb->post('/me/photos',$image);
 			}
 
 			//Poster un message sur le mur de l'utilisateur
-			if(isset($_POST['message'])){
+			if(isset($_POST['message']) && !empty($_POST['message'])){
 				$message['message'] = $_POST['message'];
 				$response = $fb->post('/me/feed',$message);
 			}
