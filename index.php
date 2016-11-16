@@ -192,7 +192,7 @@ $fb = new Facebook\Facebook([
 	    <form>
 
 	<?php else : ?>
-		<a href="login.php">Se connecter</a>
+		<a href="login.php">Se connecter U compte Facebook</a>
 	<?php endif?>
 </body>
 </html>
