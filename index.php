@@ -21,22 +21,7 @@ $fb = new Facebook\Facebook([
 	<link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
 	<script type="text/javascript" src="public/js/jquery.js"></script>
 	<script type="text/javascript" src="public/js/bootstrap.min.js"></script>
-	<!--<script type="text/javascript" src="public/js/script.js"></script>-->
-
-	<div id="fb-root"></div>
-	<style>
-		.modal img{
-			width: 100%;
-		}
-	</style>
-	<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.8&appId=1804945786451180";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
+	<script type="text/javascript" src="public/js/script.js"></script>
 	<div id="fb-root"></div>
 </head>
 <body>
@@ -139,8 +124,14 @@ $fb = new Facebook\Facebook([
 					      	<img src='<?php echo $photo['source']; ?>'>
 					      </div>
 					      <div class="modal-footer">
+					      <div class="fb-like" 
+							   		data-href="<?php echo $photo['source']; ?>" 
+							   		data-layout="button_count" 
+							   		data-action="like" 
+							   		data-size="small" 
+							   		data-show-faces="false" 
+							   		data-share="true"></div>
 					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					        <button type="button" class="btn btn-primary">Save changes</button>
 					      </div>
 					    </div>
 					  </div>
@@ -176,8 +167,14 @@ $fb = new Facebook\Facebook([
 						      	<img src='<?php echo $photo['source']; ?>'>
 						      </div>
 						      <div class="modal-footer">
+						      	<div class="fb-like" 
+								   		data-href="<?php echo $photo['source']; ?>" 
+								   		data-layout="button_count" 
+								   		data-action="like" 
+								   		data-size="small" 
+								   		data-show-faces="false" 
+								   		data-share="true"></div>
 						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						        <button type="button" class="btn btn-primary">Save changes</button>
 						      </div>
 						    </div>
 						  </div>
