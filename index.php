@@ -149,6 +149,7 @@ $fb = new Facebook\Facebook([
 			if(isset($_POST['url'])){
 				$image['url'] = $_POST['url'];
 				$response = $fb->post('/me/photos',$image);
+			
 			}
 
 			//Poster un message sur le mur de l'utilisateur
