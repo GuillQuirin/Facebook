@@ -149,7 +149,6 @@ $fb = new Facebook\Facebook([
 			if(isset($_POST['url'])){
 				$image['url'] = $_POST['url'];
 				$response = $fb->post('/me/photos',$image);
-			
 			}
 
 			//Poster un message sur le mur de l'utilisateur
@@ -193,7 +192,7 @@ $fb = new Facebook\Facebook([
 	    <form>
 
 	<?php else : ?>
-		<a href="login.php">Se connecter AU compte Facebook</a>
+		<a href="login.php">Se connecter U compte Facebook</a>
 	<?php endif?>
 </body>
 </html>
