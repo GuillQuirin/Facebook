@@ -3,6 +3,9 @@ session_start();
 $fb = new Facebook\Facebook([
 	'app_id' => '1804945786451180',
 	'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
+	// ELISE
+	// 'app_id' => '187377105043014',
+	// 'app_secret' => 'f5012f947d16170a87ae80cd59decde2',
 	'default_graph_version' => 'v2.5',
 	'fileUpload' => true
 	]);
@@ -103,17 +106,20 @@ $fb = new Facebook\Facebook([
 		$images = $response->getDecodedBody();
 		if($images){
 			//Photos individuelles
-			foreach ($images["photos"]["data"] as $key => $photo){
-				echo "<img style='width:10%;' src='".$photo['source']."'>";
-				echo '<div class="fb-like" 
-						   		data-href="'.$photo['source'].'" 
-						   		data-layout="button_count" 
-						   		data-action="like" 
-						   		data-size="small" 
-						   		data-show-faces="false" 
-						   		data-share="false"></div>';
-				echo "<br>";
+			if(isset($images["photos"])){
+				foreach ($images["photos"]["data"] as $key => $photo){
+					echo "<img style='width:10%;' src='".$photo['source']."'>";
+					echo '<div class="fb-like" 
+							   		data-href="'.$photo['source'].'" 
+							   		data-layout="button_count" 
+							   		data-action="like" 
+							   		data-size="small" 
+							   		data-show-faces="false" 
+							   		data-share="false"></div>';
+					echo "<br>";
+				}
 			}
+			
 
 			//Albums
 			foreach ($images["albums"]["data"] as $key => $album) {
