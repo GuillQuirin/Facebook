@@ -33,6 +33,5 @@ if(isset($accessToken)) {
 else
 	unset($_SESSION["ACCESS_TOKEN"]);
 
-
-header('Location: /Facebook/');
+header('Location: index.php');
 ?>
