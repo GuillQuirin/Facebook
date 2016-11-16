@@ -12,7 +12,7 @@
 					'publish_actions',
 					'pages_show_list','manage_pages','pages_manage_cta','publish_pages'];
 					
-	$loginUrl = $helper->getLoginUrl('http://egl.fbdev.fr/Facebook/login-callback.php', $permissions);
+	$loginUrl = $helper->getLoginUrl('https://egl.fbdev.fr/Facebook/login-callback.php', $permissions);
 
 ?>
 <!DOCTYPE html>
