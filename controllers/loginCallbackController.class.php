@@ -6,18 +6,7 @@ class loginCallbackController extends template{
 		//$v->assign("css", "loginCallback");
 		//$v->assign("js", "loginCallback");
 
-		/*
-		//Liste Tournois
-		$obj = new tournamentManager();
-		//Le paramètre par défaut vaut NULL si l'utilisateur n'est pas connecté
-		$listetournois = $obj->getUnstartedTournaments($this->connectedUser);
-		if(!!($listetournois)){
-			$v->assign("listeTournois", $listetournois);
-		}
-		*/
-		//$v->setView("loginCallback");
 		
-
 		$helper = $this->fb->getRedirectLoginHelper();
 
 		try {
