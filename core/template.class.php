@@ -4,9 +4,16 @@
 */
 class template{
   protected $connectedUser = false;
+  protected $fb;
 
   public function __construct(){
     /*Tant que chaque controller herite de template, le token sera vérifié à chaque rafraichissement de page*/
+    require_once __ROOT__.WEBPATH.'/web/vendor/autoload.php';
+    $this->fb = new Facebook\Facebook([
+    'app_id' => '1804945786451180',
+    'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
+    'default_graph_version' => 'v2.5',
+    ]);
     $this->checkToken();
   }
   protected function getConnectedUser(){return $this->connectedUser;}
