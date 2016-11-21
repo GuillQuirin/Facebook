@@ -7,15 +7,30 @@ class template{
   protected $fb;
 
   public function __construct(){
-    /*Tant que chaque controller herite de template, le token sera vérifié à chaque rafraichissement de page*/
-    require_once __ROOT__.WEBPATH.'/web/vendor/autoload.php';
+    
+    require_once __ROOT__.'/web/vendor/autoload.php';
+    
     $this->fb = new Facebook\Facebook([
-    'app_id' => '1804945786451180',
-    'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
-    'default_graph_version' => 'v2.5',
+      'app_id' => '1804945786451180',
+      'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
+      // ELISE
+      // 'app_id' => '187377105043014',
+      // 'app_secret' => 'f5012f947d16170a87ae80cd59decde2',
+      // GUILLAUME
+      //'app_id' => '1804945786451180',
+      //'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
+      'default_graph_version' => 'v2.5',
+      'fileUpload' => true
     ]);
-    $this->checkToken();
+
+    //$this->checkToken();
   }
+
+  protected function logout(){
+    unset($_SESSION["ACCESS_TOKEN"]);
+    header("Location: ".WEBPATH);
+  }
+
   protected function getConnectedUser(){return $this->connectedUser;}
 
   /* Cette methode fournira à la view reçue en parametre les propriétés nécessaires à l'affichage d'un user si ce dernier est bien connecté */

@@ -1,25 +1,9 @@
-<?php 
-require_once __ROOT__ . WEBPATH."/web/vendor/autoload.php";
-$fb = new Facebook\Facebook([
-	'app_id' => '1804945786451180',
-	'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
-	// ELISE
-	// 'app_id' => '187377105043014',
-	// 'app_secret' => 'f5012f947d16170a87ae80cd59decde2',
-	// GUILLAUME
-	//'app_id' => '1804945786451180',
-	//'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
-	'default_graph_version' => 'v2.5',
-	'fileUpload' => true
-	]);
-?>
-
 	<h1>PROJET DEV FB</h1>
 
 	<?php 
 	if(isset($_SESSION['ACCESS_TOKEN'])) : ?>
 		
-		<a href="logout.php">Se déconnecter</a>
+		<a href="<?php echo WEBPATH.'/logout'; ?>">Se déconnecter</a>
 		
 		<?php 	
 		//$fb->setDefaultAccessToken($_SESSION["LONG_ACCESS_TOKEN"]);

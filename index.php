@@ -29,8 +29,8 @@ function mon_loader($class){
 		return;
 	}
 
-	if(file_exists(__ROOT__ . WEBPATH."/web/vendor/autoload.php")){
-		require_once __ROOT__ . WEBPATH."/web/vendor/autoload.php";
+	if(file_exists(__ROOT__ ."/web/vendor/autoload.php")){
+		require_once __ROOT__ ."/web/vendor/autoload.php";
 		return;
 	}
 }
