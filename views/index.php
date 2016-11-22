@@ -1,13 +1,13 @@
 	<h1>PROJET DEV FB</h1>
 
 	<?php 
+	// unset($_SESSION['ACCESS_TOKEN']);
+	// print_r($fb);
 	if(isset($_SESSION['ACCESS_TOKEN'])) : ?>
 		
 		<a href="<?php echo WEBPATH.'/logout'; ?>">Se déconnecter</a>
 		
 		<?php 	
-		//$fb->setDefaultAccessToken($_SESSION["LONG_ACCESS_TOKEN"]);
-		$fb->setDefaultAccessToken($_SESSION["ACCESS_TOKEN"]);
 		try{
 			$response = $fb->get('/me');
 			$userNode = $response->getGraphUser();
@@ -207,7 +207,7 @@
 		    <input type="submit" name="upload" value="  U P L O A D  ">
 	    <form>
 
-	<?php else : ?>
-		<a href="<?php echo WEBPATH.'/login'; ?>">Se connecter à un compte Facebook</a>
-	<?php endif?>
+	<?php else : 
+		echo $urlLogin;
+	 endif?>
 
