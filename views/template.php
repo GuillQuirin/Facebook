@@ -20,6 +20,9 @@
 
 	<body>
 		<header>
+			<a href="<?php echo WEBPATH; ?>">Participer</a>
+			<a href="<?php echo WEBPATH; ?>/gallery">Galerie</a>
+			<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a></div>
 		</header>
 
 		<div id="content">
@@ -29,6 +32,9 @@
 
 		<!-- Footer des pages -->
 		<footer>
+			<a href="<?php echo WEBPATH; ?>/reglement">Règlement du concours</a>
+			<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a>
+			<a href="<?php echo WEBPATH; ?>/admin">Administration (à afficher si admin de la page)</a>
 		</footer>
 
 		<?php echo '<script src="'.WEBPATH.'/web/js/jquery.js"></script>';?>

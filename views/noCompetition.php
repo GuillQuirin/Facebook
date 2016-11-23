@@ -1,0 +1,1 @@
+<div>Pas de compétition ouverte actuellement !</div>

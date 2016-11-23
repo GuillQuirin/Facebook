@@ -8,27 +8,34 @@ class template{
 
   public function __construct(){
     
-    require_once __ROOT__.'/web/vendor/autoload.php';
+    //Recherche d'un concours ouvert au public
+    $competition = searchCompetitions();
     
-    //Connexion à l'application enregistrée
-    $this->fb = new Facebook\Facebook([
-      'app_id' => '1804945786451180',
-      'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
-      // ELISE
-      // 'app_id' => '187377105043014',
-      // 'app_secret' => 'f5012f947d16170a87ae80cd59decde2',
-      // GUILLAUME
-      //'app_id' => '1804945786451180',
-      //'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
-      'default_graph_version' => 'v2.5',
-      'fileUpload' => true
-    ]);
-    
-    //Session ouverte sur 3 mois ou non
-    if(isset($_SESSION['ACCESS_TOKEN'])){
-      //$this->fb->setDefaultAccessToken($_SESSION["LONG_ACCESS_TOKEN"]);
-      $this->fb->setDefaultAccessToken($_SESSION["ACCESS_TOKEN"]);
+    if($competition!==NULL){ //Un concours est actif
+
+      require_once __ROOT__.'/web/vendor/autoload.php';
+      
+      //Connexion à l'application enregistrée
+      $this->fb = new Facebook\Facebook([
+        'app_id' => '1804945786451180',
+        'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
+        // ELISE
+        // 'app_id' => '187377105043014',
+        // 'app_secret' => 'f5012f947d16170a87ae80cd59decde2',
+        // GUILLAUME
+        //'app_id' => '1804945786451180',
+        //'app_secret' => '0071a8a0031dae4539ae78f37d052dae',
+        'default_graph_version' => 'v2.5',
+        'fileUpload' => true
+      ]);
+      
+      //Session ouverte sur 3 mois ou non
+      if(isset($_SESSION['ACCESS_TOKEN']))
+        //$this->fb->setDefaultAccessToken($_SESSION["LONG_ACCESS_TOKEN"]);
+        $this->fb->setDefaultAccessToken($_SESSION["ACCESS_TOKEN"]);
     }
+    else //Pas de concours ouverts actuellement
+      header('Location: '.WEBPATH.'/noCompetition');
   }
 
   protected function login(view $v){
@@ -41,7 +48,9 @@ class template{
           $helper->getLoginUrl('https://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions)
           : $helper->getLoginUrl('http://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions);
 
-    $v->assign("urlLogin","<a href='".$loginUrl."'>Se connecter</a>");
+    $button = (isset($_SESSION['ACCESS_TOKEN'])) ? "<a href='".WEBPATH."/logout'><button>Se déconnecter</button></a>" 
+                                                 : "<a href='".$loginUrl."'><button>Se connecter</button></a>";
+    $v->assign("urlLoginLogout",$button);
   }
 
   protected function logout(){
@@ -52,14 +61,8 @@ class template{
 
   /* Cette methode fournira à la view reçue en parametre les propriétés nécessaires de la classe-mère template */
   protected function assignConnectedProperties(view $v){
-    if($this->fb!==false){
+    if($this->fb!==false)
       $v->assign("fb",$this->fb);
-    }
-
-  }
-  
-  protected function connectionUser(){
-
   }
 
   protected function envoiMail($destinataire, $objet, $contenu){

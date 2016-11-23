@@ -9,6 +9,6 @@ class LoadFailController{
 		$v->assign("title", "Erreur 404");
         $v->assign("content", "Erreur 404, <a href='".WEBPATH."/index'>Retour à l'accueil</a>.");
 
-        $v->setView("templatefail", "templatefail");
+        $v->setView("404", "templateempty");
     }
 }
