@@ -13,6 +13,7 @@
 		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/template.css" media="screen">';?>
 		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/general-stylesheet.css">';?>
 		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/bootstrap.min.css">';?>
+		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/lib/DataTables/datatables.min.css">';?>
 		
 		<?php echo (isset($css)) ? '<link rel="stylesheet" href="'.WEBPATH.'/web/css/'.$css.'-stylesheet.css">' : '';?>
 
@@ -40,6 +41,7 @@
 
 		<?php echo '<script src="'.WEBPATH.'/web/js/jquery.js"></script>';?>
 		<?php echo '<script src="'.WEBPATH.'/web/js/bootstrap.min.js"></script>';?>
+		<?php echo '<script src="'.WEBPATH.'/web/lib/DataTables/datatables.min.js"></script>';?>
 		<?php 
 			if(isset($js)){ 
 				if(is_array($js)){

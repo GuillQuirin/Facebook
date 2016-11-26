@@ -71,4 +71,50 @@ abstract class basesql{
 
 		return $query->execute($data);
 	}
+
+	protected function update($data){
+		$listColumns=$this->getColumns();
+		
+		$sql = "UPDATE ".$this->table." SET";
+		$i=0;
+		foreach ($listColumns as $column) {
+			if($i!=0){ //On saute le premier élèment qui correspond normalement à l'ID
+				$sql .= " ".$column."=:".$column;
+				if($column!=end($listColumns))
+					$sql.=",";
+			}
+			$i++;
+		}
+		reset($listColumns); //obligatoire pour récupérer le 1er élement d'un tableau apres son parcours
+		$sql.= " WHERE ".key($listColumns)."=:".key($listColumns);
+
+		
+		$sth = $this->pdo->prepare($sql);
+
+		foreach ($listColumns as $key => $attribute){
+			$method = 'get'.ucfirst($attribute);
+			$value = $data->$method();
+			$array[$key]=$value;
+		}
+
+		$sth->execute($array);	
+	}
+
+	protected function getColumns(){
+		//Retourne les colonnes appartenant d'une la table visée
+		$sql = "SELECT COLUMN_NAME 
+				FROM INFORMATION_SCHEMA.COLUMNS 
+				WHERE TABLE_SCHEMA = '".DBNAME."' AND TABLE_NAME = '".$this->table."'";
+
+		$sth = $this->pdo->prepare($sql);
+		$sth->execute();
+		$r = $sth->fetchAll(PDO::FETCH_NUM);
+		$list = [];
+
+		foreach ($r as $key => $value)
+			$list[$value[0]]=$value[0];
+
+		return $list;
+	}
+
 }
