@@ -5,13 +5,15 @@
 class template{
   protected $connectedUser = false;
   protected $fb=false;
+  protected $competition = NULL;
 
   public function __construct(){
     
     //Recherche d'un concours ouvert au public
-    $competition = searchCompetitions();
+    $competitionManager = new competitionManager();
+    $this->competition = $competitionManager->searchCompetitions();
     
-    if($competition!==NULL){ //Un concours est actif
+    if($this->competition!==NULL){ //Un concours est actif
 
       require_once __ROOT__.'/web/vendor/autoload.php';
       
@@ -63,6 +65,9 @@ class template{
   protected function assignConnectedProperties(view $v){
     if($this->fb!==false)
       $v->assign("fb",$this->fb);
+
+    if($this->competition!==NULL)
+      $v->assign("competition",$this->competition);
   }
 
   protected function envoiMail($destinataire, $objet, $contenu){

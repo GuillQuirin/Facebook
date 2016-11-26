@@ -4,7 +4,8 @@ class noCompetitionController{
 	public function __construct(){
 		$v = new view();
 
-		$competition = searchCompetitions();
+		$competitionManager = new competitionManager();
+		$competition = $competitionManager->searchCompetitions();
 		if($competition!==NULL)
 			header('Location: '.WEBPATH);
 		else{

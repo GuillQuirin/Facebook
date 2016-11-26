@@ -1,13 +1,5 @@
 <?php
 
-function searchCompetitions(){
-	/*En attendant que le manager soit mis en place -->
-	$bddCompetitions = new competitionManager();
-    $competition = $bddCompetitions->isOpenCompetition();
-    */
-    $competition = 1;
-    return $competition;
-}
 
 /*******/
 
