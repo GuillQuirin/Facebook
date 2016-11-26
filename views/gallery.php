@@ -1,17 +1,9 @@
 
 <?php
-if(isset($competition)) :?>
-	<p>Nombre de participants actuels: <?php echo $competition->nbPlayers(); ?></p>
+if(isset($competition) && isset($_SESSION['ACCESS_TOKEN'])) : ?>
+	<p>Nombre de participants actuels: <?php //echo $competition->nbPlayers(); ?></p>
+	
+
 <?php  
 	endif; 
 ?> 
-
-PHOTO<br>
-PHOTO<br>
-PHOTO<br>
-PHOTO<br>
-PHOTO<br>
-PHOTO<br>
-PHOTO<br>
-PHOTO<br>
-PHOTO<br>

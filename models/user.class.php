@@ -1,5 +1,5 @@
 <?php 
-class user{
+class user extends motherClass{
 
 	protected $email=null;
 	protected $user_posts=null;
@@ -11,6 +11,7 @@ class user{
 	protected $manage_pages=null;
 	protected $pages_manage_cta=null;
 	protected $publish_pages=null;
+	protected $isAdmin = null;
 
 	public function __construct($token){
 		$this->hydrate($token);
@@ -47,6 +48,7 @@ class user{
 	public function setManage_pages($v){$this->manage_pages=$v;}
 	public function setPages_manage_cta($v){$this->pages_manage_cta=$v;}
 	public function setPublish_pages($v){$this->publish_pages=$v;}
+	public function setIsAdmin($v){$this->isAdmin=$v;}
 
 	public function getEmail(){return $this->email;}
 	public function getUser_posts(){return $this->user_posts;}
@@ -58,4 +60,5 @@ class user{
 	public function getManage_pages(){return $this->manage_pages;}
 	public function getPages_manage_cta(){return $this->pages_manage_cta;}
 	public function getPublish_pages(){return $this->publish_pages;}
+	public function getIsAdmin(){return $this->isAdmin;}
 }

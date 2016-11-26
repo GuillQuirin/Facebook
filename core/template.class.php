@@ -31,9 +31,9 @@ class template{
         'fileUpload' => true
       ]);
       
-      //Session ouverte sur 3 mois ou non
+      //Session ouverte sur 2 heures
       if(isset($_SESSION['ACCESS_TOKEN']))
-        //$this->fb->setDefaultAccessToken($_SESSION["LONG_ACCESS_TOKEN"]);
+        //$this->fb->setDefaultAccessToken($_SESSION["LONG_ACCESS_TOKEN"]); //60 jours
         $this->fb->setDefaultAccessToken($_SESSION["ACCESS_TOKEN"]);
     }
     else //Pas de concours ouverts actuellement
@@ -42,7 +42,7 @@ class template{
 
   protected function login(view $v){
     $helper = $this->fb->getRedirectLoginHelper();
-    $permissions = ['email','publish_actions',
+    $permissions = ['email','user_birthday','user_location','publish_actions',
                     'user_posts','user_likes','user_photos','user_friends',
                     'pages_show_list','manage_pages','pages_manage_cta','publish_pages'];
           
@@ -70,8 +70,8 @@ class template{
       $v->assign("competition",$this->competition);
   }
 
-  protected function envoiMail($destinataire, $objet, $contenu){
-    /* CONFIGURATION DU MAIL*/
+  /*protected function envoiMail($destinataire, $objet, $contenu){
+    // CONFIGURATION DU MAIL
 
     $adrPHPM = "web/lib/PHPMailer/"; 
     include $adrPHPM."PHPMailerAutoload.php";
@@ -115,7 +115,7 @@ class template{
 
     }
   }
-
+  */
 
 }
 

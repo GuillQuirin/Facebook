@@ -18,9 +18,21 @@
 			?>
 		</div>
 		<?php echo $urlLoginLogout; ?>
+		<a href="<?php echo WEBPATH; ?>/admin">Administration</a>
 	<?php
 	endif;
 	?>
 
 
 <?php echo (isset($_SESSION['ACCESS_TOKEN'])) ? "Vous avez une session ACCESS_TOKEN" : "Vous n'avez pas de session ACCESS_TOKEN"; ?>
+
+
+<?php 
+	/*$response = $fb->get('/me?fields=id,name,email,birthday,location');
+	$pages = $response->getGraphUser();
+	echo "<pre>";
+	print_r($pages);
+	$user = new user($pages);
+*/
+
+//echo (isset($_SESSION['ACCESS_TOKEN'])) ? "Vous êtes ".$user->getNom() : "Vous n'avez pas de nom."; ?>
