@@ -38,6 +38,10 @@ class competitionManager extends basesql{
 		$this->update($data);
 	} 
 
+	public function insertCompetition(competition $data){
+		$this->save($data);
+	} 
+
 }
 
 /*

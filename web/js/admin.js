@@ -1,6 +1,6 @@
 $(document).ready(function() {
     //Liste des competitions
-    $('#listCompetitions').DataTable( {
+    var listAdmin = $('#listCompetitions').DataTable( {
         "paging":   true,
         "ordering": true,
         "info":     true,
@@ -23,10 +23,9 @@ $(document).ready(function() {
             var type = $(this).attr('name');
             $('#Modal input[name="'+type+'"]').val($(this).text());
         })
-        $("#Modal").modal();    
     });
 
-    //Envoi des nouvelles données en ajax
+    //Envoi des modifications en ajax
     $('#Modal #submit').click(function(){
         $.ajax({
           method: "POST",
@@ -34,7 +33,19 @@ $(document).ready(function() {
           data: $('#data_competition').serialize()
         })
           .done(function( msg ) {
-            console.log( "Data Saved: " + msg );
+           location.reload();
+          });
+    });
+
+     //Envoi du nouveau concours en ajax
+    $('#CreateCompetition #submit').click(function(){
+        $.ajax({
+          method: "POST",
+          url: $('[name="webpath"]').val()+"/admin/addCompetition",
+          data: $('#create_data_competition').serialize()
+        })
+          .done(function( msg ) {
+           location.reload();
           });
     });
 } );

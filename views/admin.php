@@ -13,7 +13,7 @@
 <tbody>
 	<?php 
 	foreach ($listCompetitions as $key => $competition) {
-		echo "<tr data-target='#Modal'>";
+		echo "<tr data-toggle='modal' data-target='#Modal'>";
 			echo "<td name='id_competition' >".$competition->getId_competition()."</td>";
 			echo "<td name='name' >".$competition->getName()."</td>";
 			echo "<td name='description' >".$competition->getDescription()."</td>";
@@ -54,6 +54,32 @@
       </div>
       <div class="modal-footer">
         <button type="button" id="submit" class="btn btn-primary">Modifier le concours</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button type="button"  data-toggle="modal" data-target='#CreateCompetition'>Créer un concours</button>
+<!-- Modal -->
+<div class="modal fade" id="CreateCompetition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Création un concours</h4>
+      </div>
+      <div class="modal-body">
+        <form id="create_data_competition">
+	        <input type="text" name="name" placeholder="Nom">
+	        <input type="text" name="description" placeholder="Description">
+	        <input type="date" name="start_date" placeholder="Début">
+	        <input type="date" name="end_date" placeholder="Fin">
+	        <input type="text" name="prize" placeholder="Prix">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="submit" class="btn btn-primary">Enregistrer le concours</button>
       </div>
     </div>
   </div>

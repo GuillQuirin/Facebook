@@ -15,6 +15,12 @@ class adminController extends template{
 		$v->setView("admin","templateadmin");
 	}
 
+	public function addCompetitionAction(){
+		$competition = new competition($_POST);
+		$competitionManager = new competitionManager();
+		$competitionManager->insertCompetition($competition);
+	}
+
 	public function editCompetitionAction(){
 		$competition = new competition($_POST);
 		$competitionManager = new competitionManager();

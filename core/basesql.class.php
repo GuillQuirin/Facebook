@@ -33,43 +33,22 @@ abstract class basesql{
 	
 	}
 
-	public function create(){
-		// Check afin de savoir qui appelle cette méthode
-		$e = new Exception();
-		$trace = $e->getTrace();
+	protected function save($data){
+		//Suppression des valeurs NULL présentes dans le nouvel objet à inserer
+		$listColumns=array_filter($data->getAllAttributes());
 
-		// get calling class:
-		$calling_class = (isset($trace[1]['class'])) ? $trace[1]['class'] : false;
-		// get calling method
-		$calling_method = (isset($trace[1]['function'])) ? $trace[1]['function'] : false;
-
-
-		if(!$calling_class || !$calling_method)
-			return false;
-
-		$this->table = strtolower(get_class($this->mirrorObject));	
-		$this->columns = [];
-		$object_methods = get_class_methods($this->mirrorObject);
-
-		foreach ($object_methods as $key => $method) {
-			if(strpos($method, 'get') !== FALSE && strpos($method, 'get')===0){
-				$col = lcfirst(str_replace('get', '', $method));
-				$this->columns[$col] = ($col==="img" || $col==="pImg" || $col==="gameImg") ? $this->mirrorObject->$method(true) : $this->mirrorObject->$method();
-			};
-		}
-		$this->columns = array_filter($this->columns);
-		return $this->save();
-	}
-
-	protected function save(){
-		$sql = "INSERT INTO ".$this->table." (".implode(",",array_keys($this->columns)).")
-		VALUES (:".implode(",:", array_keys($this->columns)).")";
+		$sql = "INSERT INTO ".$this->table." (".implode(",",array_keys($listColumns)).")
+		VALUES (:".implode(",:", array_keys($listColumns)).")";
 
 		$query = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-		foreach($this->columns as $key => $value) 
-			$data[$key] = $value;
+		
+		foreach ($listColumns as $key => $attribute){
+			$method = 'get'.ucfirst($key);
+			$value = $data->$method();
+			$array[$key]=$value;
+		}
 
-		return $query->execute($data);
+		return $query->execute($array);
 	}
 
 	protected function update($data){
@@ -87,12 +66,11 @@ abstract class basesql{
 		}
 		reset($listColumns); //obligatoire pour récupérer le 1er élement d'un tableau apres son parcours
 		$sql.= " WHERE ".key($listColumns)."=:".key($listColumns);
-
 		
 		$sth = $this->pdo->prepare($sql);
 
 		foreach ($listColumns as $key => $attribute){
-			$method = 'get'.ucfirst($attribute);
+			$method = 'get'.ucfirst($key);
 			$value = $data->$method();
 			$array[$key]=$value;
 		}
