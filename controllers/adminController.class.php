@@ -7,13 +7,25 @@ class adminController extends template{
 		//$v->assign("css", "admin");
 		$v->assign("js", "admin");				
 		
+		//Competitions
 		$competitionManager = new competitionManager();
 		$listCompetitions = $competitionManager->getAllCompetitions();
 		$v->assign("listCompetitions",$listCompetitions);
-	
+		
+		//Utilisateurs
+		$userManager = new userManager();
+		$listUsers = $userManager->getAllUsers();
+		$v->assign("listUsers",$listUsers);
+
+		//Participations
+		$participateManager = new participateManager();
+		$listParticipants = $participateManager->getAllParticipants();
+		$v->assign("listParticipants",$listParticipants);
 
 		$v->setView("admin","templateadmin");
 	}
+
+	//ADMINISTRATION DES COMPETITIONS
 
 	public function addCompetitionAction(){
 		$competition = new competition($_POST);

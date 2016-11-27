@@ -30,8 +30,43 @@
 	?>
 </tbody>
 </table>
+<button type="button"  data-toggle="modal" data-target='#CreateCompetition'>Créer un concours</button>
 
-<!-- Modal -->
+<table id="listUsers">
+<thead>
+	<th>Nom</th>
+	<th>Prénom</th>
+	<th>Date de naissance</th>
+	<th>Email</th>
+	<th>Concours participés</th>
+</thead>
+<tbody>
+	<?php 
+	foreach ($listUsers as $key => $user) {
+		echo "<tr data-toggle='modal' data-target='#Modal'>";
+			echo "<td name='last_name' >".$user->getLast_name()."</td>";
+			echo "<td name='first_name' >".$user->getFirst_name()."</td>";
+			echo "<td name='email' >".$user->getEmail()."</td>";
+			echo "<td name='birth_date' >".date('d/m/Y',strtotime($user->getBirth_date()))."</td>";
+			echo "<td >";
+				$i=0;
+				foreach ($listParticipants as $key => $participation) {
+					if($participation->getId_participant()==$user->getId_participant()){
+						if($i!=0)
+							echo ", ";
+						echo "<a href=''>".$participation->getId_competition()."</a>";
+					}
+					$i++;
+				}
+			echo "</td>";
+		echo "</tr>";
+	}
+	?>
+</tbody>
+</table>
+
+<!--      Modal      -->
+<!-- Modification -->
 <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -60,8 +95,7 @@
 </div>
 
 
-<button type="button"  data-toggle="modal" data-target='#CreateCompetition'>Créer un concours</button>
-<!-- Modal -->
+<!--  Création -->
 <div class="modal fade" id="CreateCompetition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

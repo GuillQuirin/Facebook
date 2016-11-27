@@ -33,6 +33,8 @@ abstract class basesql{
 	
 	}
 
+
+	//INSERTION 
 	protected function save($data){
 		//Suppression des valeurs NULL présentes dans le nouvel objet à inserer
 		$listColumns=array_filter($data->getAllAttributes());
@@ -51,6 +53,7 @@ abstract class basesql{
 		return $query->execute($array);
 	}
 
+	//MISE A JOUR
 	protected function update($data){
 		$listColumns=$this->getColumns();
 		
@@ -78,8 +81,8 @@ abstract class basesql{
 		$sth->execute($array);	
 	}
 
+	//NOM DES COLONNES D'UNE TABLE
 	protected function getColumns(){
-		//Retourne les colonnes appartenant d'une la table visée
 		$sql = "SELECT COLUMN_NAME 
 				FROM INFORMATION_SCHEMA.COLUMNS 
 				WHERE TABLE_SCHEMA = '".DBNAME."' AND TABLE_NAME = '".$this->table."'";
