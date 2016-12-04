@@ -9,9 +9,14 @@ class noCompetitionController{
 		if($competition!==NULL)
 			header('Location: '.WEBPATH);
 		else{
-			//$v->assign("css", "404");
-			//$v->assign("js", "404");
-			//$v->assign("title", "Erreur 404");
+
+			$settingManager = new settingManager();
+			$setting = $settingManager->getSetting();
+
+			$v->assign("css", "noCompetition");
+			$v->assign("js", "noCompetition");
+			$v->assign("title", "Pas de concours");
+			$v->assign("setting", $setting);
 	        //$v->assign("content", "Erreur 404, <a href='".WEBPATH."/index'>Retour à l'accueil</a>.");
 
 	        $v->setView("noCompetition", "templateempty");
