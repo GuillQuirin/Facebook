@@ -50,9 +50,10 @@ class template{
           $helper->getLoginUrl('https://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions)
           : $helper->getLoginUrl('http://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions);
 
-    $button = (isset($_SESSION['ACCESS_TOKEN'])) ? "<a href='".WEBPATH."/logout'><button>Se déconnecter</button></a>" 
+    /*$button = (isset($_SESSION['ACCESS_TOKEN'])) ? "<a href='".WEBPATH."/logout'><button>Se déconnecter</button></a>" 
                                                  : "<a href='".$loginUrl."'><button>Se connecter</button></a>";
-    $v->assign("urlLoginLogout",$button);
+    */
+    $v->assign("urlLoginLogout",$loginUrl);
   }
 
   protected function logout(){
