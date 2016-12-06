@@ -1,5 +1,16 @@
-<?php 
+<?php  
+	if(isset($_SESSION['ACCESS_TOKEN'])){
+		$response = $fb->get('1804945786451180/roles',"1804945786451180|yqj6xWNaG2lUvVv3sfwwRbU5Sjk");
+		$admins = $response->getDecodedBody();
 
+		foreach ($admins['data'] as $key => $admin) {
+			if($admin['role']=="administrators")
+				$listAdmins[] = $admin['user'];
+		}
+
+		$response = $fb->get('/me?fields=id,name,first_name,last_name,email,birthday,location');
+		$user = $response->getGraphUser();
+	}
 	if(isset($competition)) :?>
 		<div class="row">
 			<div class="col-md-2">
@@ -27,9 +38,10 @@
 				<div class="col-md-6">
 					<?php 
 					if(isset($_SESSION['ACCESS_TOKEN'])) :?>
-						<button>Bienvenue Guigui</button>
+						<button>Bienvenue <?php echo $user->getFirstName(); ?></button>
+						<a href="<?php echo WEBPATH; ?>/logout">Se déconnecter</a>
 					<?php else :?>
-						<button><a href="<?php echo $urlLoginLogout; ?>">Je participe !</a></button>
+						<a href="<?php echo $urlLoginLogout; ?>"><button>Participer</button></a>
 					<?php endif; ?>
 				</div>
 				<div class="col-md-6">
@@ -56,14 +68,8 @@
 
 
 <?php 
-	/*$response = $fb->get('/me?fields=id,name,email,birthday,location');
-	$pages = $response->getGraphUser();
-	echo "<pre>";
-	print_r($pages);
-	$user = new user($pages);
-*/
-
-//echo (isset($_SESSION['ACCESS_TOKEN'])) ? "Vous êtes ".$user->getNom() : "Vous n'avez pas de nom."; ?>
+//echo (isset($_SESSION['ACCESS_TOKEN'])) ? "Vous êtes ".$user->getNom() : "Vous n'avez pas de nom."; 
+?>
 
 <footer>
 	<nav class="navbar navbar-default">
@@ -71,7 +77,10 @@
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="<?php echo WEBPATH;?>/">Règlement du concours</a></li>
 			<li><a href="<?php echo WEBPATH;?>/">CGU</a></li>
-			<li><a href="<?php echo WEBPATH;?>/admin">Administration</a></li>
+			<?php 
+			if(isset($_SESSION['ACCESS_TOKEN']) && in_array($user->getId(),$listAdmins)) :?>
+				<li><a href="<?php echo WEBPATH;?>/admin">Administration</a></li>
+			<?php endif; ?>
 	    </ul>
 	    <div class="nav navbar-nav navbar-right fb-share-button" 
 	    	data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true">
