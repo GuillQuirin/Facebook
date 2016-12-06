@@ -1,121 +1,153 @@
-<table id="listCompetitions">
-<thead>
-	<th>Numéro</th>
-	<th>Nom</th>
-	<th>Description</th>
-	<th>Date de départ</th>
-	<th>Date de fin</th>
-	<th>Prix</th>
-	<th>Nombre de participants</th>
-	<th>Nom du gagnant</th>
-	<th>Statut</th>
-</thead>
-<tbody>
-	<?php 
-	foreach ($listCompetitions as $key => $competition) {
-		echo "<tr data-toggle='modal' data-target='#Modal'>";
-			echo "<td name='id_competition' >".$competition->getId_competition()."</td>";
-			echo "<td name='name' >".$competition->getName()."</td>";
-			echo "<td name='description' >".$competition->getDescription()."</td>";
-			echo "<td name='start_date' >".date('d/m/Y',strtotime($competition->getStart_date()))."</td>";
-			echo "<td name='end_date' >".date('d/m/Y',strtotime($competition->getEnd_date()))."</td>";
-			echo "<td name='prize' >".$competition->getPrize()."</td>";
-			echo "<td name='totalParticipants' >".$competition->getTotalParticipants()."</td>";
-			echo "<td name='id_winner' >".$competition->getId_winner()."</td>";
-			echo "<td name='active'>";
-				echo ($competition->getActive()==1) ? "Actif" : "";
-			echo "</td>";
-		echo "</tr>";
-	}
-	?>
-</tbody>
-</table>
-<button type="button"  data-toggle="modal" data-target='#CreateCompetition'>Créer un concours</button>
+<div class="col-md-12">
+	<div class="col-md-offset-1 col-md-10 col-offset-1">
+		<h2 class="text-center text-uppercase">Liste des concours</h2>
 
-<table id="listUsers">
-<thead>
-	<th>Nom</th>
-	<th>Prénom</th>
-	<th>Date de naissance</th>
-	<th>Email</th>
-	<th>Concours participés</th>
-</thead>
-<tbody>
-	<?php 
-	foreach ($listUsers as $key => $user) {
-		echo "<tr data-toggle='modal' data-target='#Modal'>";
-			echo "<td name='last_name' >".$user->getLast_name()."</td>";
-			echo "<td name='first_name' >".$user->getFirst_name()."</td>";
-			echo "<td name='email' >".$user->getEmail()."</td>";
-			echo "<td name='birth_date' >".date('d/m/Y',strtotime($user->getBirth_date()))."</td>";
-			echo "<td >";
-				$i=0;
-				foreach ($listParticipants as $key => $participation) {
-					if($participation->getId_participant()==$user->getId_participant()){
-						if($i!=0)
-							echo ", ";
-						echo "<a href=''>".$participation->getId_competition()."</a>";
-					}
-					$i++;
-				}
-			echo "</td>";
-		echo "</tr>";
-	}
-	?>
-</tbody>
-</table>
+		<table id="listCompetitions" class="table stripe order-column">
+			<thead>
+				<th>Numéro</th>
+				<th>Nom</th>
+				<th>Description</th>
+				<th>Date de départ</th>
+				<th>Date de fin</th>
+				<th>Prix</th>
+				<th>Nombre de participants</th>
+				<th>Nom du gagnant</th>
+				<th>Statut</th>
+				<th>Action</th>
+			</thead>
+			<tbody>
+				<?php foreach ($listCompetitions as $key => $competition) { ?>
+					<tr data-toggle='modal' data-target='#Modal' class="cursor">
+						<td name='id_competition'> <?php echo $competition->getId_competition() ?> </td>
+						<td name='name'> <?php echo $competition->getName() ?></td>
+						<td name='description'> <?php echo $competition->getDescription() ?></td>
+						<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())) ?></td>
+						<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())) ?></td>
+						<td name='prize' > <?php echo $competition->getPrize() ?></td>
+						<td name='totalParticipants' > <?php echo $competition->getTotalParticipants() ?></td>
+						<td name='id_winner' ><?php echo $competition->getId_winner() ?></td>
+						<td name='active'>
+							<?php echo ($competition->getActive()==1) ? "Actif" : ""; ?>
+						</td>
+						<td name='action'> <?php echo ($competition->getActive()==1) ? "<button class='btn btn-danger'>Cloturer</button>" : ""; ?></td>
+					</tr>
+				<?php } ?>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-md-offset-3 col-md-6 col-offset-3 btn-new-competition">
+		<button type="button" data-toggle="modal" data-target="#CreateCompetition" class="col-md-12 btn btn-success">Créer un concours !</button>
+	</div>
+	<div class="col-md-offset-1 col-md-10 col-offset-1">
+		<h2 class="text-center text-uppercase">Liste des photos signalées</h2>
 
-<!--      Modal      -->
-<!-- Modification -->
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modifier un concours</h4>
-      </div>
-      <div class="modal-body">
-        <form id="data_competition">
-        	<input type="hidden" name="id_competition">
-	        <input type="text" name="name">
-	        <input type="text" name="description">
-	        <input type="date" name="start_date">
-	        <input type="date" name="end_date">
-	        <input type="text" name="prize">
-	        <input type="number" name="totalParticipants">
-	        <input type="number" name="id_winner">
-	        <input type="checkbox" name="active">
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="submit" class="btn btn-primary">Modifier le concours</button>
-      </div>
-    </div>
-  </div>
-</div>
+		<table id="listReportedPhoto" class="table table-striped">
+		<thead>
+			<th>Nom de l'uploader</th>
+			<th>Url de la photo</th>
+			<th>Action</th>
+		</thead>
+		<tbody>
+			<?php foreach ($listReportedPhoto as $key => $photo) { ?>
+				<tr data-toggle='modal' data-target='#Modal'>
+					<td name='nom_updlader'><?php echo $photo->getId_participant() ?></td>
+					<td name='url_photo'><?php echo $photo->getUrl_photo() ?></td>
+					<td name='action'> 
+						<?php echo ($photo->getIs_locked()==0) ? "<button class='btn btn-success'>Vérouiller</button>" : "<button class='btn btn-danger'>Dévérouiller</button>" ?>
+					</td>
+				</tr>
+			<?php } ?>
+		</tbody>
+		</table>
+
+		<!--      Modal      -->
+		<!-- Modification -->
+		<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modifier un concours</h4>
+		      </div>
+		      <div class="modal-body">
+		        <form id="data_competition">
+		        	<div class="form-group row">
+		        		<label for="name" class="col-xs-3 col-form-label text-right">Name</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="name" class="form-control">
+	        			</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="description" class="col-xs-3 col-form-label text-right">Description</label>
+		        		<div class="col-xs-9">
+		        			<textarea class="form-control" name="description" rows="3"></textarea>
+	        			</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="start_date" class="col-xs-3 col-form-label text-right">Date de début</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="start_date" class="form-control">
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="end_date" class="col-xs-3 col-form-label text-right">Date de fin</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="end_date" class="form-control">
+	        			</div>	
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="prize" class="col-xs-3 col-form-label text-right">Prix</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="prize" class="form-control">
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="totalParticipants" class="col-xs-3 col-form-label text-right">Nombre de participants</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="totalParticipants" class="form-control" disabled>
+	        			</div>
+		        	</div>
+		        	<div class="form-check row">
+					    <label class="col-xs-3 form-check-label text-right">Actif</label>
+					    <div class="col-xs-9">
+					      	<input type="checkbox" name="active" class="form-check-input">
+				      	</div>
+					    </label>
+					  </div>
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" id="submit" class="btn btn-primary">Modifier le concours</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
 
-<!--  Création -->
-<div class="modal fade" id="CreateCompetition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Création un concours</h4>
-      </div>
-      <div class="modal-body">
-        <form id="create_data_competition">
-	        <input type="text" name="name" placeholder="Nom">
-	        <input type="text" name="description" placeholder="Description">
-	        <input type="date" name="start_date" placeholder="Début">
-	        <input type="date" name="end_date" placeholder="Fin">
-	        <input type="text" name="prize" placeholder="Prix">
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="submit" class="btn btn-primary">Enregistrer le concours</button>
-      </div>
-    </div>
-  </div>
+		<!--  Création -->
+		<div class="modal fade" id="CreateCompetition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Création un concours</h4>
+		      </div>
+		      <div class="modal-body">
+		        <form id="create_data_competition">
+			        <input type="text" name="name" placeholder="Nom">
+			        <input type="text" name="description" placeholder="Description">
+			        <input type="date" name="start_date" placeholder="Début">
+			        <input type="date" name="end_date" placeholder="Fin">
+			        <input type="text" name="prize" placeholder="Prix">
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" id="submit" class="btn btn-primary">Enregistrer le concours</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+	</div>
 </div>
 

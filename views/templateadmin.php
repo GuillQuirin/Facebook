@@ -20,10 +20,15 @@
 	</head>
 
 	<body>
-		<header>
-			<a href="<?php echo WEBPATH; ?>">Participer</a>
-			<a href="<?php echo WEBPATH; ?>/gallery">Galerie</a>
-			<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a></div>
+		<header class="col-md-12">
+			<nav class="col-md-offset-3 col-md-6 navbar navbar-default no-padding">
+		      <ul class="nav navbar-nav">
+		        <li class="active"><a href="#">Liste des concours</a></li>
+		        <li><a href="#">Design</a></li>
+		        <li><a href="#">Export des données</a></li>
+		        <li><a href="#">Reglement et CGU</a></li>
+		      </ul>
+			</nav>
 		</header>
 
 		<div id="content">

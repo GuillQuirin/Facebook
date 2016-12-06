@@ -5,20 +5,25 @@ class participateManager extends basesql{
 		parent::__construct();
 	}
 
-
-    public function getUser(){
-    	$sql = "SELECT * FROM ".$this->table." WHERE Nom=1";
+	public function getAllParticipants(){
+		//Présent dans basesql car appelable de n'importe quel Manager
+		$sql = "SELECT * FROM ".$this->table;
 		
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute();
 		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-		return (!empty($r)) ? new competition($r[0]) : null;
+		$list = [];
+		foreach ($r as $key => $value) {
+			$list[] = new participate($value);
+		}
+		return $list;
 	}
 
-	public function getAllParticipants(){
-		//Présent dans basesql car appelable de n'importe quel Manager
-		$sql = "SELECT * FROM ".$this->table;
+	/*
+	* Get all participation with reported photo
+	*/
+	public function getPhotoReported(){
+		$sql = "SELECT * FROM ".$this->table." WHERE is_reported = 1";
 		
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute();

@@ -24,6 +24,7 @@ $(document).ready(function() {
         $(this).find("td").each(function(){
             var type = $(this).attr('name');
             $('#Modal input[name="'+type+'"]').val($(this).text());
+            $('#Modal textarea[name="'+type+'"]').val($(this).text());
         })
     });
 
@@ -53,8 +54,8 @@ $(document).ready(function() {
 
     /*PARTICIPANTS*/
 
-    //Liste des utilisateurs participants
-    var listUsers = $('#listUsers').DataTable( {
+    //Liste des photo reported
+    var listUsers = $('#listReportedPhoto').DataTable( {
         "paging":   true,
         "ordering": true,
         "info":     true,

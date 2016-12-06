@@ -4,7 +4,7 @@ class adminController extends template{
 	public function adminAction(){
 		$v = new view();
 		$this->assignConnectedProperties($v);
-		//$v->assign("css", "admin");
+		$v->assign("css", "admin");
 		$v->assign("js", "admin");				
 		
 		//Competitions
@@ -21,6 +21,10 @@ class adminController extends template{
 		$participateManager = new participateManager();
 		$listParticipants = $participateManager->getAllParticipants();
 		$v->assign("listParticipants",$listParticipants);
+
+		//Photo signalées
+		$listReportedPhoto = $participateManager->getPhotoReported();
+		$v->assign("listReportedPhoto",$listReportedPhoto);
 
 		$v->setView("admin","templateadmin");
 	}

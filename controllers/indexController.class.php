@@ -13,7 +13,7 @@ class indexController extends template{
 		pour gérer à chaque load d'une page la validité de la session utilisateur
 		(s'il n'a pas supprimé des permission entre-temps)*/
 
-		$v->setView("index","templateempty");
+		$v->setView("index");
 	}
 }
 
