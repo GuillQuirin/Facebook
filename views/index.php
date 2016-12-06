@@ -66,12 +66,17 @@
 //echo (isset($_SESSION['ACCESS_TOKEN'])) ? "Vous êtes ".$user->getNom() : "Vous n'avez pas de nom."; ?>
 
 <footer>
-	<nav>
-		<a href="<?php echo WEBPATH;?>/">Règlement du concours</a>
-		<a href="<?php echo WEBPATH;?>/">CGU</a>
-		<a href="<?php echo WEBPATH;?>/admin">Administration</a>
-	</nav>
-	<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="<?php echo WEBPATH;?>/">Règlement du concours</a></li>
+			<li><a href="<?php echo WEBPATH;?>/">CGU</a></li>
+			<li><a href="<?php echo WEBPATH;?>/admin">Administration</a></li>
+	    </ul>
+	    <div class="nav navbar-nav navbar-right fb-share-button" 
+	    	data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true">
 			<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a>
 		</div>
+	  </div>
+	</nav>
 </footer>
