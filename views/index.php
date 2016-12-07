@@ -1,6 +1,33 @@
 <?php  
+	/* --ENVOI DE DONNEES PAR L'UTILISATEUR-- */
+	if(isset($_POST)){
+		//Envoi d'une image vers la page de l'administrateur depuis l'ordi
+		if(isset($_FILES['file']) && $is_admin){
+			$target = 'uploads/' . basename( $_FILES['file']['name']) ; 
+	        move_uploaded_file($_FILES['file']['tmp_name'], $target); 
+	        $image['image'] = "uploads/".$_FILES['file']['name'];
+
+			$data = [
+			  'message' => 'My awesome photo upload example.',
+			  'source' => $fb->fileToUpload($image['image']),
+			];
+
+			try { //Envoi 
+			  $response = $fb->post('/me/photos', $data, $token_page);
+			}
+			catch(Facebook\Exceptions\FacebookResponseException $e) {
+			  echo 'Graph returned an error: ' . $e->getMessage();
+			  exit;
+			}
+			catch(Facebook\Exceptions\FacebookSDKException $e) {
+			  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+			  exit;
+			}
+			$graphNode = $response->getGraphNode();
+		}
+	}
 	if(isset($_SESSION['ACCESS_TOKEN'])){
-		$response = $fb->get('1804945786451180/roles',"1804945786451180|yqj6xWNaG2lUvVv3sfwwRbU5Sjk");
+		$response = $fb->get('app/roles',"1804945786451180|yqj6xWNaG2lUvVv3sfwwRbU5Sjk");
 		$admins = $response->getDecodedBody();
 
 		foreach ($admins['data'] as $key => $admin) {
@@ -13,10 +40,8 @@
 	}
 	if(isset($competition)) :?>
 		<div class="row">
-			<div class="col-xs-3 col-sm-1 col-md-2">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 text-center">
 				<img class="img-thumbnail" src="https://scontent-fra3-1.xx.fbcdn.net/v/t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" alt="logo">
-			</div>
-			<div class="col-xs-7 col-xs-offset-1 col-sm-6 col-sm-offset-2 col-md-4 col-md-offset-2 text-center">
 				<h1>CONCOURS <?php echo $competition->getName(); ?></h1>
 				<p>
 					du <?php echo date('d/m/Y', strtotime($competition->getStart_date())); ?>
@@ -31,7 +56,7 @@
 				<h3><?php echo $competition->getPrize(); ?></h3>
 				<?php 
 					if($competition->getUrl_prize()!==NULL)
-						echo "<img class='img-responsive' src='".$competition->getUrl_prize()."' alt='photo du prix'>";
+						echo "<div class='col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3'><img class='img-responsive' src='".$competition->getUrl_prize()."' alt='photo du prix'>";
 				?>
 			</div>
 		</div>
@@ -40,10 +65,12 @@
 				<div class="col-xs-6 col-sm-6 col-md-6">
 					<?php 
 					if(isset($_SESSION['ACCESS_TOKEN'])) :?>
-						<button class="btn">
+						<a href="<?php echo WEBPATH; ?>/logout">
+							<button class="btn">
 							Bienvenue <?php echo $user->getFirstName(); ?><br>
-							<a href="<?php echo WEBPATH; ?>/logout">Se déconnecter</a>
-						</button>
+							Se déconnecter
+							</button>
+						</a>
 					<?php else :?>
 						<a href="<?php echo $urlLoginLogout; ?>"><button class="btn">Participer</button></a>
 					<?php endif; ?>
@@ -54,10 +81,10 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-10 col-xs-offset-1 text-center">
+			<div class="col-xs-10 col-xs-offset-1  text-center">
 				<?php 
 				if(isset($_SESSION['ACCESS_TOKEN'])) :?>
-						<h3>Selectionner une photo de mes albums Facebook</h3>
+						<h3>Selectionner une photo de mes albums Facebook....</h3>
 						<?php
 						//Récupération des différentes photos de l'utilisateur
 						$response = $fb->get('/me?fields=photos{id,name,source},albums{name,photos{id,name,source}}');
@@ -137,14 +164,11 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-10 col-xs-offset-1 text-center">
-				<h4>OU</h4>
-				<h3>Importer une photo depuis mon ordinateur</h3>
+			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 text-center">
+				<h3>....ou importez une photo depuis mon ordinateur</h3>
 				<form action="" id="form" method="post" enctype="multipart/form-data" >
 				    <input type="file" name="file">
-				    <input type="text" name="url" placeholder="url de l'image">
-				    <input type="text" name="message" placeholder="message sur le mur">
-				    <input type="submit" name="upload" value="  U P L O A D  ">
+				    <input type="submit" class="btn" name="upload" value="Envoyer">
 			    <form>
 			</div>
 		</div>
@@ -152,15 +176,11 @@
 	endif;
 	?>
 
-
+<p>
 <?php echo (isset($_SESSION['ACCESS_TOKEN'])) ? "Vous avez une session ACCESS_TOKEN" : "Vous n'avez pas de session ACCESS_TOKEN"; ?>
+</p>
 
-
-<?php 
-//echo (isset($_SESSION['ACCESS_TOKEN'])) ? "Vous êtes ".$user->getNom() : "Vous n'avez pas de nom."; 
-?>
-
-<footer>
+<footer class='text-center'>
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <ul class="nav navbar-nav">
@@ -171,10 +191,6 @@
 				<li><a href="<?php echo WEBPATH;?>/admin">Administration</a></li>
 			<?php endif; ?>
 	    </ul>
-	    <div class="nav navbar-nav navbar-right fb-share-button" 
-	    	data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true">
-			<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a>
-		</div>
 	  </div>
 	</nav>
 </footer>
