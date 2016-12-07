@@ -34,7 +34,7 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Liste des concours</a></li>
 				<li><a href="<?php echo WEBPATH ?>/admin/design">Design</a></li>
-				<li><a href="#">Export des données</a></li>
+				<li><a href="<?php echo WEBPATH ?>/admin/export">Export des données</a></li>
 				<li><a href="#">Reglement et CGU</a></li>
 			</ul>
 		</nav>
@@ -47,9 +47,9 @@
 
 
 	<!-- Footer des pages -->
-	<footer>
-		<a href="<?php echo WEBPATH; ?>/reglement">Règlement du concours</a>
-		<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a>
+	<footer class="footer">
+		<a href="<?php echo WEBPATH; ?>/reglement">Règlement du concours</a> |
+		<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a> |
 		<a href="<?php echo WEBPATH; ?>/admin">Administration (à afficher si admin de la page)</a>
 	</footer>
 
