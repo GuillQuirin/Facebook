@@ -8,9 +8,15 @@
 		<?php echo '<link rel="shortcut icon" href="' . WEBPATH . '/web/img/icon/logo-full.ico" type="image/x-icon">';?>
 		<meta name="description" content="Erreur d'accès à la page">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/template.css" media="screen">';?>
-
+		
+		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/templateempty.css" media="screen">';?>
 		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/general-stylesheet.css">';?>
+		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/bootstrap.css">';?>
+		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/datepicker.min.css">';?>
+		<?php echo '<script src="'.WEBPATH.'/web/js/jquery.js"></script>';?>
+		<?php echo '<script src="'.WEBPATH.'/web/js/bootstrap.min.js"></script>';?>
+		<?php echo '<script src="'.WEBPATH.'/web/js/bootstrap-datepicker.min.js"></script>';?>
+		<?php echo '<script src="'.WEBPATH.'/web/js/datepicker-fr.js"></script>';?>
 
 		
 		<?php echo (isset($css)) ? '<link rel="stylesheet" href="'.WEBPATH.'/web/css/'.$css.'-stylesheet.css">' : '';?>

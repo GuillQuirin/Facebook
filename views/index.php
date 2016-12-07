@@ -34,18 +34,18 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
+			<div class="col-md-6 col-md-offset-3">
 				<div class="col-md-6">
 					<?php 
 					if(isset($_SESSION['ACCESS_TOKEN'])) :?>
-						<button>Bienvenue <?php echo $user->getFirstName(); ?></button>
+						<button class="btn">Bienvenue <?php echo $user->getFirstName(); ?></button>
 						<a href="<?php echo WEBPATH; ?>/logout">Se déconnecter</a>
 					<?php else :?>
-						<a href="<?php echo $urlLoginLogout; ?>"><button>Participer</button></a>
+						<a href="<?php echo $urlLoginLogout; ?>"><button class="btn">Participer</button></a>
 					<?php endif; ?>
 				</div>
 				<div class="col-md-6">
-					<button><a href="<?php echo WEBPATH; ?>/gallery">Accèder aux photos des participants</a></button>
+					<button class="btn"><a href="<?php echo WEBPATH; ?>/gallery">Accèder aux photos des participants</a></button>
 				</div>
 				<?php 
 				if(isset($_SESSION['ACCESS_TOKEN'])) :?>
