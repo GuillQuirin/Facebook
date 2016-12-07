@@ -3,5 +3,16 @@ button{
     height: 50px;
     font-size: 15px;
     margin: 10px auto;
+    white-space: normal !important;
 }
 
+#listPictures{
+	/*on ne peut pas gérer le margin left/right avec Bootstrap*/
+	display: block;
+	margin-top:20px;
+	margin-bottom:20px;
+	overflow: scroll;
+	height: 300px;
+	border: 1px solid;
+	text-align: center;
+}
