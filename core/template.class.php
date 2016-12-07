@@ -37,14 +37,10 @@ class template{
     $helper = $this->fb->getRedirectLoginHelper();
     $permissions = ['public_profile','email','user_birthday','user_location','publish_actions',
                     'user_posts','user_likes','user_photos','user_friends'];
-          
-    $loginUrl = (isset($_SERVER['HTTPS'])) ? 
-          $helper->getLoginUrl('https://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions)
-          : $helper->getLoginUrl('http://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions);
 
-    /*$button = (isset($_SESSION['ACCESS_TOKEN'])) ? "<a href='".WEBPATH."/logout'><button>Se déconnecter</button></a>" 
-                                                 : "<a href='".$loginUrl."'><button>Se connecter</button></a>";
-    */
+    $http = (isset($_SERVER['HTTPS'])) ? "https" : "http";          
+    $loginUrl = $helper->getLoginUrl($http.'://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions);
+
     $v->assign("urlLoginLogout",$loginUrl);
   }
 
