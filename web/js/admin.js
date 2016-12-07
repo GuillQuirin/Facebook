@@ -20,7 +20,7 @@ $(document).ready(function() {
     } );
 
     //Affichage de la pop-up d'une competition
-    $('#listCompetitions tbody tr').click(function(){
+    $('#listCompetitions>tbody>tr').click(function(){
         $(this).find("td").each(function(){
             var type = $(this).attr('name');
             $('#Modal input[name="'+type+'"]').val($(this).text());
@@ -55,7 +55,7 @@ $(document).ready(function() {
     /*PARTICIPANTS*/
 
     //Liste des photo reported
-    var listUsers = $('#listReportedPhoto').DataTable( {
+    var listReportedPhoto = $('#listReportedPhoto').DataTable( {
         "paging":   true,
         "ordering": true,
         "info":     true,

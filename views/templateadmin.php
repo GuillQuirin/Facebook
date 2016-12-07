@@ -24,7 +24,7 @@
 			<nav class="col-md-offset-3 col-md-6 navbar navbar-default no-padding">
 		      <ul class="nav navbar-nav">
 		        <li class="active"><a href="#">Liste des concours</a></li>
-		        <li><a href="#">Design</a></li>
+		        <li><a href="<?php echo WEBPATH ?>/admin/design">Design</a></li>
 		        <li><a href="#">Export des données</a></li>
 		        <li><a href="#">Reglement et CGU</a></li>
 		      </ul>

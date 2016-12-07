@@ -4,3 +4,7 @@
 .cursor{
 	cursor: pointer;
 }
+a{
+	text-decoration: none !important;
+	color: inherit !important;
+}

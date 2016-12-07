@@ -1,7 +1,7 @@
 <?php 
 class user extends motherClass{
 
-	protected $id_participant=null;
+	protected $id_user=null;
 	protected $last_name=null;
 	protected $first_name=null;
 	protected $email=null;
@@ -49,7 +49,7 @@ class user extends motherClass{
 		return $list;
 	}
 
-	public function setId_participant($v){$this->id_participant=$v;}
+	public function setId_user($v){$this->id_user=$v;}
 	public function setLast_name($v){$this->last_name=$v;}
 	public function setFirst_name($v){$this->first_name=$v;}
 	public function setEmail($v){$this->email=$v;}
@@ -72,7 +72,7 @@ class user extends motherClass{
 
 
 
-	public function getId_participant(){return $this->id_participant;}
+	public function getId_user(){return $this->id_user;}
 	public function getLast_name(){return $this->last_name;}
 	public function getFirst_name(){return $this->first_name;}
 	public function getEmail(){return $this->email;}

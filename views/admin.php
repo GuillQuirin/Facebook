@@ -9,7 +9,8 @@
 				<th>Description</th>
 				<th>Date de départ</th>
 				<th>Date de fin</th>
-				<th>Prix</th>
+				<th>Lot à gagner</th>
+				<th>Url du lot</th>
 				<th>Nombre de participants</th>
 				<th>Nom du gagnant</th>
 				<th>Statut</th>
@@ -24,6 +25,7 @@
 						<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())) ?></td>
 						<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())) ?></td>
 						<td name='prize' > <?php echo $competition->getPrize() ?></td>
+						<td name='url_prize' > <?php echo $competition->getUrl_prize() ?></td>
 						<td name='totalParticipants' > <?php echo $competition->getTotalParticipants() ?></td>
 						<td name='id_winner' ><?php echo $competition->getId_winner() ?></td>
 						<td name='active'>
@@ -41,23 +43,23 @@
 	<div class="col-md-offset-1 col-md-10 col-offset-1">
 		<h2 class="text-center text-uppercase">Liste des photos signalées</h2>
 
-		<table id="listReportedPhoto" class="table table-striped">
-		<thead>
-			<th>Nom de l'uploader</th>
-			<th>Url de la photo</th>
-			<th>Action</th>
-		</thead>
-		<tbody>
-			<?php foreach ($listReportedPhoto as $key => $photo) { ?>
-				<tr data-toggle='modal' data-target='#Modal'>
-					<td name='nom_updlader'><?php echo $photo->getId_participant() ?></td>
-					<td name='url_photo'><?php echo $photo->getUrl_photo() ?></td>
-					<td name='action'> 
-						<?php echo ($photo->getIs_locked()==0) ? "<button class='btn btn-success'>Vérouiller</button>" : "<button class='btn btn-danger'>Dévérouiller</button>" ?>
-					</td>
-				</tr>
-			<?php } ?>
-		</tbody>
+		<table id="listReportedPhoto" class="table stripe order-column">
+			<thead>
+				<th>Nom de l'uploader</th>
+				<th>Url de la photo</th>
+				<th>Action</th>
+			</thead>
+			<tbody>
+				<?php foreach ($listReportedPhoto as $key => $photo) { ?>
+					<tr>
+						<td name='nom_updlader'><?php echo $photo->getId_user() ?></td>
+						<td name='url_photo'><a href="#" target="blank"><?php echo $photo->getUrl_photo() ?></a></td>
+						<td name='action'> 
+							<?php echo ($photo->getIs_locked()==0) ? "<button class='btn btn-success'>Vérouiller</button>" : "<button class='btn btn-danger'>Dévérouiller</button>" ?>
+						</td>
+					</tr>
+				<?php } ?>
+			</tbody>
 		</table>
 
 		<!--      Modal      -->
@@ -72,7 +74,7 @@
 		      <div class="modal-body">
 		        <form id="data_competition">
 		        	<div class="form-group row">
-		        		<label for="name" class="col-xs-3 col-form-label text-right">Name</label>
+		        		<label for="name" class="col-xs-3 col-form-label text-right">Intitulé</label>
 		        		<div class="col-xs-9">
 		        			<input type="text" name="name" class="form-control">
 	        			</div>
@@ -96,9 +98,15 @@
 	        			</div>	
 		        	</div>
 		        	<div class="form-group row">
-		        		<label for="prize" class="col-xs-3 col-form-label text-right">Prix</label>
+		        		<label for="prize" class="col-xs-3 col-form-label text-right">Lot à gagner</label>
 		        		<div class="col-xs-9">
 		        			<input type="text" name="prize" class="form-control">
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="prize" class="col-xs-3 col-form-label text-right">Url du lot</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="url_prize" class="form-control">
 		        		</div>
 		        	</div>
 		        	<div class="form-group row">
@@ -109,11 +117,11 @@
 		        	</div>
 		        	<div class="form-check row">
 					    <label class="col-xs-3 form-check-label text-right">Actif</label>
-					    <div class="col-xs-9">
-					      	<input type="checkbox" name="active" class="form-check-input">
-				      	</div>
+						    <div class="col-xs-9">
+						      	<input type="checkbox" name="active" class="form-check-input">
+					      	</div>
 					    </label>
-					  </div>
+					 </div>
 		        </form>
 		      </div>
 		      <div class="modal-footer">
@@ -134,15 +142,46 @@
 		      </div>
 		      <div class="modal-body">
 		        <form id="create_data_competition">
-			        <input type="text" name="name" placeholder="Nom">
-			        <input type="text" name="description" placeholder="Description">
-			        <input type="date" name="start_date" placeholder="Début">
-			        <input type="date" name="end_date" placeholder="Fin">
-			        <input type="text" name="prize" placeholder="Prix">
+		        	<div class="form-group row">
+		        		<label for="name" class="col-xs-3 col-form-label text-right">Intitulé</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="name" class="form-control">
+	        			</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="description" class="col-xs-3 col-form-label text-right">Description</label>
+		        		<div class="col-xs-9">
+		        			<textarea class="form-control" name="description" rows="3"></textarea>
+	        			</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="start_date" class="col-xs-3 col-form-label text-right">Date de début</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="start_date" class="form-control">
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="end_date" class="col-xs-3 col-form-label text-right">Date de fin</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="end_date" class="form-control">
+	        			</div>	
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="prize" class="col-xs-3 col-form-label text-right">Lot à gagner</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="prize" class="form-control">
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="prize" class="col-xs-3 col-form-label text-right">url du lot</label>
+		        		<div class="col-xs-9">
+		        			<input type="text" name="url_prize" class="form-control">
+		        		</div>
+		        	</div>
 		        </form>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" id="submit" class="btn btn-primary">Enregistrer le concours</button>
+		        <button type="button" id="submit" class="btn btn-success col-offset-3">Créer le concours</button>
 		      </div>
 		    </div>
 		  </div>
