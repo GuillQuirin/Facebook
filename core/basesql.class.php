@@ -41,7 +41,6 @@ abstract class basesql{
 
 		$sql = "INSERT INTO ".$this->table." (".implode(",",array_keys($listColumns)).")
 		VALUES (:".implode(",:", array_keys($listColumns)).")";
-
 		$query = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		
 		foreach ($listColumns as $key => $attribute){

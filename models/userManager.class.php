@@ -5,12 +5,11 @@ class userManager extends basesql{
 		parent::__construct();
 	}
 
-
-    public function getUser(){
-    	$sql = "SELECT * FROM ".$this->table." WHERE Nom=1";
-		
+    public function getUserByIdFb($data = []){
+    	$table['idFacebook'] = $data['idFacebook'];
+    	$sql = "SELECT * FROM ".$this->table." WHERE idFacebook=:idFacebook";		
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-		$sth->execute();
+		$sth->execute($table);
 		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 		return (!empty($r)) ? new user($r[0]) : null;
@@ -29,6 +28,16 @@ class userManager extends basesql{
 			$list[] = new user($value);
 		}
 		return $list;
+	}
+
+	//Enregistrement d'un participant
+	public function saveUser($data){
+		//Vérification s'il n'existe pas déjà en BDD
+		$user = $this->getUserByIdFb($data);
+		if($user===null){
+			$save = $this->save(new user($data));
+		}
+
 	}
 
 }

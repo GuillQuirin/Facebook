@@ -50,6 +50,25 @@ class indexController extends template{
 				}
 				$graphNode = $response->getGraphNode();
 			}
+			
+			try{ //Récupération des infos de l'utilisateur
+				$response = $this->fb->get('/me?fields=id,name,first_name,last_name,email,birthday,location');
+				$infosUser = $response->getDecodedBody();
+				$infosUser['location'] = $infosUser['location']['name'];
+				$infosUser['idFacebook'] = $infosUser['id'];
+				unset($infosUser['id']);
+				$userManager = new userManager();
+				$bool = $userManager->saveUser($infosUser);
+			}
+			catch(Facebook\Exceptions\FacebookResponseException $e) {
+			  echo 'Graph returned an error: ' . $e->getMessage();
+			  exit;
+			}
+			catch(Facebook\Exceptions\FacebookSDKException $e) {
+			  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+			  exit;
+			}
+
 		}
 		header('Location: '.WEBPATH);
 	}

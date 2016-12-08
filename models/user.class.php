@@ -5,9 +5,10 @@ class user extends motherClass{
 	protected $last_name=null;
 	protected $first_name=null;
 	protected $email=null;
-	protected $birth_date=null;
+	protected $birthday=null;
 	protected $validation_cgu=null;
-	protected $statut=null;
+	protected $status=null;
+	protected $location=null;
 	protected $idFacebook=null;
 
 
@@ -22,9 +23,8 @@ class user extends motherClass{
 	protected $publish_pages=null;
 	protected $isAdmin = null;
 
-	protected $listParticipation = [];
-
-/*	public function __construct($token){
+/*	
+	public function __construct($token){
 		$this->hydrate($token);
 	}
 
@@ -53,10 +53,11 @@ class user extends motherClass{
 	public function setLast_name($v){$this->last_name=$v;}
 	public function setFirst_name($v){$this->first_name=$v;}
 	public function setEmail($v){$this->email=$v;}
-	public function setBirth_date($v){$this->birth_date=$v;}
+	public function setBirthday($v){$this->birthday=$v;}
 	public function setValidation_cgu($v){$this->validation_cgu=$v;}
-	public function setStatut($v){$this->statut=$v;}
-	public function setidFacebook($v){$this->idFacebook=$v;}
+	public function setStatus($v){$this->status=$v;}
+	public function setLocation($v){$this->location=$v;}
+	public function setIdFacebook($v){$this->idFacebook=$v;}
 
 	public function setUser_posts($v){$this->user_posts=$v;}
 	public function setUser_likes($v){$this->user_likes=$v;}
@@ -68,7 +69,6 @@ class user extends motherClass{
 	public function setPages_manage_cta($v){$this->pages_manage_cta=$v;}
 	public function setPublish_pages($v){$this->publish_pages=$v;}
 	public function setIsAdmin($v){$this->isAdmin=$v;}
-	public function setListParticipation($v){$this->listParticipation=$v;}
 
 
 
@@ -76,10 +76,11 @@ class user extends motherClass{
 	public function getLast_name(){return $this->last_name;}
 	public function getFirst_name(){return $this->first_name;}
 	public function getEmail(){return $this->email;}
-	public function getBirth_date(){return $this->birth_date;}
+	public function getBirthday(){return $this->birthday;}
 	public function getValidation_cgu(){return $this->validation_cgu;}
-	public function getStatut(){return $this->statut;}
-	public function getidFacebook(){return $this->idFacebook;}
+	public function getStatus(){return $this->status;}
+	public function getLocation(){return $this->location;}
+	public function getIdFacebook(){return $this->idFacebook;}
 
 	public function getUser_posts(){return $this->user_posts;}
 	public function getUser_likes(){return $this->user_likes;}
@@ -91,5 +92,4 @@ class user extends motherClass{
 	public function getPages_manage_cta(){return $this->pages_manage_cta;}
 	public function getPublish_pages(){return $this->publish_pages;}
 	public function getIsAdmin(){return $this->isAdmin;}
-	public function getListParticipation(){return $this->listParticipation;}
 }
