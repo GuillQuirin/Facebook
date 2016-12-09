@@ -5,8 +5,9 @@ class userManager extends basesql{
 		parent::__construct();
 	}
 
-    public function getUserByIdFb($data = []){
-    	$table['idFacebook'] = $data['idFacebook'];
+    public function getUserByIdFb($idFb){
+    	//Nouvelle table avec une seule case
+    	$table['idFacebook'] = $idFb;
     	$sql = "SELECT * FROM ".$this->table." WHERE idFacebook=:idFacebook";		
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute($table);
@@ -15,7 +16,7 @@ class userManager extends basesql{
 		return (!empty($r)) ? new user($r[0]) : null;
 	}
 
-	//LISTE DES DIFFERENTS PARTICIPANTS
+	//Liste de tous les participants
 	public function getAllUsers(){
 		//Présent dans basesql car appelable de n'importe quel Manager
 		$sql = "SELECT * FROM ".$this->table." WHERE validation_cgu=1";
@@ -31,13 +32,13 @@ class userManager extends basesql{
 	}
 
 	//Enregistrement d'un participant
-	public function saveUser($data){
+	public function saveUser(user $data){
 		//Vérification s'il n'existe pas déjà en BDD
-		$user = $this->getUserByIdFb($data);
+		$user = $this->getUserByIdFb($data->getIdFacebook());
 		if($user===null){
-			$save = $this->save(new user($data));
+			$save = $this->save($data);
 		}
-
+		return $this->getUserByIdFb($data->getIdFacebook());
 	}
 
 }

@@ -49,6 +49,11 @@ class template{
     header("Location: ".WEBPATH);
   }
 
+  protected function bringFile($idFile){
+    $response = $this->fb->get('/'.$idFile.'?fields=id,link,picture');
+    $picture = $response->getDecodedBody();
+    return $picture;
+  }
 
   /* Cette methode fournira à la view reçue en parametre les propriétés nécessaires de la classe-mère template */
   protected function assignConnectedProperties(view $v){

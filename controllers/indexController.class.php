@@ -48,17 +48,24 @@ class indexController extends template{
 				  echo 'Facebook SDK returned an error: ' . $e->getMessage();
 				  exit;
 				}
-				$graphNode = $response->getGraphNode();
+				$idFbPhoto = $response->getDecodedBody();
+
+				try{
+					$response = $this->fb->get('/'.$idFbPhoto['id'].'?fields=images');
+				}
+				catch(Facebook\Exceptions\FacebookResponseException $e) {
+				  echo 'Graph returned an error: ' . $e->getMessage();
+				  exit;
+				}
+				catch(Facebook\Exceptions\FacebookSDKException $e) {
+				  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+				  exit;
+				}
+				$infosPhoto = $response->getDecodedBody();
 			}
-			
-			try{ //Récupération des infos de l'utilisateur
+
+			try{
 				$response = $this->fb->get('/me?fields=id,name,first_name,last_name,email,birthday,location');
-				$infosUser = $response->getDecodedBody();
-				$infosUser['location'] = $infosUser['location']['name'];
-				$infosUser['idFacebook'] = $infosUser['id'];
-				unset($infosUser['id']);
-				$userManager = new userManager();
-				$bool = $userManager->saveUser($infosUser);
 			}
 			catch(Facebook\Exceptions\FacebookResponseException $e) {
 			  echo 'Graph returned an error: ' . $e->getMessage();
@@ -68,7 +75,26 @@ class indexController extends template{
 			  echo 'Facebook SDK returned an error: ' . $e->getMessage();
 			  exit;
 			}
+			//Enregistrement des infos de l'utilisateur
+			$infosUser = $response->getDecodedBody();
+			$infosUser['location'] = $infosUser['location']['name'];
+			$infosUser['idFacebook'] = $infosUser['id'];
+			unset($infosUser['id']);
+			$user = new user($infosUser);
+			$userManager = new userManager();
+			$user = $userManager->saveUser($user);
 
+			//Enregistrement de la participation
+			$infosParticipation =[
+			  	'id_competition' => $this->competition->getId_competition(),
+				'id_user' => $user->getId_user(),
+				'id_photo' => $infosPhoto['id'],
+				'url_photo' => $infosPhoto['images'][0]['source']
+			];
+
+			$participation = new participate($infosParticipation);
+			$participationManager = new participateManager();
+			$participationManager->saveParticipation($participation);
 		}
 		header('Location: '.WEBPATH);
 	}
