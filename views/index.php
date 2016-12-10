@@ -50,62 +50,94 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-10 col-xs-offset-1  text-center">
+			<div class="col-xs-10 col-xs-offset-1 text-center">
 				<?php 
 				if(isset($images)) :?>
 					<h2>Participez à notre concours,</h2>
 					<h3>en sélectionnant une photo d'un de vos albums Facebook....</h3>
 					<div id='listPictures' class='col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2'>
+						<h3 id='alone' class='cursor-pointer'>Photos individuelles</h3>
+						<div class="row" id="album-alone">
 						<?php
 						//Photos individuelles
 						if(isset($images["photos"])){
 							foreach ($images["photos"]["data"] as $key => $photo) :?>
-								<img style='width:45%;' src='<?php echo $photo['source']; ?>' data-toggle='modal' data-target='<?php echo "#".$photo['id']; ?>'>
+								<img class="col-md-6" 
+										src='<?php echo $photo['source']; ?>' 
+										data-toggle='modal' 
+										data-target='<?php echo "#".$photo['id']; ?>'>
+
 								<!--Modal-->
 								<div class="modal fade" id='<?php echo $photo['id']; ?>' tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								  <div class="modal-dialog" role="document">
+								    <form action="<?php echo WEBPATH.'/index/submit'; ?>" method="post">
 								    <div class="modal-content">
 								      <div class="modal-header">
-								      <!-- Header de la modal -->
+								      	<p>Assurez-vous d'être le propriétaire du contenu que vous envoyez.</p> 
+										<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/CGU'; ?>">conditions d'utilisations</a>.</p>
 								      </div>
 								      <div class="modal-body">
 								      	<img src='<?php echo $photo['source']; ?>' alt="photo de l'utilisateur">
+								      	<input type="hidden" name="idPhoto" value="<?php echo $photo['id']; ?>">
+									    <input type="hidden" name="fromFB">
 								      </div>
-								      <div class="modal-footer">
-								        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								      </div>
+								      <div class="col-md-6">
+							        	<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+							          </div>
+							          <div class="col-md-6">
+								        <button type="submit" class="btn btn-default">Envoyer cette photo</button>
+									  </div>
 								    </div>
+								    </form>
 								  </div>
 								</div>
 							<?php 
 							endforeach;
 						}
-						
+						echo "</div>";
+
 						//Albums
 						foreach ($images["albums"]["data"] as $key => $album) {
-							echo "<h3>".$album['name']."</h3>";
+							echo "<h3 id='".$album['id']."' class='cursor-pointer'>".$album['name']."</h3>";
+							echo "<div class='row' id='album-".$album['id']."'>";
 							if(isset($album['photos'])){
 								foreach ($album['photos']["data"] as $key => $photo) :?>
-									<img style='width:45%;' src='<?php echo $photo['source']; ?>' data-toggle='modal' data-target='<?php echo "#".$photo['id']; ?>'>
+									<div class="col-md-6">
+										<img src='<?php echo $photo['source']; ?>' 
+												data-toggle='modal' 
+												data-target='<?php echo "#".$photo['id']; ?>'>
+									</div>
 									<!-- Modal -->
 									<div class="modal fade" id='<?php echo $photo['id']; ?>' tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 									  <div class="modal-dialog" role="document">
+									    <form action="<?php echo WEBPATH.'/index/submit'; ?>" method="post">
 									    <div class="modal-content">
 									      <div class="modal-header">
-									        <!-- Header de la modal -->
+									        <p>Assurez-vous d'être le propriétaire du contenu que vous envoyez.</p> 
+											<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/CGU'; ?>">conditions d'utilisations</a>.</p>
 									      </div>
 									      <div class="modal-body">
 									      	<img src='<?php echo $photo['source']; ?>' alt="photo d'un album">
+									      	<input type="hidden" name="idPhoto" value="<?php echo $photo['id']; ?>">
+									      	<input type="hidden" name="fromFB">
 									      </div>
 									      <div class="modal-footer">
-									        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									      	<div class="col-md-6">
+									        	<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+									        </div>
+									        <div class="col-md-6">
+										        <button type="submit" class="btn btn-default">Envoyer cette photo</button>
+											</div>
 									      </div>
 									    </div>
+									    </form>
 									  </div>
 									</div>
+
 								<?php
 								endforeach;
 							}
+							echo "</div>";
 						}
 						?>
 					</div>

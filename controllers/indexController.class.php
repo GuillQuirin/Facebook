@@ -22,7 +22,7 @@ class indexController extends template{
 			$v->assign("user", $this->dataApi(TRUE,'/me?fields=',$infosUser,"",FALSE));
 
 			//Récupération des différentes photos de l'utilisateur
-			$infoPhoto = "photos{id,name,source},albums{name,photos{id,name,source}}";
+			$infoPhoto = "photos{id,name,source},albums{id,name,photos{id,name,source}}";
 			$v->assign("images", $this->dataApi(TRUE,'/me?fields=',$infoPhoto,""));
 		}
 		$v->setView("index","templateempty");
@@ -30,12 +30,13 @@ class indexController extends template{
 
 
 	public function submitAction(){
-		/* --ENVOI DE DONNEES PAR L'UTILISATEUR DEPUIS L'ACCUEIL -- */
-		if(isset($_POST['uploadFile'])){
-			
-			$albumCompetition = $this->searchAlbumCompetition();
+		/* --EnvoI DE DONNEES PAR L'UTILISATEUR DEPUIS L'ACCUEIL -- */
+		$ok = FALSE;
+		//Création de l'album dans FB si inexistant
+		$albumCompetition = $this->searchAlbumCompetition();
 
-			//Envoi d'une image depuis l'ordi
+		//Envoi d'une image depuis l'ordi
+		if(isset($_POST['uploadFile'])){
 			if(isset($_FILES['file'])){
 				//Déplacement de l'image dans le serveur
 				$target = __ROOT__.'/web/uploads/' . basename( $_FILES['file']['name']) ; 
@@ -52,9 +53,23 @@ class indexController extends template{
 				unlink($image['image']);
 				
 				$infosPhoto = $this->dataApi(TRUE,'/'.$idFbPhoto['id'].'?fields=','images',"");
+				$ok = TRUE;
 			}
+		}
 
-			//Enregistrement des infos de l'utilisateur
+		if(isset($_POST['fromFB'])){
+			//Récupération de l'url de la photo présente sur FB
+			$infosPhoto = $this->dataApi(TRUE,'/'.$_POST['idPhoto'].'?fields=','id, source, images',"");
+			$data = [
+			  'url' => $infosPhoto['source']
+			];
+			//Envoi de la photo sur Facebook
+			$idFbPhoto = $this->dataApi(FALSE,'/'.$albumCompetition."/photos","",$data);
+			$ok = TRUE;
+		}
+
+		if($ok){
+			//Enregistrement de l'utilisateur
 			$listInfosUser = ['id','name','first_name','last_name','email','birthday','location'];
 			$infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
 			
@@ -76,8 +91,9 @@ class indexController extends template{
 
 			$participation = new participate($infosParticipation);
 			$participationManager = new participateManager();
-			$participationManager->saveParticipation($participation);
+			$idParticipation = $participationManager->saveParticipation($participation);
 		}
+
 		header('Location: '.WEBPATH);
 	}
 
@@ -90,7 +106,7 @@ class indexController extends template{
 				break;
 			}
 		}
-		
+
 		//Création de l'album du concours si absent chez l'utilisateur
 		if(!isset($albumCompetition)){
 			$infos = [

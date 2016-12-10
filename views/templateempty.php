@@ -15,7 +15,17 @@
 	</head>
 	<body>
 		<?php include $this->view; ?>
-		<?php echo '<script src="'.WEBPATH.'/web/js/jquery.js"></script>';?>
-		<?php echo '<script src="'.WEBPATH.'/web/js/bootstrap.min.js"></script>';?>
+		<?php 
+			echo '<script src="'.WEBPATH.'/web/js/jquery.js"></script>';
+			echo '<script src="'.WEBPATH.'/web/js/bootstrap.min.js"></script>';
+			if(isset($js)){ 
+				if(is_array($js)){
+					foreach ($js as $key => $value)
+						echo '<script src="'.WEBPATH.'/web/js/'.$value.'.js"></script>';
+				}
+				else 
+					echo '<script src="'.WEBPATH.'/web/js/'.$js.'.js"></script>';
+			}
+		?>
 	</body>
 </html>

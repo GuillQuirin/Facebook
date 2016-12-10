@@ -18,7 +18,7 @@
 			</thead>
 			<tbody>
 				<?php foreach ($listCompetitions as $key => $competition) { ?>
-				<tr data-toggle='modal' data-target='#Modal' class="cursor">
+				<tr data-toggle='modal' data-target='#Modal' class="cursor-pointer">
 					<td name='id_competition'> <?php echo $competition->getId_competition() ?> </td>
 					<td name='name'> <?php echo $competition->getName() ?></td>
 					<td name='description'> <?php echo $competition->getDescription() ?></td>
