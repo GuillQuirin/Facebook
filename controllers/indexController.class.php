@@ -13,15 +13,27 @@ class indexController extends template{
 		pour gérer à chaque load d'une page la validité de la session utilisateur
 		(s'il n'a pas supprimé des permission entre-temps)*/
 
+		if(isset($_SESSION['ACCESS_TOKEN'])){
+			//Liste admins
+			$v->assign("admins", $this->dataApi(TRUE,'/app/roles',array(),"1804945786451180|yqj6xWNaG2lUvVv3sfwwRbU5Sjk"));
+			
+			//Infos de l'utilisateur
+			$infosUser = ['id','name','first_name','last_name','email','birthday','location'];
+			$v->assign("user", $this->dataApi(TRUE,'/me?fields=',$infosUser,"",FALSE));
+
+			//Récupération des différentes photos de l'utilisateur
+			$infoPhoto = "photos{id,name,source},albums{name,photos{id,name,source}}";
+			$v->assign("images", $this->dataApi(TRUE,'/me?fields=',$infoPhoto,""));
+		}
 		$v->setView("index","templateempty");
 	}
 
 
 	public function submitAction(){
-		/* --ENVOI DE DONNEES PAR L'UTILISATEUR DEPUIS L'INDEX -- */
+		/* --ENVOI DE DONNEES PAR L'UTILISATEUR DEPUIS L'ACCUEIL -- */
 		if(isset($_POST['uploadFile'])){
 			
-			$albumCompetition = $this->searchAlbum();
+			$albumCompetition = $this->searchAlbumCompetition();
 
 			//Envoi d'une image depuis l'ordi
 			if(isset($_FILES['file'])){
@@ -35,51 +47,21 @@ class indexController extends template{
 				  'source' => $this->fb->fileToUpload($image['image']),
 				];
 
-				try { //Envoi de l'image
-				  $response = $this->fb->post('/'.$albumCompetition.'/photos', $data);
-				  //On ne conserve pas l'image sur le serveur pour éviter de l'alourdir
-				  unlink($image['image']);
-				}
-				catch(Facebook\Exceptions\FacebookResponseException $e) {
-				  echo 'Graph returned an error: ' . $e->getMessage();
-				  exit;
-				}
-				catch(Facebook\Exceptions\FacebookSDKException $e) {
-				  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-				  exit;
-				}
-				$idFbPhoto = $response->getDecodedBody();
-
-				try{
-					$response = $this->fb->get('/'.$idFbPhoto['id'].'?fields=images');
-				}
-				catch(Facebook\Exceptions\FacebookResponseException $e) {
-				  echo 'Graph returned an error: ' . $e->getMessage();
-				  exit;
-				}
-				catch(Facebook\Exceptions\FacebookSDKException $e) {
-				  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-				  exit;
-				}
-				$infosPhoto = $response->getDecodedBody();
+				//Envoi de la photo sur Facebook
+				$idFbPhoto = $this->dataApi(FALSE,'/'.$albumCompetition,"/photos",$data);
+				unlink($image['image']);
+				
+				$infosPhoto = $this->dataApi(TRUE,'/'.$idFbPhoto['id'].'?fields=','images',"");
 			}
 
-			try{
-				$response = $this->fb->get('/me?fields=id,name,first_name,last_name,email,birthday,location');
-			}
-			catch(Facebook\Exceptions\FacebookResponseException $e) {
-			  echo 'Graph returned an error: ' . $e->getMessage();
-			  exit;
-			}
-			catch(Facebook\Exceptions\FacebookSDKException $e) {
-			  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-			  exit;
-			}
 			//Enregistrement des infos de l'utilisateur
-			$infosUser = $response->getDecodedBody();
+			$listInfosUser = ['id','name','first_name','last_name','email','birthday','location'];
+			$infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
+			
 			$infosUser['location'] = $infosUser['location']['name'];
 			$infosUser['idFacebook'] = $infosUser['id'];
 			unset($infosUser['id']);
+
 			$user = new user($infosUser);
 			$userManager = new userManager();
 			$user = $userManager->saveUser($user);
@@ -99,19 +81,8 @@ class indexController extends template{
 		header('Location: '.WEBPATH);
 	}
 
-	private function searchAlbum(){
-		try { //Controle de l'existence de l'album dédié au concours
-		  $response = $this->fb->get('/me/albums');
-		}
-		catch(Facebook\Exceptions\FacebookResponseException $e) {
-		  echo 'Graph returned an error: ' . $e->getMessage();
-		  exit;
-		}
-		catch(Facebook\Exceptions\FacebookSDKException $e) {
-		  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-		  exit;
-		}
-		$albums = $response->getDecodedBody();
+	private function searchAlbumCompetition(){
+		$albums = $this->dataApi(TRUE,'/me','/albums',"");
 		
 		foreach ($albums['data'] as $key => $album) {
 			if($album['name']=="Concours Pardon-Maman"){
@@ -119,14 +90,14 @@ class indexController extends template{
 				break;
 			}
 		}
+		
 		//Création de l'album du concours si absent chez l'utilisateur
 		if(!isset($albumCompetition)){
 			$infos = [
 				'name' => 'Concours Pardon-Maman',
 				'privacy' => json_encode(array('value'=>'SELF'))
 			];
-			$response = $this->fb->post('/me/albums',$infos);
-			$graphNode = $response->getDecodedBody();
+			$graphNode = $this->dataApi(FALSE,"/me","/albums",$infos);
 			$albumCompetition = $graphNode['id'];
 		}
 		

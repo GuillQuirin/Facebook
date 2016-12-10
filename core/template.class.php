@@ -33,6 +33,16 @@ class template{
       header('Location: '.WEBPATH.'/noCompetition');
   }
 
+  // Cette methode enverra à la view reçue en parametre les propriétés nécessaires de la Template
+  protected function assignConnectedProperties(view $v){
+    if($this->fb!==false)
+      $v->assign("fb",$this->fb);
+
+    if($this->competition!==NULL)
+      $v->assign("competition",$this->competition);
+  }
+
+  //Authentification
   protected function login(view $v){
     $helper = $this->fb->getRedirectLoginHelper();
     $permissions = ['public_profile','email','user_birthday','user_location','publish_actions',
@@ -49,19 +59,22 @@ class template{
     header("Location: ".WEBPATH);
   }
 
-  protected function bringFile($idFile){
-    $response = $this->fb->get('/'.$idFile.'?fields=id,link,picture');
-    $picture = $response->getDecodedBody();
-    return $picture;
-  }
+  //Fonction Facebook : soit récupération d'un élèment, soit envoi d'un fichier dans un album photo
+  protected function dataApi($callElement = TRUE, $idElement = "me",$listParam = [], $dataPost = [], $returnDecodedBody = TRUE){
+    $string = (is_array($listParam)) ? $idElement.implode(',',$listParam) : $idElement.$listParam;
 
-  /* Cette methode fournira à la view reçue en parametre les propriétés nécessaires de la classe-mère template */
-  protected function assignConnectedProperties(view $v){
-    if($this->fb!==false)
-      $v->assign("fb",$this->fb);
-
-    if($this->competition!==NULL)
-      $v->assign("competition",$this->competition);
+    try{
+      $response = ($callElement===TRUE) ? $this->fb->get($string,$dataPost) : $this->fb->post($string,$dataPost);
+    }
+    catch(Facebook\Exceptions\FacebookResponseException $e) {
+      echo 'Graph returned an error: ' . $e->getMessage();
+      exit;
+    }
+    catch(Facebook\Exceptions\FacebookSDKException $e) {
+      echo 'Facebook SDK returned an error: ' . $e->getMessage();
+      exit;
+    }
+    return ($returnDecodedBody===TRUE) ? $response->getDecodedBody() : $response->getGraphUser();
   }
 
   /*protected function envoiMail($destinataire, $objet, $contenu){
