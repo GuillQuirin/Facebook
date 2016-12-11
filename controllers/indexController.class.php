@@ -14,13 +14,6 @@ class indexController extends template{
 		(s'il n'a pas supprimé des permission entre-temps)*/
 
 		if(isset($_SESSION['ACCESS_TOKEN'])){
-			//Liste admins
-			$v->assign("admins", $this->dataApi(TRUE,'/app/roles',array(),"1804945786451180|yqj6xWNaG2lUvVv3sfwwRbU5Sjk"));
-			
-			//Infos de l'utilisateur
-			$infosUser = ['id','name','first_name','last_name','email','birthday','location'];
-			$v->assign("user", $this->dataApi(TRUE,'/me?fields=',$infosUser,"",FALSE));
-
 			//Récupération des différentes photos de l'utilisateur
 			$infoPhoto = "photos{id,name,source},albums{id,name,photos{id,name,source}}";
 			$v->assign("images", $this->dataApi(TRUE,'/me?fields=',$infoPhoto,""));

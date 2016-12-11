@@ -40,6 +40,21 @@ class template{
 
     if($this->competition!==NULL)
       $v->assign("competition",$this->competition);
+      
+    if(isset($_SESSION['ACCESS_TOKEN'])){  
+      //Liste des admins
+      $admins = $this->dataApi(TRUE,'/app/roles',array(),"1804945786451180|yqj6xWNaG2lUvVv3sfwwRbU5Sjk");
+      foreach ($admins['data'] as $key => $admin) {
+        if($admin['role']=="administrators")
+          $listAdmins[] = $admin['user'];
+        }
+      $v->assign("listAdmins", $listAdmins);
+       
+      //Infos de l'utilisateur
+      $infosUser = ['id','name','first_name','last_name','email','birthday','location'];
+      $v->assign("user", $this->dataApi(TRUE,'/me?fields=',$infosUser,"",FALSE));
+    }
+
   }
 
   //Authentification

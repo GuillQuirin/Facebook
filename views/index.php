@@ -1,10 +1,4 @@
 <?php  
-	if(isset($admins)){
-		foreach ($admins['data'] as $key => $admin) {
-			if($admin['role']=="administrators")
-				$listAdmins[] = $admin['user'];
-		}
-	}
 	if(isset($competition)) :?>
 		<div class="row">
 			<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 text-center">
@@ -42,10 +36,11 @@
 					<?php endif; ?>
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-6">
-					<button class="btn">
-						<a href="<?php echo WEBPATH; ?>/gallery">
-						Accèder aux photos des participants</a>
-					</button>
+					<a href="<?php echo WEBPATH; ?>/gallery">
+						<button class="btn">					
+							Accèder aux photos des participants
+						</button>
+					</a>
 				</div>
 			</div>
 		</div>

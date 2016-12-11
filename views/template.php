@@ -30,7 +30,7 @@
 	<header>
 		<div class="container">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="<?php echo WEBPATH; ?>">Participer</a></li>
+				<li><a href="<?php echo WEBPATH; ?>">Participer</a></li>
 				<li><a href="<?php echo WEBPATH; ?>/gallery">Galerie</a></li>
 				<li><!--<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true">--><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a><!--</div>--></li>
 			</ul>
@@ -47,7 +47,10 @@
 	<footer class="footer">
 		<a href="<?php echo WEBPATH; ?>/reglement">Règlement du concours</a> | 
 		<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a> | 
-		<a href="<?php echo WEBPATH; ?>/admin">Administration (à afficher si admin de la page)</a>
+		<?php 
+		if(1)://isset($user) && in_array($user->getId(),$listAdmins)) :?>
+			<a href="<?php echo WEBPATH;?>/admin">Administration</a>
+		<?php endif; ?>
 	</footer>
 
 	<?php 
