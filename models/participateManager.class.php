@@ -19,6 +19,24 @@ class participateManager extends basesql{
 		return $list;
 	}
 
+	public function getParticipantsByCompetition(competition $data){
+		//Présent dans basesql car appelable de n'importe quel Manager
+		$sql = "SELECT * FROM ".$this->table." WHERE id_competition=:id_competition";
+		
+		//Nouvelle table avec une seule case
+    	$table = [
+    		'id_competition' => $data->getId_competition()
+    	];	
+		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$sth->execute($table);
+		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
+		$list = [];
+		foreach ($r as $key => $value) {
+			$list[] = new participate($value);
+		}
+		return $list;
+	}
+
 	public function getParticipationByIds(participate $data){
 		$sql = "SELECT * FROM ".$this->table." WHERE id_competition=:id_competition AND id_user=:id_user";
 		
