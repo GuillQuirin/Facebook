@@ -1,6 +1,7 @@
 $(document).ready(function(){
-	$('#listPictures h3').click(function(){
-		var id = $(this).attr('id');
-		$('#album-'+id).slideToggle();
+	$('.backTop').click(function(){
+		$('html, body').animate({
+			scrollTop: $(".listPictures").offset().top-100
+		}, 100);
 	});
 });
