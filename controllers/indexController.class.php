@@ -34,7 +34,7 @@ class indexController extends template{
 		$ok = FALSE;
 		//Création de l'album dans FB si inexistant
 		$albumCompetition = $this->searchAlbumCompetition();
-		/* LIMITATION A 10 Mo A SURVEILLER */
+
 		//Envoi d'une image depuis l'ordi
 		if(isset($_POST['uploadFile'])){
 			if(isset($_FILES['file'])){

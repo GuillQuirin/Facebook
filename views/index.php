@@ -190,11 +190,12 @@
 					<div class="row">
 						<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 text-center">
 							<h3>....ou en important une photo depuis votre ordinateur.</h3>
-							<form action="<?php echo WEBPATH.'/index/submit'; ?>" id="form" method="post" enctype="multipart/form-data" >
-							    <input type="file" name="file">
+							<form action="<?php echo WEBPATH.'/index/submit'; ?>" id="localForm" method="post" enctype="multipart/form-data" >
+							    <input type="file" name="file" id="i_file">
 							    <input type="hidden" name="uploadFile">
 							    <input type="submit" class="btn" name="upload" value="Envoyer">
 						    <form>
+						    <p class="pbFileSize">Le fichier est trop gros pour l'application, il ne doit pas excèder 10 Mo</p>
 						</div>
 					</div>
 					<?php
