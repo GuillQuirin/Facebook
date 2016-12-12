@@ -92,6 +92,18 @@ class template{
     return ($returnDecodedBody===TRUE) ? $response->getDecodedBody() : $response->getGraphUser();
   }
 
+
+  public function utf8ize($d) {
+      if (is_array($d)) {
+          foreach ($d as $k => $v) {
+              $d[$k] = $this->utf8ize($v);
+          }
+      } else if (is_string ($d)) {
+          return utf8_encode($d);
+      }
+      return $d;
+  }
+
   /*protected function envoiMail($destinataire, $objet, $contenu){
     // CONFIGURATION DU MAIL
 
