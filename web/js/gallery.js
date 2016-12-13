@@ -12,8 +12,13 @@ function getContent(page){
 		},*/
 		url: "gallery/getGallery", 
 		success: function(result){
+			var listParticipation = JSON.parse(result);
 			console.log(JSON.parse(result));
-			$('#gallery').html(JSON.parse(result));
+			var code = "";
+			$.each(listParticipation,function(){
+				code += "<div class='col-md-3'><img class='img-thumbnail' src='"+this.url_photo+"'></div>";
+			});
+			$('#gallery').html(code);
 		},
 		fail: function(){
 			console.log('Pas OK');

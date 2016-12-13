@@ -19,7 +19,7 @@ class galleryController extends template{
 
 		$participateManager = new participateManager();
 		$listParticipation = $participateManager->getParticipantsByCompetition($this->competition);
-		print_r($listParticipation);
+		//print_r($listParticipation);
 		echo json_encode($this->utf8ize($listParticipation));
 	}
 }
