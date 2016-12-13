@@ -30,9 +30,8 @@ class participateManager extends basesql{
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute($table);
 		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
-		$list = [];
-		foreach ($r as $key => $value) {
-			$list[] = new participate($value);
+		foreach ($r as $key => $value){
+			$list[] = $value;
 		}
 		return $list;
 	}
