@@ -2,32 +2,38 @@
   <h2>Création d'un concours </h2>
   <form>
     <div class="form-group">
-      <label for="email">Intitulé du concours : </label>
-      <input type="email" class="form-control" id="email">
+      <label for="name">Intitulé du concours : </label>
+      <input type="name" class="form-control" id="name"/>
     </div>
     <div class="form-group">
-      <label for="pwd">Description du concours :</label>
+      <label for="description">Description du concours :</label>
       <div id="summernote">Hello Summernote</div>
     </div>
     <div class="form-group">
-      <label for="dateDebut">Date de début du concours : </label>
+      <label for="start_date">Date de début du concours : </label>
       <div class="date" id="datePicker">
         <div class="input-group">
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-          <input type="text" class="form-control" name="dateDebut" id="dateDebut" placeholder="jj/mm/aaaa" required/>
+          <input type="text" class="form-control" name="start_date" id="start_date" placeholder="jj/mm/aaaa" required/>
         </div>
       </div>
     </div>
     <div class="form-group">
-      <label for="dateFin">Date de fin du concours : </label>
+      <label for="end_date">Date de fin du concours : </label>
       <div class="date" id="datePicker2">
         <div class="input-group">
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-          <input type="text" class="form-control" name="dateFin" id="dateFin" placeholder="jj/mm/aaaa" required/>
+          <input type="text" class="form-control" name="end_date" id="end_date" placeholder="jj/mm/aaaa" required/>
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <div class="form-group">
+      <label for="prize">Description du concours :</label>
+      <input type="text" class="form-control" id="prize"/>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-lg btn-success">Créer le concours !</button>
+    </div>
   </form>
 </div>
 <script>
