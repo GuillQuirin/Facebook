@@ -14,12 +14,16 @@ class galleryController extends template{
 		$v->setView("gallery");
 	}
 
-	public function getGalleryAction(){
-		//$page = $_POST['page'];
+	public function getGalleryAction(){ 
+		$tri = (isset($_POST['tri'])) ? $_POST['tri'] : 0;
 
 		$participateManager = new participateManager();
-		$listParticipation = $participateManager->getParticipantsByCompetition($this->competition);
-		//print_r($listParticipation);
+		$listParticipation = $participateManager->getParticipantsByCompetition($this->competition,$tri);
+
+		foreach ($listParticipation as $key => $participation) {
+			$nblikes = $this->dataApi(TRUE, '/'.$participation['id_photo'],"?fields=likes.summary(1)");
+			$listParticipation[$key]['nb_likes'] = $nblikes['likes']['summary']['total_count'];
+		}
 		echo json_encode($this->utf8ize($listParticipation));
 	}
 }

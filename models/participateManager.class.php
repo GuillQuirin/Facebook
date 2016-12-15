@@ -19,10 +19,16 @@ class participateManager extends basesql{
 		return $list;
 	}
 
-	public function getParticipantsByCompetition(competition $data){
+	public function getParticipantsByCompetition(competition $data,$order=0){
 		//Présent dans basesql car appelable de n'importe quel Manager
 		$sql = "SELECT * FROM ".$this->table." WHERE id_competition=:id_competition";
 		
+		switch($order){
+			case 1:
+				$sql.=" ORDER BY date_created DESC";
+				break;
+		}
+
 		//Nouvelle table avec une seule case
     	$table = [
     		'id_competition' => $data->getId_competition()
@@ -33,6 +39,9 @@ class participateManager extends basesql{
 		foreach ($r as $key => $value){
 			$list[] = $value;
 		}
+		if($order==0)
+			shuffle($list);
+
 		return $list;
 	}
 
@@ -69,8 +78,8 @@ class participateManager extends basesql{
 
 	public function saveParticipation(participate $data){
 		//Vérification s'il n'existe pas déjà en BDD
-		$participation = $this->getParticipationByIds($data);
-		if($participation===null)
+		/*$participation = $this->getParticipationByIds($data);
+		if($participation===null)*/
 			$save = $this->save($data);
 		//Renvoi de l'objet avec ses id de la BDD complétés
 		return $this->getParticipationByIds($data);

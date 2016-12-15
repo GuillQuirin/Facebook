@@ -1,6 +1,11 @@
 <?php 
 	if(!empty($listParticipation)): 
 		?>
+		<select name="sort">
+			<option value="0" selected>Random</option>
+			<option value="1">Date d'ajout</option>
+			<option value="2">Tri par like</option>
+		</select>
 		<input type="hidden" id="url" value="<?php echo __URI__; ?>">
 		<div class="row" id="gallery">
 		

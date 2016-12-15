@@ -75,7 +75,7 @@ class template{
   }
 
   //Fonction Facebook : soit récupération d'un élèment, soit envoi d'un fichier dans un album photo
-  protected function dataApi($callElement = TRUE, $idElement = "me",$listParam = [], $dataPost = [], $returnDecodedBody = TRUE){
+  protected function dataApi($callElement = TRUE, $idElement = "/me",$listParam = [], $dataPost = [], $returnDecodedBody = TRUE){
     $string = (is_array($listParam)) ? $idElement.implode(',',$listParam) : $idElement.$listParam;
 
     try{
