@@ -5,11 +5,11 @@ class motherClass{
 		$this->hydrate($data);
 	}
 
-	private function hydrate($data){
+	protected function hydrate($data){
 		foreach ($data as $key => $value) {
 			$method = 'set'.ucfirst($key);
 			if(method_exists($this, $method))
-				$this->$method($value);
+				$this->$method(trim($value));
 		}
 	}
 
@@ -18,4 +18,9 @@ class motherClass{
 		return get_object_vars($this);
 	}
 
+	protected function multiexplode ($delimiters,$string) {
+	    $ready = str_replace($delimiters, $delimiters[0], $string);
+	    $launch = explode($delimiters[0], $ready);
+	    return  $launch;
+	}
 }

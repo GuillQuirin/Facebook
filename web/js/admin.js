@@ -26,27 +26,33 @@ $(document).ready(function() {
     $('#listCompetitions>tbody>tr').click(function(){
         $(this).find("td").each(function(){
             var type = $(this).attr('name');
-            $('#Modal input[name="'+type+'"]').val($(this).text());
+            $('#Modal input[type!="checkbox"][name="'+type+'"]').val($(this).text());
             $('#Modal textarea[name="'+type+'"]').val($(this).text());
             if(type=="url_prize")
                 $('#Modal input[name="'+type+'"]').val($(this).find('a').attr("href"));
-        })
+            if(type=="active"){
+                if($.trim($(this).text())=="Actif")
+                    $('#Modal input[name="'+type+'"]').prop("checked","checked");
+                else
+                    $('#Modal input[name="'+type+'"]').prop("checked",false);
+            }
+        });
     });
 
-    //Envoi des modifications en ajax
+    //Modifications du concours en ajax
     $('#Modal #submit').click(function(){
         $.ajax({
           method: "POST",
           url: $('[name="webpath"]').val()+"/admin/editCompetition",
           data: $('#data_competition').serialize()
         })
-          .done(function( msg ) {
-           console.log(msg);
-           //location.reload();
+          .done(function( msg ){
+           //listCompetitions
+           location.reload();
           });
     });
 
-     //Envoi du nouveau concours en ajax
+     //Création du nouveau concours en ajax
     $('#CreateCompetition #submit').click(function(){
         $.ajax({
           method: "POST",
@@ -60,7 +66,7 @@ $(document).ready(function() {
 
     /*PARTICIPANTS*/
 
-    //Liste des photo reported
+    //Liste des photo signalees
     var listReportedPhoto = $('#listReportedPhoto').DataTable( {
         "paging":   true,
         "ordering": true,

@@ -22,11 +22,19 @@ class competition extends motherClass{
 	public function setId_competition($v){$this->id_competition=$v;}
 	public function setName($v){$this->name=$v;}
 	public function setDescription($v){$this->description=$v;}
-	public function setStart_date($v){$this->start_date=$v;}
-	public function setEnd_date($v){$this->end_date=$v;}
+	public function setStart_date($v){
+		$date = $this->multiexplode(array("/","-"),$v);
+		$this->start_date = $date[2]."-".$date[1]."-".$date[0];
+	}
+	public function setEnd_date($v){
+		$date = $this->multiexplode(array("/","-"),$v);
+		$this->end_date = $date[2]."-".$date[1]."-".$date[0];
+	}
 	public function setPrize($v){$this->prize=$v;}
 	public function setId_winner($v){$this->id_winner=$v;}
-	public function setActive($v){$this->active=1;}
+	public function setActive($v){
+		$this->active = ($v=="on" || $v=="1") ? 1 : 0;
+	}
 	public function setUrl_prize($v){$this->url_prize=$v;}
 	public function setDate_created($v){}
 	public function setDate_updated($v){$this->date_updated=$v;}
@@ -38,8 +46,8 @@ class competition extends motherClass{
 	public function getId_competition(){return $this->id_competition;}
 	public function getName(){return $this->name;}
 	public function getDescription(){return $this->description;}
-	public function getStart_date(){return $this->start_date;}
-	public function getEnd_date(){return $this->end_date;}
+	public function getStart_date(){return str_replace("-","/",$this->start_date);}
+	public function getEnd_date(){return str_replace("-","/",$this->end_date);}
 	public function getPrize(){return $this->prize;}
 	public function getId_winner(){return $this->id_winner;}
 	public function getActive(){return $this->active;}

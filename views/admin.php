@@ -23,8 +23,8 @@
 						<td name='id_competition'> <?php echo $competition->getId_competition(); ?> </td>
 						<td name='name'> <?php echo $competition->getName(); ?></td>
 						<td name='description'> <?php echo $competition->getDescription(); ?></td>
-						<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())); ?></td>
-						<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())); ?></td>
+						<td name='start_date' > <?php echo $competition->getStart_date(); ?></td>
+						<td name='end_date' ><?php echo $competition->getEnd_date(); ?></td>
 						<td name='prize' > <?php echo $competition->getPrize(); ?></td>
 						<td name='url_prize'><?php echo (trim($competition->getUrl_prize())!="") ? 
 												"<a target='_blank' href='".$competition->getUrl_prize()."'>Lien du prix</a>" : 
@@ -87,6 +87,7 @@
 					</div>
 					<div class="modal-body">
 						<form id="data_competition">
+							<input type="hidden" name="id_competition">
 							<div class="form-group row">
 								<label for="name" class="col-xs-3 col-form-label text-right">Intitulé</label>
 								<div class="col-xs-9">

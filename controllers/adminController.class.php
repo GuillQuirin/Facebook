@@ -40,7 +40,7 @@ class adminController extends template{
 	public function editCompetitionAction(){
 		$competition = new competition($_POST);
 		$competitionManager = new competitionManager();
-		$competitionManager->updateCompetition($competition);
+		$competitionManager->updateCompetition($competition);	
 	}
 }
 

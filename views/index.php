@@ -5,8 +5,8 @@
 				<img class="img-thumbnail" style="width: 10%;" src="https://scontent-fra3-1.xx.fbcdn.net/v/t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" alt="logo">
 				<h1>CONCOURS <?php echo $competition->getName(); ?></h1>
 				<p>Organisé
-					du <?php echo date('d/m/Y', strtotime($competition->getStart_date())); ?>
-					au <?php echo date('d/m/Y', strtotime($competition->getEnd_date())); ?>.
+					du <?php echo $competition->getStart_date(); ?>
+					au <?php echo $competition->getEnd_date(); ?>.
 				</p>
 	 			<hr>
 	 			<hr>
@@ -205,17 +205,12 @@
 	//Publication
 	?>
 
-<footer class='text-center'>
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <ul class="nav navbar-nav">
-	      	<li><a href="<?php echo WEBPATH;?>/">Règlement du concours</a></li>
-			<li><a href="<?php echo WEBPATH;?>/">CGU</a></li>
-			<?php 
-			if(isset($user) && in_array($user->getId(),$listAdmins)) :?>
-				<li><a href="<?php echo WEBPATH;?>/admin">Administration</a></li>
-			<?php endif; ?>
-	    </ul>
-	  </div>
-	</nav>
+<!-- Footer des pages -->
+<footer class="footer col-md-12">
+	<a href="<?php echo WEBPATH; ?>/reglement">Règlement du concours</a> | 
+	<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a> | 
+	<?php 
+	if(isset($user) && isset($listAdmins) && in_array($user->getId(),$listAdmins)) :?>
+		<a href="<?php echo WEBPATH;?>/admin">Administration</a>
+	<?php endif; ?>
 </footer>
