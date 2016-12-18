@@ -1,8 +1,8 @@
 <div class="col-md-12">
-	<div class="col-md-offset-1 col-md-10 col-offset-1">
+	<div>
 		<h2 class="text-center text-uppercase">Liste des concours</h2>
 
-		<table id="listCompetitions" class="table stripe order-column">
+		<table id="listCompetitions" class="table stripe responsive order-column text-center">
 			<thead>
 				<th>Numéro</th>
 				<th>Nom</th>
@@ -14,25 +14,33 @@
 				<th>Nombre de participants</th>
 				<th>Nom du gagnant</th>
 				<th>Statut</th>
+				<th>Edition</th>
 				<th>Action</th>
 			</thead>
 			<tbody>
 				<?php foreach ($listCompetitions as $key => $competition) { ?>
-				<tr data-toggle='modal' data-target='#Modal' class="cursor-pointer">
-					<td name='id_competition'> <?php echo $competition->getId_competition() ?> </td>
-					<td name='name'> <?php echo $competition->getName() ?></td>
-					<td name='description'> <?php echo $competition->getDescription() ?></td>
-					<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())) ?></td>
-					<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())) ?></td>
-					<td name='prize' > <?php echo $competition->getPrize() ?></td>
-					<td name='url_prize' > <?php echo $competition->getUrl_prize() ?></td>
-					<td name='totalParticipants' > <?php echo $competition->getTotalParticipants() ?></td>
-					<td name='id_winner' ><?php echo $competition->getId_winner() ?></td>
-					<td name='active'>
-						<?php echo ($competition->getActive()==1) ? "Actif" : ""; ?>
-					</td>
-					<td name='action'> <?php echo ($competition->getActive()==1) ? "<button class='btn btn-danger'>Cloturer</button>" : ""; ?></td>
-				</tr>
+					<tr>
+						<td name='id_competition'> <?php echo $competition->getId_competition(); ?> </td>
+						<td name='name'> <?php echo $competition->getName(); ?></td>
+						<td name='description'> <?php echo $competition->getDescription(); ?></td>
+						<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())); ?></td>
+						<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())); ?></td>
+						<td name='prize' > <?php echo $competition->getPrize(); ?></td>
+						<td name='url_prize'><?php echo (trim($competition->getUrl_prize())!="") ? 
+												"<a target='_blank' href='".$competition->getUrl_prize()."'>Lien du prix</a>" : 
+												""; 
+											?>
+						</td>
+						<td name='totalParticipants' > <?php echo $competition->getTotalParticipants(); ?></td>
+						<td name='id_winner' ><?php echo $competition->getId_winner(); ?></td>
+						<td name='active'>
+							<?php echo ($competition->getActive()==1) ? "Actif" : ""; ?>
+						</td>
+						<td><button data-toggle="modal" data-target="#Modal" class="btn btn-warning">Modifier</button></td>
+						<td name='action'> 
+							<?php echo ($competition->getActive()==1) ? "<button class='btn btn-danger'>Cloturer</button>" : ""; ?>	
+						</td>
+					</tr>
 				<?php } ?>
 			</tbody>
 		</table>
@@ -40,7 +48,7 @@
 	<div class="col-md-offset-3 col-md-6 col-offset-3 btn-new-competition">
 		<button type="button" data-toggle="modal" data-target="#CreateCompetition" class="col-md-12 btn btn-success">Créer un concours !</button>
 	</div>
-	<div class="col-md-offset-1 col-md-10 col-offset-1">
+	<div class="col-md-12">
 		<h2 class="text-center text-uppercase">Liste des photos signalées</h2>
 
 		<table id="listReportedPhoto" class="table stripe order-column">
@@ -50,15 +58,21 @@
 				<th>Action</th>
 			</thead>
 			<tbody>
-				<?php foreach ($listReportedPhoto as $key => $photo) { ?>
-				<tr>
-					<td name='nom_updlader'><?php echo $photo->getId_user() ?></td>
-					<td name='url_photo'><a href="#" target="blank"><?php echo $photo->getUrl_photo() ?></a></td>
-					<td name='action'> 
-						<?php echo ($photo->getIs_locked()==0) ? "<button class='btn btn-success'>Vérouiller</button>" : "<button class='btn btn-danger'>Dévérouiller</button>" ?>
-					</td>
-				</tr>
-				<?php } ?>
+				<?php 
+				if(isset($listReportedPhoto)){
+					foreach ($listReportedPhoto as $key => $photo) : ?>
+						<tr>
+							<td name='nom_updlader'><?php echo $photo->getId_user() ?></td>
+							<td name='url_photo'><a href="#" target="blank"><?php echo $photo->getUrl_photo() ?></a></td>
+							<td name='action'> 
+								<?php echo ($photo->getIs_locked()==0) ? "<button class='btn btn-success'>Verrouiller</button>" : "<button class='btn btn-danger'>Déverrouiller</button>" ?>
+							</td>
+						</tr>
+				<?php
+					endforeach; 
+				} 
+				else ?>
+					<tr><td></td><td>Pas de photo signalées par les utilisateurs</td><td></td></tr>
 			</tbody>
 		</table>
 
@@ -107,12 +121,6 @@
 								<label for="prize" class="col-xs-3 col-form-label text-right">Url du lot</label>
 								<div class="col-xs-9">
 									<input type="text" name="url_prize" class="form-control">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="totalParticipants" class="col-xs-3 col-form-label text-right">Nombre de participants</label>
-								<div class="col-xs-9">
-									<input type="text" name="totalParticipants" class="form-control" disabled>
 								</div>
 							</div>
 							<div class="form-check row">

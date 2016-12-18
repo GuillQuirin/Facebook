@@ -6,3 +6,9 @@
 .modal-footer{
 	text-align: center;
 }
+.tab_url{
+	max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: inherit;
+}

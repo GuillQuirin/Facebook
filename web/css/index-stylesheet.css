@@ -28,3 +28,7 @@ img{
 .pbFileSize{
 	display: none;
 }
+
+footer .navbar{
+	margin-bottom: 0;
+}
