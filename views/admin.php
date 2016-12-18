@@ -54,7 +54,7 @@
 		<table id="listReportedPhoto" class="table stripe order-column">
 			<thead>
 				<th>Nom de l'uploader</th>
-				<th>Url de la photo</th>
+				<th>Lien de l'image</th>
 				<th>Action</th>
 			</thead>
 			<tbody>
@@ -62,7 +62,9 @@
 				if(isset($listReportedPhoto)){
 					foreach ($listReportedPhoto as $key => $photo) : ?>
 						<tr>
-							<td name='nom_updlader'><?php echo $photo->getId_user() ?></td>
+							<td name='nom_updlader'>
+								<?php echo strtoupper($photo->getLast_name())." ".ucfirst($photo->getFirst_name()); ?>	
+							</td>
 							<td name='url_photo'><a href="#" target="blank"><?php echo $photo->getUrl_photo() ?></a></td>
 							<td name='action'> 
 								<?php echo ($photo->getIs_locked()==0) ? "<button class='btn btn-success'>Verrouiller</button>" : "<button class='btn btn-danger'>Déverrouiller</button>" ?>

@@ -21,7 +21,11 @@ class participateManager extends basesql{
 
 	public function getParticipantsByCompetition(competition $data,$order=0){
 		//Présent dans basesql car appelable de n'importe quel Manager
-		$sql = "SELECT * FROM ".$this->table." WHERE id_competition=:id_competition";
+		$sql = "SELECT id, id_competition, id_user, id_photo, 
+						url_photo, is_reported, is_locked, 
+						date_created, date_updated, deleted 
+					FROM participate 
+					WHERE id_competition=:id_competition";
 		
 		switch($order){
 			case 1:
@@ -46,7 +50,11 @@ class participateManager extends basesql{
 	}
 
 	public function getParticipationByIds(participate $data){
-		$sql = "SELECT * FROM ".$this->table." WHERE id_competition=:id_competition AND id_user=:id_user";
+		$sql = "SELECT id, id_competition, id_user, id_photo, 
+						url_photo, is_reported, is_locked, 
+						date_created, date_updated, deleted  
+					FROM participate 
+					WHERE id_competition=:id_competition AND id_user=:id_user";
 		
 		//Nouvelle table avec une seule case
     	$table = [
@@ -64,7 +72,13 @@ class participateManager extends basesql{
 	* Get all participation with reported photo
 	*/
 	public function getPhotoReported(){
-		$sql = "SELECT * FROM ".$this->table." WHERE is_reported = 1";
+		$sql = "SELECT p.id, p.id_competition, p.id_photo, 
+						p.url_photo, p.is_reported, p.is_locked, 
+						p.date_created, p.date_updated, p.deleted,
+						u.last_name, u.first_name 
+					FROM participate p 
+						LEFT OUTER JOIN user u ON u.id_user = p.id_user
+					WHERE p.is_reported = 1";
 		
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute();
@@ -73,6 +87,7 @@ class participateManager extends basesql{
 		foreach ($r as $key => $value) {
 			$list[] = new participate($value);
 		}
+
 		return $list;
 	}
 
