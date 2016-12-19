@@ -99,6 +99,10 @@ class participateManager extends basesql{
 		//Renvoi de l'objet avec ses id de la BDD complétés
 		return $this->getParticipationByIds($data);
 	}
+
+	public function editPhoto(participate $data){
+		$this->update($data);
+	}
 }
 
 /*

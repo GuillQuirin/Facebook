@@ -14,8 +14,12 @@ class motherClass{
 	}
 
 	public function getAllAttributes(){
-		//Retourne l'ensemble des attributs d'une classe
-		return get_object_vars($this);
+		//Retourne l'ensemble des attributs NON-NULS d'une classe
+		foreach ($this as $method => $value) {
+			if($value!==NULL)
+				$table[$method] = $method;
+		}
+		return $table;
 	}
 
 	protected function multiexplode ($delimiters,$string) {

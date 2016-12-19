@@ -54,21 +54,22 @@ abstract class basesql{
 
 	//MISE A JOUR
 	protected function update($data){
-		$listColumns=$this->getColumns();
-		
-		$sql = "UPDATE ".$this->table." SET";
+
+		$listColumns=$data->getAllAttributes();
+
+		$sql = "UPDATE `".$this->table."` SET";
 		$i=0;
 		foreach ($listColumns as $column) {
 			if($i!=0){ //On saute le premier élèment qui correspond normalement à l'ID
-				$sql .= " ".$column."=:".$column;
+				$sql .= " `".$column."`=:".$column;
 				if($column!=end($listColumns))
 					$sql.=",";
 			}
 			$i++;
 		}
 		reset($listColumns); //obligatoire pour récupérer le 1er élement d'un tableau apres son parcours
-		$sql.= " WHERE ".key($listColumns)."=:".key($listColumns);
-		
+		$sql.= " WHERE `".key($listColumns)."`=:".key($listColumns);
+
 		$sth = $this->pdo->prepare($sql);
 
 		foreach ($listColumns as $key => $attribute){
@@ -76,9 +77,12 @@ abstract class basesql{
 			$value = $data->$method();
 			$array[$key]=$value;
 		}
-
+		var_dump($sql);
+		var_dump($array);
+		//exit;
 		$sth->execute($array);	
 	}
+//UPDATE `participate` SET `is_locked` = '0' WHERE `url_photo` = "https://scontent.xx.fbcdn.net/v/t1.0-9/15492172_10211905112134197_5372954879866724434_n.jpg?oh=eb0f4c2402c13ea9da5c8fa560120833&oe=58B3BDE0";
 
 	//NOM DES COLONNES D'UNE TABLE
 	protected function getColumns(){

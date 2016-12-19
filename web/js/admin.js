@@ -61,7 +61,7 @@ $(document).ready(function() {
         })
           .done(function( msg ) {
            location.reload();
-          });
+        });
     });
 
     /*PARTICIPANTS*/
@@ -84,6 +84,27 @@ $(document).ready(function() {
             "infoFiltered": "(trier sur un enregistrement total de _MAX_ résultats)",
             "search": "Rechercher"
         }
-    } );
+    });
+
+    $('.lock_photo, .unlock_photo').click(function(){
+        var button = $(this);
+        var locked = (button.hasClass("lock_photo")) ? 1 : 0;
+
+        $.ajax({
+          method: "POST",
+          url: $('[name="webpath"]').val()+"/admin/adminPhoto",
+          data: {
+            "url_photo" : button.parent().parent().find('a[name="url_photo"]').text(),
+            "is_locked" : locked
+            },
+        })
+          .done(function() {
+            console.log(button);
+            if(locked==1)
+                button.removeClass("btn-success lock_photo").addClass("btn-danger unlock_photo").html("Déverrouiller");
+            else
+                button.removeClass("btn-danger unlock_photo").addClass("btn-success lock_photo").html("Verrouiller");
+        });
+    });
 
 } );

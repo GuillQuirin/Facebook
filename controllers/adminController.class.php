@@ -42,5 +42,12 @@ class adminController extends template{
 		$competitionManager = new competitionManager();
 		$competitionManager->updateCompetition($competition);	
 	}
+
+	//ADMINISTRATION DES PHOTOS
+	public function adminPhotoAction(){
+		$participate = new participate($_POST);
+		$participateManager = new participateManager();
+		$participateManager->editPhoto($participate);	
+	}	
 }
 

@@ -62,12 +62,12 @@
 				if(isset($listReportedPhoto)){
 					foreach ($listReportedPhoto as $key => $photo) : ?>
 						<tr>
-							<td name='nom_updlader'>
+							<td>
 								<?php echo strtoupper($photo->getLast_name())." ".ucfirst($photo->getFirst_name()); ?>	
 							</td>
-							<td name='url_photo'><a href="#" target="blank"><?php echo $photo->getUrl_photo() ?></a></td>
-							<td name='action'> 
-								<?php echo ($photo->getIs_locked()==0) ? "<button class='btn btn-success'>Verrouiller</button>" : "<button class='btn btn-danger'>Déverrouiller</button>" ?>
+							<td><a href="#" target="blank" name="url_photo"><?php echo $photo->getUrl_photo(); ?></a></td>
+							<td> 
+								<?php echo ($photo->getIs_locked()==0) ? "<button class='btn btn-success lock_photo'>Verrouiller</button>" : "<button class='btn btn-danger unlock_photo'>Déverrouiller</button>" ?>
 							</td>
 						</tr>
 				<?php
