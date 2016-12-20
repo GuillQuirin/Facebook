@@ -37,13 +37,14 @@ class participateManager extends basesql{
     	$table = [
     		'id_competition' => $data->getId_competition()
     	];	
+    	$list =[];
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute($table);
 		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
 		foreach ($r as $key => $value){
 			$list[] = $value;
 		}
-		if($order==0)
+		if(!empty($list) && $order==0)
 			shuffle($list);
 
 		return $list;
