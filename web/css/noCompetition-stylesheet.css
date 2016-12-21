@@ -1,7 +1,7 @@
 body{
-  	background-image : url("http://media.gettyimages.com/photos/woman-outdoors-in-summer-picture-id532647025");
-	background-size : 100%;
-	vertical-align: bottom;
+  	background-image : url("http://media.gettyimages.com/photos/bearded-man-with-tattoos-standing-with-arms-crossed-picture-id518339107");
+	  background-size : 100%;
+	  vertical-align: bottom;
 }
 
 .padding-left-30{
@@ -15,9 +15,10 @@ body{
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 100px;
+  text-align : left;
 }
 
 img{
 	width: auto;
-  	height: 100px;
+  height: 100px;
 }
