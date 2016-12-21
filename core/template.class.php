@@ -9,28 +9,29 @@ class template{
 
   public function __construct(){
     
+    require_once __ROOT__.'/web/vendor/autoload.php';      
+    //Connexion à l'application enregistrée
+    $this->fb = new Facebook\Facebook([
+      'app_id' => '1804945786451180',
+      'app_secret' => APP_SECRET,
+      'default_graph_version' => 'v2.5',
+      'fileUpload' => true
+    ]);
+
     //Recherche d'un concours ouvert au public
     $competitionManager = new competitionManager();
     $this->competition = $competitionManager->searchCompetitions();
     
-    if($this->competition!==NULL){ //Un concours est actif
-
-      require_once __ROOT__.'/web/vendor/autoload.php';
-      
-      //Connexion à l'application enregistrée
-      $this->fb = new Facebook\Facebook([
-        'app_id' => '1804945786451180',
-        'app_secret' => APP_SECRET,
-        'default_graph_version' => 'v2.5',
-        'fileUpload' => true
-      ]);
-      //Session ouverte sur 2 heures
-      if(isset($_SESSION['ACCESS_TOKEN']))
-        //$this->fb->setDefaultAccessToken($_SESSION["LONG_ACCESS_TOKEN"]); //60 jours
-        $this->fb->setDefaultAccessToken($_SESSION["ACCESS_TOKEN"]);
+    //Session ouverte sur 2 heures
+    if(isset($_SESSION['ACCESS_TOKEN'])){
+      //$this->fb->setDefaultAccessToken($_SESSION["LONG_ACCESS_TOKEN"]); //60 jours
+      $this->fb->setDefaultAccessToken($_SESSION["ACCESS_TOKEN"]);
     }
-    else //Pas de concours ouverts actuellement
-      header('Location: '.WEBPATH.'/noCompetition');
+    
+    //Renvoi sur la page noCompetition lorsqu'il n'y a pas de concours disponible (si l'utilisateur n'y était pas déjà)
+    //if(get_class($this)!="noCompetitionController" && $this->competition===NULL)
+     // header('Location: '.WEBPATH.'/noCompetition');
+
   }
 
   // Cette methode enverra à la view reçue en parametre les propriétés nécessaires de la Template
@@ -44,10 +45,11 @@ class template{
     if(isset($_SESSION['ACCESS_TOKEN'])){  
       //Liste des admins
       $admins = $this->dataApi(TRUE,'/app/roles',array(),"1804945786451180|yqj6xWNaG2lUvVv3sfwwRbU5Sjk");
+      $listAdmins=[];
       foreach ($admins['data'] as $key => $admin) {
         if($admin['role']=="administrators")
           $listAdmins[] = $admin['user'];
-        }
+      }
       $v->assign("listAdmins", $listAdmins);
        
       //Infos de l'utilisateur
