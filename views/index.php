@@ -189,7 +189,7 @@
 							    <input type="file" name="file" id="i_file">
 							    <input type="hidden" name="uploadFile">
 							    <input type="submit" class="btn" name="upload" value="Envoyer">
-						    <form>
+						    </form>
 						    <p class="pbFileSize">Le fichier est trop gros pour l'application, il ne doit pas excèder 10 Mo</p>
 						</div>
 					</div>
