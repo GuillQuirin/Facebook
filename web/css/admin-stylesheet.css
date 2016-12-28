@@ -33,3 +33,42 @@ body {
 	outline: 1px solid orange;
 	padding-bottom : 15px;
 }
+
+.navbar-default {
+  background-color: #fcb455;
+  border-color: #f4861f;
+  color : white;
+}
+.navbar-default .navbar-brand {
+  color: #ffffff;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #f79e2a;
+}
+
+.navbar-default .navbar-link:hover {
+  color: #ffffff;
+}
+
+.apercu{
+  outline : 1px solid black;
+  font-size : 12px;
+  font-family : "Courier New";
+  background : url("http://hdwallpaper20.com/wp-content/uploads/2016/07/black-wallpapers15-1024x640.jpg");
+}
+
+.apercu input, .apercu select{
+  background-color: #e5e6e8;
+}
+
+.apercu{
+  color : white;
+}
+
+hr{
+  border-top-color: orange;
+}
