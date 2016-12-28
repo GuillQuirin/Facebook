@@ -30,18 +30,18 @@
 
 <body>
 	<header class="col-md-12">
-		<nav class="container">
+		<!--<nav class="container">
 			<ul class="nav nav-tabs">
 				<li><a href="<?php echo WEBPATH; ?>">Participer</a></li>
 				<li><a href="<?php echo WEBPATH; ?>/gallery">Galerie</a></li>
-				<li><!--<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true">--><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a><!--</div>--></li>
+				<li><!--<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a><!--</div></li>
 			</ul>
-		</nav>	
+		</nav>-->
 		<nav class="col-md-offset-3 col-md-6 navbar navbar-default no-padding">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Liste des concours</a></li>
+				<li class="active"><a href="<?php echo WEBPATH ?>/admin">Liste des concours</a></li>
 				<li><a href="<?php echo WEBPATH ?>/admin/design">Design</a></li>
-				<li><a href="<?php echo WEBPATH ?>/admin/export">Export des données</a></li>
+				<li><a href="<?php echo WEBPATH ?>/export">Export des données</a></li>
 				<li><a href="#">Reglement et CGU</a></li>
 			</ul>
 		</nav>
