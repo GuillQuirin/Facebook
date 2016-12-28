@@ -1,3 +1,7 @@
+body {
+	background-color : #fbffba;
+}
+
 .btn-new-competition{
 	margin-top: 20px;
 	margin-bottom: 60px;
@@ -6,9 +10,26 @@
 .modal-footer{
 	text-align: center;
 }
+
 .tab_url{
 	max-width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: inherit;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 50px;
+  text-align : center;
+}
+
+.bord { 
+	text-align : center;
+	background-color : white;
+	outline: 1px solid orange;
+	padding-bottom : 15px;
 }
