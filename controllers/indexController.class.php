@@ -45,14 +45,14 @@ class indexController extends template{
 				$idFbPhoto = $this->dataApi(FALSE,'/'.$albumCompetition,"/photos",$data);
 				unlink($image['image']);
 				
-				$infosPhoto = $this->dataApi(TRUE,'/'.$idFbPhoto['id'].'?fields=','images',"");
+				$infosPhoto = $this->dataApi(TRUE,'/'.$idFbPhoto['id'].'?fields=','id,name,source',"");
 				$ok = TRUE;
 			}
 		}
 
 		if(isset($_POST['fromFB'])){
 			//Récupération de l'url de la photo présente sur FB
-			$infosPhoto = $this->dataApi(TRUE,'/'.$_POST['idPhoto'].'?fields=','id, source, images',"");
+			$infosPhoto = $this->dataApi(TRUE,'/'.$_POST['idPhoto'].'?fields=','id,name,source',"");
 			$data = [
 			  'url' => $infosPhoto['source']
 			];
@@ -71,7 +71,8 @@ class indexController extends template{
 			unset($infosUser['id']);
 
 			$user = new user($infosUser);
-			$userManager = new userManager();
+
+			$userManager = new userManager();			
 			$user = $userManager->saveUser($user);
 
 			//Enregistrement de la participation
@@ -79,7 +80,7 @@ class indexController extends template{
 			  	'id_competition' => $this->competition->getId_competition(),
 				'id_user' => $user->getId_user(),
 				'id_photo' => $infosPhoto['id'],
-				'url_photo' => $infosPhoto['images'][0]['source']
+				'url_photo' => $infosPhoto['source']
 			];
 
 			$participation = new participate($infosParticipation);
