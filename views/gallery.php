@@ -1,14 +1,25 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.8&appId=1804945786451180";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <?php 
 	if(!empty($listParticipation)): 
 		?>
 		<select name="sort">
-			<option value="0" selected>Random</option>
-			<option value="1">Date d'ajout</option>
-			<option value="2">Tri par like</option>
+			<option value="0" selected>Aléatoire</option>
+			<option value="1">Le plus ancien</option>
+			<option value="2">Le plus récent</option>
+			<option value="3">Tri par like</option>
 		</select>
 		<input type="hidden" id="url" value="<?php echo __URI__; ?>">
-		<div class="row" id="gallery">
-		
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1" id="gallery">
+				<img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Chargement" id="loading">
+			</div>
 		</div>
 		<!-- Pagination -->
 		<nav aria-label="Page navigation">

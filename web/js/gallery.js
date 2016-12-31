@@ -5,7 +5,10 @@ $(document).ready(function(){
 
 	//Tri
 	$('select[name="sort"]').change(function(){
-		getContent();
+		if($(this).val()!="3")
+			getContent();
+		else
+			getContentByLikes();
 	});
 
 	//Pagination
@@ -26,12 +29,16 @@ function getContent(){
 			var listParticipation = JSON.parse(result);
 			var code = "";
 			//console.log(listParticipation);
+			$("#loading").hide();
 			$.each(listParticipation,function(){
-				code += "<div class='col-md-3'>";
+				code += "<div class='col-md-4'>";
 					code += "<figure>";
 						code += "<img class='img-thumbnail' src='"+this.url_photo+"'>";
 						code += "<figcaption>";
-							code += '<div class="fb-like" data-href="'+this.url_photo+'" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>';
+							code += '<button>Signaler</button>';
+							code += this.first_name+' '+this.last_name;
+							//code += '<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>';
+							code += '<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true"></div>'
 						code += '</figcaption>';
 					code += "</figure>";
 				code += "</div>";
@@ -43,6 +50,9 @@ function getContent(){
 		}
 	});
 
+function getContentByLikes(){
+
+}
 	/*
 
 			foreach($listParticipation as $key => $participation){

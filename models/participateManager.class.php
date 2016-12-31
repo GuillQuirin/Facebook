@@ -21,15 +21,20 @@ class participateManager extends basesql{
 
 	public function getParticipantsByCompetition(competition $data,$order=0){
 		//Présent dans basesql car appelable de n'importe quel Manager
-		$sql = "SELECT id, id_competition, id_user, id_photo, 
-						url_photo, is_reported, is_locked, 
-						date_created, date_updated, deleted 
-					FROM participate 
+		$sql = "SELECT p.id, p.id_competition, p.id_user, p.id_photo, 
+						p.url_photo, p.is_reported, p.is_locked, 
+						p.date_created, p.date_updated, p.deleted, u.last_name, u.first_name 
+					FROM participate p
+					LEFT OUTER JOIN user u ON p.id_user = u.id_user
 					WHERE id_competition=:id_competition";
 		
 		switch($order){
 			case 1:
-				$sql.=" ORDER BY date_created DESC";
+				$sql.=" ORDER BY p.date_created ASC";
+				break;
+
+			case 2:
+				$sql.=" ORDER BY p.date_created DESC";
 				break;
 		}
 
