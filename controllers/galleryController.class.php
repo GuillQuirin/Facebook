@@ -21,8 +21,18 @@ class galleryController extends template{
 		$listParticipation = $participateManager->getParticipantsByCompetition($this->competition,$tri);
 
 		foreach ($listParticipation as $key => $participation) {
-			$nblikes = $this->dataApi(TRUE, '/'.$participation['id_photo'],"?fields=likes.summary(1)");
-			$listParticipation[$key]['nb_likes'] = $nblikes['likes']['summary']['total_count'];
+			$participation['url_photo'] = str_replace(
+														substr(
+																$participation['url_photo'],
+																strpos($participation['url_photo'],
+																"?")
+															),
+														"",
+														$participation['url_photo']
+													);
+
+			$nblikes = $this->dataApi(TRUE, '/'.$participation['url_photo'],"?fields=og_object{likes.limit(0).summary(true)}");
+			$listParticipation[$key]['nb_likes'] = $nblikes['og_object']['likes']['summary']['total_count'];
 		}
 		echo json_encode($this->utf8ize($listParticipation));
 	}

@@ -20,6 +20,7 @@ $(document).ready(function(){
 function getContent(){
 	//Méthode de tri
 	var tri = $('select[name="sort"]').val();
+	$("#loading").show();
 	$.ajax({method: "POST",
 		data:{
 			tri : tri
@@ -37,7 +38,7 @@ function getContent(){
 						code += "<figcaption>";
 							code += '<button>Signaler</button>';
 							code += this.first_name+' '+this.last_name;
-							//code += '<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>';
+							code += this.nb_likes;
 							code += '<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true"></div>'
 						code += '</figcaption>';
 					code += "</figure>";
@@ -54,18 +55,15 @@ function getContentByLikes(){
 
 }
 	/*
-
-			foreach($listParticipation as $key => $participation){
-			$result .= '<div class="col-md-3">';
-				$result .= '<div class="thumbnail">';
-					$result .= '<img src="'.$participation->getUrl_photo().'" alt="Photo de concours">';
-					$result .= '<div class="caption">';
-						$result .= '<p>123 likes</p>';
-					$result .= '</div>';
+		foreach($listParticipation as $key => $participation){
+		$result .= '<div class="col-md-3">';
+			$result .= '<div class="thumbnail">';
+				$result .= '<img src="'.$participation->getUrl_photo().'" alt="Photo de concours">';
+				$result .= '<div class="caption">';
+					$result .= '<p>123 likes</p>';
 				$result .= '</div>';
 			$result .= '</div>';
+		$result .= '</div>';
 		}
-
-
 	*/
 }

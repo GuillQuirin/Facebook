@@ -32,20 +32,20 @@
 	  var js, fjs = d.getElementsByTagName(s)[0];
 	  if (d.getElementById(id)) return;
 	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.8&appId=1804945786451180";
+	  js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1";
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 	<header>
 		<div class="container">
-			<ul class="nav nav-tabs">
-				<li><a href="<?php echo WEBPATH; ?>">Participer</a></li>
-				<li><a href="<?php echo WEBPATH; ?>/gallery">Galerie</a></li>
-				<li><!--<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true">--><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a><!--</div>--></li>
+			<ul class="col-md-4 col-md-offset-4 nav nav-tabs text-center">
+				<li class="col-md-4"><a href="<?php echo WEBPATH; ?>">Participer</a></li>
+				<li class="col-md-4"><a href="<?php echo WEBPATH; ?>/gallery">Galerie</a></li>
+				<li class="col-md-4"><!--<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true">--><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a><!--</div>--></li>
 			</ul>
 		</div>	
 	</header>
 
-	<div id="content">
+	<div id="content" class="container">
 		<input type="hidden" name="webpath" value="<?php echo WEBPATH; ?>">
 		<?php include $this->view; ?>
 	</div>
