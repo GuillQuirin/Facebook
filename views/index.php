@@ -75,6 +75,10 @@
 										</div>
 										
 										<!--Modal-->
+										<?php 
+											//Empêche d'avoir la meme image en individuel + album : bug de modal
+											$listAlonePic[] = $photo['id']; 
+										?>
 										<div class="modal fade" id='<?php echo $photo['id']; ?>' tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 										  <div class="modal-dialog" role="document">
 										    <form action="<?php echo WEBPATH.'/index/submit'; ?>" method="post">
@@ -128,7 +132,9 @@
 						      <div class="panel-body">
 						       <?php
 									if(isset($album['photos'])) :
-										foreach ($album['photos']["data"] as $key => $photo) :?>
+										foreach ($album['photos']["data"] as $key => $photo): 
+											if(!in_array($photo['id'],$listAlonePic)): 
+											?>
 											<div class="col-xs-6 col-md-4">
 												<a class="thumbnail cursor-pointer">
 													<img src='<?php echo $photo['source']; ?>' 
@@ -139,33 +145,33 @@
 											</div>
 
 											<!-- Modal -->
-											<div class="modal fade" id='<?php echo $photo['id']; ?>' tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-											  <div class="modal-dialog" role="document">
-											    <form action="<?php echo WEBPATH.'/index/submit'; ?>" method="post">
-											    <div class="modal-content">
-											      <div class="modal-header">
-											        <p>Assurez-vous d'être le propriétaire du contenu que vous envoyez.</p> 
-													<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/CGU'; ?>">conditions d'utilisations</a>.</p>
-											      </div>
-											      <div class="modal-body">
-											      	<img src='<?php echo $photo['source']; ?>' alt="photo d'un album">
-											      	<input type="hidden" name="idPhoto" value="<?php echo $photo['id']; ?>">
-											      	<input type="hidden" name="fromFB">
-											      </div>
-											      <div class="modal-footer">
-											      	<div class="col-md-6">
-											        	<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-											        </div>
-											        <div class="col-md-6">
-												        <button type="submit" class="btn btn-default">Envoyer cette photo</button>
-													</div>
-											      </div>
-											    </div>
-											    </form>
-											  </div>
-											</div>
-
+												<div class="modal fade" id='<?php echo $photo['id']; ?>' tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												  <div class="modal-dialog" role="document">
+												    <form action="<?php echo WEBPATH.'/index/submit'; ?>" method="post">
+												    <div class="modal-content">
+												      <div class="modal-header">
+												        <p>Assurez-vous d'être le propriétaire du contenu que vous envoyez.</p> 
+														<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/CGU'; ?>">conditions d'utilisations</a>.</p>
+												      </div>
+												      <div class="modal-body">
+												      	<img src='<?php echo $photo['source']; ?>' alt="photo d'un album">
+												      	<input type="hidden" name="idPhoto" value="<?php echo $photo['id']; ?>">
+												      	<input type="hidden" name="fromFB">
+												      </div>
+												      <div class="modal-footer">
+												      	<div class="col-md-6">
+												        	<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+												        </div>
+												        <div class="col-md-6">
+													        <button type="submit" class="btn btn-default">Envoyer cette photo</button>
+														</div>
+												      </div>
+												    </div>
+												    </form>
+												  </div>
+												</div>
 										<?php
+											endif;
 										endforeach;
 									endif;
 								?>

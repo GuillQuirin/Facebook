@@ -34,6 +34,7 @@ class userManager extends basesql{
 	//Enregistrement d'un participant
 	public function saveUser(user $data){
 		//Vérification s'il n'existe pas déjà en BDD
+		//var_dump($data);
 		$user = $this->getUserByIdFb($data->getIdFacebook());
 		if($user===null){
 			$save = $this->save($data);
