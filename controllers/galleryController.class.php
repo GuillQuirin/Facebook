@@ -32,6 +32,7 @@ class galleryController extends template{
 													);
 
 			$nblikes = $this->dataApi(TRUE, '/'.$participation['url_photo'],"?fields=og_object{likes.limit(0).summary(true)}");
+			$listParticipation[$key]['url_photo_cleaned'] = $participation['url_photo'];
 			$listParticipation[$key]['nb_likes'] = $nblikes['og_object']['likes']['summary']['total_count'];
 		}
 		echo json_encode($this->utf8ize($listParticipation));

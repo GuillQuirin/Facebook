@@ -8,8 +8,7 @@
 			<option value="3">Tri par like</option>
 		</select>
 		<input type="hidden" id="url" value="<?php echo __URI__; ?>">
-		<div class="col-md-10 col-md-offset-1" id="gallery">
-			<img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Chargement" id="loading">
+		<div class="col-md-12" id="gallery">
 		</div>
 		<!-- Pagination -->
 		<nav aria-label="Page navigation">
@@ -35,4 +34,3 @@
 	<h3>Soyez le premier participant au concours !</h3>
 	<h5>Pour vous inscrire, accèder <a href="<?php echo WEBPATH.'/index'; ?>">ici</a></h5>
 <?php endif; ?>
-

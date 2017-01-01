@@ -1,0 +1,9 @@
+.report img{
+	width: 100%;
+	cursor: pointer;
+}
+
+.reportSent{
+	font-size: 11px;
+    color: red;
+}

@@ -9,8 +9,6 @@ $(document).ready(function(){
 			getContentByLikes();
 	});
 
-	
-
 	//Pagination
 	/*$('select[name="sort"]').change(function(){
 		getContent(1);
@@ -20,7 +18,7 @@ $(document).ready(function(){
 function getContent(){
 	//Méthode de tri
 	var tri = $('select[name="sort"]').val();
-	$("#loading").show();
+	$('#gallery').html('<img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Chargement" id="loading">');
 	$.ajax({method: "POST",
 		data:{
 			tri : tri
@@ -36,9 +34,10 @@ function getContent(){
 					code += "<figure>";
 						code += "<img class='img-thumbnail' src='"+this.url_photo+"'>";
 						code += "<figcaption>";
-							code += '<button class="col-md-4 report">Signaler</button>';
-							code += '<p class="user col-md-4">'+this.first_name+' '+this.last_name+' '+this.nb_likes+'</p>';
-							code += '<div class="col-md-4 fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true"></div>'
+							code += '<p class="col-md-2 report"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/VisualEditor_-_Icon_-_Alert.svg/2000px-VisualEditor_-_Icon_-_Alert.svg.png" alt="Signaler"></p>';
+							code += '<p class="user col-md-5">'+this.first_name+' '+this.last_name+' '+this.nb_likes+'</p>';
+							//code += '<div class="col-md-4 fb-like" data-href="'+this.url_photo+'" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>'
+							code += '<iframe class="fb-like col-md-5" src="https://www.facebook.com/plugins/like.php?href='+this.url_photo_cleaned+'&layout=button_count&action=like&size=large&show_faces=false&share=false&appId=1804945786451180" height="30" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>';
 						code += '</figcaption>';
 					code += "</figure>";
 				code += "</div>";
@@ -46,6 +45,7 @@ function getContent(){
 			$('#gallery').html(code);
 			//Appel du code pour signaler APRES le load du contenu ajax
 			report();
+			like();
 		},
 		fail: function(){
 			console.log('Pas OK');
@@ -55,6 +55,14 @@ function getContent(){
 function getContentByLikes(){
 
 }
+
+function like(){
+	$('.fb-like *').click(function(){
+		$(this).hide();
+		//getContent();
+	});
+}
+
 
 function report(){
 	//Signalement
@@ -68,7 +76,7 @@ function report(){
 				url: "gallery/report", 
 				success: function(result){
 					//console.log(result);
-					$("#"+id+" .report").fadeOut();
+					$("#"+id+" .report").addClass("reportSent").html("Signalement envoyé.");
 				}
 			});
 		}
