@@ -74,6 +74,16 @@ class participateManager extends basesql{
 		return (!empty($r)) ? new participate($r[0]) : null;
 	}
 
+	public function reportParticipation(participate $data){
+		$sql = "UPDATE participate SET is_reported='1' WHERE id = :id";
+		$table = [
+			'id' => $data->getId()
+		];
+		
+		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$sth->execute($table);
+	}
+
 	/*
 	* Get all participation with reported photo
 	*/

@@ -36,5 +36,14 @@ class galleryController extends template{
 		}
 		echo json_encode($this->utf8ize($listParticipation));
 	}
+
+	public function reportAction(){
+		$whiteList['id'] = FILTER_VALIDATE_INT; 
+		$post = filter_var_array($_POST,$whiteList);
+
+		$participation = new participate($post);
+		$participateManager = new participateManager();
+		$participateManager->reportParticipation($participation);
+	}
 }
 

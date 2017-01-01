@@ -1,7 +1,5 @@
 $(document).ready(function(){
-	$('#gallery').ready(function(){
-		getContent();
-	});
+	getContent();
 
 	//Tri
 	$('select[name="sort"]').change(function(){
@@ -10,6 +8,8 @@ $(document).ready(function(){
 		else
 			getContentByLikes();
 	});
+
+	
 
 	//Pagination
 	/*$('select[name="sort"]').change(function(){
@@ -32,19 +32,20 @@ function getContent(){
 			//console.log(listParticipation);
 			$("#loading").hide();
 			$.each(listParticipation,function(){
-				code += "<div class='col-md-4'>";
+				code += "<div id='"+this.id+"' class='col-md-4'>";
 					code += "<figure>";
 						code += "<img class='img-thumbnail' src='"+this.url_photo+"'>";
 						code += "<figcaption>";
-							code += '<button>Signaler</button>';
-							code += this.first_name+' '+this.last_name;
-							code += this.nb_likes;
-							code += '<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true"></div>'
+							code += '<button class="col-md-4 report">Signaler</button>';
+							code += '<p class="user col-md-4">'+this.first_name+' '+this.last_name+' '+this.nb_likes+'</p>';
+							code += '<div class="col-md-4 fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true"></div>'
 						code += '</figcaption>';
 					code += "</figure>";
 				code += "</div>";
 			});
 			$('#gallery').html(code);
+			//Appel du code pour signaler APRES le load du contenu ajax
+			report();
 		},
 		fail: function(){
 			console.log('Pas OK');
@@ -54,6 +55,26 @@ function getContent(){
 function getContentByLikes(){
 
 }
+
+function report(){
+	//Signalement
+	$('.report').on("click",function(){
+		if(confirm("Souhaitez-vous vraiment signaler cette image ?")){
+			id = $(this).parent().parent().parent().prop('id'); 
+			$.ajax({method: "POST",
+				data:{
+					id : id
+				},
+				url: "gallery/report", 
+				success: function(result){
+					//console.log(result);
+					$("#"+id+" .report").fadeOut();
+				}
+			});
+		}
+	});
+}
+
 	/*
 		foreach($listParticipation as $key => $participation){
 		$result .= '<div class="col-md-3">';
