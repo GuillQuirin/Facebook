@@ -86,6 +86,7 @@ $(document).ready(function() {
         }
     });
 
+    //Verrouiller une participation
     $('.lock_photo, .unlock_photo').click(function(){
         var button = $(this);
         var locked = (button.hasClass("lock_photo")) ? 1 : 0;
@@ -94,9 +95,10 @@ $(document).ready(function() {
           method: "POST",
           url: $('[name="webpath"]').val()+"/admin/adminPhoto",
           data: {
+            "id" : button.prop('id').replace("photo-",""),
             "url_photo" : button.parent().parent().find('a[name="url_photo"]').text(),
             "is_locked" : locked
-            },
+            }
         })
           .done(function() {
             console.log(button);

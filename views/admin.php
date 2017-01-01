@@ -58,23 +58,21 @@
 				<th>Action</th>
 			</thead>
 			<tbody>
-				<?php 
-				if(isset($listReportedPhoto)){
-					foreach ($listReportedPhoto as $key => $photo) : ?>
+				<?php if(isset($listReportedPhoto)) : ?>
+					<?php foreach ($listReportedPhoto as $key => $photo) : ?>
 						<tr>
 							<td>
 								<?php echo strtoupper($photo->getLast_name())." ".ucfirst($photo->getFirst_name()); ?>	
 							</td>
 							<td><a href="#" target="blank" name="url_photo"><?php echo $photo->getUrl_photo(); ?></a></td>
 							<td> 
-								<?php echo ($photo->getIs_locked()==0) ? "<button class='btn btn-success lock_photo'>Verrouiller</button>" : "<button class='btn btn-danger unlock_photo'>Déverrouiller</button>" ?>
+								<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId()."' class='btn btn-success lock_photo'>Verrouiller</button>" : "<button id='photo-".$photo->getId()."' class='btn btn-danger unlock_photo'>Déverrouiller</button>" ?>
 							</td>
 						</tr>
-				<?php
-					endforeach; 
-				} 
-				else ?>
+					<?php endforeach; ?>  
+				<?php else : ?>
 					<tr><td></td><td>Pas de photo signalées par les utilisateurs</td><td></td></tr>
+				<?php endif ?>
 			</tbody>
 		</table>
 

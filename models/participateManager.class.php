@@ -26,7 +26,7 @@ class participateManager extends basesql{
 						p.date_created, p.date_updated, p.deleted, u.last_name, u.first_name 
 					FROM participate p
 					LEFT OUTER JOIN user u ON p.id_user = u.id_user
-					WHERE id_competition=:id_competition";
+					WHERE id_competition=:id_competition AND p.is_locked = 0";
 		
 		switch($order){
 			case 1:
@@ -60,7 +60,9 @@ class participateManager extends basesql{
 						url_photo, is_reported, is_locked, 
 						date_created, date_updated, deleted  
 					FROM participate 
-					WHERE id_competition=:id_competition AND id_user=:id_user";
+					WHERE id_competition=:id_competition 
+						AND id_user=:id_user
+						AND is_locked = 0";
 		
 		//Nouvelle table avec une seule case
     	$table = [
@@ -79,7 +81,7 @@ class participateManager extends basesql{
 		$table = [
 			'id' => $data->getId()
 		];
-		
+
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute($table);
 	}
