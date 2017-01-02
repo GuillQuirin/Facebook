@@ -31,13 +31,13 @@ function getContent(){
 					//console.log(listParticipation);
 					$("#loading").hide();
 					$.each(listParticipation,function(){
-						code += "<div id='"+this.id+"' class='col-md-4 '>";
+						code += "<div id='"+this.id+"' class='col-xs-12 col-sm-6 col-md-4'>";
 							code += "<figure>";
 								code += "<img class='img-thumbnail' src='"+this.url_photo+"'>";
 								code += "<figcaption>";
-									code += '<p class="report col-md-2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/VisualEditor_-_Icon_-_Alert.svg/2000px-VisualEditor_-_Icon_-_Alert.svg.png" alt="Signaler"></p>';
-									code += '<p class="user col-md-5">'+this.first_name+' '+this.last_name+' '+this.nb_likes+'</p>';
-									code += '<div class="col-md-4 fb-like" data-href="'+this.url_photo_cleaned+'" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>';				
+									code += '<p class="report col-xs-2 col-sm-2 col-md-2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/VisualEditor_-_Icon_-_Alert.svg/2000px-VisualEditor_-_Icon_-_Alert.svg.png" alt="Signaler"></p>';
+									code += '<p class="user text-center col-xs-6 col-sm-6 col-md-6">'+this.first_name+' '+this.last_name+' '+this.nb_likes+'</p>';
+									code += '<div class="fb-like col-xs-4 col-sm-4 col-md-4" data-href="'+this.url_photo_cleaned+'" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>';				
 								code += '</figcaption>';
 							code += "</figure>";
 						code += "</div>";

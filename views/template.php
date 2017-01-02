@@ -23,6 +23,12 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 
 	<?php echo (isset($css)) ? '<link rel="stylesheet" href="'.WEBPATH.'/web/css/'.$css.'-stylesheet.css">' : '';?>
+	
+	<meta property="og:url"           content="<?php echo __URI__; ?>" />
+	<meta property="og:type"          content="EGL" />
+	<meta property="og:title"         content="Your Website Title" />
+	<meta property="og:description"   content="Your description" />
+	<meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
 
 </head>
 
@@ -40,11 +46,14 @@
 			<ul class="col-md-4 col-md-offset-4 nav nav-tabs text-center">
 				<li class="col-md-4"><a href="<?php echo WEBPATH; ?>">Participer</a></li>
 				<li class="col-md-4"><a href="<?php echo WEBPATH; ?>/gallery">Galerie</a></li>
-				<li class="col-md-4"><!--<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="true">--><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a><!--</div>--></li>
+				<li class="col-md-4">
+					<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="false">
+						<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a>
+					</div>
+				</li>
 			</ul>
 		</div>	
 	</header>
-
 	<div id="content" class="container">
 		<input type="hidden" name="webpath" value="<?php echo WEBPATH; ?>">
 		<?php include $this->view; ?>
