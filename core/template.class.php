@@ -3,20 +3,22 @@
 *
 */
 class template{
-  protected $connectedUser = false;
-  protected $fb=false;
+  protected $connectedUser = NULL;
+  protected $fb=NULL;
   protected $competition = NULL;
 
   public function __construct(){
     
-    require_once __ROOT__.'/web/vendor/autoload.php';      
-    //Connexion à l'application enregistrée
-    $this->fb = new Facebook\Facebook([
-      'app_id' => '1804945786451180',
-      'app_secret' => APP_SECRET,
-      'default_graph_version' => 'v2.5',
-      'fileUpload' => true
-    ]);
+    if($this->fb===null){
+      require_once __ROOT__.'/web/vendor/autoload.php';      
+      //Connexion à l'application enregistrée
+      $this->fb = new Facebook\Facebook([
+        'app_id' => '1804945786451180',
+        'app_secret' => APP_SECRET,
+        'default_graph_version' => 'v2.5',
+        'fileUpload' => true
+      ]);
+    }
 
     //Recherche d'un concours ouvert au public
     $competitionManager = new competitionManager();
@@ -36,7 +38,7 @@ class template{
 
   // Cette methode enverra à la view reçue en parametre les propriétés nécessaires de la Template
   protected function assignConnectedProperties(view $v){
-    if($this->fb!==false)
+    if($this->fb!==null)
       $v->assign("fb",$this->fb);
 
     if($this->competition!==NULL)
@@ -79,19 +81,21 @@ class template{
   //Fonction Facebook : soit récupération d'un élèment, soit envoi d'un fichier dans un album photo
   protected function dataApi($callElement = TRUE, $idElement = "/me",$listParam = [], $dataPost = [], $returnDecodedBody = TRUE){
     $string = (is_array($listParam)) ? $idElement.implode(',',$listParam) : $idElement.$listParam;
-
     try{
       $response = ($callElement===TRUE) ? $this->fb->get($string,$dataPost) : $this->fb->post($string,$dataPost);
     }
     catch(Facebook\Exceptions\FacebookResponseException $e) {
-      echo 'Graph returned an error: ' . $e->getMessage();
-      exit;
+      //echo 'Graph returned an error: ' . $e->getMessage();
+      //exit;
     }
     catch(Facebook\Exceptions\FacebookSDKException $e) {
-      echo 'Facebook SDK returned an error: ' . $e->getMessage();
-      exit;
+      //echo 'Facebook SDK returned an error: ' . $e->getMessage();
+      //exit;
     }
-    return ($returnDecodedBody===TRUE) ? $response->getDecodedBody() : $response->getGraphUser();
+    if(isset($response))
+      return ($returnDecodedBody===TRUE) ? $response->getDecodedBody() : $response->getGraphUser();
+    else
+      return NULL;
   }
 
 
