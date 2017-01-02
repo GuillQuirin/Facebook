@@ -48,23 +48,23 @@ function getContent(){
 						code += "</div>";
 					});
 					$('#gallery').html(code);
+					FB.XFBML.parse();
 					//dispPagination();
 					//Appel du code pour signaler APRES le load du contenu ajax
 					report();
 					like();
-					FB.XFBML.parse();
 				},
 				fail: function(){
 					console.log('Pas OK');
 				}
 			});
-		}, 2000);
+		}, 1000);
 }
 
 function like(){
-	/*$('.fbLike').on('click',function(){
+	$('.fb-like').on('click',function(){
 		getContent();
-	});*/
+	});
 }
 
 

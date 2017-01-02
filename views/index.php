@@ -214,9 +214,9 @@
 <!-- Footer des pages -->
 <footer class="footer col-md-12">
 	<a href="<?php echo WEBPATH; ?>/reglement">Règlement du concours</a> | 
-	<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a> | 
+	<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a> 
 	<?php 
 	if(isset($user) && isset($listAdmins) && in_array($user->getId(),$listAdmins)) :?>
-		<a href="<?php echo WEBPATH;?>/admin">Administration</a>
+		| <a href="<?php echo WEBPATH;?>/admin">Administration</a>
 	<?php endif; ?>
 </footer>
