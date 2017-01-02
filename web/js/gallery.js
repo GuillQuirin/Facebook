@@ -1,11 +1,9 @@
 $(document).ready(function(){
 	getContent();
+
 	//Tri
 	$('select[name="sort"]').change(function(){
-		if($(this).val()!="3")
-			getContent();
-		else
-			getContentByLikes();
+		getContent();
 	});
 
 	//Pagination
@@ -27,8 +25,15 @@ function getContent(){
 				url: "gallery/getGallery", 
 				success: function(result){
 					var listParticipation = JSON.parse(result);
+					
+					//Tri par like décroissant
+					if($('select[name="sort"]').val()=="3"){
+						listParticipation.sort(function(a, b) {
+						    return parseInt(b.nb_likes) - parseInt(a.nb_likes);
+						});
+					}
+
 					var code = "";
-					//console.log(listParticipation);
 					$("#loading").hide();
 					$.each(listParticipation,function(){
 						code += "<div id='"+this.id+"' class='col-xs-12 col-sm-6 col-md-4'>";
@@ -54,10 +59,6 @@ function getContent(){
 				}
 			});
 		}, 2000);
-}
-
-function getContentByLikes(){
-
 }
 
 function like(){
