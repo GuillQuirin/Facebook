@@ -7,6 +7,7 @@ figure {
 	height: 300px;
     background-size: cover;
     background-position: center;
+	cursor: pointer;
 }
 
 figcaption{
@@ -15,6 +16,7 @@ figcaption{
 	height: 20%;
 	width: 100%;
 	background-color: rgba(226, 224, 224, 0.77);
+	cursor: default;
 }
 
 figcaption *{
@@ -27,12 +29,6 @@ figcaption *{
     justify-content: center;
 }
 
-// .user{
-// 	transform: translateX(-50%) translateY(-50%);
-//     left: 50%;
-//     top: 50%;
-// }
-
 .report img{
 	max-width: 100%;
 	cursor: pointer;
@@ -41,4 +37,18 @@ figcaption *{
 .reportSent{
 	font-size: 11px;
     color: red;
+}
+
+/*** MODAL ****/
+
+.modal-body{
+	height: 400px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.modal-report img{
+	max-width: 30%;
+	cursor: pointer;
 }
