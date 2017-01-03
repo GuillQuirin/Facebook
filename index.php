@@ -57,5 +57,3 @@ if(!$routeExists){
 	require_once("controllers/LoadFailController.class.php");
 	new LoadFailController();
 }
-
-?>
