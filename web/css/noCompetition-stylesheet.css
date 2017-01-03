@@ -1,12 +1,13 @@
 body{
-  	background-image : url("http://media.gettyimages.com/photos/bearded-man-with-tattoos-standing-with-arms-crossed-picture-id518339107");
+  	background-image : url('../img/noCompetition.jpg');
 	  background-size : 100%;
+    background-repeat: no-repeat;
 	  vertical-align: bottom;
 }
 
-.padding-left-30{
-	padding-left: 30px;
-	padding-top : 15%;
+h2{
+  color: black;
+  margin-left: 20%;
 }
 
 .footer {
