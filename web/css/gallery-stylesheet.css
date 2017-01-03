@@ -1,5 +1,40 @@
-.report img{
+#gallery>div{
+	margin-top: 20px;
+}
+
+figure {
+	position: relative;
+	height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+figcaption{
+	position: absolute;
+	bottom: 0;
+	height: 20%;
 	width: 100%;
+	background-color: rgba(226, 224, 224, 0.77);
+}
+
+figcaption *{
+	height: 100%;
+	padding: 0 !important;
+	text-align: center;
+	margin: 0;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+}
+
+// .user{
+// 	transform: translateX(-50%) translateY(-50%);
+//     left: 50%;
+//     top: 50%;
+// }
+
+.report img{
+	max-width: 100%;
 	cursor: pointer;
 }
 
