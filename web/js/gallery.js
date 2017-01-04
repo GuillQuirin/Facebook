@@ -16,7 +16,7 @@ function getContent(){
 	//Méthode de tri
 	var tri = $('select[name="sort"]').val();
 	var qtty = $('select[name="quantity"]').val();
-	$('#gallery').html('<img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Chargement" id="loading">');
+	$('#gallery').html('<img src="facebook.gif" alt="Chargement" id="loading">');
 
 	$.ajax({method: "POST",
 		data:{
@@ -37,31 +37,30 @@ function getContent(){
 
 			var code = "";
 			$.each(listParticipation,function(){
+				code += "<div id='"+this.id+"'>";
+					code += "<figure ";
+							code += "data-toggle='modal'";
+							code += "data-target='#popUpGallery'";
+							code += "data-url='"+this.url_photo+"'";
+							code += "data-name='"+this.first_name+" "+this.last_name+"'";
+							code += "data-like='"+this.id+"'";
+							code += "data-report='"+this.id+"'";
+						code += "style='background-image:url("+this.url_photo+")'>";
 
-					code += "<div id='"+this.id+"'>";
-						code += "<figure ";
-								code += "data-toggle='modal'";
-								code += "data-target='#popUpGallery'";
-								code += "data-url='"+this.url_photo+"'";
-								code += "data-name='"+this.first_name+" "+this.last_name+"'";
-								code += "data-like='"+this.url_photo_cleaned+"'";
-								code += "data-report='"+this.id+"'";
-							code += "style='background-image:url("+this.url_photo+")'>";
+							code += "<figcaption>";
+								code += '<span class="nb_likes">'+this.nb_likes+'</span>';
+								code += '<p class="report col-xs-2 col-sm-2 col-md-2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/VisualEditor_-_Icon_-_Alert.svg/2000px-VisualEditor_-_Icon_-_Alert.svg.png" alt="Signaler"></p>';
+								code += '<p class="user text-center col-xs-6 col-sm-6 col-md-6">'+this.first_name+' '+this.last_name+'</p>';			
+								if(this.is_liked==0)
+									code += '<p class="col-xs-2 col-sm-2 col-md-2 like" id="'+this.id+'"></p>';
+							code += '</figcaption>';
 
-								code += "<figcaption>";
-									code += '<p class="report col-xs-2 col-sm-2 col-md-2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/VisualEditor_-_Icon_-_Alert.svg/2000px-VisualEditor_-_Icon_-_Alert.svg.png" alt="Signaler"></p>';
-									code += '<p class="user text-center col-xs-6 col-sm-6 col-md-6">'+this.first_name+' '+this.last_name+' '+this.nb_likes+'</p>';
-									code += '<div class="fb-like col-xs-4 col-sm-4 col-md-4" data-href="'+this.url_photo_cleaned+'" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>';				
-								code += '</figcaption>';
-
-						code += "</figure>";
-					code += "</div>";
+					code += "</figure>";
+				code += "</div>";
 			});
-			
 			//Mise à jour de la mosaïque
 			$('#gallery').html(code);
-			FB.XFBML.parse();
-
+			
 			//Pagination de départ
 			getPage(1);
 			
@@ -82,8 +81,7 @@ function getPage(page){
 	var depart = (page-1) * qtty;
 	var arrivee = parseInt(depart)+parseInt(qtty);
 	var i=0;
-	console.log(depart);
-	console.log(arrivee);
+
 	$('#gallery>div').each(function(){
 		if(i>=depart && i<arrivee)
 			$(this).removeClass( "hidden-xs hidden-sm hidden-md" ).addClass('col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4');
@@ -108,9 +106,19 @@ function creationPagination(nbElements,idActive){
 }
 
 function like(){
-	/*$('.fb-like').on('click',function(){
-		getContent($(".pagination li.active a").text());
-	});*/
+	$('.like').click(function(){
+		$.ajax({method: "POST",
+			data:{
+				id_participate : $(this).attr('id')
+			},
+			url: "gallery/addLike", 
+			success: function(result){
+				//console.log(result);
+				getContent();
+			}
+		});
+		return false;
+	});
 }
 
 function openModal(){
@@ -121,8 +129,8 @@ function openModal(){
 		modal.find('.modal-name').text(button.data('name'));
 		modal.find('.modal-body').css('background-image','url('+button.data("url")+')');
 		modal.find('.modal-report img').attr('idimage',button.data('report'));
-		modal.find('.modal-like').html('<div class="fb-like" data-href="'+button.data('like')+'" data-layout="box_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>');
-		FB.XFBML.parse();
+		//modal.find('.modal-like').html('<div class="fb-like" data-href="'+button.data('like')+'" data-layout="box_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>');
+		//FB.XFBML.parse();
 	});
 }
 

@@ -23,7 +23,7 @@ figcaption{
 	cursor: default;
 }
 
-figcaption *{
+figcaption p{
 	height: 100%;
 	padding: 0 !important;
 	text-align: center;
@@ -33,9 +33,31 @@ figcaption *{
     justify-content: center;
 }
 
+span.nb_likes{
+	position: absolute;
+    top: 0;
+    height: 30%;
+    right: 0;
+    background-color: #737373;
+    color: white;
+    font-weight: bold;
+    padding: 0px 10px;
+}
+
 .report img{
 	max-width: 100%;
 	cursor: pointer;
+}
+
+.like{
+	background-image: url('https://www.shareicon.net/data/128x128/2016/12/07/862654_heart_512x512.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+.like:hover{
+	background-image: url('http://icons.veryicon.com/ico/System/100%20Flat%20Vol.%202/favourite%20heart.ico');
 }
 
 .reportSent{
