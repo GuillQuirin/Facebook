@@ -11,4 +11,10 @@ class designController extends template{
 		$v->assign("listDesign", $listDesign);
         $v->setView("/admin/design","templateadmin");
     }
+
+    public function getDesignAction(){
+        $designManager = new designManager();
+        $listDesign = $designManager->getDesignById($_POST['id_design']);
+        echo json_encode($listDesign);
+    }
 }
