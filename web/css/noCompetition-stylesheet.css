@@ -1,13 +1,16 @@
 body{
   	background-image : url('../img/noCompetition.jpg');
-	  background-size : 100%;
+	  background-size : cover;
     background-repeat: no-repeat;
-	  vertical-align: bottom;
+    background-position-y: 15%;
+    color: #ebebe9;
 }
 
-h2{
-  color: black;
-  margin-left: 20%;
+h2, h3{
+  margin-left: 2%;
+}
+p{
+  padding-top: 5%;
 }
 
 .footer {
@@ -19,7 +22,13 @@ h2{
   text-align : left;
 }
 
+.admin-connexion{
+  position: absolute;
+  bottom: 0;
+}
+
 img{
+  float: left;
 	width: auto;
   height: 100px;
 }
