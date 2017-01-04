@@ -2,14 +2,20 @@
 	if(isset($competition)) :?>
 
 		<div class="row">
-			<img class="img-thumbnail img-logo" style="width: 10%;" src="https://scontent-fra3-1.xx.fbcdn.net/v/t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" alt="logo">
-		
+			<div>
+				<img class="img-thumbnail img-logo" style="width: 10%;" src="https://scontent-fra3-1.xx.fbcdn.net/v/	t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" alt="logo">
+			</div>		
 			<div class="col-xs-10 col-xs-offset-1 text-center">
 				<h1>CONCOURS <br> <?php echo $competition->getName(); ?></h1>
 				<p>Organisé
 					du <?php echo $competition->getStart_date(); ?>
 					au <?php echo $competition->getEnd_date(); ?>.
 				</p>
+			</div>
+		</div>	
+
+		<div class="row">
+			<div class="col-xs-10 col-xs-offset-1 text-center">
 	 			<hr>
 	 			<hr>
 	 			<p><?php echo $competition->getDescription(); ?></p>
