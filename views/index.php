@@ -56,8 +56,9 @@
 		<div class="row">
 			<div class="col-xs-10 col-xs-offset-1 text-center">
 				<?php 
+				$listAlonePic = [];
 				if(isset($images)) :?>
-					<h2>Participez à notre concours,</h2>
+					<h2>Participez à notre concours</h2>
 					<h3>en sélectionnant une photo d'un de vos albums Facebook....</h3>
 					<div class="panel-group listPictures"" id="accordion" role="tablist" aria-multiselectable="true">
 					  <div class="panel panel-default">
@@ -94,7 +95,7 @@
 										    <div class="modal-content">
 										      <div class="modal-header">
 										      	<p>Assurez-vous d'être le propriétaire du contenu que vous envoyez.</p> 
-												<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/CGU'; ?>">conditions d'utilisations</a>.</p>
+												<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/CGU'; ?>" class="cgu-link">conditions d'utilisations</a>.</p>
 										      </div>
 										      <div class="modal-body">
 										      	<img src='<?php echo $photo['source']; ?>' alt="photo de l'utilisateur">
@@ -103,10 +104,10 @@
 										      </div>
 										      <div class="modal-footer">
 										      <div class="col-md-6">
-									        	<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+									        	<button type="button" class="btn" data-dismiss="modal">Annuler</button>
 									          </div>
 									          <div class="col-md-6">
-										        <button type="submit" class="btn btn-default">Envoyer cette photo</button>
+										        <button type="submit" class="btn">Envoyer cette photo</button>
 											  </div>
 											  </div>
 										    </div>
