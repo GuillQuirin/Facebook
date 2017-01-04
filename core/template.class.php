@@ -85,13 +85,12 @@ class template{
       unset($infosUser['id']);
 
       $user = new user($infosUser);
-
       $userManager = new userManager();     
       
-      if($userManager->getUserByEmail($user->getEmail())==NULL)
+      if($userManager->getUserByIdFb($user->getIdFacebook())==NULL)
         $user = $userManager->saveUser($user);
 
-      $_SESSION['email'] = $user->getEmail();
+      $_SESSION['idFB'] = $user->getIdFacebook();
       return $user;
   }
 

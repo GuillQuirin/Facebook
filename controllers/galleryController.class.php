@@ -21,7 +21,7 @@ class galleryController extends template{
 		$listParticipation = $participateManager->getParticipantsByCompetition($this->competition,$tri);
 
 		$userManager = new userManager();
-		$user = $userManager->getUserByEmail($_SESSION['email']);
+		$user = $userManager->getUserByIdFb($_SESSION['idFB']);
 
 		foreach ($listParticipation as $key => $participation) {
 			$participate = new participate($participation);
@@ -33,7 +33,7 @@ class galleryController extends template{
 
 	public function addLikeAction(){
 		$userManager = new userManager();
-		$user = $userManager->getUserByEmail($_SESSION['email']);
+		$user = $userManager->getUserByIdFb($_SESSION['idFB']);
 
 		$_POST['id_user'] = $user->getId_user();
 		$vote = new vote($_POST);
