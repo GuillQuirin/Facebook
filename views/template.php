@@ -23,8 +23,8 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 
 	<?php echo (isset($css)) ? '<link rel="stylesheet" href="'.WEBPATH.'/web/css/'.$css.'-stylesheet.css">' : '';?>
-	
-	<meta property="og:url"           content="<?php echo __URI__; ?>" />
+
+	<!--  <meta property="og:url"           content="<?php echo __URI__; ?>" />-->
 	<meta property="og:type"          content="EGL" />
 	<meta property="og:title"         content="Your Website Title" />
 	<meta property="og:description"   content="Your description" />

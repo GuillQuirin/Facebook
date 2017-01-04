@@ -21,7 +21,7 @@ button, .btn{
     background-color: #730932;
     color: #fff;
 }
-.btn:hover{
+.btn:hover, .btn:active, .btn:focus{
 	color: #e8ced8;
 }
 
@@ -54,10 +54,19 @@ img{
 	display: none;
 }
 
+.cgu-link:hover{
+	color: #730932;
+}
+
 footer .navbar{
 	margin-bottom: 0;
 }
 
 .footer-link:hover{
 	color: #730932 !important;
+}
+
+.panel-heading{
+	background-color: #730932;
+		
 }
