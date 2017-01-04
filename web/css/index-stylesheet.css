@@ -1,9 +1,27 @@
+body{
+	background-image: url(../img/wallpaper.png);
+	background-size: cover;
+}
+
+h1, h2{
+	font-family: 'Architects Daughter', cursive;
+	font-weight: bold;
+}
+h2{
+	font-size: 36px;
+}
+
 button, .btn{
     width: 100%;
     height: 50px;
     font-size: 15px;
     margin: 10px auto;
     white-space: normal !important;
+    background-color: #730932;
+    color: #fff;
+}
+.btn:hover{
+	color: #e8ced8;
 }
 
 .listPictures{
@@ -21,8 +39,14 @@ button, .btn{
 input[type=file]{
 	margin: 0 auto;
 }
+
 img{
 	width: 100%;
+}
+
+.img-logo{
+	position: absolute;
+	float: left;
 }
 
 .pbFileSize{
@@ -31,4 +55,8 @@ img{
 
 footer .navbar{
 	margin-bottom: 0;
+}
+
+.footer-link:hover{
+	color: #730932 !important;
 }

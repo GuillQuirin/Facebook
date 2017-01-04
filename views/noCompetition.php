@@ -1,6 +1,6 @@
 
 <div>
-	<h2 class="text-uppercase">Pas de concours actuellement !</h2>
+	<h2 class="text-uppercase">Pas de concours <br>actuellement !</h2>
 	<h2>Revenez plus tard ...</h2>
 </div>
 <div class="footer">
