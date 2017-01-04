@@ -17,4 +17,10 @@ class designController extends template{
         $listDesign = $designManager->getDesignById($_POST['id_design']);
         echo json_encode($listDesign);
     }
+
+    public function addDesignAction(){
+        $design = new design($_POST);
+        $designManager = new designManager();
+        $designManager->insertDesign($design);
+    }
 }
