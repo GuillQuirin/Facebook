@@ -31,7 +31,7 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4>Photo proposée par <span class="modal-name"></span>.</h4> 
+		        <h4>Photo proposée par <span class="modal-name"></span></h4> 
 		      </div>
 		      <div class="modal-body">
 		      </div>
@@ -49,7 +49,7 @@
 
 		<!-- Pagination -->
 		<div class="row">
-			<nav class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2" aria-label="Page navigation">
+			<nav class="text-center col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2" aria-label="Page navigation">
 			  <ul class="pagination">
 			  </ul>
 			</nav>

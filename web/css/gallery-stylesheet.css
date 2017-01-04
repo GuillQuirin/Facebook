@@ -10,6 +10,10 @@ figure {
 	cursor: pointer;
 }
 
+div.hidden-xs figure,div.hidden-sm figure,div.hidden-md figure {
+    display: none;
+}
+
 figcaption{
 	position: absolute;
 	bottom: 0;
