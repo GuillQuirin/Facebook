@@ -1,27 +1,30 @@
 <?php  
 	if(isset($competition)) :?>
+
 		<div class="row">
-			<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 text-center">
-				<img class="img-thumbnail" style="width: 10%;" src="https://scontent-fra3-1.xx.fbcdn.net/v/t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" alt="logo">
-				<h1>CONCOURS <?php echo $competition->getName(); ?></h1>
+			<img class="img-thumbnail img-logo" style="width: 10%;" src="https://scontent-fra3-1.xx.fbcdn.net/v/t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" alt="logo">
+		
+			<div class="col-xs-10 col-xs-offset-1 text-center">
+				<h1>CONCOURS <br> <?php echo $competition->getName(); ?></h1>
 				<p>Organisé
 					du <?php echo $competition->getStart_date(); ?>
 					au <?php echo $competition->getEnd_date(); ?>.
 				</p>
 	 			<hr>
 	 			<hr>
-	 			<h3><?php echo $competition->getDescription(); ?></h3>
+	 			<p><?php echo $competition->getDescription(); ?></p>
 				<hr>
 				<hr>
-				<h2>Tente de gagner <?php echo $competition->getPrize(); ?></h2>
+				<h2>TENTE DE GAGNER <br> <?php echo $competition->getPrize(); ?></h2>
 				<?php 
 					if($competition->getUrl_prize()!==NULL)
 						echo "<div class='col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3'><img class='img-responsive' src='".$competition->getUrl_prize()."' alt='photo du prix'></div>";
 				?>
 			</div>
 		</div>
+
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+			<div class="col-xs-10 col-xs-offset-1">
 				<div class="col-xs-6 col-sm-6 col-md-6">
 					<?php 
 					if(isset($user)) :?>
@@ -213,10 +216,10 @@
 
 <!-- Footer des pages -->
 <footer class="footer col-md-12">
-	<a href="<?php echo WEBPATH; ?>/reglement">Règlement du concours</a> | 
-	<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a> 
+	<a href="<?php echo WEBPATH; ?>/reglement" class="footer-link">Règlement du concours</a> | 
+	<a href="<?php echo WEBPATH; ?>/CGU" class="footer-link">Conditions d'utilisations</a> 
 	<?php 
 	if(isset($user) && isset($listAdmins) && in_array($user->getId(),$listAdmins)) :?>
-		| <a href="<?php echo WEBPATH;?>/admin">Administration</a>
+		| <a href="<?php echo WEBPATH;?>/admin" class="footer-link">Administration</a>
 	<?php endif; ?>
 </footer>
