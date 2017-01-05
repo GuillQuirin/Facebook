@@ -19,7 +19,7 @@ class competitionManager extends basesql{
 	public function getAllCompetitions(){
     	$sql = "SELECT c.id_competition, c.name, c.description, c.start_date,
     					c.end_date, c.prize, c.url_prize, c.id_winner, c.active,
-    					COUNT(p.id_competition) as totalParticipants 
+    					COUNT(p.id_user) as totalParticipants 
     			FROM ".$this->table." c 
     			LEFT OUTER JOIN participate p ON c.id_competition=p.id_competition
     			GROUP BY c.id_competition";

@@ -14,6 +14,7 @@ $(document).ready(function() {
         "language": {
             "lengthMenu": "Affichage de _MENU_ résultats par page",
             "zeroRecords": "Aucun résultat trouvé",
+            //"info": "",
             "info": "Affichage de la page numéro _PAGE_ sur un total de _PAGES_ page(s)",
             "infoEmpty": "Pas de résultat trouvé",
             "infoFiltered": "(trier sur un enregistrement total de _MAX_ résultats)",
@@ -103,10 +104,24 @@ $(document).ready(function() {
           .done(function() {
             console.log(button);
             if(locked==1)
-                button.removeClass("btn-success lock_photo").addClass("btn-danger unlock_photo").html("Déverrouiller");
+                button.removeClass("btn-success lock_photo").addClass("btn-danger unlock_photo").html("Verrouillé");
             else
-                button.removeClass("btn-danger unlock_photo").addClass("btn-success lock_photo").html("Verrouiller");
+                button.removeClass("btn-danger unlock_photo").addClass("btn-success lock_photo").html("Déverrouillé");
         });
     });
 
 } );
+
+
+function openModal(){
+$('#popUpGallery').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+
+    var modal = $(this);
+    modal.find('.modal-name').text(button.data('name'));
+    modal.find('.modal-body').css('background-image','url('+button.data("url")+')');
+    modal.find('.modal-report img').attr('idimage',button.data('report'));
+    //modal.find('.modal-like').html('<div class="fb-like" data-href="'+button.data('like')+'" data-layout="box_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>');
+    //FB.XFBML.parse();
+});
+}

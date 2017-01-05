@@ -4,25 +4,20 @@
 
 		<table id="listCompetitions" class="table stripe responsive order-column text-center">
 			<thead>
-				<th>Numéro</th>
 				<th>Nom</th>
-				<th>Description</th>
-				<th>Date de départ</th>
-				<th>Date de fin</th>
+				<th>Début</th>
+				<th>Fin</th>
 				<th>Lot à gagner</th>
-				<th>Url du lot</th>
+				<th>Photo du lot</th>
 				<th>Nombre de participants</th>
 				<th>Nom du gagnant</th>
 				<th>Statut</th>
 				<th>Edition</th>
-				<th>Action</th>
 			</thead>
 			<tbody>
 				<?php foreach ($listCompetitions as $key => $competition) { ?>
 					<tr>
-						<td name='id_competition'> <?php echo $competition->getId_competition(); ?> </td>
 						<td name='name'> <?php echo $competition->getName(); ?></td>
-						<td name='description'> <?php echo $competition->getDescription(); ?></td>
 						<td name='start_date' > <?php echo $competition->getStart_date(); ?></td>
 						<td name='end_date' ><?php echo $competition->getEnd_date(); ?></td>
 						<td name='prize' > <?php echo $competition->getPrize(); ?></td>
@@ -36,9 +31,15 @@
 						<td name='active'>
 							<?php echo ($competition->getActive()==1) ? "Actif" : ""; ?>
 						</td>
-						<td><button data-toggle="modal" data-target="#Modal" class="btn btn-warning">Modifier</button></td>
-						<td name='action'> 
-							<?php echo ($competition->getActive()==1) ? "<button class='btn btn-danger'>Cloturer</button>" : ""; ?>	
+						<td>
+							<button 
+								data-toggle="modal" 
+								data-target="#ModalEdit" 
+								data-url='"+this.url_photo+"'";
+								data-name='"+this.first_name+" "+this.last_name+"'";
+								data-like='"+this.id+"'";
+								data-report='"+this.id+"'";
+								class="btn btn-warning">Modifier</button>
 						</td>
 					</tr>
 				<?php } ?>
@@ -53,8 +54,8 @@
 
 		<table id="listReportedPhoto" class="table stripe order-column">
 			<thead>
-				<th>Nom de l'uploader</th>
-				<th>Lien de l'image</th>
+				<th>Nom du participant</th>
+				<th>Lien de l'image signalée</th>
 				<th>Action</th>
 			</thead>
 			<tbody>
@@ -64,9 +65,9 @@
 							<td>
 								<?php echo strtoupper($photo->getLast_name())." ".ucfirst($photo->getFirst_name()); ?>	
 							</td>
-							<td><a href="#" target="blank" name="url_photo"><?php echo $photo->getUrl_photo(); ?></a></td>
+							<td><a href="<?php echo $photo->getUrl_photo(); ?>" target="_blank" name="url_photo">Lien de la photo</a></td>
 							<td> 
-								<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId()."' class='btn btn-success lock_photo'>Verrouiller</button>" : "<button id='photo-".$photo->getId()."' class='btn btn-danger unlock_photo'>Déverrouiller</button>" ?>
+								<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId()."' class='btn btn-success lock_photo'>Déverrouillé</button>" : "<button id='photo-".$photo->getId()."' class='btn btn-danger unlock_photo'>Verrouillé</button>" ?>
 							</td>
 						</tr>
 					<?php endforeach; ?>  
