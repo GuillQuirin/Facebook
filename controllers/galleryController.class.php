@@ -20,13 +20,16 @@ class galleryController extends template{
 		$participateManager = new participateManager();
 		$listParticipation = $participateManager->getParticipantsByCompetition($this->competition,$tri);
 
-		$userManager = new userManager();
-		$user = $userManager->getUserByIdFb($_SESSION['idFB']);
+		if(isset($_SESSION['idFB'])){
+			$userManager = new userManager();
+			$user = $userManager->getUserByIdFb($_SESSION['idFB']);
+		}
 
 		foreach ($listParticipation as $key => $participation) {
 			$participate = new participate($participation);
 			$listParticipation[$key]['nb_likes'] = $participateManager->getTotalLikesByParticipation($participate);
-			$listParticipation[$key]['is_liked'] = $participateManager->getLikesByUser($user, $participate);
+			if(isset($_SESSION['idFB']))
+				$listParticipation[$key]['is_liked'] = $participateManager->getLikesByUser($user, $participate);
 		}
 		echo json_encode($this->utf8ize($listParticipation));
 	}
