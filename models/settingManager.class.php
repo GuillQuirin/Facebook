@@ -18,11 +18,11 @@ class settingManager extends basesql{
 		return $list;
 	}
 
-	public function updateRegulation(setting $data){
+	public function updateSetting($regulation, $id_setting){
 		$sql = "UPDATE setting SET value = :value WHERE id_setting = :id";
 		$table = [
-			'id' => $data->getId_setting(),
-			'value' => $data->getValue()
+			'id' => $id_setting,
+			'value' => $regulation
 		];
 
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
