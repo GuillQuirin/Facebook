@@ -48,6 +48,9 @@ footer .navbar {margin-bottom: 0;}
 
 .footer-link:hover {color: #730932 !important;}
 
+.panel-default{
+	transition: all 1s;
+}
 .panel-heading {
 	background-color: #730932;
 	color: #fff;

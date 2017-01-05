@@ -5,6 +5,15 @@ $(document).ready(function(){
 		}, 100);
 	});
 
+	$('.panel-heading').click(function(){
+		var panelDefault = $(this).parent().parent();
+
+		panelDefault.toggleClass("col-md-10",5000);
+		panelDefault.toggleClass("col-md-6",5000);
+		panelDefault.toggleClass("col-md-offset-3",5000);
+		panelDefault.toggleClass("col-md-offset-1",5000);
+	});
+
 	$('#localForm').submit(function(){
 		$('.pbFileSize').slideUp();
 
