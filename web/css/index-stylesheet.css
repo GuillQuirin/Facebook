@@ -8,9 +8,7 @@ h1, h2{
 	font-family: 'Architects Daughter', cursive;
 	font-weight: bold;
 }
-h2{
-	font-size: 36px;
-}
+h2 {font-size: 36px;}
 
 button, .btn{
     width: 100%;
@@ -21,9 +19,7 @@ button, .btn{
     background-color: #730932;
     color: #fff;
 }
-.btn:hover, .btn:active, .btn:focus{
-	color: #e8ced8;
-}
+.btn:hover, .btn:active, .btn:focus {color: #e8ced8;}
 
 .listPictures{
 	/*on ne peut pas gérer le margin left/right avec Bootstrap*/
@@ -33,40 +29,28 @@ button, .btn{
 	text-align: center;
 }
 
-.collapse.in{
-	border-top: 1px solid #ddd;
-}
+.collapse.in {border-top: 1px solid #ddd;}
 
-input[type=file]{
-	margin: 0 auto;
-}
+input[type=file] {margin: 0 auto;}
 
-img{
-	width: 100%;
-}
+img {width: 100%;}
 
 .img-logo{
 	position: absolute;
 	float: left;
 }
 
-.pbFileSize{
-	display: none;
-}
+.pbFileSize {display: none;}
 
-.cgu-link:hover{
-	color: #730932;
-}
+.cgu-link:hover {color: #730932;}
 
-footer .navbar{
-	margin-bottom: 0;
-}
+footer .navbar {margin-bottom: 0;}
 
-.footer-link:hover{
-	color: #730932 !important;
-}
+.footer-link:hover {color: #730932 !important;}
 
-.panel-heading{
+.panel-heading {
 	background-color: #730932;
 	color: #fff;
+	padding-left: 0px !important;
+	padding-right: 0px !important;
 }
