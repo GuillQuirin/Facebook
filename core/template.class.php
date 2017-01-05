@@ -93,8 +93,8 @@ class template{
 
       $user = new user($infosUser);
       $userManager = new userManager();     
-      
-      if($userManager->getUserByIdFb($user->getIdFacebook())==NULL)
+      $user = $userManager->getUserByIdFb($user->getIdFacebook()); 
+      if($user==NULL)
         $user = $userManager->saveUser($user);
 
       $_SESSION['idFB'] = $user->getIdFacebook();

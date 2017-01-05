@@ -64,7 +64,6 @@ class indexController extends template{
 		if($ok){
 			//Enregistrement de l'utilisateur
 			$user = $this->bringDatasUser();	
-
 			//Enregistrement de la participation
 			$infosParticipation =[
 			  	'id_competition' => $this->competition->getId_competition(),
