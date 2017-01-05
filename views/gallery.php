@@ -1,6 +1,5 @@
-<?php if(isset($listParticipation)) : ?>
-	<?php 
-		if(!empty($listParticipation)): 
+<?php if(isset($competition) && $competition!==NULL) : ?>
+	<?php if(isset($listParticipation) && !empty($listParticipation)): 
 			?>
 			<!-- Nombre d'élèments à afficher --> 
 			<select name="quantity">

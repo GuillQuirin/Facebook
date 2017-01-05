@@ -9,7 +9,8 @@ class galleryController extends template{
 
 		$competitionManager = new competitionManager();
 		$competition = $competitionManager->searchCompetitions();
-		
+		$v->assign("competition",$competition);
+
 		if($competition!==NULL){
 			$participateManager = new participateManager();
 			$listParticipation = $participateManager->getParticipantsByCompetition($this->competition);
