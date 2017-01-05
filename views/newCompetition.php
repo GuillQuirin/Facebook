@@ -3,7 +3,7 @@
   <form>
     <div class="form-group">
       <label for="name">Intitulé du concours : </label>
-      <input type="name" class="form-control" id="name"/>
+      <input type="text" class="form-control" id="name"/>
     </div>
     <div class="form-group">
       <label for="description">Description du concours :</label>

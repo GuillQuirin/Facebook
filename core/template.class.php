@@ -3,9 +3,9 @@
 *
 */
 class template{
-  protected $connectedUser = NULL;
   protected $fb=NULL;
   protected $competition = NULL;
+  protected $isAdmin = NULL;
 
   public function __construct(){
     
@@ -28,6 +28,9 @@ class template{
     if(isset($_SESSION['ACCESS_TOKEN'])){
       //$this->fb->setDefaultAccessToken($_SESSION["LONG_ACCESS_TOKEN"]); //60 jours
       $this->fb->setDefaultAccessToken($_SESSION["ACCESS_TOKEN"]);
+
+      //Enregistrement de l'utilisateur en BDD dès sa connexion
+      $this->bringDatasUser();
     }
     
     //Renvoi sur la page noCompetition lorsqu'il n'y a pas de concours disponible (si l'utilisateur n'y était pas déjà)
@@ -56,7 +59,13 @@ class template{
        
       //Infos de l'utilisateur
       $infosUser = ['id','name','first_name','last_name','email','birthday','location'];
-      $v->assign("user", $this->dataApi(TRUE,'/me?fields=',$infosUser,"",FALSE));
+      $user = $this->dataApi(TRUE,'/me?fields=',$infosUser,"",FALSE);
+      $v->assign("user", $user);
+
+      if(in_array($user->getId(),$listAdmins))
+        $this->isAdmin = 1;
+
+      $v->assign("isAdmin",$this->isAdmin);
     }
 
   }
@@ -73,6 +82,25 @@ class template{
     $v->assign("urlLoginLogout",$loginUrl);
   }
 
+  //Importation des infos de l'utilisateur depuis Facebook
+  protected function bringDatasUser(){
+      $listInfosUser = ['id','name','first_name','last_name','email','birthday','location'];
+      $infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
+      
+      $infosUser['location'] = $infosUser['location']['name'];
+      $infosUser['idFacebook'] = $infosUser['id'];
+      unset($infosUser['id']);
+
+      $user = new user($infosUser);
+      $userManager = new userManager();     
+      
+      if($userManager->getUserByIdFb($user->getIdFacebook())==NULL)
+        $user = $userManager->saveUser($user);
+
+      $_SESSION['idFB'] = $user->getIdFacebook();
+      return $user;
+  }
+
   protected function logout(){
     unset($_SESSION["ACCESS_TOKEN"]);
     header("Location: ".WEBPATH);
@@ -81,6 +109,7 @@ class template{
   //Fonction Facebook : soit récupération d'un élèment, soit envoi d'un fichier dans un album photo
   protected function dataApi($callElement = TRUE, $idElement = "/me",$listParam = [], $dataPost = [], $returnDecodedBody = TRUE){
     $string = (is_array($listParam)) ? $idElement.implode(',',$listParam) : $idElement.$listParam;
+    //var_dump($string);
     try{
       $response = ($callElement===TRUE) ? $this->fb->get($string,$dataPost) : $this->fb->post($string,$dataPost);
     }
@@ -98,7 +127,7 @@ class template{
       return NULL;
   }
 
-
+  //Encodage en UTF-8 de tableaux
   public function utf8ize($d) {
       if (is_array($d)) {
           foreach ($d as $k => $v) {
@@ -158,8 +187,3 @@ class template{
   */
 
 }
-
-
-/*  
-*
-*/

@@ -11,12 +11,22 @@ class settingManager extends basesql{
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute();
 		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-		return (!empty($r)) ? new setting($r[0]) : null;
+		$list = [];
+		foreach ($r as $key => $value) {
+			$list[] = new setting($value);
+		}
+		return $list;
 	}
 
-	public function updateSetting(setting $data){
-		$this->update($data);
+	public function updateRegulation(setting $data){
+		$sql = "UPDATE setting SET value = :value WHERE id_setting = :id";
+		$table = [
+			'id' => $data->getId_setting(),
+			'value' => $data->getValue()
+		];
+
+		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$sth->execute($table);
 	}  
 
 }

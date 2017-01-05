@@ -15,7 +15,6 @@
 	<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/bootstrap.min.css">';?>
 	<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/lib/DataTables/datatables.min.css">';?>
 	<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/datepicker.min.css">';?>
-	<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/bootstrap.colopickersliders.css">';?>
 	<?php echo '<script src="'.WEBPATH.'/web/js/jquery.js"></script>';?>
 	<?php echo '<script src="'.WEBPATH.'/web/js/bootstrap.min.js"></script>';?>
 	<?php echo '<script src="'.WEBPATH.'/web/lib/DataTables/datatables.min.js"></script>';?>
@@ -23,6 +22,8 @@
 	<?php echo '<script src="'.WEBPATH.'/web/js/datepicker-fr.js"></script>';?>
 	<?php echo '<script src="'.WEBPATH.'/web/js/bootstrap.colorpickersliders.js"></script>';?>
 	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+	<?php echo '<script src="'.WEBPATH.'/web/js/jscolor.js"></script>';?>
+
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 
@@ -49,8 +50,9 @@
 				<li class="col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/export') echo "active"; ?>">
 					<a href="<?php echo WEBPATH; ?>/export">Export des données</a>
 				</li>
-				<li class="col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/') echo "active"; ?>">
-					<a href="#">Reglement et CGU</a>
+				<li class="col-md-2 <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
+					<a href="<?php echo WEBPATH; ?>/setting">Reglement et CGU</a>
+
 				</li>
 			</ul>
 		</nav>
@@ -66,8 +68,7 @@
 	<footer class="footer col-md-12">
 		<a href="<?php echo WEBPATH; ?>/reglement">Règlement du concours</a> | 
 		<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a> | 
-		<?php 
-		if(isset($user) && isset($listAdmins) && in_array($user->getId(),$listAdmins)) :?>
+		<?php if(isset($isAdmin) && $isAdmin==1) :?>
 			<a href="<?php echo WEBPATH;?>/admin">Administration</a>
 		<?php endif; ?>
 	</footer>

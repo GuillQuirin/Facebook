@@ -1,12 +1,7 @@
 <?php
 class loginCallbackController extends template{
 	public function loginCallbackAction($requiredPosts){
-		//$v = new view();
-		//$this->assignConnectedProperties($v);
-		//$v->assign("css", "loginCallback");
-		//$v->assign("js", "loginCallback");
-
-		
+	
 		$helper = $this->fb->getRedirectLoginHelper();
 
 		try{
@@ -33,7 +28,7 @@ class loginCallbackController extends template{
 		}
 		else
 			unset($_SESSION["ACCESS_TOKEN"]);
-
+		
 		header('Location: '.WEBPATH);
 	}
 }

@@ -61,7 +61,7 @@
 					<h2>Participez à notre concours</h2>
 					<h3>en sélectionnant une photo d'un de vos albums Facebook....</h3>
 					<div class="panel-group listPictures"" id="accordion" role="tablist" aria-multiselectable="true">
-					  <div class="panel panel-default">
+					  <div class="panel panel-default col-md-6 col-md-offset-3">
 					    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 						    <div class="panel-heading" role="tab" id="headingOne">
 						      <h4 class="panel-title">			        
@@ -130,7 +130,7 @@
 					  <?php 
 						//Albums
 						foreach ($images["albums"]["data"] as $key => $album) :?>
-						  <div class="panel panel-default">
+						  <div class="panel panel-default col-md-6 col-md-offset-3">
 						  	<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $album['id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $album['id']; ?>">
 							    <div class="panel-heading" role="tab" id="heading<?php echo $album['id']; ?>">
 							      <h4 class="panel-title">
@@ -202,7 +202,7 @@
 						<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 text-center">
 							<h3>....ou en important une photo depuis votre ordinateur.</h3>
 							<form action="<?php echo WEBPATH.'/index/submit'; ?>" id="localForm" method="post" enctype="multipart/form-data" >
-							    <input type="file" name="file" id="i_file">
+							    <input type="file" name="file" id="i_file" required>
 							    <input type="hidden" name="uploadFile">
 							    <input type="submit" class="btn" name="upload" value="Envoyer">
 						    </form>
@@ -225,8 +225,7 @@
 <footer class="footer col-md-12">
 	<a href="<?php echo WEBPATH; ?>/reglement" class="footer-link">Règlement du concours</a> | 
 	<a href="<?php echo WEBPATH; ?>/CGU" class="footer-link">Conditions d'utilisations</a> 
-	<?php 
-	if(isset($user) && isset($listAdmins) && in_array($user->getId(),$listAdmins)) :?>
+	<?php if(isset($isAdmin) && $isAdmin==1) :?>
 		| <a href="<?php echo WEBPATH;?>/admin" class="footer-link">Administration</a>
 	<?php endif; ?>
 </footer>

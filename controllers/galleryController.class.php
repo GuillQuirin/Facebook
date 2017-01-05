@@ -20,22 +20,29 @@ class galleryController extends template{
 		$participateManager = new participateManager();
 		$listParticipation = $participateManager->getParticipantsByCompetition($this->competition,$tri);
 
-		foreach ($listParticipation as $key => $participation) {
-			$participation['url_photo'] = str_replace(
-														substr(
-																$participation['url_photo'],
-																strpos($participation['url_photo'],
-																"?")
-															),
-														"",
-														$participation['url_photo']
-													);
+		if(isset($_SESSION['idFB'])){
+			$userManager = new userManager();
+			$user = $userManager->getUserByIdFb($_SESSION['idFB']);
+		}
 
-			$nblikes = $this->dataApi(TRUE, '/'.$participation['url_photo'],"?fields=og_object{likes.limit(0).summary(true)}");
-			$listParticipation[$key]['url_photo_cleaned'] = $participation['url_photo'];
-			$listParticipation[$key]['nb_likes'] = $nblikes['og_object']['likes']['summary']['total_count'];
+		foreach ($listParticipation as $key => $participation) {
+			$participate = new participate($participation);
+			$listParticipation[$key]['nb_likes'] = $participateManager->getTotalLikesByParticipation($participate);
+			if(isset($_SESSION['idFB']))
+				$listParticipation[$key]['is_liked'] = $participateManager->getLikesByUser($user, $participate);
 		}
 		echo json_encode($this->utf8ize($listParticipation));
+	}
+
+	public function addLikeAction(){
+		$userManager = new userManager();
+		$user = $userManager->getUserByIdFb($_SESSION['idFB']);
+
+		$_POST['id_user'] = $user->getId_user();
+		$vote = new vote($_POST);
+
+		$voteManager = new voteManager();
+		$vote = $voteManager->register($vote);
 	}
 
 	public function reportAction(){

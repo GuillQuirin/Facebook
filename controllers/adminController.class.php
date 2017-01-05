@@ -26,7 +26,10 @@ class adminController extends template{
 		$listReportedPhoto = $participateManager->getPhotoReported();
 		$v->assign("listReportedPhoto",$listReportedPhoto);
 
-		$v->setView("admin","templateadmin");
+		if($this->isAdmin==1)
+			$v->setView("admin","templateadmin");
+		else
+			header('Location: '.WEBPATH);
 	}
 
 	//ADMINISTRATION DES COMPETITIONS

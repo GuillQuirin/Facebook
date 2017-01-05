@@ -63,17 +63,7 @@ class indexController extends template{
 
 		if($ok){
 			//Enregistrement de l'utilisateur
-			$listInfosUser = ['id','name','first_name','last_name','email','birthday','location'];
-			$infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
-			
-			$infosUser['location'] = $infosUser['location']['name'];
-			$infosUser['idFacebook'] = $infosUser['id'];
-			unset($infosUser['id']);
-
-			$user = new user($infosUser);
-
-			$userManager = new userManager();			
-			$user = $userManager->saveUser($user);
+			$user = $this->bringDatasUser();	
 
 			//Enregistrement de la participation
 			$infosParticipation =[
