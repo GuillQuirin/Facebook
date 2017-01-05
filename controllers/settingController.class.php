@@ -16,8 +16,12 @@ class settingController extends template{
 	}
 
 	public function saveRegulationAction(){
-        $setting = new setting($_POST);
         $settingManager = new settingManager();
-        $settingManager->updateRegulation($setting);
+        $settingManager->updateSetting($_POST['regulation'], $_POST['id_setting']);
+    }
+
+    public function saveCGUAction(){
+        $settingManager = new settingManager();
+        $settingManager->updateSetting($_POST['cgu'], $_POST['id_setting']);
     }
 }
