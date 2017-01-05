@@ -7,30 +7,43 @@ class galleryController extends template{
 		$v->assign("css", "gallery");
 		$v->assign("js", "gallery");
 
-		$participateManager = new participateManager();
-		$listParticipation = $participateManager->getParticipantsByCompetition($this->competition);
-		$v->assign("listParticipation",$listParticipation);
-
+		$competitionManager = new competitionManager();
+		$competition = $competitionManager->searchCompetitions();
+		
+		if($competition!==NULL){
+			$participateManager = new participateManager();
+			$listParticipation = $participateManager->getParticipantsByCompetition($this->competition);
+			$v->assign("listParticipation",$listParticipation);
+		}
+		
 		$v->setView("gallery");
 	}
 
 	public function getGalleryAction(){ 
 		$tri = (isset($_POST['tri'])) ? $_POST['tri'] : 0;
 
-		$participateManager = new participateManager();
-		$listParticipation = $participateManager->getParticipantsByCompetition($this->competition,$tri);
+		$competitionManager = new competitionManager();
+		$competition = $competitionManager->searchCompetitions();
+		
+		if($competition!==NULL){
+			$participateManager = new participateManager();
+			$listParticipation = $participateManager->getParticipantsByCompetition($this->competition,$tri);
 
-		if(isset($_SESSION['idFB'])){
-			$userManager = new userManager();
-			$user = $userManager->getUserByIdFb($_SESSION['idFB']);
-		}
+			if(isset($_SESSION['idFB'])){
+				$userManager = new userManager();
+				$user = $userManager->getUserByIdFb($_SESSION['idFB']);
+			}
 
-		foreach ($listParticipation as $key => $participation) {
-			$participate = new participate($participation);
-			$listParticipation[$key]['nb_likes'] = $participateManager->getTotalLikesByParticipation($participate);
-			if(isset($_SESSION['idFB']))
-				$listParticipation[$key]['is_liked'] = $participateManager->getLikesByUser($user, $participate);
+			foreach ($listParticipation as $key => $participation) {
+				$participate = new participate($participation);
+				$listParticipation[$key]['nb_likes'] = $participateManager->getTotalLikesByParticipation($participate);
+				if(isset($_SESSION['idFB']))
+					$listParticipation[$key]['is_liked'] = $participateManager->getLikesByUser($user, $participate);
+			}
 		}
+		else
+			$listParticipation = [];
+		
 		echo json_encode($this->utf8ize($listParticipation));
 	}
 
