@@ -39,7 +39,7 @@
 				if(isset($user)) :?>
 					<a href="<?php echo WEBPATH; ?>/logout">
 						<button class="btn">
-						Bienvenue <?php echo $user->getFirstName(); ?><br>
+						Bienvenue <?php echo $user->getFirst_name(); ?><br>
 						Se déconnecter
 						</button>
 					</a>
