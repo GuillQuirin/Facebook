@@ -5,6 +5,7 @@
 class template{
   protected $fb=NULL;
   protected $competition = NULL;
+  protected $isAdmin = NULL;
 
   public function __construct(){
     
@@ -58,7 +59,13 @@ class template{
        
       //Infos de l'utilisateur
       $infosUser = ['id','name','first_name','last_name','email','birthday','location'];
-      $v->assign("user", $this->dataApi(TRUE,'/me?fields=',$infosUser,"",FALSE));
+      $user = $this->dataApi(TRUE,'/me?fields=',$infosUser,"",FALSE);
+      $v->assign("user", $user);
+
+      if(in_array($user->getId(),$listAdmins))
+        $this->isAdmin = 1;
+
+      $v->assign("isAdmin",$this->isAdmin);
     }
 
   }
