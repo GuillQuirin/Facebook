@@ -37,6 +37,10 @@ class galleryController extends template{
 			foreach ($listParticipation as $key => $participation) {
 				$participate = new participate($participation);
 				$listParticipation[$key]['nb_likes'] = $participateManager->getTotalLikesByParticipation($participate);
+				
+				if($listParticipation[$key]['nb_likes']==NULL) 
+					$listParticipation[$key]['nb_likes']=0;
+
 				if(isset($_SESSION['idFB']))
 					$listParticipation[$key]['is_liked'] = $participateManager->getLikesByUser($user, $participate);
 			}
