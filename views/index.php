@@ -218,12 +218,6 @@
 		</div>
 	</div>
 <?php endif; ?>
-<?php
-//Liste d'amis
-//Email
-//Publication
-var_dump($isAdmin);
-?>
 
 <!-- Footer des pages -->
 <footer class="footer col-md-12">

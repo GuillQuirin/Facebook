@@ -30,12 +30,16 @@ class template{
       $this->fb->setDefaultAccessToken($_SESSION["ACCESS_TOKEN"]);
 
       //Enregistrement de l'utilisateur en BDD dès sa connexion
-      $this->bringDatasUser();
+      $user = $this->bringDatasUser();
+
+      if(in_array($user->getIdFacebook(),$this->bringListAdmins()))
+        $this->isAdmin = 1;
     }
     
     //Renvoi sur la page noCompetition lorsqu'il n'y a pas de concours disponible (si l'utilisateur n'y était pas déjà)
-    //if(get_class($this)!="noCompetitionController" && $this->competition===NULL)
-     // header('Location: '.WEBPATH.'/noCompetition');
+
+    if(get_class($this)!="noCompetitionController" && $this->competition===NULL && $this->isAdmin==NULL)
+      header('Location: '.WEBPATH.'/noCompetition');
 
   }
 
@@ -49,25 +53,14 @@ class template{
       
     if(isset($_SESSION['ACCESS_TOKEN'])){  
       //Liste des admins
-      $admins = $this->dataApi(TRUE,'/app/roles',array(),"1804945786451180|yqj6xWNaG2lUvVv3sfwwRbU5Sjk");
-      $listAdmins=[];
-      foreach ($admins['data'] as $key => $admin) {
-        if($admin['role']=="administrators")
-          $listAdmins[] = $admin['user'];
-      }
-      $v->assign("listAdmins", $listAdmins);
+      $v->assign("listAdmins", $this->bringListAdmins());
        
       //Infos de l'utilisateur
-      $infosUser = ['id','name','first_name','last_name','email','birthday','location'];
-      $user = $this->dataApi(TRUE,'/me?fields=',$infosUser,"",FALSE);
-      $v->assign("user", $user);
-
-      if(in_array($user->getId(),$listAdmins))
-        $this->isAdmin = 1;
-
-      $v->assign("isAdmin",$this->isAdmin);
+      $v->assign("user", $this->bringDatasUser());  
     }
 
+    //Info sur le statut de l'utilisateur
+    $v->assign("isAdmin",$this->isAdmin);
   }
 
   //Authentification
@@ -82,22 +75,36 @@ class template{
     $v->assign("urlLoginLogout",$loginUrl);
   }
 
+  //Importation des administrateurs de l'application
+  protected function bringListAdmins(){
+    $admins = $this->dataApi(TRUE,'/app/roles',array(),"1804945786451180|yqj6xWNaG2lUvVv3sfwwRbU5Sjk");
+    $listAdmins=[];
+    foreach ($admins['data'] as $key => $admin) {
+      if($admin['role']=="administrators")
+        $listAdmins[] = $admin['user'];
+    }
+    return $listAdmins;
+  }
+
   //Importation des infos de l'utilisateur depuis Facebook
   protected function bringDatasUser(){
       $listInfosUser = ['id','name','first_name','last_name','email','birthday','location'];
       $infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
-      
-      $infosUser['location'] = $infosUser['location']['name'];
-      $infosUser['idFacebook'] = $infosUser['id'];
-      unset($infosUser['id']);
+      if(is_array($infosUser)){
+        $infosUser['location'] = $infosUser['location']['name'];
+        $infosUser['idFacebook'] = $infosUser['id'];
+        unset($infosUser['id']);
 
-      $user = new user($infosUser);
-      $userManager = new userManager();     
-      $user = $userManager->getUserByIdFb($user->getIdFacebook()); 
-      if($user==NULL)
-        $user = $userManager->saveUser($user);
+        $user = new user($infosUser);
+        $userManager = new userManager();     
+        $user = $userManager->getUserByIdFb($user->getIdFacebook()); 
+        if($user==NULL)
+          $user = $userManager->saveUser($user);
 
-      $_SESSION['idFB'] = $user->getIdFacebook();
+        $_SESSION['idFB'] = $user->getIdFacebook();
+      }
+      else
+        $user = NULL;
       return $user;
   }
 
