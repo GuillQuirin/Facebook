@@ -141,7 +141,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<p class="error"></p>
+					<p class="errorEdit"></p>
 					<button type="button" id="submitEdit" class="btn btn-primary">Modifier le concours</button>
 				</div>
 			</div>
@@ -158,40 +158,43 @@
 					<h4 class="modal-title" id="myModalLabel">Création d'un concours</h4>
 				</div>
 				<div class="modal-body">
-					<div class="form-group">
-						<label for="name">Intitulé du concours : </label>
-						<input type="name" class="form-control" id="name"/>
-					</div>
-					<div class="form-group">
-						<label for="description">Description du concours :</label>
-						<div id="summernote">Saisissez la description de votre concours...</div>
-					</div>
-					<div class="form-group">
-						<label for="start_date">Date de début du concours : </label>
-						<div class="date" id="datePicker">
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" name="start_date" id="start_date" placeholder="jj/mm/aaaa" required/>
+					<form id="create_data_competition">
+						<div class="form-group">
+							<label for="name">Intitulé du concours : </label>
+							<input type="name" name="name" class="form-control" id="name" required>
+						</div>
+						<div class="form-group">
+							<label for="description">Description du concours :</label>
+							<textarea name="description" id="summernote" placeholder="Saisissez la description de votre concours..."></textarea>
+						</div>
+						<div class="form-group">
+							<label for="start_date">Date de début du concours : </label>
+							<div class="date" id="datePicker">
+								<div class="input-group">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+									<input type="text" class="form-control" name="start_date" id="start_date" placeholder="jj/mm/aaaa" required>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="end_date">Date de fin du concours : </label>
-						<div class="date" id="datePicker2">
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" name="end_date" id="end_date" placeholder="jj/mm/aaaa" required/>
+						<div class="form-group">
+							<label for="end_date">Date de fin du concours : </label>
+							<div class="date" id="datePicker2">
+								<div class="input-group">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+									<input type="text" class="form-control" name="end_date" id="end_date" placeholder="jj/mm/aaaa" required/>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="prize">Lot à gagner : </label>
-						<input type="text" class="form-control" id="prize"/>
-					</div>
-					<div class="text-center">
-						<button type="submit" id="submitCreate" class="btn btn-lg btn-success">Créer le concours !</button>
-					</div>
-				</form>
+						<div class="form-group">
+							<label for="prize">Lot à gagner : </label>
+							<input type="text" class="form-control" name="prize" id="prize">
+						</div>
+						<div class="text-center">
+							<p class="errorCreate"></p>
+							<button type="submit" id="submitCreate" class="btn btn-lg btn-success">Créer le concours !</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

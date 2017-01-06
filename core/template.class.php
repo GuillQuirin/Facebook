@@ -23,7 +23,7 @@ class template{
     //Recherche d'un concours ouvert au public
     $competitionManager = new competitionManager();
     $this->competition = $competitionManager->searchCompetitions();
-    
+
     //Session ouverte sur 2 heures
     if(isset($_SESSION['ACCESS_TOKEN'])){
       //$this->fb->setDefaultAccessToken($_SESSION["LONG_ACCESS_TOKEN"]); //60 jours
@@ -32,7 +32,7 @@ class template{
       //Enregistrement de l'utilisateur en BDD dès sa connexion
       $user = $this->bringDatasUser();
 
-      if(in_array($user->getIdFacebook(),$this->bringListAdmins()))
+      if($user!=NULL && in_array($user->getIdFacebook(),$this->bringListAdmins()))
         $this->isAdmin = 1;
     }
     

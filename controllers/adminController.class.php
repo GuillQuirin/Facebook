@@ -35,9 +35,21 @@ class adminController extends template{
 	//ADMINISTRATION DES COMPETITIONS
 
 	public function addCompetitionAction(){
-		$competition = new competition($_POST);
-		$competitionManager = new competitionManager();
-		$competitionManager->insertCompetition($competition);
+		$error = "";
+
+		if(!$_POST){
+			$error .= "Erreur !";	
+		}
+
+		if($error==""){
+			$competition = new competition($_POST);
+			var_dump($competition);
+			$competitionManager = new competitionManager();
+			$competitionManager->insertCompetition($competition);
+			$error = "ok";	
+		}
+
+		echo $error;
 	}
 
 	public function editCompetitionAction(){

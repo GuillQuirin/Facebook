@@ -23,29 +23,12 @@ $(document).ready(function() {
     } );
 
 
-    //Affichage de la pop-up d'une competition
-    $('#listCompetitions>tbody>tr').click(function(){
-        $(this).find("td").each(function(){
-            var type = $(this).attr('name');
-            $('#Modal input[type!="checkbox"][name="'+type+'"]').val($(this).text());
-            $('#Modal textarea[name="'+type+'"]').val($(this).text());
-            if(type=="url_prize")
-                $('#Modal input[name="'+type+'"]').val($(this).find('a').attr("href"));
-            if(type=="active"){
-                if($.trim($(this).text())=="Actif")
-                    $('#Modal input[name="'+type+'"]').prop("checked","checked");
-                else
-                    $('#Modal input[name="'+type+'"]').prop("checked",false);
-            }
-        });
-    });
-
     //Affichage des infos dans une modal
     $('#ModalEdit').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var modal = $(this);
 
-        $('.error').text('');
+        $('.errorEdit').text('');
 
         modal.find('input[name="id_competition"]').val(button.data('id'));
         modal.find('input[name="name"]').val(button.data('name'));
@@ -72,25 +55,41 @@ $(document).ready(function() {
         })
           .done(function( msg ){
             if(msg!="ok"){
-                $('.error').html(msg);
+                $('.errorEdit').html(msg);
                 $('#submitEdit').html("Modifier le concours");
             }
             else
                 location.reload();
           });
+        return false;
     });
 
     //Création du nouveau concours en ajax
     $('#CreateCompetition #submitCreate').click(function(){
+        $('#submitEdit').html("Enregistrement.....");
+        
         $.ajax({
           method: "POST",
           url: $('[name="webpath"]').val()+"/admin/addCompetition",
           data: $('#create_data_competition').serialize() //récuperation des input présents dans le <form>
         })
-          .done(function( msg ) {
-           location.reload();
-        });
+          .done(function( msg ){
+            /*if(msg!="ok"){
+                $('.errorCreate').html(msg);
+                $('#submitEdit').html("Créer le concours !");
+            }
+            else
+                location.reload();*/
+            console.log(msg);
+          });
+        return false;
     });
+
+    //Réinitialisation du message d'erreur
+    $('#CreateCompetition').on('show.bs.modal', function (event) {
+        $('.errorCreate').html('');
+    });
+
 
     /*PARTICIPANTS*/
 
