@@ -33,13 +33,18 @@
 						</td>
 						<td>
 							<button 
+								class="btn btn-warning"
 								data-toggle="modal" 
 								data-target="#ModalEdit" 
-								data-url='"+this.url_photo+"'";
-								data-name='"+this.first_name+" "+this.last_name+"'";
-								data-like='"+this.id+"'";
-								data-report='"+this.id+"'";
-								class="btn btn-warning">Modifier</button>
+								data-name="<?php echo $competition->getName(); ?>"
+								data-description="<?php echo $competition->getDescription(); ?>"
+								data-begin="<?php echo $competition->getStart_date(); ?>"
+								data-end="<?php echo $competition->getEnd_date(); ?>"
+								data-prize="<?php echo $competition->getPrize(); ?>"
+								data-url="<?php echo $competition->getUrl_prize(); ?>"
+								data-active="<?php echo $competition->getActive(); ?>">
+								Modifier
+							</button>
 						</td>
 					</tr>
 				<?php } ?>
@@ -79,7 +84,7 @@
 
 		<!--      Modal      -->
 		<!-- Modification -->
-		<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -135,7 +140,8 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="submit" class="btn btn-primary">Modifier le concours</button>
+					<p class="error"></p>
+					<button type="button" id="submitEdit" class="btn btn-primary">Modifier le concours</button>
 				</div>
 			</div>
 		</div>
@@ -182,7 +188,7 @@
 						<input type="text" class="form-control" id="prize"/>
 					</div>
 					<div class="text-center">
-						<button type="submit" class="btn btn-lg btn-success">Créer le concours !</button>
+						<button type="submit" id="submitCreate" class="btn btn-lg btn-success">Créer le concours !</button>
 					</div>
 				</form>
 			</div>

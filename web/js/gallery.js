@@ -129,8 +129,6 @@ function openModal(){
 		modal.find('.modal-name').text(button.data('name'));
 		modal.find('.modal-body').css('background-image','url('+button.data("url")+')');
 		modal.find('.modal-report img').attr('idimage',button.data('report'));
-		//modal.find('.modal-like').html('<div class="fb-like" data-href="'+button.data('like')+'" data-layout="box_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>');
-		//FB.XFBML.parse();
 	});
 }
 

@@ -40,25 +40,51 @@ $(document).ready(function() {
         });
     });
 
+    //Affichage des infos dans une modal
+    $('#ModalEdit').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var modal = $(this);
+
+        $('.error').text('');
+
+        modal.find('input[name="name"]').val(button.data('name'));
+        modal.find('textarea[name="description"]').val(button.data('description'));
+        modal.find('input[name="start_date"]').val(button.data('begin'));
+        modal.find('input[name="end_date"]').val(button.data('end'));
+        modal.find('input[name="prize"]').val(button.data('prize'));
+        modal.find('input[name="url_prize"]').val(button.data('url'));
+        
+        if(button.data('active')=="1")
+            modal.find('input[name="active"]').prop('checked','checked');
+        else
+            modal.find('input[name="active"]').prop('checked',false);
+    });
+
     //Modifications du concours en ajax
-    $('#Modal #submit').click(function(){
+    $('#ModalEdit #submitEdit').click(function(){
+        $('#submitEdit').html("Enregistrement.....");
+        
         $.ajax({
           method: "POST",
           url: $('[name="webpath"]').val()+"/admin/editCompetition",
-          data: $('#data_competition').serialize()
+          data: $('#data_competition').serialize() //récuperation des input présents dans le <form>
         })
           .done(function( msg ){
-           //listCompetitions
-           location.reload();
+            if(msg!="ok"){
+                $('.error').html(msg);
+                $('#submitEdit').html("Modifier le concours");
+            }
+            else
+                location.reload();
           });
     });
 
-     //Création du nouveau concours en ajax
-    $('#CreateCompetition #submit').click(function(){
+    //Création du nouveau concours en ajax
+    $('#CreateCompetition #submitCreate').click(function(){
         $.ajax({
           method: "POST",
           url: $('[name="webpath"]').val()+"/admin/addCompetition",
-          data: $('#create_data_competition').serialize()
+          data: $('#create_data_competition').serialize() //récuperation des input présents dans le <form>
         })
           .done(function( msg ) {
            location.reload();
@@ -111,17 +137,3 @@ $(document).ready(function() {
     });
 
 } );
-
-
-function openModal(){
-$('#popUpGallery').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // Button that triggered the modal
-
-    var modal = $(this);
-    modal.find('.modal-name').text(button.data('name'));
-    modal.find('.modal-body').css('background-image','url('+button.data("url")+')');
-    modal.find('.modal-report img').attr('idimage',button.data('report'));
-    //modal.find('.modal-like').html('<div class="fb-like" data-href="'+button.data('like')+'" data-layout="box_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>');
-    //FB.XFBML.parse();
-});
-}

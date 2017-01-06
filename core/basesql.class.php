@@ -77,8 +77,8 @@ abstract class basesql{
 			$value = $data->$method();
 			$array[$key]=$value;
 		}
-		var_dump($sql);
-		var_dump($array);
+		//var_dump($sql);
+		//var_dump($array);
 		//exit;
 		$sth->execute($array);	
 	}
