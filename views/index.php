@@ -74,6 +74,7 @@
 					</a>
 				    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 				      <div class="panel-body">
+				        <div class="row">
 				        <?php
 							//Photos individuelles
 							if(isset($images["photos"])){
@@ -121,10 +122,13 @@
 								endforeach;
 							}
 						?>
-						<div class="col-md-12">
-							<a class="backTop" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-								<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-							</a>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<a class="backTop" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+									<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+								</a>
+							</div>
 						</div>
 				      </div>
 				    </div>
@@ -143,7 +147,8 @@
 						</a>
 					    <div id="collapse<?php echo $album['id']; ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $album['id']; ?>">
 					      <div class="panel-body">
-					       <?php
+					       	<div class="row">
+					       	<?php
 								if(isset($album['photos'])) :
 									foreach ($album['photos']["data"] as $key => $photo): 
 										if(!in_array($photo['id'],$listAlonePic)): 
@@ -188,10 +193,13 @@
 									endforeach;
 								endif;
 							?>
-							<div class="col-md-12">
-								<a class="backTop" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $album['id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $album['id']; ?>">
-									<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-								</a>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<a class="backTop" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $album['id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $album['id']; ?>">
+										<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+									</a>
+								</div>
 							</div>
 					      </div>
 					    </div>
