@@ -82,7 +82,6 @@ abstract class basesql{
 		//exit;
 		$sth->execute($array);	
 	}
-//UPDATE `participate` SET `is_locked` = '0' WHERE `url_photo` = "https://scontent.xx.fbcdn.net/v/t1.0-9/15492172_10211905112134197_5372954879866724434_n.jpg?oh=eb0f4c2402c13ea9da5c8fa560120833&oe=58B3BDE0";
 
 	//NOM DES COLONNES D'UNE TABLE
 	protected function getColumns(){

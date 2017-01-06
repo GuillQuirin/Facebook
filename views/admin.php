@@ -36,6 +36,7 @@
 								class="btn btn-warning"
 								data-toggle="modal" 
 								data-target="#ModalEdit" 
+								data-id="<?php echo $competition->getId_competition(); ?>"
 								data-name="<?php echo $competition->getName(); ?>"
 								data-description="<?php echo $competition->getDescription(); ?>"
 								data-begin="<?php echo $competition->getStart_date(); ?>"

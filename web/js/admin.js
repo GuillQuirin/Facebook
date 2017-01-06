@@ -47,6 +47,7 @@ $(document).ready(function() {
 
         $('.error').text('');
 
+        modal.find('input[name="id_competition"]').val(button.data('id'));
         modal.find('input[name="name"]').val(button.data('name'));
         modal.find('textarea[name="description"]').val(button.data('description'));
         modal.find('input[name="start_date"]').val(button.data('begin'));

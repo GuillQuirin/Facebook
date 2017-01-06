@@ -41,15 +41,19 @@ class adminController extends template{
 	}
 
 	public function editCompetitionAction(){
+		$error = "";
 		if(!$_POST){
-			echo "Erreur !";	
+			$error .= "Erreur !";	
 		}
-		else{
+
+		if($error==""){
 			$competition = new competition($_POST);
 			$competitionManager = new competitionManager();
 			$upd = $competitionManager->updateCompetition($competition);
-			echo "ok";	
+			$error = "ok";	
 		}
+
+		echo $error;
 	}
 
 	//ADMINISTRATION DES PHOTOS
