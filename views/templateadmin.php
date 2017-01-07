@@ -28,33 +28,38 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 
 	<?php echo (isset($css)) ? '<link rel="stylesheet" href="'.WEBPATH.'/web/css/'.$css.'-stylesheet.css">' : '';?>
-
+	
 </head>
 
 <body>
-	<header class="col-md-10 col-md-offset-1">
-		<nav class="navbar navbar-default no-padding">
-			<ul class="nav navbar-nav">
-				<li class="col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH) echo "active"; ?>">
-					<a href="<?php echo WEBPATH; ?>">Participer</a>
-				</li>
-				<li class="col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/gallery') echo "active"; ?>">
-					<a href="<?php echo WEBPATH; ?>/gallery">Galerie</a>
-				</li>
-				<li class="col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/admin') echo "active"; ?>">
-					<a href="<?php echo WEBPATH; ?>/admin">Liste des concours</a>
-				</li>
-				<li class="col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/design') echo "active"; ?>">
-					<a href="<?php echo WEBPATH; ?>/design">Design</a>
-				</li>
-				<li class="col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/export') echo "active"; ?>">
-					<a href="<?php echo WEBPATH; ?>/export">Export des données</a>
-				</li>
-				<li class="col-md-2 <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
-					<a href="<?php echo WEBPATH; ?>/setting">Reglement et CGU</a>
-
-				</li>
-			</ul>
+	<header class="col-md-6 col-md-offset-3">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="col-md-6 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH) echo "active"; ?>">
+							<a href="<?php echo WEBPATH; ?>">Participer</a>
+						</li>
+						<li class="col-md-6 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/gallery') echo "active"; ?>">
+							<a href="<?php echo WEBPATH; ?>/gallery">Galerie</a>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/admin') echo "active"; ?>">
+							<a href="<?php echo WEBPATH; ?>/admin">Liste des concours</a>
+						</li>
+						<li class="menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/design') echo "active"; ?>">
+							<a href="<?php echo WEBPATH; ?>/design">Design</a>
+						</li>
+						<li class="menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/export') echo "active"; ?>">
+							<a href="<?php echo WEBPATH; ?>/export">Export des données</a>
+						</li>
+						<li class="<?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
+							<a href="<?php echo WEBPATH; ?>/setting">Reglement et CGU</a>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div><!--/.container-fluid -->
 		</nav>
 	</header>
 
