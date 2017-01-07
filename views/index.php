@@ -144,8 +144,7 @@
 				  	<p>Vous devez pour cela nous autoriser à récupérer vos photos</p>
 				  <?php
 				  	endif;
-				  	var_dump($_SESSION);
-				  	var_dump($test);
+
 					//Albums
 				  	if(isset($images['albums'])) :
 						foreach ($images["albums"]["data"] as $key => $album) :?>

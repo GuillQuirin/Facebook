@@ -93,25 +93,20 @@ class indexController extends template{
 
 			$listPb = [];
 			if(trim($user->getLast_name())=="")
-				$listPb["Nom"]="Information essentielle pour vous contacter";
+				$listPb["public_profile"]="Nom (information essentielle pour vous contacter)";
 
 			if(trim($user->getFirst_name())=="")
-				$listPb["Prénom"]="Information essentielle pour vous contacter";
+				$listPb["public_profile"]="Prénom (information essentielle pour vous contacter)";
 
 			if(trim($user->getEmail())=="")
-				$listPb["Adresse e-mail"]="Information essentielle pour vous contacter";
+				$listPb["email"]="Adresse e-mail (information essentielle pour vous contacter)";
 
 			if($user->getBirthday()==="")
-				$listPb["Date de naissance"]="Vous devez être majeur (ou avoir l'accord de vos tuteurs) pour participer";
+				$listPb["user_birthday"]="Date de naissance (vous devez être majeur (ou avoir l'accord de vos tuteurs) pour participer)";
 
 			if(trim($user->getLocation())=="")
-				$listPb["Localisation"]="Le concours est disponible pour les participants vivants à proximité de l'Ile-de-France";
+				$listPb["user_location"]="Localisation (le concours est disponible pour les participants vivants à proximité de l'Ile-de-France)";
 			
-
-			$helper = $this->fb->getRedirectLoginHelper();
-			$scope = ['publish_actions','email'];
-			$listPb['url'] = $helper->getLoginUrl("http://egl.fbdev.fr".WEBPATH."/loginCallback", $scope);
-
 			echo json_encode($listPb);
 		}
 		else
