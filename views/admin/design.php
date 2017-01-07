@@ -9,9 +9,11 @@
 					<?php } ?>                            
 				</select>
 				<span class="input-group-btn">
-					<button type="submit" class="btn btn-success">Appliquer le design</button>
+					<button type="submit" id="applyTemplate" class="btn btn-success">Appliquer le design</button>
 				</span>
 			</div><br>
+		</form>
+		<form>
 			<hr>
 			<h2 class="text-uppercase"> Création d'un design </h2>
 			<div class="form-group">
@@ -140,6 +142,18 @@
 					location.reload();
 				});
 			}
+		});
+
+		$('#applyTemplate').click(function(){
+				$.ajax({
+					method: "POST",
+					url: $('[name="webpath"]').val()+"/design/applyDesign",
+					data: {id_design: $("#designExist").val()
+						}
+				})
+				.done(function( msg ) {
+					location.reload();
+				});
 		});
 	});
 </script>
