@@ -26,6 +26,10 @@ class adminController extends template{
 		$listReportedPhoto = $participateManager->getPhotoReported();
 		$v->assign("listReportedPhoto",$listReportedPhoto);
 
+		$designManager = new designManager();
+		$listActiveDesign = $designManager->getActiveDesign();
+		$v->assign("listActiveDesign", $listActiveDesign);
+
 		if($this->isAdmin==1)
 			$v->setView("admin","templateadmin");
 		else
