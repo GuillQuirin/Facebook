@@ -11,6 +11,7 @@ class design extends motherClass{
 	protected $date_created=null;
 	protected $date_updated=null;
 	protected $deleted=null;
+	protected $state=null;
 
 	public function setId_design($v){$this->id_design=$v;}
 	public function setName($v){$this->name=$v;}
@@ -23,6 +24,7 @@ class design extends motherClass{
 	public function setDate_created($v){$this->date_created=$v;}
 	public function setDate_updated($v){$this->date_updated=$v;}
 	public function setDeleted($v){$this->deleted=$v;}
+	public function setState($v){$this->state=$v;}
 
 	public function getId_design(){return $this->id_design;}
 	public function getName(){return $this->name;}
@@ -35,4 +37,5 @@ class design extends motherClass{
 	public function getDate_created(){return $this->date_created;}
 	public function getDate_updated(){return $this->date_updated;}
 	public function getDeleted(){return $this->deleted;}
+	public function getState(){return $this->state;}
 }
