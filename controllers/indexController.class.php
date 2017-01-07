@@ -23,7 +23,7 @@ class indexController extends template{
 
 
 	public function submitAction(){
-		/* --EnvoI DE DONNEES PAR L'UTILISATEUR DEPUIS L'ACCUEIL -- */
+		/* --ENVOI DE DONNEES PAR L'UTILISATEUR DEPUIS L'ACCUEIL -- */
 		$ok = FALSE;
 		//Création de l'album dans FB si inexistant
 		$albumCompetition = $this->searchAlbumCompetition();
@@ -80,6 +80,33 @@ class indexController extends template{
 		header('Location: '.WEBPATH);
 	}
 
+	public function checkUserAction(){
+		if(isset($_SESSION['idFB'])){
+			$userManager = new userManager();
+			$user = $userManager->getUserByIdFb($_SESSION['idFB']);
+
+			$listPb = [];
+			if(trim($user->getLast_name())=="")
+				$listPb[] = "Nom";
+
+			if(trim($user->getFirst_name())=="")
+				$listPb[] = "Prénom";
+
+			if(trim($user->getEmail())=="")
+				$listPb[] = "Adresse e-mail"; 
+
+			if($user->getBirthday()===NULL)
+				$listPb[] = "Date de naissance";
+
+			if(trim($user->getLocation())=="")
+				$listPb[] = "Localisation";
+
+			echo json_encode($listPb);
+		}
+		else
+			return false;
+	}
+
 	private function searchAlbumCompetition(){
 		$albums = $this->dataApi(TRUE,'/me','/albums',"");
 		
@@ -102,6 +129,7 @@ class indexController extends template{
 		
 		return $albumCompetition;
 	}
+
 
 }
 

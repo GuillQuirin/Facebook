@@ -15,6 +15,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
 	</head>
 	<body>
+		<input type="hidden" name="webpath" value="<?php echo WEBPATH; ?>">
 		<?php include $this->view; ?>
 		<?php 
 			echo '<script src="'.WEBPATH.'/web/js/jquery.js"></script>';

@@ -22,7 +22,7 @@ $(document).ready(function(){
 		$('.pbFileSize').slideUp();
 
 	    if (window.File && window.FileReader && window.FileList && window.Blob){
-	    	if($('#i_file')[0].files[0].size < 10485760) //10Mo
+	    	if($('#i_file')[0].files[0].size < 10485760 && controlDatas()) //10Mo
 	    		return true;
 	    	else
 	    		$('.pbFileSize').slideDown();
@@ -32,4 +32,25 @@ $(document).ready(function(){
 	    
 	    return false;
 	});
+
+	$('.onlineForm').submit(function(){
+		controlDatas();
+		return false;
+	});
+
+	//Check des infos utilisateur avant envoi
+	function controlDatas(){
+		$.ajax({
+          method: "GET",
+          url: $('[name="webpath"]').val()+"/index/checkUser"
+        })
+          .done(function( msg ){
+            var resultUser = JSON.parse(msg);
+            $('.modal-footer').append("Certaines informations manquent pour finaliser votre participation:");
+            $.each(resultUser,function(index, value){
+            	$('.modal-footer').append(value);
+            });
+            return false;
+          });
+	}
 });

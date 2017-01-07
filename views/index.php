@@ -95,7 +95,7 @@
 									?>
 									<div class="modal fade" id='<?php echo $photo['id']; ?>' tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 									  <div class="modal-dialog" role="document">
-									    <form action="<?php echo WEBPATH.'/index/submit'; ?>" method="post">
+									    <form action="<?php echo WEBPATH.'/index/submit'; ?>" class="onlineForm" method="post">
 									    <div class="modal-content">
 									      <div class="modal-header">
 									      	<p>Assurez-vous d'être le propriétaire du contenu que vous envoyez.</p> 
@@ -111,7 +111,7 @@
 								        	<button type="button" class="btn" data-dismiss="modal">Annuler</button>
 								          </div>
 								          <div class="col-md-6">
-									        <button type="submit" class="btn">Envoyer cette photo</button>
+									        <button type="submit" class="btn sendPicture">Envoyer cette photo</button>
 										  </div>
 										  </div>
 									    </div>
@@ -165,11 +165,12 @@
 										<!-- Modal -->
 											<div class="modal fade" id='<?php echo $photo['id']; ?>' tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 											  <div class="modal-dialog" role="document">
-											    <form action="<?php echo WEBPATH.'/index/submit'; ?>" method="post">
+											    <form action="<?php echo WEBPATH.'/index/submit'; ?>" class="onlineForm" method="post">
 											    <div class="modal-content">
 											      <div class="modal-header">
 											        <p>Assurez-vous d'être le propriétaire du contenu que vous envoyez.</p> 
 													<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/CGU'; ?>">conditions d'utilisations</a>.</p>
+													<p>Un album "Pardon-Maman" sera créé dans la section Photo de votre compte Facebook, celui-ci aura la même visibilité que vous avez indiqué en vous connectant.</p>
 											      </div>
 											      <div class="modal-body">
 											      	<img src='<?php echo $photo['source']; ?>' alt="photo d'un album">
@@ -181,7 +182,7 @@
 											        	<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 											        </div>
 											        <div class="col-md-6">
-												        <button type="submit" class="btn btn-default">Envoyer cette photo</button>
+												        <button type="submit" class="btn btn-default sendPicture">Envoyer cette photo</button>
 													</div>
 											      </div>
 											    </div>
