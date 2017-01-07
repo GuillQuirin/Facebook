@@ -23,4 +23,10 @@ class designController extends template{
         $designManager = new designManager();
         $designManager->insertDesign($design);
     }
+
+    public function applyDesignAction(){
+        $designManager = new designManager();
+        $designManager->activeDesign($_POST['id_design']);
+        $designManager->inactiveDesign($_POST['id_design']);
+    }
 }
