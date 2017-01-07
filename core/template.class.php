@@ -91,14 +91,16 @@ class template{
       $listInfosUser = ['id','name','first_name','last_name','email','birthday','location'];
       $infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
       if(is_array($infosUser)){
-        $infosUser['location'] = $infosUser['location']['name'];
+        if(isset($infosUser['location']))
+          $infosUser['location'] = $infosUser['location']['name'];
         $infosUser['idFacebook'] = $infosUser['id'];
         unset($infosUser['id']);
 
         $user = new user($infosUser);
         $userManager = new userManager();     
-        $user = $userManager->getUserByIdFb($user->getIdFacebook()); 
-        if($user==NULL)
+        $userBDD = $userManager->getUserByIdFb($user->getIdFacebook()); 
+
+        if($userBDD==NULL)
           $user = $userManager->saveUser($user);
 
         $_SESSION['idFB'] = $user->getIdFacebook();
