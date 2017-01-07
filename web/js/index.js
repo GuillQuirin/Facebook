@@ -1,11 +1,14 @@
 $(document).ready(function(){
+	//Flèches vers le haut
 	$('.backTop').click(function(){
 		$('html, body').animate({
 			scrollTop: $(".listPictures").offset().top-100
 		}, 100);
 	});
 
+	//Volet déroulant
 	$('.panel-heading').click(function(){
+		$('.panel-heading').not(this).parent().parent().removeClass("col-md-10").removeClass("col-md-offset-1").addClass("col-md-6").addClass("col-md-offset-3");
 		var panelDefault = $(this).parent().parent();
 
 		panelDefault.toggleClass("col-md-10",5000);
@@ -14,6 +17,7 @@ $(document).ready(function(){
 		panelDefault.toggleClass("col-md-offset-1",5000);
 	});
 
+	//Check de la taille de l'image avant envoi
 	$('#localForm').submit(function(){
 		$('.pbFileSize').slideUp();
 
