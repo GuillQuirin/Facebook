@@ -87,19 +87,22 @@ class indexController extends template{
 
 			$listPb = [];
 			if(trim($user->getLast_name())=="")
-				$listPb[] = "Nom";
+				$listPb["Nom"]="Information essentielle pour vous contacter";
 
 			if(trim($user->getFirst_name())=="")
-				$listPb[] = "Prénom";
+				$listPb["Prénom"]="Information essentielle pour vous contacter";
 
 			if(trim($user->getEmail())=="")
-				$listPb[] = "Adresse e-mail"; 
+				$listPb["Adresse e-mail"]="Information essentielle pour vous contacter";
 
 			if($user->getBirthday()===NULL)
-				$listPb[] = "Date de naissance";
+				$listPb["Date de naissance"]="Vous devez être majeur (ou avoir l'accord de vos tuteurs) pour participer";
 
 			if(trim($user->getLocation())=="")
-				$listPb[] = "Localisation";
+				$listPb["Localisation"]="Le concours est disponible pour les participants vivants à proximité de l'Ile-de-France";
+			
+			$helper = $this->fb->getRedirectLoginHelper();
+			$listPb['url'] = $helper->getLoginUrl('http://egl.fbdev.fr'.WEBPATH.'/loginCallback',array("scope" => "publish_actions"));
 
 			echo json_encode($listPb);
 		}

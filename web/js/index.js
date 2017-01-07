@@ -21,36 +21,55 @@ $(document).ready(function(){
 	$('#localForm').submit(function(){
 		$('.pbFileSize').slideUp();
 
-	    if (window.File && window.FileReader && window.FileList && window.Blob){
-	    	if($('#i_file')[0].files[0].size < 10485760 && controlDatas()) //10Mo
-	    		return true;
-	    	else
+		var result = true;
+	    if(window.File && window.FileReader && window.FileList && window.Blob){
+	    	if($('#i_file')[0].files[0].size > 10485760){ //10Mo
 	    		$('.pbFileSize').slideDown();
+	    		result = false;
+	    	}
+			
+			//Affichage des erreurs
+	    	if(!controlDatas('.errorUpload'))
+	    		result = false;
 	    }
-	    else
-	        alert("Please upgrade your browser, because your current browser lacks some new features we need!");
+	    else{
+	        alert("Veuillez mettre à jour votre navigateur Internet afin de pouvoir accèder au concours.");
+	    	result = false;
+	    }
 	    
-	    return false;
+	    return result;
 	});
 
+	//Affichage des erreurs
 	$('.onlineForm').submit(function(){
-		controlDatas();
+		console.log(controlDatas('.errorSend'));
 		return false;
 	});
 
-	//Check des infos utilisateur avant envoi
-	function controlDatas(){
+	//Ouverture d'une pop-up image
+	$('img').click(function(){
+		$('.errorSend, .errorUpload').hide();
+	});
+
+	//Check des autorisations utilisateur
+	function controlDatas(classError){
+		$(classError+' .listError').html('');
+
 		$.ajax({
           method: "GET",
           url: $('[name="webpath"]').val()+"/index/checkUser"
         })
           .done(function( msg ){
             var resultUser = JSON.parse(msg);
-            $('.modal-footer').append("Certaines informations manquent pour finaliser votre participation:");
+        	$(classError).show();
             $.each(resultUser,function(index, value){
-            	$('.modal-footer').append(value);
+            	$(classError+' .listError').append('<li>'+index+': '+value+'</li>');
             });
+            $('.errorSend a').attr('href',resultUser.url);
+            console.log(resultUser.url);
             return false;
+            return (resultUser.length==0);
           });
+          return false;
 	}
 });
