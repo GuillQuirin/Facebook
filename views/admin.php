@@ -98,37 +98,37 @@
 							<div class="form-group row">
 								<label for="name" class="col-xs-3 col-form-label text-right">Intitulé</label>
 								<div class="col-xs-9">
-									<input type="text" name="name" class="form-control">
+									<input type="text" name="name" class="form-control" required>
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="description" class="col-xs-3 col-form-label text-right">Description</label>
 								<div class="col-xs-9">
-									<textarea class="form-control" name="description" rows="3"></textarea>
+									<textarea class="form-control" name="description" rows="3" required></textarea>
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="start_date" class="col-xs-3 col-form-label text-right">Date de début</label>
 								<div class="col-xs-9">
-									<input type="text" name="start_date" class="form-control">
+									<input type="date" name="start_date" class="form-control" required>
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="end_date" class="col-xs-3 col-form-label text-right">Date de fin</label>
 								<div class="col-xs-9">
-									<input type="text" name="end_date" class="form-control">
+									<input type="date" name="end_date" class="form-control" required>
 								</div>	
 							</div>
 							<div class="form-group row">
 								<label for="prize" class="col-xs-3 col-form-label text-right">Lot à gagner</label>
 								<div class="col-xs-9">
-									<input type="text" name="prize" class="form-control">
+									<input type="text" name="prize" class="form-control" required>
 								</div>
 							</div>
 							<div class="form-group row">
 								<label for="prize" class="col-xs-3 col-form-label text-right">Url du lot</label>
 								<div class="col-xs-9">
-									<input type="text" name="url_prize" class="form-control">
+									<input type="text" name="url_prize" class="form-control" required>
 								</div>
 							</div>
 							<div class="form-check row">
@@ -165,7 +165,7 @@
 						</div>
 						<div class="form-group">
 							<label for="description">Description du concours :</label>
-							<textarea name="description" id="summernote" placeholder="Saisissez la description de votre concours..."></textarea>
+							<textarea name="description" id="summernote" placeholder="Saisissez la description de votre concours..." required></textarea>
 						</div>
 						<div class="form-group">
 							<label for="start_date">Date de début du concours : </label>
@@ -187,7 +187,7 @@
 						</div>
 						<div class="form-group">
 							<label for="prize">Lot à gagner : </label>
-							<input type="text" class="form-control" name="prize" id="prize">
+							<input type="text" class="form-control" name="prize" id="prize" required>
 						</div>
 						<div class="text-center">
 							<p class="errorCreate"></p>
