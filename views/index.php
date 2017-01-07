@@ -142,8 +142,10 @@
 					  </div>
 				  <?php else: ?>
 				  	<p>Vous devez pour cela nous autoriser à récupérer vos photos</p>
-				  <?php 
+				  <?php
 				  	endif;
+				  	var_dump($_SESSION);
+				  	var_dump($test);
 					//Albums
 				  	if(isset($images['albums'])) :
 						foreach ($images["albums"]["data"] as $key => $album) :?>
@@ -198,7 +200,7 @@
 												  			<p>Attention, certaines informations sont nécessaires pour finaliser votre participation:</p>
 														  	<ul class="listError">
 														  	</ul>
-												  			<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href="">ici</a></p>
+												  			<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href="#">ici</a></p>
 												  		</div>
 												      </div>
 												    </div>
