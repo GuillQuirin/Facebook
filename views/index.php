@@ -119,7 +119,7 @@
 											  	<p>Attention, certaines informations sont nécessaires pour finaliser votre participation:</p>
 											  	<ul class="listError">
 											  	</ul>
-											  	<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href="">ici</a></p>
+											  	<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href=""><button>ici</button></a></p>
 											  </div>
 										  </div>
 									    </div>
@@ -199,7 +199,7 @@
 												  			<p>Attention, certaines informations sont nécessaires pour finaliser votre participation:</p>
 														  	<ul class="listError">
 														  	</ul>
-												  			<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href="#">ici</a></p>
+												  			<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href="#"><button>ici</button></a></p>
 												  		</div>
 												      </div>
 												    </div>
@@ -241,7 +241,7 @@
 						  	<p>Attention, certaines informations sont nécessaires pour finaliser votre participation:</p>
 						  	<ul class="listError">
 						 	</ul>
-							<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href="">ici</a></p>
+							<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href=""><button>ici</button></a></p>
 						</div>
 					</div>
 				</div>

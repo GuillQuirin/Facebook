@@ -53,7 +53,8 @@ $(document).ready(function(){
 
 
 	var listOfScope = [];
-	var maxRerequestScope = 3;
+	var listOfScopeGrantedNow = [];
+	var maxRerequestScope = 1;
 	var numberRerequestScope = 0;
 
 	//Check des autorisations utilisateur
@@ -75,31 +76,31 @@ $(document).ready(function(){
           return false;
 	}
 
+	//Initialisation de la connexion à FB en JS pour affichage des pop-up de droits
+	(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 
+ 	window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '1804945786451180',
+	      cookie     : true,  // enable cookies to allow the server to access 
+	                          // the session
+	      xfbml      : true,  // parse social plugins on this page
+	      version    : 'v2.5' // use graph api version 2.5
+	    });
+	}
 
 	$('.errorSend a').click(function(){
-		(function(d, s, id) {
-	      var js, fjs = d.getElementsByTagName(s)[0];
-	      if (d.getElementById(id)) return;
-	      js = d.createElement(s); js.id = id;
-	      js.src = "//connect.facebook.net/fr_FR/sdk.js";
-	      fjs.parentNode.insertBefore(js, fjs);
-	    }(document, 'script', 'facebook-jssdk'));
-
-     	window.fbAsyncInit = function() {
-		    FB.init({
-		      appId      : '1804945786451180',
-		      cookie     : true,  // enable cookies to allow the server to access 
-		                          // the session
-		      xfbml      : true,  // parse social plugins on this page
-		      version    : 'v2.5' // use graph api version 2.5
-		    });
-
-		    console.log(listOfScope);
-		  	FB.getLoginStatus(function(response) {
-		  	  statusChangeCallback(response);
-		  	});
-	  	};
+		numberRerequestScope = 0;
+		console.log(listOfScope);
+		FB.getLoginStatus(function(response) {
+		  statusChangeCallback(response);
+		});
 		return false;
 	});
 
@@ -112,16 +113,12 @@ $(document).ready(function(){
     }
 
   	function statusChangeCallback(response) {
-      console.log(response);
-
       if(response.status === 'connected') // Logged into your app and Facebook.
         verifyScope(testAPI, response);
   	}
 
 
     function verifyScope(callback, values){
-
-      var listOfScopeGrantedNow = [];
       var error = false;
 
       FB.api('/me/permissions', function(response) {
@@ -135,7 +132,7 @@ $(document).ready(function(){
         listOfScope.forEach(function(permissionAsking){
           if( $.inArray(permissionAsking, listOfScopeGrantedNow) == -1 )
           {
-            console.log("Il manque des permissions : "+permissionAsking);
+            //console.log("Il manque des permissions : "+permissionAsking);
             error = true;
           }
         })
@@ -151,7 +148,7 @@ $(document).ready(function(){
 	    	}
         }
         else{
-          console.log(arguments);
+          //console.log(arguments);
           callback(values);
         }
 
@@ -160,10 +157,36 @@ $(document).ready(function(){
     }
 
     function testAPI(response) {
-      	console.log("Access token : "+response.authResponse.accessToken);
-      	console.log("User id : "+response.authResponse.userID);
+      	//console.log("Access token : "+response.authResponse.accessToken);
+      	//console.log("User id : "+response.authResponse.userID);
     	FB.api('/me', function(response) {
-	        console.log(response);
+    		/*var infos = "";
+	        $.each(listOfScope,function(){
+	        	//envoi des informations à récuperer après avoir obtenu de nouveaux droits
+	        	if($.inArray(this,listOfScopeGrantedNow)){
+	        		switch(this){
+	        			case "public_profile":
+	        				infos = "name,first_name,last_name,age_range";
+	        			break;
+	        			case "email":
+	        				infos = "email";
+	        			break;
+	        			case "user_location":
+	        				infos = "location";
+	        			break;
+	        		}
+	        	}
+	        });*/
+	        
+	        $.ajax({
+	          method: "POST",
+	          /*data: {
+	          	infos : infos
+	          },*/
+	          url: $('[name="webpath"]').val()+"/index/reupdateUser"
+	        }).done(function(msg){console.log(msg);});
+
+	        console.log(listOfScopeGrantedNow);
 	        console.log('Successful login for: ' + response.name);
 	    });
     }

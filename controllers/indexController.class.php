@@ -113,6 +113,11 @@ class indexController extends template{
 			return false;
 	}
 
+	public function reupdateUserAction(){
+		$this->bringDatasUser(1);
+	}
+
+
 	private function searchAlbumCompetition(){
 		$albums = $this->dataApi(TRUE,'/me','/albums',"");
 		

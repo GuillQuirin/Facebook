@@ -42,4 +42,8 @@ class userManager extends basesql{
 		return $this->getUserByIdFb($data->getIdFacebook());
 	}
 
+	public function updateUser(user $data){
+		$this->update($data);
+	}
+
 }

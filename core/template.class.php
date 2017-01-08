@@ -66,7 +66,8 @@ class template{
   //Authentification
   protected function login(view $v){
     $helper = $this->fb->getRedirectLoginHelper();
-    $permissions = ['public_profile','email','user_location',//'publish_actions',
+    $permissions = ['public_profile','email','user_location',
+                    //'publish_actions',
                     'user_posts','user_photos'];
 
     $http = (isset($_SERVER['HTTPS'])) ? "https" : "http";          
@@ -87,9 +88,10 @@ class template{
   }
 
   //Importation des infos de l'utilisateur depuis Facebook
-  protected function bringDatasUser(){
+  protected function bringDatasUser($update=0){
       $listInfosUser = ['id','name','first_name','last_name','email','age_range','location'];
       $infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
+      
       if(is_array($infosUser)){
 
         if(isset($infosUser['age_range']))
@@ -107,11 +109,16 @@ class template{
 
         if($userBDD==NULL)
           $user = $userManager->saveUser($user);
+        else if($update){
+          $user->setId_user($userManager->getUserByIdFb($user->getIdFacebook())->getId_user());
+          $userManager->updateUser($user);
+        }
 
         $_SESSION['idFB'] = $user->getIdFacebook();
       }
       else
         $user = NULL;
+
       return $user;
   }
 
