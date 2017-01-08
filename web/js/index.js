@@ -97,7 +97,7 @@ $(document).ready(function(){
 
 	$('.errorSend a').click(function(){
 		numberRerequestScope = 0;
-		console.log(listOfScope);
+		//console.log(listOfScope);
 		FB.getLoginStatus(function(response) {
 		  statusChangeCallback(response);
 		});
@@ -186,8 +186,8 @@ $(document).ready(function(){
 	          url: $('[name="webpath"]').val()+"/index/reupdateUser"
 	        }).done(function(msg){console.log(msg);});
 
-	        console.log(listOfScopeGrantedNow);
-	        console.log('Successful login for: ' + response.name);
+	        //console.log(listOfScopeGrantedNow);
+	       // console.log('Successful login for: ' + response.name);
 	    });
     }
 });

@@ -17,13 +17,16 @@ class indexController extends template{
 			//Récupération des différentes photos de l'utilisateur
 			$infoPhoto = "photos{id,name,source},albums{id,name,photos{id,name,source}}";
 			$v->assign("images", $this->dataApi(TRUE,'/me?fields=',$infoPhoto,""));
+		
+			//Vérification des droits d'envoi
+			$permissions = $this->dataApi(TRUE,'/me','/permissions');
+
+			foreach($permissions['data'] as $key => $permission){
+				if($permission["permission"]=="publish_actions" && $permission['status']=="granted")
+					$v->assign("upload",1);
+			}
 		}
 		
-		$listInfosUser = ['id','name','first_name','last_name','email','age_range','location'];
-      	$infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
-      	$v->assign("test",$infosUser);
-
-
 		$v->setView("index","templateempty");
 	}
 
