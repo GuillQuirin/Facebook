@@ -95,7 +95,6 @@ $(document).ready(function(){
 		      version    : 'v2.5' // use graph api version 2.5
 		    });
 
-		    controlDatas('.errorSend');
 		    console.log(listOfScope);
 		  	FB.getLoginStatus(function(response) {
 		  	  statusChangeCallback(response);
@@ -113,23 +112,10 @@ $(document).ready(function(){
     }
 
   	function statusChangeCallback(response) {
-      console.log('statusChangeCallback');
       console.log(response);
 
-      if (response.status === 'connected') {
-        // Logged into your app and Facebook.
+      if(response.status === 'connected') // Logged into your app and Facebook.
         verifyScope(testAPI, response);
-
-      } else if (response.status === 'not_authorized') {
-        // The person is logged into Facebook, but not your app.
-        document.getElementById('status').innerHTML = 'Please log ' +
-          'into this app.';
-      } else {
-        // The person is not logged into Facebook, so we're not sure if
-        // they are logged into this app or not.
-        document.getElementById('status').innerHTML = 'Please log ' +
-          'into Facebook.';
-      }
   	}
 
 
@@ -158,7 +144,7 @@ $(document).ready(function(){
         	//AskScope again
           	if(numberRerequestScope < maxRerequestScope){
 	       		FB.login(function(response){
-	            	//verifyScope(testAPI, response);
+	            	verifyScope(testAPI, response);
 	        	}, {scope: listOfScope.join(), auth_type: 'rerequest'} );
 
 	        	numberRerequestScope++;
@@ -174,17 +160,11 @@ $(document).ready(function(){
     }
 
     function testAPI(response) {
-      console.log(response);
-      console.log('Welcome!  Fetching your information.... ');
-      console.log("Access token : "+response.authResponse.accessToken);
-      console.log("User id : "+response.authResponse.userID);
-    
-      FB.api('/me', function(response) {
-        console.log(response);
-        console.log('Successful login for: ' + response.name);
-        document.getElementById('status').innerHTML =
-          'Thanks for logging in, ' + response.name + '!';
-      });
-      
+      	console.log("Access token : "+response.authResponse.accessToken);
+      	console.log("User id : "+response.authResponse.userID);
+    	FB.api('/me', function(response) {
+	        console.log(response);
+	        console.log('Successful login for: ' + response.name);
+	    });
     }
 });
