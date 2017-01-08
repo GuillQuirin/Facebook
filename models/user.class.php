@@ -5,7 +5,7 @@ class user extends motherClass{
 	protected $last_name=null;
 	protected $first_name=null;
 	protected $email=null;
-	protected $birthday=null;
+	protected $age_range=null;
 	protected $validation_cgu=null;
 	protected $location=null;
 	protected $idFacebook=null;
@@ -19,7 +19,7 @@ class user extends motherClass{
 	public function setLast_name($v){$this->last_name=$v;}
 	public function setFirst_name($v){$this->first_name=$v;}
 	public function setEmail($v){$this->email=$v;}
-	public function setBirthday($v){$this->birthday=date('Y-m-d',strtotime($v));}
+	public function setAge_range($v){$this->age_range=$v;}
 	public function setValidation_cgu($v){$this->validation_cgu=$v;}
 	public function setLocation($v){$this->location=$v;}
 	public function setIdFacebook($v){$this->idFacebook=$v;}
@@ -35,7 +35,7 @@ class user extends motherClass{
 	public function getLast_name(){return $this->last_name;}
 	public function getFirst_name(){return $this->first_name;}
 	public function getEmail(){return $this->email;}
-	public function getBirthday(){return $this->birthday;}
+	public function getAge_range(){return $this->age_range;}
 	public function getValidation_cgu(){return $this->validation_cgu;}
 	public function getLocation(){return $this->location;}
 	public function getIdFacebook(){return $this->idFacebook;}

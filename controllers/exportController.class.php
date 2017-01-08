@@ -90,7 +90,7 @@ class exportController extends template{
             $compet->addChild('nom', $user->getLast_name());
             $compet->addChild('prenom', $user->getFirst_name());
             $compet->addChild('email', $user->getEmail());
-            $compet->addChild('date_anniversaire', $user->getBirthday());
+            $compet->addChild('age', $user->getAge_range());
             $compet->addChild('cgu', $user->getValidation_cgu());
             $compet->addChild('statut', $user->getStatus());
         }

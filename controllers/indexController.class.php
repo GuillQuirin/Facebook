@@ -19,7 +19,7 @@ class indexController extends template{
 			$v->assign("images", $this->dataApi(TRUE,'/me?fields=',$infoPhoto,""));
 		}
 		
-		$listInfosUser = ['id','name','first_name','last_name','email','birthday','location'];
+		$listInfosUser = ['id','name','first_name','last_name','email','age_range','location'];
       	$infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
       	$v->assign("test",$infosUser);
 
@@ -101,8 +101,8 @@ class indexController extends template{
 			if(trim($user->getEmail())=="")
 				$listPb["email"]="Adresse e-mail (information essentielle pour vous contacter)";
 
-			if($user->getBirthday()==="")
-				$listPb["user_birthday"]="Date de naissance (vous devez être majeur (ou avoir l'accord de vos tuteurs) pour participer)";
+			if($user->getAge_range()=="0")
+				$listPb["public_profile"]="Age (vous devez être majeur (ou avoir l'accord de vos tuteurs) pour participer)";
 
 			if(trim($user->getLocation())=="")
 				$listPb["user_location"]="Localisation (le concours est disponible pour les participants vivants à proximité de l'Ile-de-France)";

@@ -66,7 +66,7 @@ class template{
   //Authentification
   protected function login(view $v){
     $helper = $this->fb->getRedirectLoginHelper();
-    $permissions = ['public_profile','email','user_birthday','user_location','publish_actions',
+    $permissions = ['public_profile','email','user_location',//'publish_actions',
                     'user_posts','user_photos'];
 
     $http = (isset($_SERVER['HTTPS'])) ? "https" : "http";          
@@ -88,11 +88,16 @@ class template{
 
   //Importation des infos de l'utilisateur depuis Facebook
   protected function bringDatasUser(){
-      $listInfosUser = ['id','name','first_name','last_name','email','birthday','location'];
+      $listInfosUser = ['id','name','first_name','last_name','email','age_range','location'];
       $infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
       if(is_array($infosUser)){
+
+        if(isset($infosUser['age_range']))
+          $infosUser['age_range'] = $infosUser['age_range']['min'];
+        
         if(isset($infosUser['location']))
           $infosUser['location'] = $infosUser['location']['name'];
+        
         $infosUser['idFacebook'] = $infosUser['id'];
         unset($infosUser['id']);
 
