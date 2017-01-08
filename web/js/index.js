@@ -27,10 +27,6 @@ $(document).ready(function(){
 	    		$('.pbFileSize').slideDown();
 	    		result = false;
 	    	}
-			
-			//Affichage des erreurs
-	    	if(!controlDatas('.errorUpload'))
-	    		result = false;
 	    }
 	    else{
 	        alert("Veuillez mettre à jour votre navigateur Internet afin de pouvoir accèder au concours.");
@@ -42,8 +38,8 @@ $(document).ready(function(){
 
 	//Affichage des erreurs
 	$('.onlineForm').submit(function(){
-		controlDatas('.errorSend');
-		return false;
+		//controlDatas('.errorSend');
+		//return false;
 	});
 
 	//Ouverture d'une pop-up image
@@ -52,29 +48,14 @@ $(document).ready(function(){
 	});
 
 
+
+
+
 	var listOfScope = [];
 	var listOfScopeGrantedNow = [];
 	var maxRerequestScope = 1;
 	var numberRerequestScope = 0;
-
-	//Check des autorisations utilisateur
-	function controlDatas(classError){
-		$(classError+' .listError').html('');
-
-		$.ajax({
-          method: "GET",
-          url: $('[name="webpath"]').val()+"/index/checkUser"
-        })
-          .done(function( msg ){
-            var resultUser = JSON.parse(msg);
-        	$(classError).show();
-            $.each(resultUser,function(index, value){
-            	$(classError+' .listError').append('<li>'+value+'</li>');
-            	listOfScope.push(index);
-            });
-          });
-          return false;
-	}
+	var reloadPage = false;
 
 	//Initialisation de la connexion à FB en JS pour affichage des pop-up de droits
 	(function(d, s, id) {
@@ -95,16 +76,63 @@ $(document).ready(function(){
 	    });
 	}
 
+	//Check des autorisations pour les infos manquantes en BDD
 	$('.errorSend a').click(function(){
 		numberRerequestScope = 0;
-		//console.log(listOfScope);
 		FB.getLoginStatus(function(response) {
 		  statusChangeCallback(response);
 		});
 		return false;
 	});
 
-	/*********************** */
+
+	//Check de l'autorisation de récupération des albums
+	$('.getPhotos').click(function(){
+		numberRerequestScope = 0;
+
+		if($.inArray("user_photos",listOfScope) == -1)
+			listOfScope.push('user_photos');
+
+		FB.getLoginStatus(function(response) {
+		  statusChangeCallback(response);
+		});
+	});
+
+
+	//Check de l'autorisation de publication des photos
+	$('.postPhotos').click(function(){
+		numberRerequestScope = 0;
+
+		if($.inArray("publish_actions",listOfScope) == -1)
+			listOfScope.push('publish_actions');
+
+		FB.getLoginStatus(function(response) {
+		  statusChangeCallback(response);
+		});
+	});
+
+
+
+	//Check des autorisations utilisateur
+	function controlDatas(classError){
+		$(classError+' .listError').html('');
+
+		$.ajax({
+          method: "GET",
+          url: $('[name="webpath"]').val()+"/index/checkUser"
+        })
+          .done(function( msg ){
+            var resultUser = JSON.parse(msg);
+        	$(classError).show();
+            $.each(resultUser,function(index, value){
+            	$(classError+' .listError').append('<li>'+value+'</li>');
+            	listOfScope.push(index);
+            });
+          });
+          return false;
+	}
+
+	/************************/
 
    	function checkLoginState() {
       FB.getLoginStatus(function(response) {
@@ -124,9 +152,14 @@ $(document).ready(function(){
       FB.api('/me/permissions', function(response) {
 
         response.data.forEach(function(permission){
-          if(permission.status == "granted"){
-            listOfScopeGrantedNow.push(permission.permission);
-          }
+          	if(permission.status == "granted"){
+            	listOfScopeGrantedNow.push(permission.permission);
+
+	            //Si ancienne permission PHOTO ou POST bloquée alors on reload la page
+    	        if((permission.permission=="user_photos" || permission.permission=="publish_actions") 
+            			&& $.inArray(permission.permission, listOfScope)!==-1)
+        	    	reload = true;
+          	}
         });
 
         listOfScope.forEach(function(permissionAsking){
@@ -160,33 +193,15 @@ $(document).ready(function(){
       	//console.log("Access token : "+response.authResponse.accessToken);
       	//console.log("User id : "+response.authResponse.userID);
     	FB.api('/me', function(response) {
-    		/*var infos = "";
-	        $.each(listOfScope,function(){
-	        	//envoi des informations à récuperer après avoir obtenu de nouveaux droits
-	        	if($.inArray(this,listOfScopeGrantedNow)){
-	        		switch(this){
-	        			case "public_profile":
-	        				infos = "name,first_name,last_name,age_range";
-	        			break;
-	        			case "email":
-	        				infos = "email";
-	        			break;
-	        			case "user_location":
-	        				infos = "location";
-	        			break;
-	        		}
-	        	}
-	        });*/
 	        
 	        $.ajax({
 	          method: "POST",
-	          /*data: {
-	          	infos : infos
-	          },*/
 	          url: $('[name="webpath"]').val()+"/index/reupdateUser"
-	        }).done(function(msg){console.log(msg);});
+	        });
 
-	        //console.log(listOfScopeGrantedNow);
+	        if(reload)
+	        	location.reload();
+
 	       // console.log('Successful login for: ' + response.name);
 	    });
     }

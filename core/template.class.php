@@ -67,9 +67,7 @@ class template{
   protected function login(view $v){
     $helper = $this->fb->getRedirectLoginHelper();
     $permissions = ['public_profile','email','user_location',
-                    'user_photos',
-                    'publish_actions',
-                    ];
+                    'user_photos', 'publish_actions'];
 
     $http = (isset($_SERVER['HTTPS'])) ? "https" : "http";          
     $loginUrl = $helper->getLoginUrl($http.'://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions);
