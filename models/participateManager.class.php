@@ -21,7 +21,7 @@ class participateManager extends basesql{
 
 	public function getParticipantsByCompetition(competition $data,$order=0){
 		//Présent dans basesql car appelable de n'importe quel Manager
-		$sql = "SELECT p.id, p.id_competition, p.id_user, p.id_photo, 
+		$sql = "SELECT p.id_participate, p.id_competition, p.id_user, p.id_photo, 
 						p.url_photo, p.is_reported, p.is_locked, 
 						p.date_created, p.date_updated, p.deleted, 
 						u.last_name, u.first_name
@@ -57,7 +57,7 @@ class participateManager extends basesql{
 	}
 
 	public function getParticipationByIds(participate $data){
-		$sql = "SELECT id, id_competition, id_user, id_photo, 
+		$sql = "SELECT id_participate, id_competition, id_user, id_photo, 
 						url_photo, is_reported, is_locked, 
 						date_created, date_updated, deleted  
 					FROM participate 
@@ -78,9 +78,9 @@ class participateManager extends basesql{
 	}
 
 	public function reportParticipation(participate $data){
-		$sql = "UPDATE participate SET is_reported='1' WHERE id = :id";
+		$sql = "UPDATE participate SET is_reported='1' WHERE id_participate = :id_participate";
 		$table = [
-			'id' => $data->getId()
+			'id_participate' => $data->getId_participate()
 		];
 
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -96,13 +96,12 @@ class participateManager extends basesql{
 		
 		//Nouvelle table avec une seule case
     	$table = [
-    		'id_participate' => $participation->getId()
+    		'id_participate' => $participation->getId_participate()
     	];	
-    	
+
     	$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute($table);
 		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
-
 		return (!empty($r)) ? $r[0]['total_likes'] : null;
 	}
 
@@ -113,7 +112,7 @@ class participateManager extends basesql{
 		
 		//Nouvelle table avec une seule case
     	$table = [
-    		'id_participate' => $participation->getId(),
+    		'id_participate' => $participation->getId_participate(),
     		'id_user' => $user->getId_user()
     	];	
     	$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -131,7 +130,7 @@ class participateManager extends basesql{
 	* Get all participation with reported photo
 	*/
 	public function getPhotoReported(){
-		$sql = "SELECT p.id, p.id_competition, p.id_photo, 
+		$sql = "SELECT p.id_participate, p.id_competition, p.id_photo, 
 						p.url_photo, p.is_reported, p.is_locked, 
 						p.date_created, p.date_updated, p.deleted,
 						u.last_name, u.first_name 

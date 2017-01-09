@@ -1,7 +1,7 @@
 <?php 
 class participate extends motherClass{
 
-	protected $id=null;
+	protected $id_participate=null;
 	protected $id_competition=null;
 	protected $id_user=null;
 	protected $id_photo=null;
@@ -14,7 +14,7 @@ class participate extends motherClass{
 	protected $date_updated = null;
 	protected $deleted = null;	
 
-	public function setId($v){$this->id=$v;}
+	public function setId_participate($v){$this->id_participate=$v;}
 	public function setId_competition($v){$this->id_competition=$v;}
 	public function setId_user($v){$this->id_user=$v;}
 	public function setId_photo($v){$this->id_photo=$v;}
@@ -27,7 +27,7 @@ class participate extends motherClass{
 	public function setDate_updated($v){$this->date_updated=$v;}
 	public function setDeleted($v){$this->deleted=$v;}	
 
-	public function getId(){return $this->id;}
+	public function getId_participate(){return $this->id_participate;}
 	public function getId_competition(){return $this->id_competition;}
 	public function getId_user(){return $this->id_user;}
 	public function getId_photo(){return $this->id_photo;}

@@ -7,6 +7,9 @@ class galleryController extends template{
 		$v->assign("css", "gallery");
 		$v->assign("js", "gallery");
 
+		//Ajout d'un lien "connexion à Facebook" sur cette page
+		$this->login($v);
+		
 		$competitionManager = new competitionManager();
 		$competition = $competitionManager->searchCompetitions();
 		$v->assign("competition",$competition);
@@ -53,14 +56,23 @@ class galleryController extends template{
 	}
 
 	public function addLikeAction(){
+		$participateManager = new participateManager();
+		$participate = new participate($_POST);
+
 		$userManager = new userManager();
 		$user = $userManager->getUserByIdFb($_SESSION['idFB']);
-
 		$_POST['id_user'] = $user->getId_user();
 		$vote = new vote($_POST);
 
+		//Enregistrement du vote en BDD
 		$voteManager = new voteManager();
-		$vote = $voteManager->register($vote);
+		$voteBDD = $voteManager->isVote($vote);
+
+		if($voteBDD==NULL)
+			$voteManager->register($vote);
+
+		//Actualisation du compteur de like pour la participation
+		echo json_encode($participateManager->getTotalLikesByParticipation($participate));
 	}
 
 	public function reportAction(){

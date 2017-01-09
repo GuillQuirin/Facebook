@@ -9,10 +9,6 @@ class indexController extends template{
 		//Ajout d'un lien "connexion à Facebook" sur cette page
 		$this->login($v);
 
-		/*Etablir une fonction (dans la classe mère ou fille)
-		pour gérer à chaque load d'une page la validité de la session utilisateur
-		(s'il n'a pas supprimé des permission entre-temps)*/
-
 		if(isset($_SESSION['ACCESS_TOKEN'])){
 			//Récupération des différentes photos de l'utilisateur
 			$infoPhoto = "photos{id,name,source},albums{id,name,photos{id,name,source}}";

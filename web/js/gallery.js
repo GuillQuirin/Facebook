@@ -10,7 +10,122 @@ $(document).ready(function(){
 	$('select[name="quantity"]').change(function(){
 		getContent();
 	});
+
+
+
+
+	var listOfScope = [];
+	var listOfScopeGrantedNow = [];
+	var maxRerequestScope = 1;
+	var numberRerequestScope = 0;
+	var reloadPage = false;
+
+	//Initialisation de la connexion à FB en JS pour affichage des pop-up de droits
+	(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/fr_FR/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+ 	window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '1804945786451180',
+	      cookie     : true,  // enable cookies to allow the server to access 
+	                          // the session
+	      xfbml      : true,  // parse social plugins on this page
+	      version    : 'v2.5' // use graph api version 2.5
+	    });
+	}
+
+	//Check des autorisations pour les infos manquantes en BDD
+	$('.errorSend a').click(function(){
+		listOfScope.push("public_profile");
+		numberRerequestScope = 0;
+		FB.getLoginStatus(function(response) {
+		  statusChangeCallback(response);
+		});
+		return false;
+	});
+
+
+	/************************/
+
+   	function checkLoginState() {
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
+    }
+
+  	function statusChangeCallback(response) {
+      if(response.status === 'connected') // Logged into your app and Facebook.
+        verifyScope(testAPI, response);
+  	}
+
+
+    function verifyScope(callback, values){
+      var error = false;
+
+      FB.api('/me/permissions', function(response) {
+
+        response.data.forEach(function(permission){
+          	if(permission.status == "granted"){
+            	listOfScopeGrantedNow.push(permission.permission);
+
+	            //Si ancienne permission PHOTO ou POST bloquée alors on reload la page
+    	        if((permission.permission=="public_profile") 
+            			&& $.inArray(permission.permission, listOfScope)!==-1)
+        	    	reload = true;
+          	}
+        });
+
+        listOfScope.forEach(function(permissionAsking){
+          if( $.inArray(permissionAsking, listOfScopeGrantedNow) == -1 )
+          {
+            //console.log("Il manque des permissions : "+permissionAsking);
+            error = true;
+          }
+        })
+     
+        if(error){
+        	//AskScope again
+          	if(numberRerequestScope < maxRerequestScope){
+	       		FB.login(function(response){
+	            	verifyScope(testAPI, response);
+	        	}, {scope: listOfScope.join(), auth_type: 'rerequest'} );
+
+	        	numberRerequestScope++;
+	    	}
+        }
+        else{
+          //console.log(arguments);
+          callback(values);
+        }
+
+        return !error;
+      });
+    }
+
+    function testAPI(response) {
+      	//console.log("Access token : "+response.authResponse.accessToken);
+      	//console.log("User id : "+response.authResponse.userID);
+    	FB.api('/me', function(response) {
+	        
+	        $.ajax({
+	          method: "POST",
+	          url: $('[name="webpath"]').val()+"/index/reupdateUser"
+	        });
+
+	        if(reload)
+	        	location.reload();
+
+	       // console.log('Successful login for: ' + response.name);
+	    });
+    }
 });
+
+
 
 function getContent(){
 	//Méthode de tri
@@ -37,14 +152,14 @@ function getContent(){
 
 			var code = "";
 			$.each(listParticipation,function(){
-				code += "<div id='"+this.id+"'>";
+				code += "<div id='"+this.id_participate+"'>";
 					code += "<figure ";
 							code += "data-toggle='modal'";
 							code += "data-target='#popUpGallery'";
 							code += "data-url='"+this.url_photo+"'";
 							code += "data-name='"+this.first_name+" "+this.last_name+"'";
-							code += "data-like='"+this.id+"'";
-							code += "data-report='"+this.id+"'";
+							code += "data-like='"+this.id_participate+"'";
+							code += "data-report='"+this.id_participate+"'";
 						code += "style='background-image:url("+this.url_photo+")'>";
 
 							code += "<figcaption>";
@@ -52,7 +167,7 @@ function getContent(){
 								code += '<p class="report col-xs-2 col-sm-2 col-md-2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/VisualEditor_-_Icon_-_Alert.svg/2000px-VisualEditor_-_Icon_-_Alert.svg.png" alt="Signaler"></p>';
 								code += '<p class="user text-center col-xs-6 col-sm-6 col-md-6">'+this.first_name+' '+this.last_name+'</p>';			
 								if(this.is_liked==0)
-									code += '<p class="col-xs-2 col-sm-2 col-md-2 like" id="'+this.id+'"></p>';
+									code += '<p class="col-xs-2 col-sm-2 col-md-2 like"></p>';
 							code += '</figcaption>';
 
 					code += "</figure>";
@@ -107,14 +222,16 @@ function creationPagination(nbElements,idActive){
 
 function like(){
 	$('.like').click(function(){
+		var img = $(this).parent().parent().parent();
 		$.ajax({method: "POST",
 			data:{
-				id_participate : $(this).attr('id')
+				id_participate : img.prop('id')
 			},
 			url: "gallery/addLike", 
 			success: function(result){
-				//console.log(result);
-				getContent();
+				var vote = JSON.parse(result);
+				img.find('.nb_likes').html(vote);
+				img.find('.like').fadeOut();
 			}
 		});
 		return false;
