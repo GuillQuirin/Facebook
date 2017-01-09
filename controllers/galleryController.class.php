@@ -29,13 +29,26 @@ class galleryController extends template{
 		$competitionManager = new competitionManager();
 		$competition = $competitionManager->searchCompetitions();
 		
+		$listParticipation = [];
+
 		if($competition!==NULL){
 			$participateManager = new participateManager();
 			$listParticipation = $participateManager->getParticipantsByCompetition($this->competition,$tri);
 
+			$error = true;
+
 			if(isset($_SESSION['idFB'])){
 				$userManager = new userManager();
 				$user = $userManager->getUserByIdFb($_SESSION['idFB']);
+
+				//Vérification des droits d'enregistrement du vote
+				$permissions = $this->dataApi(TRUE,'/me','/permissions');
+				if($permissions){
+					foreach($permissions['data'] as $key => $permission){
+						if($permission["permission"]=="public_profile" && $permission['status']=="granted")
+							$error = false;
+					}
+				}
 			}
 
 			foreach ($listParticipation as $key => $participation) {
@@ -47,11 +60,11 @@ class galleryController extends template{
 
 				if(isset($_SESSION['idFB']))
 					$listParticipation[$key]['is_liked'] = $participateManager->getLikesByUser($user, $participate);
+
+				if($error)
+					$listParticipation[$key]['noRights'] = 1;
 			}
 		}
-		else
-			$listParticipation = [];
-		
 		echo json_encode($this->utf8ize($listParticipation));
 	}
 

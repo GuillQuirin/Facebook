@@ -31,7 +31,12 @@
 		<?php endif; ?>
 	</div>
 </div>
-<?php if(isset($competition)) :?>
+<?php if(isset($competition)) : ?>
+	<?php if(!isset($_SESSION['idFB'])) : ?>
+		<div class="row">
+			<p class="col-md-8 col-md-offset-2 text-center">Connectez-vous à l'application et admirez les chefs d'oeuvres que portent les autres participants</p>
+		</div>
+	<?php endif; ?>
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1">
 			<div class="col-xs-6 col-sm-6 col-md-6">
@@ -48,7 +53,11 @@
 				<?php endif; ?>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
-				<a href="<?php echo WEBPATH; ?>/gallery">
+				<?php if(isset($_SESSION['idFB'])) : ?>
+					<a href="<?php echo WEBPATH; ?>/gallery">
+				<?php else : ?>
+					<a href="<?php echo $urlLoginLogout; ?>">
+				<?php endif; ?>
 					<button class="btn">					
 						Accèder aux photos des participants
 					</button>

@@ -17,9 +17,11 @@ class indexController extends template{
 			//Vérification des droits d'envoi
 			$permissions = $this->dataApi(TRUE,'/me','/permissions');
 
-			foreach($permissions['data'] as $key => $permission){
-				if($permission["permission"]=="publish_actions" && $permission['status']=="granted")
-					$v->assign("upload",1);
+			if($permissions){
+				foreach($permissions['data'] as $key => $permission){
+					if($permission["permission"]=="publish_actions" && $permission['status']=="granted")
+						$v->assign("upload",1);
+				}
 			}
 		}
 		

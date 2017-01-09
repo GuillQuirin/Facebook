@@ -85,7 +85,6 @@ $(document).ready(function(){
 		return false;
 	});
 
-
 	//Check de l'autorisation de récupération des albums
 	$('.getPhotos').click(function(){
 		numberRerequestScope = 0;
@@ -156,7 +155,7 @@ $(document).ready(function(){
             	listOfScopeGrantedNow.push(permission.permission);
 
 	            //Si ancienne permission PHOTO ou POST bloquée alors on reload la page
-    	        if((permission.permission=="user_photos" || permission.permission=="publish_actions") 
+    	        if((permission.permission=="user_photos" || permission.permission=="publish_actions" || permission.permission=="public_profile") 
             			&& $.inArray(permission.permission, listOfScope)!==-1)
         	    	reload = true;
           	}
