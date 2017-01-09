@@ -31,16 +31,17 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 				    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4>Photo proposée par <span class="modal-name"></span></h4> 
+			        <h4>Photo proposée le <span class="modal-date"></span></h4> 
 			      </div>
 			      <div class="modal-body">
 			      </div>
-			      <div class="modal-footer">
-			      	<div class="col-xs-6 col-sm-6 col-md-6 modal-report report text-left">
+			      <div class="modal-footer text-center">
+			      	<!-- <div class="col-xs-6 col-sm-6 col-md-6 modal-report report text-left">
 			      		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/VisualEditor_-_Icon_-_Alert.svg/2000px-VisualEditor_-_Icon_-_Alert.svg.png" alt="Signaler"> Signaler la photographie
 			        </div>
 			        <div class="col-md-6 modal-like text-right">
-					</div>
+					</div> -->
+					Par <span class="modal-name"></span>
 			      </div>
 			    </div>
 			    </form>

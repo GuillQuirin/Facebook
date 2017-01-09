@@ -144,6 +144,7 @@ function getContent(){
 
 			//Tri par like décroissant
 			var listParticipation = JSON.parse(result);
+
 			if($('select[name="sort"]').val()=="3"){
 				listParticipation.sort(function(a, b) {
 				    return parseInt(b.nb_likes) - parseInt(a.nb_likes);
@@ -158,8 +159,7 @@ function getContent(){
 							code += "data-target='#popUpGallery'";
 							code += "data-url='"+this.url_photo+"'";
 							code += "data-name='"+this.first_name+" "+this.last_name+"'";
-							code += "data-like='"+this.id_participate+"'";
-							code += "data-report='"+this.id_participate+"'";
+							code += "data-date='"+this.date_created+"'";
 						code += "style='background-image:url("+this.url_photo+")'>";
 
 							code += "<figcaption>";
@@ -240,12 +240,14 @@ function like(){
 
 function openModal(){
 	$('#popUpGallery').on('show.bs.modal', function (event) {
-		var button = $(event.relatedTarget); // Button that triggered the modal
+		var div = $(event.relatedTarget); // Button that triggered the modal
 
 		var modal = $(this);
-		modal.find('.modal-name').text(button.data('name'));
-		modal.find('.modal-body').css('background-image','url('+button.data("url")+')');
-		modal.find('.modal-report img').attr('idimage',button.data('report'));
+		var date = new Date(div.data('date'));
+		modal.find('.modal-date').text(("0" + date.getDate()).slice(-2)+"-"+("0" + (date.getMonth() + 1)).slice(-2)+"-"+date.getFullYear());
+		modal.find('.modal-name').text(div.data('name'));
+		modal.find('.modal-body').css('background-image','url('+div.data("url")+')');
+		modal.find('.modal-report img').attr('idimage',div.data('report'));
 	});
 }
 
