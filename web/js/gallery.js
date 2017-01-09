@@ -253,14 +253,13 @@ function report(){
 	//Signalement
 	$('.report img').on("click",function(){
 		if(confirm("Souhaitez-vous vraiment signaler cette image ?")){
-			id = ($(this).attr('idimage')==undefined) ? $(this).parent().parent().parent().prop('id') : $(this).attr('idimage'); 
+			id = ($(this).attr('idimage')==undefined) ? $(this).parent().parent().parent().parent().prop('id') : $(this).attr('idimage'); 
 			$.ajax({method: "POST",
 				data:{
-					id : id
+					id_participate : id
 				},
 				url: "gallery/report", 
 				success: function(result){
-					//console.log(result);
 					$("#"+id+" .report").addClass("reportSent").html("Signalement envoyé.");
 				}
 			});

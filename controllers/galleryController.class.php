@@ -76,7 +76,7 @@ class galleryController extends template{
 	}
 
 	public function reportAction(){
-		$whiteList['id'] = FILTER_VALIDATE_INT; 
+		$whiteList['id_participate'] = FILTER_VALIDATE_INT; 
 		$post = filter_var_array($_POST,$whiteList);
 
 		$participation = new participate($post);
