@@ -42,7 +42,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<?php 
 				if(isset($user)) :?>
-					<a href="<?php echo WEBPATH; ?>/logout">
+					<a href="<?php echo WEBPATH; ?>/logout" target="_top">
 						<button class="btn">
 						Bienvenue <?php echo $user->getFirst_name(); ?><br>
 						Se déconnecter
