@@ -18,33 +18,7 @@ class template{
         'default_graph_version' => 'v2.5',
         'fileUpload' => true
       ]);
-      
-      $canvasHelper = $this->fb->getPageTabHelper();
-      $signedRequest = $pageHelper->getSignedRequest();
-      
-      try {
-        $accessToken = $pageHelper->getAccessToken();
-      } catch(Facebook\Exceptions\FacebookResponseException $e) {
-        // When Graph returns an error
-        echo 'Graph returned an error: ' . $e->getMessage();
-      } catch(Facebook\Exceptions\FacebookSDKException $e) {
-        // When validation fails or other local issues
-        echo 'Facebook SDK returned an error: ' . $e->getMessage();
-      }
-
-      if(isset($accessToken)) {
-        // Logged in!
-        $_SESSION["ACCESS_TOKEN"] = (string) $accessToken;
-        
-        //Requete d'un access token de 60 jours
-        $oAuth2Client = $this->fb->getOAuth2Client();
-        $_SESSION["LONG_ACCESS_TOKEN"] = $oAuth2Client->getLongLivedAccessToken($accessToken);
-      }
-      else
-        unset($_SESSION["ACCESS_TOKEN"]);
     }
-
-    var_dump($pageHelper->getUserId());
 
     //Recherche d'un concours ouvert au public
     $competitionManager = new competitionManager();
@@ -91,33 +65,14 @@ class template{
 
   //Authentification
   protected function login(view $v){
-    // $helper = $this->fb->getRedirectLoginHelper();
-    // $permissions = ['public_profile','email','user_location',
-    //                 'user_photos', 'publish_actions'];
+    $helper = $this->fb->getRedirectLoginHelper();
+    $permissions = ['public_profile','email','user_location',
+                    'user_photos', 'publish_actions'];
 
-    // $http = (isset($_SERVER['HTTPS'])) ? "https" : "http";          
-    // $loginUrl = $helper->getLoginUrl($http.'://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions);
+    $http = (isset($_SERVER['HTTPS'])) ? "https" : "http";          
+    $loginUrl = $helper->getLoginUrl($http.'://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions);
 
-    // $v->assign("urlLoginLogout",$loginUrl);
-    $pageHelper = $this->fb->getPageTabHelper();
-    $signedRequest = $pageHelper->getSignedRequest();
-
-    if ($signedRequest) {
-      $payload = $signedRequest->getPayload();
-      //var_dump($payload);
-    }
-    $helper = $this->fb->getPageTabHelper();
-    try {
-      $accessToken = $pageHelper->getAccessToken();
-    } catch(Facebook\Exceptions\FacebookResponseException $e) {
-      // When Graph returns an error
-      echo 'Graph returned an error: ' . $e->getMessage();
-    } catch(Facebook\Exceptions\FacebookSDKException $e) {
-      // When validation fails or other local issues
-      echo 'Facebook SDK returned an error: ' . $e->getMessage();
-    }
-    if (isset($accessToken))
-      header('Location : '.WEBPATH);
+    $v->assign("urlLoginLogout",$loginUrl);
   }
 
   //Importation des administrateurs de l'application

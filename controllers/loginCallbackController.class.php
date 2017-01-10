@@ -2,7 +2,8 @@
 class loginCallbackController extends template{
 	public function loginCallbackAction($requiredPosts){
 	
-		$helper = $this->fb->getRedirectLoginHelper();
+		//$helper = $this->fb->getRedirectLoginHelper();
+		$helper = $this->fb->getCanvasHelper();
 
 		try{
 			$accessToken = $helper->getAccessToken();
