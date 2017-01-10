@@ -49,7 +49,7 @@
 						</button>
 					</a>
 				<?php else :?>
-					<a href="<?php echo $urlLoginLogout; ?>"><button class="btn">Participer</button></a>
+					<a href="<?php echo $urlLoginLogout; ?>" target="_top"><button class="btn">Participer</button></a>
 				<?php endif; ?>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
