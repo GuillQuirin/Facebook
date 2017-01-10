@@ -18,14 +18,6 @@ class template{
         'default_graph_version' => 'v2.5',
         'fileUpload' => true
       ]);
-
-      $pageHelper = $this->fb->getPageTabHelper();
-      $signedRequest = $pageHelper->getSignedRequest();
-
-      if ($signedRequest) {
-        $payload = $signedRequest->getPayload();
-        var_dump($payload);
-      }
     }
 
     //Recherche d'un concours ouvert au public
@@ -81,6 +73,13 @@ class template{
     // $loginUrl = $helper->getLoginUrl($http.'://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions);
 
     // $v->assign("urlLoginLogout",$loginUrl);
+    $pageHelper = $this->fb->getPageTabHelper();
+    $signedRequest = $pageHelper->getSignedRequest();
+
+    if ($signedRequest) {
+      $payload = $signedRequest->getPayload();
+      //var_dump($payload);
+    }
     $helper = $this->fb->getPageTabHelper();
     try {
       $accessToken = $pageHelper->getAccessToken();
