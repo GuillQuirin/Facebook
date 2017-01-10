@@ -4,7 +4,6 @@ class loginCallbackController extends template{
 	
 		//$helper = $this->fb->getRedirectLoginHelper();
 		$helper = $this->fb->getCanvasHelper();
-
 		try{
 			$accessToken = $helper->getAccessToken();
 		} 
@@ -18,7 +17,6 @@ class loginCallbackController extends template{
 			echo 'Facebook SDK returned an error: ' . $e->getMessage();
 			exit;
 		}
-
 		if(isset($accessToken)) {
 			// Logged in!
 			$_SESSION["ACCESS_TOKEN"] = (string) $accessToken;
@@ -30,6 +28,6 @@ class loginCallbackController extends template{
 		else
 			unset($_SESSION["ACCESS_TOKEN"]);
 		
-		header('Location: '.WEBPATH);
+		header('Location: https://egl.fbdev.fr/Facebook/');
 	}
 }
