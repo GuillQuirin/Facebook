@@ -2,8 +2,8 @@
 class loginCallbackController extends template{
 	public function loginCallbackAction($requiredPosts){
 	
-		//$helper = $this->fb->getRedirectLoginHelper();
-		$helper = $this->fb->getCanvasHelper();
+		$helper = $this->fb->getRedirectLoginHelper();
+		//$helper = $this->fb->getCanvasHelper();
 		try{
 			$accessToken = $helper->getAccessToken();
 		} 
@@ -27,7 +27,12 @@ class loginCallbackController extends template{
 		}
 		else
 			unset($_SESSION["ACCESS_TOKEN"]);
-		
-		header('Location: https://egl.fbdev.fr/Facebook/');
+
+		echo "<script>";
+
+		echo "window.location='https://egl.fbdev.fr/Facebook/'";
+
+		echo "</script>";
+		//header('Location: https://egl.fbdev.fr/Facebook/');
 	}
 }
