@@ -31,6 +31,7 @@
 		<?php endif; ?>
 	</div>
 </div>
+<input type="hidden" id="isConnected" value="<?php echo (isset($_SESSION['ACCESS_TOKEN'])) ? 1 : 0; ?>">
 <?php if(isset($competition)) : ?>
 	<?php if(!isset($_SESSION['idFB'])) : ?>
 		<div class="row">
@@ -39,30 +40,25 @@
 	<?php endif; ?>
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1">
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<?php 
-				if(isset($user)) :?>
-					<a href="<?php echo WEBPATH; ?>/logout" target="_top">
-						<button class="btn">
+			<?php if(isset($user)) :  //Utilisateur connecté ?>
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<button class="btn" id="logout">
 						Bienvenue <?php echo $user->getFirst_name(); ?><br>
 						Se déconnecter
+					</button>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<a href="<?php echo WEBPATH.'/gallery'; ?>">
+						<button class="btn">					
+							Accèder aux photos des participants
 						</button>
 					</a>
-				<?php else :?>
-					<a href="<?php echo $urlLoginLogout; ?>" target="_top"><button class="btn">Participer</button></a>
-				<?php endif; ?>
-			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				<?php if(isset($_SESSION['idFB'])) : ?>
-					<a href="<?php echo WEBPATH; ?>/gallery">
-				<?php else : ?>
-					<a href="<?php echo $urlLoginLogout; ?>">
-				<?php endif; ?>
-					<button class="btn">					
-						Accèder aux photos des participants
-					</button>
-				</a>
-			</div>
+				</div>
+			<?php else : //Visiteur non connecté ?>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+					<button class="btn" id="login">Connectez-vous</button>
+				</div>
+			<?php endif; ?>		
 		</div>
 	</div>
 	<div class="row">

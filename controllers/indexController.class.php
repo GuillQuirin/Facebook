@@ -5,9 +5,6 @@ class indexController extends template{
 		$this->assignConnectedProperties($v);
 		$v->assign("css", "index");
 		$v->assign("js", "index");				
-		
-		//Ajout d'un lien "connexion à Facebook" sur cette page
-		$this->login($v);
 
 		if(isset($_SESSION['ACCESS_TOKEN'])){
 			//Récupération des différentes photos de l'utilisateur
@@ -115,7 +112,11 @@ class indexController extends template{
 	}
 
 	public function reupdateUserAction(){
-		$this->bringDatasUser(1);
+		if(isset($_POST['infosApi'])){
+			$idFacebook = $_POST['infosApi']['userID'];
+			$_SESSION['ACCESS_TOKEN'] = $_POST['infosApi']['accessToken'];
+			$this->bringDatasUser(1);
+		}
 	}
 
 

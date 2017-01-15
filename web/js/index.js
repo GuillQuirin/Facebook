@@ -55,7 +55,8 @@ $(document).ready(function(){
 	var listOfScopeGrantedNow = [];
 	var maxRerequestScope = 1;
 	var numberRerequestScope = 0;
-	var reloadPage = false;
+	var reload = false;
+	var error = false;
 
 	//Initialisation de la connexion à FB en JS pour affichage des pop-up de droits
 	(function(d, s, id) {
@@ -66,22 +67,37 @@ $(document).ready(function(){
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
- 	window.fbAsyncInit = function() {
-	    FB.init({
-	      appId      : '1804945786451180',
-	      cookie     : true,  // enable cookies to allow the server to access 
-	                          // the session
-	      xfbml      : true,  // parse social plugins on this page
-	      version    : 'v2.5' // use graph api version 2.5
-	    });
-	}
+	window.fbAsyncInit = function() {
+		FB.init({
+		    appId      : '1804945786451180',
+		    cookie     : true,  // enable cookies to allow the server to access 
+		                        // the session
+		    xfbml      : true,  // parse social plugins on this page
+		    version    : 'v2.5' // use graph api version 2.5
+		});
+	};
+
+    $("#login").click(function(){
+		FB.login(function(response){
+			statusChangeCallback(response);
+			reload=true;
+		});
+  	});
+
+  	$("#logout").click(function(){
+  		$.ajax({
+          method: "POST",
+          url: $('[name="webpath"]').val()+"/index/logout",
+          success: function(result){
+       		location.reload();
+          }
+        });	 
+  	});
 
 	//Check des autorisations pour les infos manquantes en BDD
 	$('.errorSend a').click(function(){
 		numberRerequestScope = 0;
-		FB.getLoginStatus(function(response) {
-		  statusChangeCallback(response);
-		});
+		checkLoginState();
 		return false;
 	});
 
@@ -92,11 +108,8 @@ $(document).ready(function(){
 		if($.inArray("user_photos",listOfScope) == -1)
 			listOfScope.push('user_photos');
 
-		FB.getLoginStatus(function(response) {
-		  statusChangeCallback(response);
-		});
+		checkLoginState();
 	});
-
 
 	//Check de l'autorisation de publication des photos
 	$('.postPhotos').click(function(){
@@ -105,12 +118,8 @@ $(document).ready(function(){
 		if($.inArray("publish_actions",listOfScope) == -1)
 			listOfScope.push('publish_actions');
 
-		FB.getLoginStatus(function(response) {
-		  statusChangeCallback(response);
-		});
+		checkLoginState();
 	});
-
-
 
 	//Check des autorisations utilisateur
 	function controlDatas(classError){
@@ -133,7 +142,7 @@ $(document).ready(function(){
 
 	/************************/
 
-   	function checkLoginState() {
+	function checkLoginState() {
       FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
       });
@@ -146,7 +155,7 @@ $(document).ready(function(){
 
 
     function verifyScope(callback, values){
-      var error = false;
+      error = false;
 
       FB.api('/me/permissions', function(response) {
 
@@ -162,9 +171,9 @@ $(document).ready(function(){
         });
 
         listOfScope.forEach(function(permissionAsking){
-          if( $.inArray(permissionAsking, listOfScopeGrantedNow) == -1 )
+          if($.inArray(permissionAsking, listOfScopeGrantedNow) == -1)
           {
-            //console.log("Il manque des permissions : "+permissionAsking);
+            console.log("Il manque des permissions : "+permissionAsking);
             error = true;
           }
         })
@@ -179,29 +188,28 @@ $(document).ready(function(){
 	        	numberRerequestScope++;
 	    	}
         }
-        else{
-          //console.log(arguments);
+        else
           callback(values);
-        }
 
         return !error;
       });
     }
 
     function testAPI(response) {
-      	//console.log("Access token : "+response.authResponse.accessToken);
-      	//console.log("User id : "+response.authResponse.userID);
-    	FB.api('/me', function(response) {
-	        
+      	var infosApi = response.authResponse;
+    	FB.api('/me', function(response){
 	        $.ajax({
 	          method: "POST",
-	          url: $('[name="webpath"]').val()+"/index/reupdateUser"
-	        });
-
-	        if(reload)
-	        	location.reload();
-
-	       // console.log('Successful login for: ' + response.name);
+	          data:{
+	          	infosApi: infosApi
+	          },
+	          url: $('[name="webpath"]').val()+"/index/reupdateUser",
+	          success: function(result){
+	          	//console.log(result);
+	          	if(($('#isConnected').val()==0 || reload) && !error)
+			    	location.reload();
+	          }
+	        });	        	
 	    });
     }
 });

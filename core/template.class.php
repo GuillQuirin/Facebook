@@ -63,17 +63,6 @@ class template{
     $v->assign("isAdmin",$this->isAdmin);
   }
 
-  //Authentification
-  protected function login(view $v){
-    $helper = $this->fb->getRedirectLoginHelper();
-    $permissions = ['public_profile','email','user_location',
-                    'user_photos', 'publish_actions'];
-
-    $http = (isset($_SERVER['HTTPS'])) ? "https" : "http";          
-    $loginUrl = $helper->getLoginUrl($http.'://egl.fbdev.fr'.WEBPATH.'/loginCallback', $permissions);
-
-    $v->assign("urlLoginLogout",$loginUrl);
-  }
 
   //Importation des administrateurs de l'application
   protected function bringListAdmins(){
@@ -90,7 +79,7 @@ class template{
   protected function bringDatasUser($update=0){
       $listInfosUser = ['id','name','first_name','last_name','email','age_range','location'];
       $infosUser = $this->dataApi(TRUE,'/me?fields=',$listInfosUser,"");
-      
+
       if(is_array($infosUser)){
 
         if(isset($infosUser['age_range']))
@@ -121,9 +110,8 @@ class template{
       return $user;
   }
 
-  protected function logout(){
+  public function logoutAction(){
     unset($_SESSION["ACCESS_TOKEN"]);
-    header("Location: ".WEBPATH);
   }
 
   //Fonction Facebook : soit récupération d'un élèment, soit envoi d'un fichier dans un album photo
