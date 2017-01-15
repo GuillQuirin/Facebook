@@ -33,6 +33,10 @@
 </head>
 
 <body>
+	<?php 
+		if(isset($noCompetition) && $noCompetition==1)
+			echo "<script>window.location = '".WEBPATH."/noCompetition';</script>"; 
+	?>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];

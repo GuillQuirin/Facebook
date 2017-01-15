@@ -15,6 +15,10 @@
 		<link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
 	</head>
 	<body>
+		<?php 
+			if(isset($noCompetition) && $noCompetition==1)
+				echo "<script>window.location = '".WEBPATH."/noCompetition';</script>"; 
+		?>
 		<input type="hidden" name="webpath" value="<?php echo WEBPATH; ?>">
 		<?php include $this->view; ?>
 		<?php 

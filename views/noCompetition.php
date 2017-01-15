@@ -10,14 +10,15 @@
 	</div>
 	<div class="col-xs-12 text-right admin-connexion">
 		<?php if(isset($user)) : ?>
+
 			<?php if(isset($isAdmin) && $isAdmin==1) : //Administrateur connecté  ?>
-				<p><a href="<?php echo WEBPATH; ?>/index">Administration</a></p>
+				<p><a href="<?php echo WEBPATH; ?>/index">Accueil</a></p>
 			<?php endif; ?>
 			
-			<p><a href="<?php echo WEBPATH; ?>/logout">Se déconnecter</a></p>
+			<p><button id="logout" style="color:red;">Se déconnecter</button></p>
 		
 		<?php else : ?>
-			<p><a href="<?php echo $urlLoginLogout; ?>">Connexion administrateur</a></p>
+			<p><button id="login" style="color:red;">Connexion administrateur</button></p>
 		
 		<?php endif; ?>
 	</div>

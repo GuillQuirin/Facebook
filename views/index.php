@@ -32,35 +32,35 @@
 	</div>
 </div>
 <input type="hidden" id="isConnected" value="<?php echo (isset($_SESSION['ACCESS_TOKEN'])) ? 1 : 0; ?>">
-<?php if(isset($competition)) : ?>
-	<?php if(!isset($_SESSION['idFB'])) : ?>
-		<div class="row">
-			<p class="col-md-8 col-md-offset-2 text-center">Connectez-vous à l'application et admirez les chefs d'oeuvres que portent les autres participants</p>
-		</div>
-	<?php endif; ?>
+<?php if(!isset($_SESSION['idFB'])) : ?>
 	<div class="row">
-		<div class="col-xs-10 col-xs-offset-1">
-			<?php if(isset($user)) :  //Utilisateur connecté ?>
-				<div class="col-xs-6 col-sm-6 col-md-6">
-					<button class="btn" id="logout">
-						Bienvenue <?php echo $user->getFirst_name(); ?><br>
-						Se déconnecter
-					</button>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6">
-					<a href="<?php echo WEBPATH.'/gallery'; ?>">
-						<button class="btn">					
-							Accèder aux photos des participants
-						</button>
-					</a>
-				</div>
-			<?php else : //Visiteur non connecté ?>
-				<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
-					<button class="btn" id="login">Connectez-vous</button>
-				</div>
-			<?php endif; ?>		
-		</div>
+		<p class="col-md-8 col-md-offset-2 text-center">Connectez-vous à l'application et admirez les chefs d'oeuvres que portent les autres participants</p>
 	</div>
+<?php endif; ?>
+<div class="row">
+	<div class="col-xs-10 col-xs-offset-1">
+		<?php if(isset($user)) :  //Utilisateur connecté ?>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<button class="btn" id="logout">
+					Bienvenue <?php echo $user->getFirst_name(); ?><br>
+					Se déconnecter
+				</button>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6">
+				<a href="<?php echo WEBPATH.'/gallery'; ?>">
+					<button class="btn">					
+						Accèder aux photos des participants
+					</button>
+				</a>
+			</div>
+		<?php else : //Visiteur non connecté ?>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+				<button class="btn" id="login">Connectez-vous</button>
+			</div>
+		<?php endif; ?>		
+	</div>
+</div>
+<?php if(isset($competition)) : ?>
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1 text-center">
 			<?php 

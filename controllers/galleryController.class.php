@@ -6,9 +6,6 @@ class galleryController extends template{
 		$this->assignConnectedProperties($v);
 		$v->assign("css", "gallery");
 		$v->assign("js", "gallery");
-
-		//Ajout d'un lien "connexion à Facebook" sur cette page
-		$this->login($v);
 		
 		$competitionManager = new competitionManager();
 		$competition = $competitionManager->searchCompetitions();

@@ -35,12 +35,6 @@ class template{
       if($user!=NULL && in_array($user->getIdFacebook(),$this->bringListAdmins()))
         $this->isAdmin = 1;
     }
-    
-    //Renvoi sur la page noCompetition lorsqu'il n'y a pas de concours disponible (si l'utilisateur n'y était pas déjà)
-
-    if(get_class($this)!="noCompetitionController" && $this->competition===NULL && $this->isAdmin==NULL)
-      header('Location: '.WEBPATH.'/noCompetition');
-
   }
 
   // Cette methode enverra à la view reçue en parametre les propriétés nécessaires de la Template
@@ -58,6 +52,10 @@ class template{
       //Infos de l'utilisateur
       $v->assign("user", $this->bringDatasUser());  
     }
+
+    //Renvoi sur la page noCompetition lorsqu'il n'y a pas de concours disponible (si l'utilisateur n'y était pas déjà)
+    if(get_class($this)!="noCompetitionController" && $this->competition===NULL && $this->isAdmin==NULL)
+      $v->assign("noCompetition",1);
 
     //Info sur le statut de l'utilisateur
     $v->assign("isAdmin",$this->isAdmin);

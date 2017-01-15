@@ -73,7 +73,7 @@
 							</td>
 							<td><a href="<?php echo $photo->getUrl_photo(); ?>" target="_blank" name="url_photo">Lien de la photo</a></td>
 							<td> 
-								<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId()."' class='btn btn-success lock_photo'>Déverrouillé</button>" : "<button id='photo-".$photo->getId()."' class='btn btn-danger unlock_photo'>Verrouillé</button>" ?>
+								<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId_participate()."' class='btn btn-success lock_photo'>Déverrouillé</button>" : "<button id='photo-".$photo->getId_participate()."' class='btn btn-danger unlock_photo'>Verrouillé</button>" ?>
 							</td>
 						</tr>
 					<?php endforeach; ?>  
