@@ -199,30 +199,4 @@
 		</div>
 	</div>
 </div>
-<script>
-	$(document).ready(function() {
-		$.fn.datepicker.defaults.language = 'fr';
-
-		$('#datePicker').datepicker({
-			endDate: "+",
-			startDate: "-2m",
-			autoclose: true,
-			format: "dd/mm/yyyy"
-		});
-
-		$('#datePicker2').datepicker({
-			endDate: "+12m",
-			startDate: "+1d",
-			autoclose: true,
-			format: "dd/mm/yyyy"
-		})
-
-		$('#summernote').summernote({
-      height: 200,                 // set editor height
-      minHeight: null,             // set minimum height of editor
-      maxHeight: null,             // set maximum height of editor
-      focus: true 
-  }); 
-	});
-</script>
 

@@ -34,7 +34,7 @@
 <input type="hidden" id="isConnected" value="<?php echo (isset($_SESSION['ACCESS_TOKEN'])) ? 1 : 0; ?>">
 <?php if(!isset($_SESSION['idFB'])) : ?>
 	<div class="row">
-		<p class="col-md-8 col-md-offset-2 text-center">Connectez-vous à l'application et admirez les chefs d'oeuvres que portent les autres participants</p>
+		<p class="col-md-8 col-md-offset-2 text-center">Connectez-vous à l'application et admirez les chefs d'oeuvres que vous réservent les autres participants</p>
 	</div>
 <?php endif; ?>
 <div class="row">
