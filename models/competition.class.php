@@ -22,14 +22,8 @@ class competition extends motherClass{
 	public function setId_competition($v){$this->id_competition=$v;}
 	public function setName($v){$this->name=$v;}
 	public function setDescription($v){$this->description=$v;}
-	public function setStart_date($v){
-		$date = $this->multiexplode(array("/","-"),$v);
-		$this->start_date = $date[2]."-".$date[1]."-".$date[0];
-	}
-	public function setEnd_date($v){
-		$date = $this->multiexplode(array("/","-"),$v);
-		$this->end_date = $date[2]."-".$date[1]."-".$date[0];
-	}
+	public function setStart_date($v){$this->start_date=$v;}
+	public function setEnd_date($v){$this->end_date=$v;}
 	public function setPrize($v){$this->prize=$v;}
 	public function setId_winner($v){$this->id_winner=$v;}
 	public function setActive($v){

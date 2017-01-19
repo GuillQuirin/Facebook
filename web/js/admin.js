@@ -128,16 +128,16 @@ $(document).ready(function() {
             }
         })
           .done(function() {
-            console.log(button);
             if(locked==1)
-                button.removeClass("btn-success lock_photo").addClass("btn-danger unlock_photo").html("Verrouillé");
+                button.removeClass("btn-success lock_photo").addClass("btn-danger unlock_photo").html("Verrouillée");
             else
-                button.removeClass("btn-danger unlock_photo").addClass("btn-success lock_photo").html("Déverrouillé");
+                button.removeClass("btn-danger unlock_photo").addClass("btn-success lock_photo").html("Déverrouillée");
         });
     });
 
 
     /*SUMMERNOTE*/
+    /*
     $.fn.datepicker.defaults.language = 'fr';
 
     $('#datePicker').datepicker({
@@ -159,7 +159,7 @@ $(document).ready(function() {
       minHeight: null,             // set minimum height of editor
       maxHeight: null,             // set maximum height of editor
         focus: true 
-    });
+    });*/
 
 
 } );

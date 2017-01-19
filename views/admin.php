@@ -7,8 +7,6 @@
 				<th>Nom</th>
 				<th>Début</th>
 				<th>Fin</th>
-				<th>Lot à gagner</th>
-				<th>Photo du lot</th>
 				<th>Nombre de participants</th>
 				<th>Nom du gagnant</th>
 				<th>Statut</th>
@@ -18,14 +16,8 @@
 				<?php foreach ($listCompetitions as $key => $competition) { ?>
 					<tr>
 						<td name='name'> <?php echo $competition->getName(); ?></td>
-						<td name='start_date' > <?php echo $competition->getStart_date(); ?></td>
-						<td name='end_date' ><?php echo $competition->getEnd_date(); ?></td>
-						<td name='prize' > <?php echo $competition->getPrize(); ?></td>
-						<td name='url_prize'><?php echo (trim($competition->getUrl_prize())!="") ? 
-												"<a target='_blank' href='".$competition->getUrl_prize()."'>Lien du prix</a>" : 
-												""; 
-											?>
-						</td>
+						<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())); ?></td>
+						<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())); ?></td>
 						<td name='totalParticipants' > <?php echo $competition->getTotalParticipants(); ?></td>
 						<td name='id_winner' ><?php echo $competition->getId_winner(); ?></td>
 						<td name='active'>
@@ -39,8 +31,8 @@
 								data-id="<?php echo $competition->getId_competition(); ?>"
 								data-name="<?php echo $competition->getName(); ?>"
 								data-description="<?php echo $competition->getDescription(); ?>"
-								data-begin="<?php echo $competition->getStart_date(); ?>"
-								data-end="<?php echo $competition->getEnd_date(); ?>"
+								data-begin="<?php echo str_replace("/","-",$competition->getStart_date()); ?>"
+								data-end="<?php echo str_replace("/","-",$competition->getEnd_date()); ?>"
 								data-prize="<?php echo $competition->getPrize(); ?>"
 								data-url="<?php echo $competition->getUrl_prize(); ?>"
 								data-active="<?php echo $competition->getActive(); ?>">
@@ -73,7 +65,7 @@
 							</td>
 							<td><a href="<?php echo $photo->getUrl_photo(); ?>" target="_blank" name="url_photo">Lien de la photo</a></td>
 							<td> 
-								<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId_participate()."' class='btn btn-success lock_photo'>Déverrouillé</button>" : "<button id='photo-".$photo->getId_participate()."' class='btn btn-danger unlock_photo'>Verrouillé</button>" ?>
+								<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId_participate()."' class='btn btn-success lock_photo'>Déverrouillée</button>" : "<button id='photo-".$photo->getId_participate()."' class='btn btn-danger unlock_photo'>Verrouillée</button>" ?>
 							</td>
 						</tr>
 					<?php endforeach; ?>  
