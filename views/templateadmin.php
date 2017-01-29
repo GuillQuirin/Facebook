@@ -20,7 +20,7 @@
 	<?php echo '<script src="'.WEBPATH.'/web/lib/DataTables/datatables.min.js"></script>';?>
 	<?php echo '<script src="'.WEBPATH.'/web/js/bootstrap-datepicker.min.js"></script>';?>
 	<?php echo '<script src="'.WEBPATH.'/web/js/datepicker-fr.js"></script>';?>
-	<?php echo '<script src="'.WEBPATH.'/web/js/bootstrap.colorpickersliders.js"></script>';?>
+	<?php //echo '<script src="'.WEBPATH.'/web/js/bootstrap.colorpickersliders.js"></script>';?>
 	<link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
 	<?php echo '<script src="'.WEBPATH.'/web/js/jscolor.js"></script>';?>
 
@@ -63,7 +63,7 @@
 		</nav>
 	</header>
 
-	<div id="content">
+	<div id="content" class="container">
 		<input type="hidden" name="webpath" value="<?php echo WEBPATH; ?>">
 		<?php include $this->view; ?>
 	</div>

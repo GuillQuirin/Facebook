@@ -1,20 +1,16 @@
 $(document).ready(function() {
-    /*COMPETITIONS*/
+    /*******************************COMPETITIONS******************************/
 
     //Liste des competitions
     var listAdmin = $('#listCompetitions').DataTable( {
         "paging":   true,
         "ordering": true,
         "info":     true,
-        "responsive": true,
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
+        responsive: true,
+        "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Tous"]],
         "language": {
             "lengthMenu": "Affichage de _MENU_ résultats par page",
             "zeroRecords": "Aucun résultat trouvé",
-            //"info": "",
             "info": "Affichage de la page numéro _PAGE_ sur un total de _PAGES_ page(s)",
             "infoEmpty": "Pas de résultat trouvé",
             "infoFiltered": "(trier sur un enregistrement total de _MAX_ résultats)",
@@ -44,8 +40,22 @@ $(document).ready(function() {
             modal.find('input[name="active"]').prop('checked',false);
     });
 
+    //Recherche d'un utilisateur
+    $('input.winner').keyup(function(event){
+        $.ajax({
+          method: "POST",
+          url: $('[name="webpath"]').val()+"/admin/searchUser",
+          data: {user: $(this).val()}
+        })
+          .done(function( msg ){
+            console.log(msg);
+          });
+        return false;
+    });
+
+
     //Modifications du concours en ajax
-    $('#ModalEdit #submitEdit').click(function(){
+    $('#data_competition').submit(function(){
         $('#submitEdit').html("Enregistrement.....");
         
         $.ajax({
@@ -65,8 +75,8 @@ $(document).ready(function() {
     });
 
     //Création du nouveau concours en ajax
-    $('#CreateCompetition #submitCreate').click(function(){
-        $('#submitEdit').html("Enregistrement.....");
+    $('#create_data_competition').submit(function(){
+        $('#submitCreate').html("Enregistrement.....");
         
         $.ajax({
           method: "POST",
@@ -74,13 +84,13 @@ $(document).ready(function() {
           data: $('#create_data_competition').serialize() //récuperation des input présents dans le <form>
         })
           .done(function( msg ){
-            /*if(msg!="ok"){
+            if(msg!="ok"){
                 $('.errorCreate').html(msg);
                 $('#submitEdit').html("Créer le concours !");
             }
             else
-                location.reload();*/
-            console.log(msg);
+                location.reload();
+            //console.log(msg);
           });
         return false;
     });
@@ -91,18 +101,15 @@ $(document).ready(function() {
     });
 
 
-    /*PARTICIPANTS*/
+    /*****************************PARTICIPANTS******************************/
 
     //Liste des photo signalees
     var listReportedPhoto = $('#listReportedPhoto').DataTable( {
         "paging":   true,
         "ordering": true,
         "info":     true,
-        "responsive": true,
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
+        responsive: true,
+        "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Tous"]],
         "language": {
             "lengthMenu": "Affichage de _MENU_ résultats par page",
             "zeroRecords": "Aucun résultat trouvé",
@@ -127,7 +134,7 @@ $(document).ready(function() {
             "is_locked" : locked
             }
         })
-          .done(function() {
+        .done(function() {
             if(locked==1)
                 button.removeClass("btn-success lock_photo").addClass("btn-danger unlock_photo").html("Verrouillée");
             else

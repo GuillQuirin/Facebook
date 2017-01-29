@@ -47,7 +47,6 @@ class adminController extends template{
 
 		if($error==""){
 			$competition = new competition($_POST);
-			var_dump($competition);
 			$competitionManager = new competitionManager();
 			$competitionManager->insertCompetition($competition);
 			$error = "ok";	
@@ -70,6 +69,14 @@ class adminController extends template{
 		}
 
 		echo $error;
+	}
+
+	public function searchUserAction(){
+		if(trim($_POST['user'])!=""){
+			$userManager = new userManager();
+			$listUser = $userManager->getUsersByName($_POST['user']);
+			echo json_encode($listUser);
+		}
 	}
 
 	//ADMINISTRATION DES PHOTOS
