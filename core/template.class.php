@@ -145,7 +145,22 @@ class template{
       return $d;
   }
 
-  /*protected function envoiMail($destinataire, $objet, $contenu){
+  public function scriptAction(){
+    $competitionManager = new competitionManager();
+    $participateManager = new participateManager();
+    $competitions = $competitionManager->getFinishedCompetition();
+    if($competitions){
+      $listUsers = $participateManager->getListOfParticipantsByCompetitions($competitions);
+
+      if($listUsers){
+        foreach ($listUsers as $key => $value) {
+          # code...
+        }
+      }
+    }
+  }
+
+  protected function envoiMail($destinataire, $objet, $contenu){
     // CONFIGURATION DU MAIL
 
     $adrPHPM = "web/lib/PHPMailer/"; 
@@ -156,20 +171,20 @@ class template{
       $mail->Host = 'smtp.gmail.com';
       $mail->Port = 465;
       $mail->SMTPAuth = true;
-      $mail->Username = "breakemall.contact@gmail.com";
-      $mail->Password = "EveryAm75";
+      $mail->Username = "pardon.maman.facebook@gmail.com";
+      $mail->Password = "Facebook";
       $mail->IsHTML(true); 
 
       $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
-      //$mail->SMTPDebug  = 4; 
+      $mail->SMTPDebug  = 4; 
 
       //Expediteur (le site)
 
-      $mail->From='breakemall.contact@gmail.com'; 
-      $mail->FromName='Administrateur Breakem All'; 
-      $mail->AddReplyTo('breakemall.contact@gmail.com');      
+      $mail->From='pardon.maman.facebook@gmail.com'; 
+      $mail->FromName='Administrateur Pardon maman'; 
+      $mail->AddReplyTo('pardon.maman.facebook@gmail.com');      
       $mail->AddAddress($destinataire);
-      $mail->setFrom('breakemall.contact@gmail.com', 'Admin BEA');         
+      $mail->setFrom('pardon.maman.facebook@gmail.com', 'Administrateur Pardon maman');         
       
       $mail->CharSet='UTF-8';
       $mail->Subject=$objet; 
@@ -190,6 +205,4 @@ class template{
 
     }
   }
-  */
-
 }

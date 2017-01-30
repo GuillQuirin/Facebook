@@ -6,8 +6,8 @@
 		<?php if(isset($competition)) :?>
 			<h1>CONCOURS <br> <?php echo $competition->getName(); ?></h1>
 			<p>Organisé
-				du <?php echo $competition->getStart_date(); ?>
-				au <?php echo $competition->getEnd_date(); ?>.
+				du <?php echo date('d/m/Y', strtotime($competition->getStart_date())); ?>
+				au <?php echo date('d/m/Y', strtotime($competition->getEnd_date())); ?>.
 			</p>
 		<?php else : ?>
 			<h1>Pas de concours ouvert actuellement</h1>
