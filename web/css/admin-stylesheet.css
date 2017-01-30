@@ -54,6 +54,11 @@ h2 {font-family: 'Architects Daughter', cursive; font-weight: bold; margin-botto
 
 .navbar-default .navbar-link:hover {color: #ffffff;}
 
+.errorCreate, .errorEdit{
+  color: red;
+  font-weight: bold;
+}
+
 .apercu{
   outline : 1px solid black;
   font-size : 12px;

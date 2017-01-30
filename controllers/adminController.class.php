@@ -40,16 +40,27 @@ class adminController extends template{
 
 	public function addCompetitionAction(){
 		$error = "";
-
+		$check = false;
 		if(!$_POST){
 			$error .= "Erreur !";	
 		}
 
 		if($error==""){
+			$error = "ok";
 			$competition = new competition($_POST);
 			$competitionManager = new competitionManager();
-			$competitionManager->insertCompetition($competition);
-			$error = "ok";	
+			
+			if(isset($_POST['active'])){
+				$competition->setActive($_POST['active']);
+				$check = $competitionManager->timeCompetition($competition);
+			}
+			else 
+				$competition->setActive("0");
+			
+			if(!$check)
+				$competitionManager->insertCompetition($competition);
+			else
+				$error="Un concours est déjà organisé dans ce laps de temps.";
 		}
 
 		echo $error;
@@ -62,10 +73,26 @@ class adminController extends template{
 		}
 
 		if($error==""){
+			$error = "ok";	
+			$check=false;
 			$competition = new competition($_POST);
 			$competitionManager = new competitionManager();
-			$upd = $competitionManager->updateCompetition($competition);
-			$error = "ok";	
+			$table = [
+				"start_date" => $_POST['start_date'],
+				"end_date" => $_POST['end_date']
+			];
+
+			if(isset($_POST['active'])){
+				$competition->setActive($_POST['active']);
+				$check = $competitionManager->timeCompetition($table);
+			}
+			else 
+				$competition->setActive("0");
+
+			if(!$check)
+				$upd = $competitionManager->updateCompetition($competition);
+			else
+				$error="Un concours est déjà organisé dans ce laps de temps.";		
 		}
 
 		echo $error;

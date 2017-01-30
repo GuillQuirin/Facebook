@@ -142,10 +142,10 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<p class="errorEdit"></p>
-					<input type="submit" id="submitEdit" class="btn btn-primary" value="Modifier le concours">
+					<div class="modal-footer">
+						<p class="errorEdit"></p>
+						<input type="submit" id="submitEdit" class="btn btn-success" value="Sauvegarder">
+					</div>
 				</div>
 			</form>
 		</div>

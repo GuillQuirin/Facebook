@@ -57,6 +57,12 @@ $(document).ready(function() {
     //Modifications du concours en ajax
     $('#data_competition').submit(function(){
         $('#submitEdit').html("Enregistrement.....");
+        $('.errorEdit').html("");
+
+        if(!checkDate('#data_competition')){
+            $('.errorEdit').html("Les dates du concours ne correspondent pas !");
+            return false;
+        }
         
         $.ajax({
           method: "POST",
@@ -77,7 +83,13 @@ $(document).ready(function() {
     //Création du nouveau concours en ajax
     $('#create_data_competition').submit(function(){
         $('#submitCreate').html("Enregistrement.....");
-        
+        $('.errorCreate').html("");
+
+        if(!checkDate('#create_data_competition')){
+            $('.errorCreate').html("Les dates du concours ne correspondent pas !");
+            return false;
+        }
+
         $.ajax({
           method: "POST",
           url: $('[name="webpath"]').val()+"/admin/addCompetition",
@@ -167,6 +179,20 @@ $(document).ready(function() {
       maxHeight: null,             // set maximum height of editor
         focus: true 
     });*/
-
-
 } );
+
+
+function checkDate(form){
+    var debut = new Date($(form+' input[name="start_date"]').val());
+    var fin = new Date($(form+' input[name="end_date"]').val());
+    //console.log(debut);
+    //console.log(fin);
+    if(debut>fin)
+        return false;
+    else
+        return true;
+}
+
+
+
+
