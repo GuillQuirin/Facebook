@@ -55,8 +55,10 @@
 				</nav>
 			</div>
 	<?php else: ?>
-		<h3>Soyez le premier participant au concours !</h3>
-		<h5>Pour vous inscrire, accèder <a href="<?php echo WEBPATH.'/index'; ?>">ici</a></h5>
+		<div id="none">
+			<h3>Soyez le premier participant au concours !</h3>
+			<h5>Pour vous inscrire, accèder <a href="<?php echo WEBPATH.'/index'; ?>">ici</a></h5>
+		</div>
 	<?php endif; ?>
 <?php else : ?>
 	<h3>Aucun concours n'est actuellement disponible</h3>

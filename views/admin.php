@@ -47,7 +47,7 @@
 	<button type="button" 
 			data-toggle="modal" 
 			data-target="#CreateCompetition" 
-			class="col-md-6 col-md-offset-3 btn btn-success">
+			class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 btn btn-success">
 			Créer un concours !
 	</button>
 </div>

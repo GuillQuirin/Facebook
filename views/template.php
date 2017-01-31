@@ -49,7 +49,7 @@
 		<div class="container">
 			<ul class="col-md-4 col-md-offset-4 nav nav-tabs text-center">
 				<li class="col-md-4"><a href="<?php echo WEBPATH; ?>">Participer</a></li>
-				<li class="col-md-4"><a href="<?php echo WEBPATH; ?>/gallery">Galerie</a></li>
+				<li class="col-md-4 active"><a href="<?php echo WEBPATH; ?>/gallery">Galerie</a></li>
 				<li class="col-md-4">
 					<div class="fb-share-button" data-href="http://egl.fbdev.fr/EGL/" data-layout="button" data-size="large" data-mobile-iframe="false">
 						<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fegl.fbdev.fr%2FEGL%2F&amp;src=sdkpreparse">Partager</a>
