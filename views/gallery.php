@@ -35,11 +35,6 @@
 			      <div class="modal-body">
 			      </div>
 			      <div class="modal-footer text-center">
-			      	<!-- <div class="col-xs-6 col-sm-6 col-md-6 modal-report report text-left">
-			      		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/VisualEditor_-_Icon_-_Alert.svg/2000px-VisualEditor_-_Icon_-_Alert.svg.png" alt="Signaler"> Signaler la photographie
-			        </div>
-			        <div class="col-md-6 modal-like text-right">
-					</div> -->
 					Par <span class="modal-name"></span>
 			      </div>
 			    </div>

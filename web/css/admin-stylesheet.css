@@ -33,7 +33,12 @@ h2 {font-family: 'Architects Daughter', cursive; font-weight: bold; margin-botto
   height: 50px;
   text-align : center;
 }
-
+table th, table td{
+  text-align: center;
+}
+table{
+  background-color: #e8e8e8;
+}
 .bord { 
 	text-align : center;
 	background-color : white;

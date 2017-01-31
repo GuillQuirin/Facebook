@@ -19,7 +19,7 @@ class template{
         'fileUpload' => true
       ]);
     }
-
+    
     //Recherche d'un concours ouvert au public
     $competitionManager = new competitionManager();
     $this->competition = $competitionManager->searchCompetitions();
@@ -110,6 +110,7 @@ class template{
 
   public function logoutAction(){
     unset($_SESSION["ACCESS_TOKEN"]);
+    header('Location: '.WEBPATH);
   }
 
   //Fonction Facebook : soit récupération d'un élèment, soit envoi d'un fichier dans un album photo
@@ -120,13 +121,15 @@ class template{
       $response = ($callElement===TRUE) ? $this->fb->get($string,$dataPost) : $this->fb->post($string,$dataPost);
     }
     catch(Facebook\Exceptions\FacebookResponseException $e) {
-      //echo 'Graph returned an error: ' . $e->getMessage();
-      //exit;
+      //var_dump('ok2');exit;
+      //Deconnexion automatique lorsque le token ne serait plus valable
+      header('Location: '.WEBPATH.'/index/logout');
     }
     catch(Facebook\Exceptions\FacebookSDKException $e) {
-      //echo 'Facebook SDK returned an error: ' . $e->getMessage();
-      //exit;
+      var_dump('ok1');exit;
+      $this->logoutAction();
     }
+
     if(isset($response))
       return ($returnDecodedBody===TRUE) ? $response->getDecodedBody() : $response->getGraphUser();
     else

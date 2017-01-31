@@ -16,8 +16,7 @@ $(document).ready(function() {
             "infoFiltered": "(trier sur un enregistrement total de _MAX_ résultats)",
             "search": "Rechercher"
         }
-    } );
-
+    });
 
     //Affichage des infos dans une modal
     $('#ModalEdit').on('show.bs.modal', function (event) {
@@ -132,6 +131,8 @@ $(document).ready(function() {
         }
     });
 
+
+
     //Verrouiller une participation
     $('.lock_photo, .unlock_photo').click(function(){
         var button = $(this);
@@ -153,40 +154,12 @@ $(document).ready(function() {
                 button.removeClass("btn-danger unlock_photo").addClass("btn-success lock_photo").html("Déverrouillée");
         });
     });
-
-
-    /*SUMMERNOTE*/
-    /*
-    $.fn.datepicker.defaults.language = 'fr';
-
-    $('#datePicker').datepicker({
-        endDate: "+",
-        startDate: "-2m",
-        autoclose: true,
-        format: "dd/mm/yyyy"
-    });
-
-    $('#datePicker2').datepicker({
-        endDate: "+12m",
-        startDate: "+1d",
-        autoclose: true,
-        format: "dd/mm/yyyy"
-    })
-
-    $('#summernote').summernote({
-      height: 200,                 // set editor height
-      minHeight: null,             // set minimum height of editor
-      maxHeight: null,             // set maximum height of editor
-        focus: true 
-    });*/
 } );
 
 
 function checkDate(form){
     var debut = new Date($(form+' input[name="start_date"]').val());
     var fin = new Date($(form+' input[name="end_date"]').val());
-    //console.log(debut);
-    //console.log(fin);
     if(debut>fin)
         return false;
     else
