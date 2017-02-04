@@ -24,7 +24,7 @@ class participateManager extends basesql{
 		$sql = "SELECT p.id_participate, p.id_competition, p.id_user, p.id_photo, 
 						p.url_photo, p.is_reported, p.is_locked, 
 						p.date_created, p.date_updated, p.deleted, 
-						u.last_name, u.first_name
+						u.last_name, u.first_name, u.email, u.age_range, u.location
 					FROM participate p
 					LEFT OUTER JOIN user u ON p.id_user = u.id_user
 					WHERE id_competition=:id_competition AND p.is_locked = 0";

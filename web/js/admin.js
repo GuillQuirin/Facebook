@@ -39,19 +39,6 @@ $(document).ready(function() {
             modal.find('input[name="active"]').prop('checked',false);
     });
 
-    //Recherche d'un utilisateur
-    $('input.winner').keyup(function(event){
-        $.ajax({
-          method: "POST",
-          url: $('[name="webpath"]').val()+"/admin/searchUser",
-          data: {user: $(this).val()}
-        })
-          .done(function( msg ){
-            console.log(msg);
-          });
-        return false;
-    });
-
 
     //Modifications du concours en ajax
     $('#data_competition').submit(function(){
@@ -113,6 +100,23 @@ $(document).ready(function() {
 
 
     /*****************************PARTICIPANTS******************************/
+
+    //Liste des participants
+    var listUsers = $('#listUsers').DataTable( {
+        "paging":   true,
+        "ordering": true,
+        "info":     true,
+        responsive: true,
+        "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Tous"]],
+        "language": {
+            "lengthMenu": "Affichage de _MENU_ résultats par page",
+            "zeroRecords": "Aucun résultat trouvé",
+            "info": "Affichage de la page numéro _PAGE_ sur un total de _PAGES_ page(s)",
+            "infoEmpty": "Pas de résultat trouvé",
+            "infoFiltered": "(trier sur un enregistrement total de _MAX_ résultats)",
+            "search": "Rechercher"
+        }
+    });
 
     //Liste des photo signalees
     var listReportedPhoto = $('#listReportedPhoto').DataTable( {

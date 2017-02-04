@@ -1,7 +1,7 @@
 
 <h2 class="text-center text-uppercase col-md-12">Liste des concours</h2>
-<div class="col-md-12">
-<table id="listCompetitions" class="table stripe responsive order-column text-center">
+
+<table id="listCompetitions" class="table stripe responsive order-column text-center col-md-12">
 	<thead>
 		<th>Nom</th>
 		<th>Début</th>
@@ -40,7 +40,7 @@
 		<?php } ?>
 	</tbody>
 </table>
-</div>
+
 
 <div class="col-md-12 btn-new-competition">
 	<button type="button" 
@@ -51,9 +51,58 @@
 	</button>
 </div>
 
+<h2 class="text-center text-uppercase col-md-12">Liste des participants</h2>
+<div class="col-md-12">
+<table id="listUsers" class="table stripe order-column text-center col-md-12">
+	<thead>
+		<th>Nom</th>
+		<th>Prenom</th>
+		<th>Email</th>
+		<th>Age</th>
+		<th>Emplacement</th>
+		<th>Action</th>
+	</thead>
+	<tbody>
+		<?php if(isset($listUsers)) : ?>
+			<?php foreach ($listUsers as $key => $participant) : ?>
+				<tr>
+					<td>
+						<?php echo strtoupper($participant['last_name']); ?>	
+					</td>
+					<td>
+						<?php echo ucfirst($participant['first_name']); ?>
+					</td>
+					<td>
+						<?php echo $participant['email']; ?>
+					</td>
+					<td>
+						<?php echo $participant['age_range']; ?>
+					</td>
+					<td>
+						<?php echo $participant['location']; ?>
+					</td>
+					<td> 
+						<button>ok</button>
+					</td>
+				</tr>
+			<?php endforeach; ?>  
+		<?php else : ?>
+			<tr class="text-center">
+				<td></td>
+				<td></td>
+				<td colspan="">Pas de participant pour ce concours</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		<?php endif ?>
+	</tbody>
+</table>
+</div>
+
 <h2 class="text-center text-uppercase col-md-12">Liste des photos signalées</h2>
 <div class="col-md-12">
-<table id="listReportedPhoto" class="table stripe order-column text-center">
+<table id="listReportedPhoto" class="table stripe order-column text-center col-md-12">
 	<thead>
 		<th>Nom du participant</th>
 		<th>Lien de l'image signalée</th>
@@ -125,14 +174,6 @@
 						<label for="prize" class="col-xs-3 col-form-label text-left">Url du lot</label>
 						<div class="col-xs-9">
 							<input type="text" name="url_prize" class="form-control" required>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="prize" class="col-xs-3 col-form-label text-left">Nom du gagnant</label>
-						<div class="col-xs-9">
-							<input 	type="text" 
-									class="form-control winner" 
-									placeholder="Ne rechercher un gagnant qu'une fois le concours terminé">
 						</div>
 					</div>
 					<div class="form-check row">

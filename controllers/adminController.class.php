@@ -13,9 +13,12 @@ class adminController extends template{
 		$v->assign("listCompetitions",$listCompetitions);
 		
 		//Utilisateurs
-		$userManager = new userManager();
-		$listUsers = $userManager->getAllUsers();
-		$v->assign("listUsers",$listUsers);
+
+		if($this->competition!==NULL){
+			$participateManager = new participateManager();
+			$listUsers = $participateManager->getParticipantsByCompetition($this->competition);
+			$v->assign("listUsers",$listUsers);
+		}
 
 		//Participations
 		$participateManager = new participateManager();
