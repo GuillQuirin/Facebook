@@ -15,7 +15,7 @@ class template{
       $this->fb = new Facebook\Facebook([
         'app_id' => '1804945786451180',
         'app_secret' => APP_SECRET,
-        'default_graph_version' => 'v2.5',
+        'default_graph_version' => 'v2.8',
         'fileUpload' => true
       ]);
     }
@@ -139,7 +139,7 @@ class template{
       header('Location: '.WEBPATH.'/index/logout');
     }
     catch(Facebook\Exceptions\FacebookSDKException $e) {
-      //var_dump('ok1');exit;
+      exit;
       $this->logoutAction();
     }
 

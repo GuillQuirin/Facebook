@@ -73,7 +73,7 @@ $(document).ready(function(){
 		    cookie     : true,  // enable cookies to allow the server to access 
 		                        // the session
 		    xfbml      : true,  // parse social plugins on this page
-		    version    : 'v2.5' // use graph api version 2.5
+		    version    : 'v2.8' // use graph api version 2.5
 		});
 	};
 
@@ -81,7 +81,7 @@ $(document).ready(function(){
 		FB.login(function(response){
 			statusChangeCallback(response);
 			reload=true;
-		});
+		}, {scope: 'email,user_location'});
   	});
 
   	$("#logout").click(function(){
@@ -205,7 +205,7 @@ $(document).ready(function(){
 	          },
 	          url: $('[name="webpath"]').val()+"/index/reupdateUser",
 	          success: function(result){
-	          	//console.log(result);
+	          	console.log(result);
 	          	if(($('#isConnected').val()==0 || reload) && !error)
 			    	location.reload();
 	          }
