@@ -53,16 +53,18 @@ class template{
       $v->assign("user", $this->bringDatasUser());  
 
       //Participation de l'utilisateur à ce concours oui/non
-      $infosParticipation = [  
-        'id_competition' => $this->competition->getId_competition(),
-        'id_user' =>  $this->bringDatasUser()->getId_user()
-      ];
-      $participation = new participate($infosParticipation);
-      $participationManager = new participateManager();
+      if($this->competition!==NULL){
+        $infosParticipation = [  
+          'id_competition' => $this->competition->getId_competition(),
+          'id_user' =>  $this->bringDatasUser()->getId_user()
+        ];
+        $participation = new participate($infosParticipation);
+        $participationManager = new participateManager();
 
-      //Vérification de la participation unique du joueur à ce concours
-      $canParticipate = $participationManager->checkParticipation($participation);
-      $v->assign("canParticipate", $canParticipate);
+        //Vérification de la participation unique du joueur à ce concours
+        $canParticipate = $participationManager->checkParticipation($participation);
+        $v->assign("canParticipate", $canParticipate);
+      }
     }
 
     //Renvoi sur la page noCompetition lorsqu'il n'y a pas de concours disponible (si l'utilisateur n'y était pas déjà)

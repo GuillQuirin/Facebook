@@ -27,7 +27,12 @@ class competition extends motherClass{
 	public function setPrize($v){$this->prize=$v;}
 	public function setId_winner($v){$this->id_winner=$v;}
 	public function setActive($v){
-		$this->active = ($v=="on" || $v=="1") ? 1 : 0;
+		if($v=="on" || $v=="1")
+			$this->active = 1; 
+		else if($v=="2")
+			$this->active = 2;
+		else
+			$this->active = 0;
 	}
 	public function setUrl_prize($v){$this->url_prize=$v;}
 	public function setDate_created($v){}

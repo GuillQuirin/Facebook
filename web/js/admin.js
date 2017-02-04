@@ -25,6 +25,12 @@ $(document).ready(function() {
 
         $('.errorEdit').text('');
 
+        $('#submitEdit').show();
+        modal.find('input[name="active"]').parent().parent().show();
+        $('#data_competition input, #data_competition textarea').each(function(){
+            $(this).attr('disabled',false);
+        });
+
         modal.find('input[name="id_competition"]').val(button.data('id'));
         modal.find('input[name="name"]').val(button.data('name'));
         modal.find('textarea[name="description"]').val(button.data('description'));
@@ -35,6 +41,13 @@ $(document).ready(function() {
         
         if(button.data('active')=="1")
             modal.find('input[name="active"]').prop('checked','checked');
+        else if(button.data('active')=="2"){
+            $('#submitEdit').hide();
+            modal.find('input[name="active"]').parent().parent().hide();
+            $('#data_competition input, #data_competition textarea').each(function(){
+                $(this).attr('disabled','disabled');
+            });
+        }
         else
             modal.find('input[name="active"]').prop('checked',false);
     });
@@ -115,6 +128,22 @@ $(document).ready(function() {
             "infoEmpty": "Pas de résultat trouvé",
             "infoFiltered": "(trier sur un enregistrement total de _MAX_ résultats)",
             "search": "Rechercher"
+        }
+    });
+
+    $('.winner').click(function(){
+        if(confirm("Attention: une fois le vainqueur selectionné, le tournoi ne sera plus modifiable et sera automatiquement cloturé.")){
+            $.ajax({
+              method: "POST",
+              url: $('[name="webpath"]').val()+"/admin/selectWinner",
+              data: {
+                    id_user: $(this).attr('data-id')
+                }
+            })
+            .done(function(result) {
+                //console.log(result);
+                location.reload();
+            });
         }
     });
 

@@ -151,7 +151,7 @@
 					  </div>
 				  <?php else: ?>
 				  		<p>Vous devez autoriser Facebook à récupérer les photos de vos albums</p>
-						<button class="getPhotos">Ici</button>
+						<button class="getPhotos">Autoriser</button>
 				  <?php
 				  	endif;
 
@@ -263,7 +263,7 @@
 								</div>
 							<?php endif; ?>
 						<?php else: ?>
-							<p>Vous devez autoriser Facebook à enregistrer vos photos dans un album que vous pourrez administrer</p>
+							<p>Vous devez autoriser Facebook à enregistrer vos photos dans un album que vous pourrez ensuite administrer</p>
 							<button class="postPhotos">Autoriser</button>
 						<?php endif; ?>
 					</div>

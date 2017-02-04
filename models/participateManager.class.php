@@ -24,9 +24,11 @@ class participateManager extends basesql{
 		$sql = "SELECT p.id_participate, p.id_competition, p.id_user, p.id_photo, 
 						p.url_photo, p.is_reported, p.is_locked, 
 						p.date_created, p.date_updated, p.deleted, 
-						u.last_name, u.first_name, u.email, u.age_range, u.location
+						u.last_name, u.first_name, u.email, u.age_range, u.location,
+						COUNT(v.id_participate) as nb_votes
 					FROM participate p
 					LEFT OUTER JOIN user u ON p.id_user = u.id_user
+					LEFT OUTER JOIN vote v ON v.id_participate = p.id_participate
 					WHERE id_competition=:id_competition AND p.is_locked = 0";
 		
 		switch($order){

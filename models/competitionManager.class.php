@@ -16,6 +16,19 @@ class competitionManager extends basesql{
 		return (!empty($r)) ? new competition($r[0]) : null;
 	}
 
+	public function getCompetitionById($id){
+    	$sql = "SELECT * FROM ".$this->table." WHERE id_competition=:id_competition";
+		
+		$table = [
+    		'id_competition' => $id
+    	];	
+		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$sth->execute($table);
+		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+		return (!empty($r)) ? new competition($r[0]) : null;
+	}
+
 	public function getAllCompetitions(){
     	$sql = "SELECT c.id_competition, c.name, c.description, c.start_date,
     					c.end_date, c.prize, c.url_prize, c.id_winner, c.active,

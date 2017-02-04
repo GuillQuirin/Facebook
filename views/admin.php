@@ -18,11 +18,16 @@
 				<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())); ?></td>
 				<td name='totalParticipants' > <?php echo $competition->getTotalParticipants(); ?></td>
 				<td name='active'>
-					<?php echo ($competition->getActive()==1) ? "Actif" : ""; ?>
+					<?php 
+						if($competition->getActive()==1) 
+							echo "Actif"; 
+						if($competition->getActive()==2)
+							echo "Terminé";
+					?>
 				</td>
 				<td>
 					<button 
-						class="btn btn-warning"
+						class="btn <?php echo ($competition->getActive()==2) ? "btn-success" : "btn-warning"; ?>"
 						data-toggle="modal" 
 						data-target="#ModalEdit" 
 						data-id="<?php echo $competition->getId_competition(); ?>"
@@ -33,7 +38,7 @@
 						data-prize="<?php echo $competition->getPrize(); ?>"
 						data-url="<?php echo $competition->getUrl_prize(); ?>"
 						data-active="<?php echo $competition->getActive(); ?>">
-						Modifier
+						<?php echo ($competition->getActive()==2) ? "Consulter" : "Modifier"; ?>
 					</button>
 				</td>
 			</tr>
@@ -51,7 +56,7 @@
 	</button>
 </div>
 
-<h2 class="text-center text-uppercase col-md-12">Liste des participants</h2>
+<h2 class="text-center text-uppercase col-md-12">Liste des participants du concours actuel</h2>
 <div class="col-md-12">
 <table id="listUsers" class="table stripe order-column text-center col-md-12">
 	<thead>
@@ -60,6 +65,7 @@
 		<th>Email</th>
 		<th>Age</th>
 		<th>Emplacement</th>
+		<th>Nombre de votes</th>
 		<th>Action</th>
 	</thead>
 	<tbody>
@@ -81,13 +87,17 @@
 					<td>
 						<?php echo $participant['location']; ?>
 					</td>
+					<td>
+						<?php echo $participant['nb_votes']; ?>
+					</td>
 					<td> 
-						<button>ok</button>
+						<button class="btn btn-success winner" data-id="<?php echo $participant['id_user']; ?>">Désigner vainqueur</button>
 					</td>
 				</tr>
 			<?php endforeach; ?>  
 		<?php else : ?>
 			<tr class="text-center">
+				<td></td>
 				<td></td>
 				<td></td>
 				<td colspan="">Pas de participant pour ce concours</td>
@@ -185,6 +195,7 @@
 				</div>
 				<div class="modal-footer">
 					<p class="errorEdit"></p>
+					<p>Pour terminer un concours, vous devez désigner un vainqueur ou atteindre la date de fin indiquée.</p>
 					<input type="submit" id="submitEdit" class="btn btn-success" value="Sauvegarder">
 				</div>
 			</div>

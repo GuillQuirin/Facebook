@@ -69,6 +69,23 @@ class adminController extends template{
 		echo $error;
 	}
 
+	public function selectWinnerAction(){
+		$infosParticipation = [
+			'id_competition' => $this->competition->getId_competition(),
+			'id_user' => $_POST['id_user']
+		];
+		$participation = new participate($infosParticipation);
+		$participationManager = new participateManager();
+		$result = $participationManager->getParticipationByIds($participation);
+		if($result!=NULL && $this->competition!=NULL){
+			$competitionManager = new competitionManager();
+			$competition = $competitionManager->getCompetitionById($this->competition->getId_competition());
+			$competition->setId_winner($result->getId_user());
+			$competition->setActive(2);
+			$competitionManager->updateCompetition($competition);
+		}
+	}
+
 	public function editCompetitionAction(){
 		$error = "";
 		if(!$_POST){
