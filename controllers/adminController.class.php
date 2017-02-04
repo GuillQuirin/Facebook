@@ -70,6 +70,7 @@ class adminController extends template{
 	}
 
 	public function selectWinnerAction(){
+		//Selection manuelle du gagnant
 		$infosParticipation = [
 			'id_competition' => $this->competition->getId_competition(),
 			'id_user' => $_POST['id_user']
@@ -83,6 +84,9 @@ class adminController extends template{
 			$competition->setId_winner($result->getId_user());
 			$competition->setActive(2);
 			$competitionManager->updateCompetition($competition);
+
+			$this->sendResults();
+
 		}
 	}
 

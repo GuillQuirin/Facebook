@@ -164,18 +164,12 @@ class template{
   }
 
   public function scriptAction(){
-    $competitionManager = new competitionManager();
-    $participateManager = new participateManager();
-    $competitions = $competitionManager->getFinishedCompetition();
-    if($competitions){
-      $listUsers = $participateManager->getListOfParticipantsByCompetitions($competitions);
+    //Selection auto du gagnant (Script CRON)
+  }
 
-      if($listUsers){
-        foreach ($listUsers as $key => $value) {
-          # code...
-        }
-      }
-    }
+  protected function sendResults(){
+    //Envoi de la photo du gagnant aux autres
+    //Envoi du mail aux admins
   }
 
   protected function envoiMail($destinataire, $objet, $contenu){
