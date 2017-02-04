@@ -35,7 +35,7 @@ class userManager extends basesql{
 	//Liste de tous les participants
 	public function getAllUsers(){
 		//Présent dans basesql car appelable de n'importe quel Manager
-		$sql = "SELECT * FROM ".$this->table." WHERE validation_cgu=1";
+		$sql = "SELECT * FROM ".$this->table;
 		
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute();

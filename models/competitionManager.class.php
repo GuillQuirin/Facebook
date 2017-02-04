@@ -67,6 +67,29 @@ class competitionManager extends basesql{
 		return (!empty($r)) ? new competition($r[0]) : null;
 	}
 
+	public function extractBDD(){
+		// Creation du fichier
+		$file = fopen('result.csv', 'w+');
+		 
+		// Collecte des donnees
+		$req = $this->pdo->query('SELECT * FROM competition;');
+		$rep = $req->fetchAll(PDO::FETCH_ASSOC);
+		$req->closeCursor();
+		 
+		// Première ligne : ligne de titres
+		if(count($rep))
+		   fputcsv($file, array_keys($rep[0]));
+		 
+		// Ajout des lignes de données
+		foreach($rep as $row)
+		   fputcsv($file, $row);
+		 
+		// Fermeture du fichier
+		fclose($file);
+		 
+		// Et voilà
+	}
+
 }
 
 /*

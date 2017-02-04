@@ -13,7 +13,7 @@ class exportController extends template{
         $competitionManager = new competitionManager();
         $listCompetitions = $competitionManager->getAllCompetitions();
         header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename=Export_Concours_' . date("dmY"). '.csv');
+        header('Content-Disposition: attachment; filename=Export_Concours_' . date("Y_m_d"). '.csv');
         $output = fopen('php://output', 'w');
         fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
         $entetes = array(
@@ -51,6 +51,7 @@ class exportController extends template{
             $compet->addChild('id_gagnant', $competition->getId_winner());
             $compet->addChild('statut', $competition->getActive());
             $compet->addChild('url_prix', $competition->getUrl_prize());
+            $compet->addChild('nb_participants', $competition->getTotalParticipants());
         }
         header('Content-type: text/xml');
         print($xml->asXML());
@@ -60,7 +61,7 @@ class exportController extends template{
         $userManager = new userManager();
         $listUsers = $userManager->getAllUsers();
         header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename=Export_Participants_' . date("dmY"). '.csv');
+        header('Content-Disposition: attachment; filename=Export_Participants_' . date("Y_m_d"). '.csv');
         $output = fopen('php://output', 'w');
         fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
         $entetes = array(
@@ -68,9 +69,13 @@ class exportController extends template{
             'Nom du participant',
             'Prénom du participant',
             'Email',
-            'Date d\'anniversaire', 
-            'Validation des CGU',
-            'Statut du participant');
+            'Age', 
+            '',
+            'Localisation',
+            'Identifiant Facebook',
+            '',
+            'Date d\'enregistrement'
+        );
 
         fputcsv($output, $entetes, ";");
         foreach ($listUsers as $key => $user) {
@@ -91,10 +96,23 @@ class exportController extends template{
             $compet->addChild('prenom', $user->getFirst_name());
             $compet->addChild('email', $user->getEmail());
             $compet->addChild('age', $user->getAge_range());
-            $compet->addChild('cgu', $user->getValidation_cgu());
-            $compet->addChild('statut', $user->getStatus());
+            $compet->addChild('localisation', $user->getLocation());
+            $compet->addChild('idFacebook', $user->getIdFacebook());
+            $compet->addChild('date_inscription', $user->getDate_created());
         }
         header('Content-type: text/xml');
         print($xml->asXML());
     }
+
+    public function exportParticipantAction(){
+        // $competitionManager = new competitionManager();
+        // $listCompetitions = $competitionManager->getAllCompetitions();
+        // $participationManager = new participateManager();
+
+        // foreach($listCompetitions as $competition){
+        //     $listParticipants = $participationManager->getParticipantsByCompetition($competition);
+            
+        // }
+    }
+
 }

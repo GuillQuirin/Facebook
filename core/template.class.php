@@ -8,7 +8,6 @@ class template{
   protected $isAdmin = NULL;
 
   public function __construct(){
-    
     if($this->fb===null){
       require_once __ROOT__.'/web/vendor/autoload.php';      
       //Connexion à l'application enregistrée
