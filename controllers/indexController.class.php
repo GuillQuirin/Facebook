@@ -28,6 +28,7 @@ class indexController extends template{
 
 	public function submitAction(){
 		/* --ENVOI DE DONNEES PAR L'UTILISATEUR DEPUIS L'ACCUEIL -- */
+
 		$ok = FALSE;
 		//Création de l'album dans FB si inexistant
 		$albumCompetition = $this->searchAlbumCompetition();
@@ -41,7 +42,7 @@ class indexController extends template{
 		        $image['image'] = __ROOT__."/web/uploads/".$_FILES['file']['name'];
 
 				$data = [
-				  'message' => 'My awesome photo upload example.',
+				  'message' => "J'ai participé au concours Pardon-Maman !",
 				  'source' => $this->fb->fileToUpload($image['image']),
 				];
 
@@ -54,8 +55,8 @@ class indexController extends template{
 			}
 		}
 
+		//Récupération de l'url de la photo présente sur FB
 		if(isset($_POST['fromFB'])){
-			//Récupération de l'url de la photo présente sur FB
 			$infosPhoto = $this->dataApi(TRUE,'/'.$_POST['idPhoto'].'?fields=','id,name,source',"");
 			$data = [
 			  'url' => $infosPhoto['source']
@@ -67,7 +68,7 @@ class indexController extends template{
 
 		if($ok){
 			//Enregistrement de l'utilisateur
-			$user = $this->bringDatasUser();	
+			$user = $this->bringDatasUser(1);	
 			//Enregistrement de la participation
 			$infosParticipation =[
 			  	'id_competition' => $this->competition->getId_competition(),
@@ -78,7 +79,12 @@ class indexController extends template{
 
 			$participation = new participate($infosParticipation);
 			$participationManager = new participateManager();
-			$idParticipation = $participationManager->saveParticipation($participation);
+
+			//Vérification de la participation unique du joueur à ce concours
+			$canParticipate = $participationManager->checkParticipation($participation);
+
+			if(!$canParticipate)
+				$idParticipation = $participationManager->saveParticipation($participation);
 		}
 
 		header('Location: '.WEBPATH);

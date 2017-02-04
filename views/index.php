@@ -118,7 +118,11 @@
 									        	<button type="button" class="btn" data-dismiss="modal">Annuler</button>
 									          </div>
 									          <div class="col-md-6">
-										        <button type="submit" class="btn sendPicture">Envoyer cette photo</button>
+									          	<?php if(isset($canParticipate) && $canParticipate): ?>
+													<p>Vous avez déjà participé à ce concours, nous vous en remercions !</p>
+												<?php else: ?>
+										        	<button type="submit" class="btn sendPicture">Envoyer cette photo</button>
+										        <?php endif; ?>
 											  </div>
 											  <div class="errorSend text-left">
 											  	<p>Attention, certaines informations sont nécessaires pour finaliser votre participation:</p>
@@ -199,7 +203,11 @@
 												        	<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 												        </div>
 												        <div class="col-md-6">
-													        <button type="submit" class="btn btn-default sendPicture">Envoyer cette photo</button>
+												        	<?php if(isset($canParticipate) && $canParticipate): ?>
+																<p>Vous avez déjà participé à ce concours, nous vous en remercions !</p>
+															<?php else: ?>
+														        <button type="submit" class="btn btn-default sendPicture">Envoyer cette photo</button>
+														    <?php endif; ?>
 														</div>
 														<div class="errorSend text-left">
 												  			<p>Attention, certaines informations sont nécessaires pour finaliser votre participation:</p>
@@ -237,22 +245,26 @@
 				<div class="row">
 					<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 text-center">
 						<h3>....ou en important une photo depuis votre ordinateur.</h3>
-						<?php if(isset($upload)) : ?>
-							<form action="<?php echo WEBPATH.'/index/submit'; ?>" id="localForm" method="post" enctype="multipart/form-data" >
-							    <input type="file" name="file" id="i_file" required>
-							    <input type="hidden" name="uploadFile">
-							    <input type="submit" class="btn" name="upload" value="Envoyer">
-						    </form>
-						    <p class="pbFileSize">Le fichier est trop gros pour l'application, il ne doit pas excèder 10 Mo</p>
-						    <div class="errorUpload text-left">
-							  	<p>Attention, certaines informations sont nécessaires pour finaliser votre participation:</p>
-							  	<ul class="listError">
-							 	</ul>
-								<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href=""><button>ici</button></a></p>
-							</div>
+						<?php if(isset($upload)): ?>
+							<?php if(isset($canParticipate) && $canParticipate): ?>
+								<p>Vous avez déjà participé à ce concours, nous vous en remercions !</p>
+							<?php else: ?>
+								<form action="<?php echo WEBPATH.'/index/submit'; ?>" id="localForm" method="post" enctype="multipart/form-data" >
+								    <input type="file" name="file" id="i_file" required>
+								    <input type="hidden" name="uploadFile">
+								    <input type="submit" class="btn" name="upload" value="Envoyer">
+							    </form>
+							    <p class="pbFileSize">Le fichier est trop gros pour l'application, il ne doit pas excèder 10 Mo</p>
+							    <div class="errorUpload text-left">
+								  	<p>Attention, certaines informations sont nécessaires pour finaliser votre participation:</p>
+								  	<ul class="listError">
+								 	</ul>
+									<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href=""><button>ici</button></a></p>
+								</div>
+							<?php endif; ?>
 						<?php else: ?>
 							<p>Vous devez autoriser Facebook à enregistrer vos photos dans un album que vous pourrez administrer</p>
-							<button class="postPhotos">Ici</button>
+							<button class="postPhotos">Autoriser</button>
 						<?php endif; ?>
 					</div>
 				</div>

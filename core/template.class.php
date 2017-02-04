@@ -51,6 +51,18 @@ class template{
        
       //Infos de l'utilisateur
       $v->assign("user", $this->bringDatasUser());  
+
+      //Participation de l'utilisateur à ce concours oui/non
+      $infosParticipation = [  
+        'id_competition' => $this->competition->getId_competition(),
+        'id_user' =>  $this->bringDatasUser()->getId_user()
+      ];
+      $participation = new participate($infosParticipation);
+      $participationManager = new participateManager();
+
+      //Vérification de la participation unique du joueur à ce concours
+      $canParticipate = $participationManager->checkParticipation($participation);
+      $v->assign("canParticipate", $canParticipate);
     }
 
     //Renvoi sur la page noCompetition lorsqu'il n'y a pas de concours disponible (si l'utilisateur n'y était pas déjà)
@@ -95,10 +107,11 @@ class template{
 
         if($userBDD==NULL)
           $user = $userManager->saveUser($user);
-        else if($update){
+
+        //if($update){
           $user->setId_user($userManager->getUserByIdFb($user->getIdFacebook())->getId_user());
           $userManager->updateUser($user);
-        }
+        //}
 
         $_SESSION['idFB'] = $user->getIdFacebook();
       }
@@ -126,7 +139,7 @@ class template{
       header('Location: '.WEBPATH.'/index/logout');
     }
     catch(Facebook\Exceptions\FacebookSDKException $e) {
-      var_dump('ok1');exit;
+      //var_dump('ok1');exit;
       $this->logoutAction();
     }
 

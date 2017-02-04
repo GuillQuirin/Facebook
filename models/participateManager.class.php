@@ -26,7 +26,7 @@ class participateManager extends basesql{
 						p.date_created, p.date_updated, p.deleted, 
 						u.last_name, u.first_name
 					FROM participate p
-					INNER JOIN user u ON p.id_user = u.id_user
+					LEFT OUTER JOIN user u ON p.id_user = u.id_user
 					WHERE id_competition=:id_competition AND p.is_locked = 0";
 		
 		switch($order){
@@ -54,6 +54,23 @@ class participateManager extends basesql{
 			shuffle($list);
 
 		return $list;
+	}
+	
+	public function checkParticipation(participate $data){
+		$sql = "SELECT * FROM participate 
+					WHERE id_competition=:id_competition 
+						AND id_user=:id_user";
+						
+		//Nouvelle table avec une seule case
+    	$table = [
+    		'id_competition' => $data->getId_competition(),
+    		'id_user' => $data->getId_user()
+    	];	
+		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$sth->execute($table);
+		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+		return (!empty($r)) ? new participate($r[0]) : null;
 	}
 
 	public function getParticipationByIds(participate $data){
