@@ -5,7 +5,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="robots" content="index,follow" />
 		<title><?php if(isset($title)) echo $title; ?></title>
-		<?php echo '<link rel="shortcut icon" href="' . WEBPATH . '/web/img/icon/logo-full.ico" type="image/x-icon">';?>
+		<link rel="shortcut icon" 
+			href="<?php echo WEBPATH.'/web/img/logo.jpg'; ?>" 
+			type="image/x-icon"
+		>
 		<meta name="description" content="Erreur d'accès à la page">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/bootstrap.min.css">';?>
