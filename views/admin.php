@@ -11,38 +11,40 @@
 		<th>Edition</th>
 	</thead>
 	<tbody>
-		<?php foreach ($listCompetitions as $key => $competition) { ?>
-			<tr>
-				<td name='name'> <?php echo $competition->getName(); ?></td>
-				<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())); ?></td>
-				<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())); ?></td>
-				<td name='totalParticipants' > <?php echo $competition->getTotalParticipants(); ?></td>
-				<td name='active'>
-					<?php 
-						if($competition->getActive()==1) 
-							echo "Actif"; 
-						if($competition->getActive()==2)
-							echo "Terminé";
-					?>
-				</td>
-				<td>
-					<button 
-						class="btn <?php echo ($competition->getActive()==2) ? "btn-success" : "btn-warning"; ?>"
-						data-toggle="modal" 
-						data-target="#ModalEdit" 
-						data-id="<?php echo $competition->getId_competition(); ?>"
-						data-name="<?php echo $competition->getName(); ?>"
-						data-description="<?php echo $competition->getDescription(); ?>"
-						data-begin="<?php echo str_replace("/","-",$competition->getStart_date()); ?>"
-						data-end="<?php echo str_replace("/","-",$competition->getEnd_date()); ?>"
-						data-prize="<?php echo $competition->getPrize(); ?>"
-						data-url="<?php echo $competition->getUrl_prize(); ?>"
-						data-active="<?php echo $competition->getActive(); ?>">
-						<?php echo ($competition->getActive()==2) ? "Consulter" : "Modifier"; ?>
-					</button>
-				</td>
-			</tr>
-		<?php } ?>
+		<?php if(isset($listCompetitions)): ?>
+			<?php foreach ($listCompetitions as $key => $competition) { ?>
+				<tr>
+					<td name='name'> <?php echo $competition->getName(); ?></td>
+					<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())); ?></td>
+					<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())); ?></td>
+					<td name='totalParticipants' > <?php echo $competition->getTotalParticipants(); ?></td>
+					<td name='active'>
+						<?php 
+							if($competition->getActive()==1) 
+								echo "Actif"; 
+							if($competition->getActive()==2)
+								echo "Terminé";
+						?>
+					</td>
+					<td>
+						<button 
+							class="btn <?php echo ($competition->getActive()==2) ? "btn-success" : "btn-warning"; ?>"
+							data-toggle="modal" 
+							data-target="#ModalEdit" 
+							data-id="<?php echo $competition->getId_competition(); ?>"
+							data-name="<?php echo $competition->getName(); ?>"
+							data-description="<?php echo $competition->getDescription(); ?>"
+							data-begin="<?php echo str_replace("/","-",$competition->getStart_date()); ?>"
+							data-end="<?php echo str_replace("/","-",$competition->getEnd_date()); ?>"
+							data-prize="<?php echo $competition->getPrize(); ?>"
+							data-url="<?php echo $competition->getUrl_prize(); ?>"
+							data-active="<?php echo $competition->getActive(); ?>">
+							<?php echo ($competition->getActive()==2) ? "Consulter" : "Modifier"; ?>
+						</button>
+					</td>
+				</tr>
+			<?php } ?>
+		<?php endif; ?>
 	</tbody>
 </table>
 
@@ -95,16 +97,6 @@
 					</td>
 				</tr>
 			<?php endforeach; ?>  
-		<?php else : ?>
-			<tr class="text-center">
-				<td></td>
-				<td></td>
-				<td></td>
-				<td colspan="">Pas de participant pour ce concours</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
 		<?php endif ?>
 	</tbody>
 </table>
@@ -127,12 +119,10 @@
 					</td>
 					<td><a href="<?php echo $photo->getUrl_photo(); ?>" target="_blank" name="url_photo">Lien de la photo</a></td>
 					<td> 
-						<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId_participate()."' class='btn btn-success lock_photo'>Déverrouillée</button>" : "<button id='photo-".$photo->getId_participate()."' class='btn btn-danger unlock_photo'>Verrouillée</button>" ?>
+						<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId_participate()."' class='btn btn-success lock_photo'>Déverrouillée</button>" : "<button id='photo-".$photo->getId_participate()."' class='btn btn-danger unlock_photo'>Verrouillée</button>"?>
 					</td>
 				</tr>
 			<?php endforeach; ?>  
-		<?php else : ?>
-			<tr><td></td><td>Pas de photo signalées par les utilisateurs</td><td></td></tr>
 		<?php endif ?>
 	</tbody>
 </table>
