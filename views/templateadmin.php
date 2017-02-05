@@ -35,34 +35,36 @@
 </head>
 
 <body>
-	<header class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1">
-		<nav class="navbar navbar-default">
-			<div id="navbar" class="navbar-collapse">
-				<ul class="nav navbar-nav text-center">
-					<li class="col-xs-4 col-md-2 menu-li">
-						<a href="<?php echo WEBPATH; ?>">Accueil</a>
-					</li>
-					<li class="col-xs-4 col-sm-4 col-md-2 menu-li">
-						<a href="<?php echo WEBPATH; ?>/gallery">Galerie</a>
-					</li>
-					<li class="col-xs-4 col-sm-4 col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/admin') echo "active"; ?>">
-						<a href="<?php echo WEBPATH; ?>/admin">Liste des concours</a>
-					</li>
-					<li class="col-xs-4 col-sm-4 col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/design') echo "active"; ?>">
-						<a href="<?php echo WEBPATH; ?>/design">Design</a>
-					</li>
-					<li class="col-xs-4 col-sm-4 col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/export') echo "active"; ?>">
-						<a href="<?php echo WEBPATH; ?>/export">Export des données</a>
-					</li>
-					<li class="col-xs-4 col-sm-4 col-md-2 <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
-						<a href="<?php echo WEBPATH; ?>/setting">Reglement et CGU</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-
 	<div id="content" class="container">
+		<div class="row">
+			<header class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1">
+				<nav class="navbar navbar-default">
+					<div id="navbar" class="navbar-collapse">
+						<ul class="nav navbar-nav text-center">
+							<li class="col-xs-4 col-md-2 menu-li">
+								<a href="<?php echo WEBPATH; ?>">Accueil</a>
+							</li>
+							<li class="col-xs-4 col-sm-4 col-md-2 menu-li">
+								<a href="<?php echo WEBPATH; ?>/gallery">Galerie</a>
+							</li>
+							<li class="col-xs-4 col-sm-4 col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/admin') echo "active"; ?>">
+								<a href="<?php echo WEBPATH; ?>/admin">Liste des concours</a>
+							</li>
+							<li class="col-xs-4 col-sm-4 col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/design') echo "active"; ?>">
+								<a href="<?php echo WEBPATH; ?>/design">Design</a>
+							</li>
+							<li class="col-xs-4 col-sm-4 col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/export') echo "active"; ?>">
+								<a href="<?php echo WEBPATH; ?>/export">Export des données</a>
+							</li>
+							<li class="col-xs-4 col-sm-4 col-md-2 <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
+								<a href="<?php echo WEBPATH; ?>/setting">Reglement et CGU</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+		</div>
+
 		<input type="hidden" name="webpath" value="<?php echo WEBPATH; ?>">
 		<?php include $this->view; ?>
 	</div>

@@ -165,15 +165,6 @@ class template{
       return $d;
   }
 
-  public function scriptAction(){
-    //Selection auto du gagnant (Script CRON)
-  }
-
-  protected function sendResults(){
-    //Envoi de la photo du gagnant aux autres
-    //Envoi du mail aux admins
-  }
-
   protected function envoiMail($destinataire, $objet, $contenu){
     // CONFIGURATION DU MAIL
 
