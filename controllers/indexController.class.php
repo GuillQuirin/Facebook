@@ -129,6 +129,9 @@ class indexController extends template{
 		}
 	}
 
+	public function checkScriptAction(){
+		$this->envoiMail("spartandu54@hotmail.fr","Test", "Test");
+	}
 
 	private function searchAlbumCompetition(){
 		$albums = $this->dataApi(TRUE,'/me','/albums',"");
