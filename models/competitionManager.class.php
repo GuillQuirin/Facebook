@@ -55,8 +55,17 @@ class competitionManager extends basesql{
 		$this->save($data);
 	} 
 
-	public function checkEndOfCompetition(competition $data){
-		return NULL;
+	public function checkEndOfCompetition(competition $competition){
+		$sql = "SELECT * FROM ".$this->table." 
+					WHERE id_competition=:id_competition AND end_date=CURRENT_DATE() AND active=1";
+		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$data = [
+			'id_competition' => $competition->getId_competition()
+		];
+		$sth->execute($data);
+		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+		return (!empty($r)) ? new competition($r[0]) : null;
 	}
 
 	public function timeCompetition($data){

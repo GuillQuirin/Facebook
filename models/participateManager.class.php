@@ -39,6 +39,10 @@ class participateManager extends basesql{
 			case 2:
 				$sql.=" ORDER BY p.date_created DESC";
 				break;
+
+			case 3:
+				$sql.=" ORDER BY v.id_participate DESC";
+				break;
 		}
 
 		//Nouvelle table avec une seule case

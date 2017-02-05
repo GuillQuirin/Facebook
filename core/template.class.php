@@ -127,6 +127,7 @@ class template{
     header('Location: '.WEBPATH);
   }
 
+
   //Fonction Facebook : soit récupération d'un élèment, soit envoi d'un fichier dans un album photo
   protected function dataApi($callElement = TRUE, $idElement = "/me",$listParam = [], $dataPost = [], $returnDecodedBody = TRUE){
     $string = (is_array($listParam)) ? $idElement.implode(',',$listParam) : $idElement.$listParam;
@@ -149,6 +150,8 @@ class template{
     else
       return NULL;
   }
+
+
 
   //Encodage en UTF-8 de tableaux
   public function utf8ize($d) {

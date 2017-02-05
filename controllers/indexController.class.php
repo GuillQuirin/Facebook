@@ -133,13 +133,25 @@ class indexController extends template{
 		
 		$competitionManager = new competitionManager();
 		if(isset($this->competition)){
-			$check = $competitionManager->checkEndOfCompetition($this->competition);
-			if($check){
-				//Envoi d'un message sur le mur de tous les participants
+			$competition = $competitionManager->checkEndOfCompetition($this->competition);
+			if($competition){
+	
 				$participationManager = new participateManager();
-				$users = $participationManager->getParticipantsByCompetition($this->competition);
+				$users = $participationManager->getParticipantsByCompetition($this->competition,3);
+	
+				//Selection du gagnant
+				$winner = $users[0];
+				$competition->setActive(2);
+				$competition->setId_winner($winner['id_user']);
+				$competitionManager->updateCompetition($competition);
+
+				//Envoi d'un message sur le mur de tous les participants
 				foreach ($users as $key => $user) {
-					$idFbPhoto = $this->dataApi(FALSE,'/'.$user['IdFacebook']."/feed","Le concours de Pardon Maman est désormais terminé !");	
+					$text = [
+						'message' =>"Le concours de Pardon Maman est désormais terminé ! Voici la photo du gagnant du concours !",
+						'object_attachment' => $winner['id_photo']
+					];
+					$idFbPhoto = $this->dataApi(FALSE,'/'.$user['idFacebook']."/feed","",$text);	
 				}
 				
 				//Envoi d'un mail aux admins
@@ -147,7 +159,8 @@ class indexController extends template{
 				$admins = $this->bringListAdmins();
 				foreach ($admins as $key => $admin) {
 					$user = $userManager->getUserByIdFb($admin);
-					$this->envoiMail($user->getEmail(),"Résultat du concours", "Test");
+					if($user) //Si enregistré dans la liste des utilisateurs de l'application
+						$this->envoiMail($user->getEmail(),"Résultat du concours", "Test");
 				}
 			}
 		}
