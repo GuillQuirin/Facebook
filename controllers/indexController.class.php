@@ -83,8 +83,12 @@ class indexController extends template{
 			//Vérification de la participation unique du joueur à ce concours
 			$canParticipate = $participationManager->checkParticipation($participation);
 
-			if(!$canParticipate)
+			if(!$canParticipate){
 				$idParticipation = $participationManager->saveParticipation($participation);
+			
+				//Envoi d'un message sur le mur du participant
+				$idFbPhoto = $this->dataApi(FALSE,'/'.$user->getIdFacebook()."/feed","J'ai participé au concours de pardon-Maman !");
+			}
 		}
 
 		header('Location: '.WEBPATH);

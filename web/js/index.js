@@ -81,7 +81,7 @@ $(document).ready(function(){
 		FB.login(function(response){
 			statusChangeCallback(response);
 			reload=true;
-		}, {scope: 'email,user_location'});
+		}, {scope: 'email,user_location,publish_actions'});
   	});
 
   	$("#logout").click(function(){
