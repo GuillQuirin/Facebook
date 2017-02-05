@@ -130,7 +130,18 @@ class indexController extends template{
 	}
 
 	public function checkScriptAction(){
-		$this->envoiMail("spartandu54@hotmail.fr","Test", "Test");
+		
+		/*
+		//Envoi d'un message sur le mur de tous les participants
+		$userManager = new userManager();
+		$users = $userManager->getAllUsers();
+		foreach ($users as $key => $user) {
+			$idFbPhoto = $this->dataApi(FALSE,'/'.$user->getIdFacebook()."/feed","Le concours de Pardon Maman est désormais terminé !");	
+		}
+		
+		//Envoi d'un mail aux admins
+		//$this->envoiMail("spartandu54@hotmail.fr","Test", "Test");
+		*/
 	}
 
 	private function searchAlbumCompetition(){
