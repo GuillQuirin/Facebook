@@ -21,7 +21,7 @@
 		<meta property="og:type"          content="website" />
 		<meta property="og:title"         content="Concours Pardon-Maman" />
 		<meta property="og:description"   content="Participez vous aussi au concours de Pardon Maman ! " />
-		<meta property="og:image"         content="<?php echo $_SERVER['HTTP_HOST'].WEBPATH.'/web/img/logo.jpg'; ?>" />
+		<meta property="og:image"         content="<?php echo 'https://'.$_SERVER['HTTP_HOST'].WEBPATH.'/web/img/logo.jpg'; ?>" />
 	
 	</head>
 	<body>
