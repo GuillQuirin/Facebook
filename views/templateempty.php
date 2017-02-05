@@ -13,6 +13,13 @@
 		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/templateempty.css" media="screen">';?>
 		<?php echo (isset($css)) ? '<link rel="stylesheet" href="'.WEBPATH.'/web/css/'.$css.'-stylesheet.css">' : '';?>	
 		<link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+
+		<meta property="og:url"           content="https://egl.fbdev.fr/Facebook/" />
+		<meta property="og:type"          content="website" />
+		<meta property="og:title"         content="Concours Pardon-Maman" />
+		<meta property="og:description"   content="Participez vous aussi au concours de Pardon Maman ! " />
+		<meta property="og:image"         content="https://scontent-fra3-1.xx.fbcdn.net/v/t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" />
+	
 	</head>
 	<body>
 		<?php 

@@ -4,8 +4,8 @@ class CGUController extends template{
 		$v = new view();
 		$this->assignConnectedProperties($v);
 
-		$v->assign("css", "noCompetition");
-		$v->assign("js", "noCompetition");
+		// $v->assign("css", "noCompetition");
+		// $v->assign("js", "noCompetition");
 		$v->assign("title", "Conditions Générales");
 		$v->assign("setting", $setting);
 
