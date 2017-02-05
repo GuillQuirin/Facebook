@@ -10,9 +10,9 @@ $(document).ready(function() {
         "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Tous"]],
         "language": {
             "lengthMenu": "Affichage de _MENU_ résultats par page",
-            "zeroRecords": "Aucun résultat trouvé",
+            "zeroRecords": "Aucun concours trouvé",
             "info": "Affichage de la page numéro _PAGE_ sur un total de _PAGES_ page(s)",
-            "infoEmpty": "Pas de résultat trouvé",
+            "infoEmpty": "Pas de concours trouvé",
             "infoFiltered": "(trier sur un enregistrement total de _MAX_ résultats)",
             "search": "Rechercher"
         }
