@@ -131,17 +131,26 @@ class indexController extends template{
 
 	public function checkScriptAction(){
 		
-		/*
-		//Envoi d'un message sur le mur de tous les participants
-		$userManager = new userManager();
-		$users = $userManager->getAllUsers();
-		foreach ($users as $key => $user) {
-			$idFbPhoto = $this->dataApi(FALSE,'/'.$user->getIdFacebook()."/feed","Le concours de Pardon Maman est désormais terminé !");	
+		$competitionManager = new competitionManager();
+		if(isset($this->competition)){
+			$check = $competitionManager->checkEndOfCompetition($this->competition);
+			if($check){
+				//Envoi d'un message sur le mur de tous les participants
+				$participationManager = new participateManager();
+				$users = $participationManager->getParticipantsByCompetition($this->competition);
+				foreach ($users as $key => $user) {
+					$idFbPhoto = $this->dataApi(FALSE,'/'.$user['IdFacebook']."/feed","Le concours de Pardon Maman est désormais terminé !");	
+				}
+				
+				//Envoi d'un mail aux admins
+				$userManager = new userManager();
+				$admins = $this->bringListAdmins();
+				foreach ($admins as $key => $admin) {
+					$user = $userManager->getUserByIdFb($admin);
+					$this->envoiMail($user->getEmail(),"Résultat du concours", "Test");
+				}
+			}
 		}
-		
-		//Envoi d'un mail aux admins
-		//$this->envoiMail("spartandu54@hotmail.fr","Test", "Test");
-		*/
 	}
 
 	private function searchAlbumCompetition(){

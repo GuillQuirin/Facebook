@@ -55,6 +55,10 @@ class competitionManager extends basesql{
 		$this->save($data);
 	} 
 
+	public function checkEndOfCompetition(competition $data){
+		return NULL;
+	}
+
 	public function timeCompetition($data){
 		$sql = "SELECT * FROM ".$this->table." 
 				WHERE active=1 AND (DATEDIFF(:end_date, start_date)<0 OR DATEDIFF(:start_date, end_date)<0)";
