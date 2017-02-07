@@ -24,7 +24,9 @@ h2 {font-family: 'Architects Daughter', cursive; font-weight: bold; margin-botto
     text-overflow: ellipsis;
     white-space: inherit;
 }
-
+#CreateCompetition textarea{
+  width: 100%;
+}
 .footer {
   /*position: absolute;
   bottom: 0;

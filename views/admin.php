@@ -210,29 +210,23 @@
 					</div>
 					<div class="form-group">
 						<label for="description">Description du concours :</label>
-						<textarea name="description" id="summernote" placeholder="Saisissez la description de votre concours..." required></textarea>
+						<textarea name="description" rows="3" id="summernote" placeholder="Saisissez la description de votre concours..."></textarea>
 					</div>
 					<div class="form-group">
 						<label for="start_date">Date de début du concours : </label>
 						<div class="date" id="datePicker">
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" name="start_date" id="start_date" placeholder="jj/mm/aaaa" required>
-							</div>
+							<input type="date" name="start_date" id='start_date' class="form-control" placeholder="jj/mm/aaaa" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="end_date">Date de fin du concours : </label>
 						<div class="date" id="datePicker2">
-							<div class="input-group">
-								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-								<input type="text" class="form-control" name="end_date" id="end_date" placeholder="jj/mm/aaaa" required/>
-							</div>
+							<input type="date" class="form-control" name="end_date" id="end_date" placeholder="jj/mm/aaaa" required/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="prize">Lot à gagner : </label>
-						<input type="text" class="form-control" name="prize" id="prize" required>
+						<input type="text" class="form-control" name="prize" id="prize">
 					</div>
 					<div class="text-center">
 						<p class="errorCreate"></p>
