@@ -9,6 +9,6 @@ class CGUController extends template{
 		$v->assign("title", "Conditions Générales");
 		$v->assign("setting", $setting);
 
-        $v->setView("noCompetition", "templateempty");
+        $v->setView("CGU");
     }
 }
