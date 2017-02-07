@@ -1,16 +1,16 @@
 <?php
-class CGUController extends template{
-	public function CGUAction(){
+class rulesController extends template{
+	public function rulesAction(){
 		$v = new view();
 		$this->assignConnectedProperties($v);
 
 		// $v->assign("css", "noCompetition");
 		// $v->assign("js", "noCompetition");
-		$v->assign("title", "Conditions Générales");
+		$v->assign("title", "Règlement du concours");
 		$settingManager = new settingManager();
 		$setting = $settingManager->getSetting();
 		$v->assign("setting", $setting);
 
-        $v->setView("CGU");
+        $v->setView("rules");
     }
 }

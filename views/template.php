@@ -48,18 +48,28 @@
 	  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.8&appId=1804945786451180";
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
-	<header>
-		<div class="container">
-			<ul class="col-md-4 col-md-offset-4 nav nav-tabs text-center">
-				<li class="col-md-4"><a href="<?php echo WEBPATH; ?>">Participer</a></li>
-				<li class="col-md-4 active"><a href="<?php echo WEBPATH; ?>/gallery">Galerie</a></li>
-				<li class="col-md-4">
-					<div class="fb-share-button" data-href="https://egl.fbdev.fr/Facebook/" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fegl.fbdev.fr%2FFacebook%2F&amp;src=sdkpreparse">Partager</a></div>
-				</li>
-			</ul>
-		</div>	
-	</header>
+	
 	<div id="content" class="container">
+		<div class="row">
+			<header class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1">
+				<nav>
+					<ul class="col-md-12 nav nav-tabs text-center">
+						<li class="col-xs-4 col-md-3 menu-li">
+							<a href="<?php echo WEBPATH; ?>">Accueil</a>
+						</li>
+						<li class="col-xs-4 col-sm-4 col-md-3 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/gallery') echo "active"; ?>">
+							<a href="<?php echo WEBPATH; ?>/gallery">Galerie</a>
+						</li>
+						<li class="col-xs-4 col-sm-4 col-md-3 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/rules') echo "active"; ?>">
+							<a href="<?php echo WEBPATH; ?>/rules">Règlement</a>
+						</li>
+						<li class="col-xs-4 col-sm-4 col-md-3">
+							<div class="fb-share-button" data-href="https://egl.fbdev.fr/Facebook/" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fegl.fbdev.fr%2FFacebook%2F&amp;src=sdkpreparse">Partager</a></div>
+						</li>
+					</ul>
+				</nav>	
+			</header>
+		</div>
 		<input type="hidden" name="webpath" value="<?php echo WEBPATH; ?>">
 		<?php include $this->view; ?>
 	</div>
@@ -67,7 +77,7 @@
 
 	<!-- Footer des pages -->
 	<footer class="footer col-md-12">
-		<a href="<?php echo WEBPATH; ?>/reglement">Règlement du concours</a> | 
+		<a href="<?php echo WEBPATH; ?>/rules">Règlement du concours</a> | 
 		<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a> 
 		<?php if(isset($isAdmin) && $isAdmin==1) :?>
 			| <a href="<?php echo WEBPATH;?>/admin">Administration</a>
