@@ -73,7 +73,7 @@
 				
 				<?php if(isset($canParticipate) && $canParticipate): ?>
 					
-					<p>Vous avez déjà participé à ce concours, nous vous en remercions !</p>
+					<p>Nous vous remercions d'avoir participé au concours, les gagnants seront désignés peu de temps après.</p>
 					
 					<?php if(isset($cantPublish) && $cantPublish): ?>
 						
