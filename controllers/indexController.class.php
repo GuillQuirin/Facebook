@@ -35,6 +35,9 @@ class indexController extends template{
 
 		//Envoi d'une image depuis l'ordi
 		if(isset($_POST['uploadFile'])){
+
+			$_POST['message'] = (isset($_POST['message'])) ? trim($_POST['message']) : "";
+			
 			if(isset($_FILES['file'])){
 				//Déplacement de l'image dans le serveur
 				$target = __ROOT__.'/web/uploads/' . basename( $_FILES['file']['name']) ; 
@@ -42,7 +45,7 @@ class indexController extends template{
 		        $image['image'] = __ROOT__."/web/uploads/".$_FILES['file']['name'];
 
 				$data = [
-				  'message' => "J'ai participé au concours Pardon-Maman !",
+				  'message' => $_POST['message'],
 				  'source' => $this->fb->fileToUpload($image['image']),
 				];
 
@@ -59,7 +62,8 @@ class indexController extends template{
 		if(isset($_POST['fromFB'])){
 			$infosPhoto = $this->dataApi(TRUE,'/'.$_POST['idPhoto'].'?fields=','id,name,source',"");
 			$data = [
-			  'url' => $infosPhoto['source']
+			  'url' => $infosPhoto['source'],
+			  'message' => $_POST['message']
 			];
 			//Envoi de la photo sur Facebook
 			$idFbPhoto = $this->dataApi(FALSE,'/'.$albumCompetition."/photos","",$data);
@@ -83,12 +87,8 @@ class indexController extends template{
 			//Vérification de la participation unique du joueur à ce concours
 			$canParticipate = $participationManager->checkParticipation($participation);
 
-			if(!$canParticipate){
+			if(!$canParticipate)
 				$idParticipation = $participationManager->saveParticipation($participation);
-			
-				//Envoi d'un message sur le mur du participant
-				$idFbPhoto = $this->dataApi(FALSE,'/'.$user->getIdFacebook()."/feed","J'ai participé au concours de pardon-Maman !");
-			}
 		}
 
 		header('Location: '.WEBPATH);

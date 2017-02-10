@@ -94,6 +94,17 @@ $(document).ready(function(){
         });	 
   	});
 
+  	$(".publish_autorization").click(function(event){
+  		event.preventDefault();
+  		numberRerequestScope = 0;
+
+		if($.inArray("publish_actions",listOfScope) == -1)
+			listOfScope.push('publish_actions');
+
+		checkLoginState();
+		return false;
+  	});
+
 	//Check des autorisations pour les infos manquantes en BDD
 	$('.errorSend a').click(function(){
 		numberRerequestScope = 0;
@@ -112,13 +123,15 @@ $(document).ready(function(){
 	});
 
 	//Check de l'autorisation de publication des photos
-	$('.postPhotos').click(function(){
+	$('.postPhotos').click(function(event){
+		event.preventDefault();
 		numberRerequestScope = 0;
 
 		if($.inArray("publish_actions",listOfScope) == -1)
 			listOfScope.push('publish_actions');
 
 		checkLoginState();
+		return false;
 	});
 
 	//Check des autorisations utilisateur

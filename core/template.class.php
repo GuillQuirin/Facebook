@@ -63,6 +63,16 @@ class template{
         //Vérification de la participation unique du joueur à ce concours
         $canParticipate = $participationManager->checkParticipation($participation);
         $v->assign("canParticipate", $canParticipate);
+
+        //Vérification de la possibilité de publier sur le mur du joueur
+        $table[] = "permissions";
+        $permissions = $this->dataApi(TRUE, '/me?fields=',$table);
+        $cantPublish = true;
+        foreach ($permissions['permissions']['data'] as $key => $value) {
+          if($value['permission']=="publish_actions" && $value['status']=="granted")
+            $cantPublish=false;
+        }
+        $v->assign("cantPublish", $cantPublish);
       }
     }
 
