@@ -139,7 +139,7 @@
 															<button class="postPhotos">Autoriser</button>
 														<?php else: ?>
 															<p>Rédigez un message personnalisé pour vos amis qui consulteraient votre photo</p>
-															<textarea class="col-md-12" name="message"></textarea>
+															<textarea class="col-xs-12 col-md-12" name="message"></textarea>
 														<?php endif; ?>
 											      	</div>
 												    <div class="col-md-6">
@@ -230,7 +230,7 @@
 																	<button class="postPhotos">Autoriser</button>
 																<?php else: ?>
 																	<p>Rédigez un message personnalisé pour vos amis qui consulteraient votre photo</p>
-																	<textarea class="col-md-12" name="message"></textarea>
+																	<textarea class="col-xs-12 col-md-12" name="message"></textarea>
 																<?php endif; ?>
 													      	</div>
 													      	<div class="col-md-6">

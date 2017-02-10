@@ -50,9 +50,9 @@ class indexController extends template{
 				];
 
 				//Envoi de la photo sur Facebook
-				$idFbPhoto = $this->dataApi(FALSE,'/'.$albumCompetition,"/photos",$data);
+				$idFbPhoto = $this->dataApi(FALSE,'/'.$albumCompetition."/photos","",$data);
 				unlink($image['image']);
-				
+				var_dump($idFbPhoto);
 				$infosPhoto = $this->dataApi(TRUE,'/'.$idFbPhoto['id'].'?fields=','id,name,source',"");
 				$ok = TRUE;
 			}
