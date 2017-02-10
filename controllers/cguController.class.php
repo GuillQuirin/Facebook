@@ -1,6 +1,6 @@
 <?php
-class CGUController extends template{
-	public function CGUAction(){
+class cguController extends template{
+	public function cguAction(){
 		$v = new view();
 		$this->assignConnectedProperties($v);
 
@@ -11,6 +11,6 @@ class CGUController extends template{
 		$setting = $settingManager->getSetting();
 		$v->assign("setting", $setting[0]);
 
-        $v->setView("CGU");
+        $v->setView("cgu");
     }
 }
