@@ -78,7 +78,7 @@
 	<!-- Footer des pages -->
 	<footer class="footer col-md-12">
 		<a href="<?php echo WEBPATH; ?>/rules">Règlement du concours</a> | 
-		<a href="<?php echo WEBPATH; ?>/CGU">Conditions d'utilisations</a> 
+		<a href="<?php echo WEBPATH; ?>/cgu">Conditions d'utilisations</a> 
 		<?php if(isset($isAdmin) && $isAdmin==1) :?>
 			| <a href="<?php echo WEBPATH;?>/admin">Administration</a>
 		<?php endif; ?>

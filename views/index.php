@@ -125,7 +125,7 @@
 										    <div class="modal-content">
 										      <div class="modal-header">
 										      	<p>Assurez-vous d'être le propriétaire du contenu que vous envoyez.</p> 
-												<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/CGU'; ?>" class="cgu-link">conditions d'utilisations</a>.</p>
+												<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/cgu'; ?>" class="cgu-link">conditions d'utilisations</a>.</p>
 										      </div>
 										      <div class="modal-body">
 										      	<img src='<?php echo $photo['source']; ?>' alt="photo de l'utilisateur">
@@ -215,7 +215,7 @@
 													    <div class="modal-content">
 													      <div class="modal-header">
 													        <p>Assurez-vous d'être le propriétaire du contenu que vous envoyez.</p> 
-															<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/CGU'; ?>">conditions d'utilisations</a>.</p>
+															<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/cgu'; ?>">conditions d'utilisations</a>.</p>
 															<p>Un album "Pardon-Maman" sera créé dans la section Photo de votre compte Facebook, celui-ci aura la même visibilité que vous avez indiqué en vous connectant.</p>
 													      </div>
 													      <div class="modal-body">
@@ -313,7 +313,7 @@
 <!-- Footer des pages -->
 <footer class="footer col-md-12">
 	<a href="<?php echo WEBPATH; ?>/rules" class="footer-link">Règlement du concours</a> | 
-	<a href="<?php echo WEBPATH; ?>/CGU" class="footer-link">Conditions d'utilisations</a> 
+	<a href="<?php echo WEBPATH; ?>/cgu" class="footer-link">Conditions d'utilisations</a> 
 	<?php if(isset($isAdmin) && $isAdmin==1) :?>
 		| <a href="<?php echo WEBPATH;?>/admin" class="footer-link">Administration</a>
 	<?php endif; ?>
