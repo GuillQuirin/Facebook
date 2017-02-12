@@ -12,7 +12,7 @@
 		<?php if(isset($user)) : ?>
 
 			<?php if(isset($isAdmin) && $isAdmin==1) : //Administrateur connecté  ?>
-				<p><a href="<?php echo WEBPATH; ?>/index">Accueil</a></p>
+				<p><a href="<?php echo WEBPATH; ?>/index"><button>Accueil</button></a></p>
 			<?php endif; ?>
 			
 			<p><button id="logout" style="color:red;">Se déconnecter</button></p>
