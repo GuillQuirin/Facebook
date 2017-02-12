@@ -1,7 +1,7 @@
 
-<h2 class="text-center text-uppercase col-md-12">Liste des concours</h2>
+<h2 class="text-center text-uppercase col-sm-12 col-md-12">Liste des concours</h2>
 
-<table id="listCompetitions" class="table stripe responsive order-column text-center col-md-12">
+<table id="listCompetitions" class="table stripe responsive order-column text-center col-sm-12 col-md-12">
 	<thead>
 		<th>Nom</th>
 		<th>Début</th>
@@ -24,6 +24,8 @@
 								echo "Actif"; 
 							if($competition->getActive()==2)
 								echo "Terminé";
+							else
+								echo "En attente";
 						?>
 					</td>
 					<td>
@@ -49,7 +51,7 @@
 </table>
 
 
-<div class="col-md-12 btn-new-competition">
+<div class="col-sm-12 col-md-12 btn-new-competition">
 	<button type="button" 
 			data-toggle="modal" 
 			data-target="#CreateCompetition" 

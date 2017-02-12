@@ -26,7 +26,7 @@
 		<h2>TENTE DE GAGNER <br> <?php echo $competition->getPrize(); ?></h2>
 		<?php 
 			if($competition->getUrl_prize()!==NULL)
-				echo "<div class='col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3'><img class='img-responsive' src='".$competition->getUrl_prize()."' alt='photo du prix'></div>";
+				echo "<div class='col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3'><img class='img-responsive' src='".$competition->getUrl_prize()."' alt='photo du prix'></div>";
 		?>
 		<?php endif; ?>
 	</div>
@@ -34,7 +34,7 @@
 <input type="hidden" id="isConnected" value="<?php echo (isset($_SESSION['ACCESS_TOKEN'])) ? 1 : 0; ?>">
 <?php if(!isset($_SESSION['idFB'])) : ?>
 	<div class="row">
-		<p class="col-md-8 col-md-offset-2 text-center">Connectez-vous à l'application et admirez les chefs d'oeuvres que vous réservent les autres participants</p>
+		<p class="col-sm-8 col-md-offset-2 col-md-8 col-md-offset-2 text-center">Connectez-vous à l'application et admirez les chefs d'oeuvres que vous réservent les autres participants</p>
 	</div>
 <?php endif; ?>
 <div class="row">
@@ -92,7 +92,7 @@
 						if(isset($images["photos"])) :
 						?>
 						
-						  <div class="panel panel-default col-md-6 col-md-offset-3">
+						  <div class="panel panel-default col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
 						    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 							    <div class="panel-heading" role="tab" id="headingOne">
 							      <h4 class="panel-title">			        
@@ -105,7 +105,7 @@
 						        <div class="row">
 						        <?php
 									foreach ($images["photos"]["data"] as $key => $photo) :?>
-										<div class="col-xs-6 col-md-4">
+										<div class="col-xs-6 col-sm-4 col-md-4">
 										    <a class="thumbnail cursor-pointer">
 										      <img src='<?php echo $photo['source']; ?>' 
 													data-toggle='modal' 
@@ -142,10 +142,10 @@
 															<textarea class="col-xs-12 col-md-12" name="message"></textarea>
 														<?php endif; ?>
 											      	</div>
-												    <div class="col-md-6">
+												    <div class="col-sm-6 col-md-6">
 											        	<button type="button" class="btn" data-dismiss="modal">Annuler</button>
 											        </div>
-											        <div class="col-md-6">
+											        <div class="col-sm-6 col-md-6">
 												       	<button type="submit" class="btn sendPicture">Envoyer cette photo</button>
 													</div>
 													<div class="errorSend text-left">
@@ -183,7 +183,7 @@
 					  	if(isset($images['albums'])) :
 							foreach ($images["albums"]["data"] as $key => $album) :?>
 							  
-							  <div class="panel panel-default col-md-6 col-md-offset-3">
+							  <div class="panel panel-default col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
 							  	<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $album['id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $album['id']; ?>">
 								    <div class="panel-heading" role="tab" id="heading<?php echo $album['id']; ?>">
 								      <h4 class="panel-title">
@@ -199,7 +199,7 @@
 											foreach ($album['photos']["data"] as $key => $photo): 
 												if(!in_array($photo['id'],$listAlonePic)): 
 												?>
-												<div class="col-xs-6 col-md-4">
+												<div class="col-xs-6 col-sm-4 col-md-4">
 													<a class="thumbnail cursor-pointer">
 														<img src='<?php echo $photo['source']; ?>' 
 															data-toggle='modal' 
@@ -233,10 +233,10 @@
 																	<textarea class="col-xs-12 col-md-12" name="message"></textarea>
 																<?php endif; ?>
 													      	</div>
-													      	<div class="col-md-6">
+													      	<div class="col-sm-6 col-md-6">
 													        	<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 													        </div>
-													        <div class="col-md-6">
+													        <div class="col-sm-6 col-md-6">
 															    <button type="submit" class="btn btn-default sendPicture">Envoyer cette photo</button>
 															</div>
 															<div class="errorSend text-left">
@@ -273,7 +273,7 @@
 					</div>
 
 					<div class="row">
-						<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 text-center">
+						<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 text-center">
 							<h3>....ou en important une photo depuis votre ordinateur.</h3>
 							
 							<?php if(isset($upload)): ?>

@@ -51,7 +51,7 @@
 	
 	<div id="content" class="container">
 		<div class="row">
-			<header class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1">
+			<header class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
 				<nav>
 					<ul class="col-md-12 nav nav-tabs text-center">
 						<li class="col-xs-4 col-md-3 menu-li">

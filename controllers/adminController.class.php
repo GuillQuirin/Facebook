@@ -85,8 +85,8 @@ class adminController extends template{
 			$competition->setActive(2);
 			$competitionManager->updateCompetition($competition);
 
-			$this->sendResults();
-
+			$this->checkWinner();
+			
 		}
 	}
 
