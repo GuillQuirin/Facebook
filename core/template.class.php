@@ -180,7 +180,6 @@ class template{
     if(isset($this->competition)){
       $competition = $this->competition;//$competitionManager->checkEndOfCompetition($this->competition);
       if($competition){
-        var_dump('coucou2');
   
         $participationManager = new participateManager();
         $users = $participationManager->getParticipantsByCompetition($this->competition,3);
@@ -207,7 +206,6 @@ class template{
           $user = $userManager->getUserByIdFb($admin);
           if($user){ //Si enregistré dans la liste des utilisateurs de l'application
             $this->envoiMail($user->getEmail(),"Résultat du concours", "Test");
-            var_dump('coucou3');
           }
         }
       }
