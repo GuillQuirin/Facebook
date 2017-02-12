@@ -7,7 +7,7 @@ class competitionManager extends basesql{
 
 
     public function searchCompetitions(){
-    	$sql = "SELECT * FROM ".$this->table." WHERE active=1 ORDER BY start_date";
+    	$sql = "SELECT * FROM ".$this->table." WHERE active=1 AND start_date<=CURRENT_DATE() AND end_date>=CURRENT_DATE() ORDER BY start_date";
 		
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute();
