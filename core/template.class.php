@@ -177,9 +177,12 @@ class template{
 
   protected function checkWinner(){
     $competitionManager = new competitionManager();
+    var_dump('coucou');
     if(isset($this->competition)){
+      var_dump('coucou1');
       $competition = $competitionManager->checkEndOfCompetition($this->competition);
       if($competition){
+        var_dump('coucou2');
   
         $participationManager = new participateManager();
         $users = $participationManager->getParticipantsByCompetition($this->competition,3);
@@ -204,8 +207,10 @@ class template{
         $admins = $this->bringListAdmins();
         foreach ($admins as $key => $admin) {
           $user = $userManager->getUserByIdFb($admin);
-          if($user) //Si enregistré dans la liste des utilisateurs de l'application
+          if($user){ //Si enregistré dans la liste des utilisateurs de l'application
             $this->envoiMail($user->getEmail(),"Résultat du concours", "Test");
+            var_dump('coucou3');
+          }
         }
       }
     }

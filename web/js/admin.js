@@ -145,8 +145,8 @@ $(document).ready(function() {
                 }
             })
             .done(function(result) {
-                //console.log(result);
-                location.reload();
+                console.log(result);
+                //location.reload();
             });
         }
     });
