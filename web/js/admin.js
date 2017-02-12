@@ -120,6 +120,10 @@ $(document).ready(function() {
         "ordering": true,
         "info":     true,
         responsive: true,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
         "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Tous"]],
         "language": {
             "lengthMenu": "Affichage de _MENU_ résultats par page",
@@ -131,7 +135,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.winner').click(function(){
+    $('.winner').on("click",function(){
         if(confirm("Attention: une fois le vainqueur selectionné, le tournoi ne sera plus modifiable et sera automatiquement cloturé.")){
             $.ajax({
               method: "POST",
