@@ -51,7 +51,7 @@
 </table>
 
 
-<div class="col-sm-12 col-md-12 btn-new-competition">
+<div class="row btn-new-competition">
 	<button type="button" 
 			data-toggle="modal" 
 			data-target="#CreateCompetition" 
