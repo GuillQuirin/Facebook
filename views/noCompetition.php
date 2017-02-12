@@ -12,13 +12,13 @@
 		<?php if(isset($user)) : ?>
 
 			<?php if(isset($isAdmin) && $isAdmin==1) : //Administrateur connecté  ?>
-				<p><a href="<?php echo WEBPATH; ?>/index"><button>Accueil</button></a></p>
+				<p><a href="<?php echo WEBPATH; ?>/index"><button style="font-weight:bold;color:red;">Accueil</button></a></p>
 			<?php endif; ?>
 			
-			<p><button id="logout" style="color:red;">Se déconnecter</button></p>
+			<p><button id="logout" style="font-weight:bold;color:red;">Se déconnecter</button></p>
 		
 		<?php else : ?>
-			<p><button id="login" style="color:red;">Connexion administrateur</button></p>
+			<p><button id="login" style="font-weight:bold;color:red;">Connexion administrateur</button></p>
 		
 		<?php endif; ?>
 	</div>
