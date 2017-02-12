@@ -22,7 +22,7 @@
 						<?php 
 							if($competition->getActive()==1) 
 								echo "Actif"; 
-							if($competition->getActive()==2)
+							else if($competition->getActive()==2)
 								echo "Terminé";
 							else
 								echo "En attente";
