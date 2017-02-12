@@ -41,7 +41,7 @@
 				<nav class="navbar navbar-default">
 					<div id="navbar" class="navbar-collapse">
 						<ul class="nav navbar-nav text-center">
-							<li class="col-xs-4 col-md-2 menu-li">
+							<li class="col-xs-4 col-sm-4 col-md-2 menu-li">
 								<a href="<?php echo WEBPATH; ?>">Accueil</a>
 							</li>
 							<li class="col-xs-4 col-sm-4 col-md-2 menu-li">
@@ -56,7 +56,7 @@
 							<li class="col-xs-4 col-sm-4 col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/export') echo "active"; ?>">
 								<a href="<?php echo WEBPATH; ?>/export">Export des données</a>
 							</li>
-							<li class="col-xs-4 col-sm-4 col-md-2 <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
+							<li class="col-xs-4 col-sm-4 col-md-2 menu-li<?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
 								<a href="<?php echo WEBPATH; ?>/setting">Reglement et CGU</a>
 							</li>
 						</ul>
