@@ -177,10 +177,8 @@ class template{
 
   protected function checkWinner(){
     $competitionManager = new competitionManager();
-    var_dump('coucou');
     if(isset($this->competition)){
-      var_dump('coucou1');
-      $competition = $competitionManager->checkEndOfCompetition($this->competition);
+      $competition = $this->competition;//$competitionManager->checkEndOfCompetition($this->competition);
       if($competition){
         var_dump('coucou2');
   
