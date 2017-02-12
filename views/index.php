@@ -316,6 +316,7 @@
 	<a href="<?php echo WEBPATH; ?>/cgu" class="footer-link">Conditions d'utilisations</a> 
 	<?php if(isset($isAdmin) && $isAdmin==1) :?>
 		| <a href="<?php echo WEBPATH;?>/admin" class="footer-link">Administration</a>
+		| <a href="<?php echo WEBPATH;?>/noCompetition" class="footer-link">Aperçu sans concours</a>
 	<?php endif; ?>
 	<div class="fb-share-button" data-href="https://egl.fbdev.fr/Facebook/" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fegl.fbdev.fr%2FFacebook%2F&amp;src=sdkpreparse">Partager</a></div>
 </footer>
