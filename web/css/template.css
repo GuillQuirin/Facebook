@@ -1,5 +1,5 @@
 #content{
-	min-height: 700px;
+	height: 150px;
 }
 
 #none{
@@ -12,4 +12,29 @@
 #none a{
 	color: blue;
 	text-decoration: underline;
+}
+
+.navbar, ul>li {
+	font-family: 'Architects Daughter', cursive;
+}
+
+ .nav-justified{
+ 	font-size: 16px;
+ }
+
+.navbar{
+	font-size : 20px;
+}
+
+.navbar-nav {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus, .nav-tabs.nav-justified>.active>a:hover{
+	background-color: black;
+}
+
+.tab-content>.tab-pane {
+	padding : 20px;
 }
