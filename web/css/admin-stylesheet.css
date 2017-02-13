@@ -1,17 +1,32 @@
+html, body {
+    height:100%;
+    width: 100%;
+} 
+
+
 body {
-	background-color : #fbffba;
+	background-image : url("http://www.fixabay.com/reimg/resize-img.php?src=http://www.fixabay.com/images/Abstract/gc34xpzi3dr.jpg&h=960&w=1280");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: left top;
+  
 }
 
-h2 {font-family: 'Architects Daughter', cursive; font-weight: bold; margin-bottom: 5%;}
+h2 {
+  font-family: 'Architects Daughter', cursive; 
+  font-weight: bold; 
+  margin-bottom: 5%;
+}
 
+h1{
+  color: white;
+}
 
- 
 .nav>li>a{
-  padding-right : 25px !important;
-  padding-left : 25px !important;
+  padding-right : 15px !important;
+  padding-left : 15px !important;
   padding-top: 15px !important;
   color: white !important;
-  min-height: 70px;
 }
 
 .btn-new-competition {margin-top: 20px; margin-bottom: 60px;}
@@ -24,23 +39,33 @@ h2 {font-family: 'Architects Daughter', cursive; font-weight: bold; margin-botto
     text-overflow: ellipsis;
     white-space: inherit;
 }
+
 #CreateCompetition textarea{
   width: 100%;
 }
+
 .footer {
-  /*position: absolute;
+  position: absolute;
   bottom: 0;
-  width: 100%;*/
-  /* Set the fixed height of the footer here */
-  height: 50px;
-  text-align : center;
+  width: 100%;
+  height: 25px;
+  background-color: #222;
+  color : white;
+  font-size : 18px;
 }
+
+a {
+  color: white;
+}
+
 table th, table td{
   text-align: center;
 }
+
 table{
   background-color: #e8e8e8;
 }
+
 .bord { 
 	text-align : center;
 	background-color : white;
@@ -53,7 +78,10 @@ table{
   border-color: #f4861f;
   color : white;
 }
-.navbar-default .navbar-brand {color: #ffffff;}
+
+.navbar-default .navbar-brand {
+  color: #ffffff;
+}
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
@@ -85,11 +113,18 @@ hr {border-top-color: orange;}
 
 
 table.col-md-12{
-background-color: transparent;
+  background-color: transparent;
 }
 
 table.dataTable.no-footer{
   border: 0;
 }
 
+#export{
+  margin-top:40%;
+}
 
+#design{
+  margin-left:0px;
+  padding-left: 0px;
+}
