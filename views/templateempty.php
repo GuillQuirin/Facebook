@@ -11,9 +11,9 @@
 		>
 		<meta name="description" content="Erreur d'accès à la page">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/bootstrap.min.css">';?>
-		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/general-stylesheet.css">';?>
-		<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/templateempty.css" media="screen">';?>
+		<link rel="stylesheet" href="<?php echo WEBPATH; ?>/web/css/bootstrap.min.css">
+		<link rel="stylesheet" href="<?php echo WEBPATH; ?>/web/css/general-stylesheet.css">
+		<link rel="stylesheet" href="<?php echo WEBPATH; ?>/web/css/templateempty.css" media="screen">
 		<?php echo (isset($css)) ? '<link rel="stylesheet" href="'.WEBPATH.'/web/css/'.$css.'-stylesheet.css">' : '';?>	
 		<link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
 

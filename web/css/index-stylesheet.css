@@ -46,6 +46,14 @@ img {max-width: 100%; max-height: 500px;}
 
 .cgu-link:hover {color: #730932;}
 
+footer{
+	position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 18px;
+}
+
+
 footer .navbar {margin-bottom: 0;}
 
 .footer-link:hover {color: #730932 !important;}
