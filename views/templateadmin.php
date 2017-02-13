@@ -7,15 +7,15 @@
 	<meta name="robots" content="index,follow" />
 	<title></title>
 	<link rel="shortcut icon" 
-			href="https://scontent-fra3-1.xx.fbcdn.net/v/	t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" 
-			type="image/x-icon"
+	href="https://scontent-fra3-1.xx.fbcdn.net/v/	t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" 
+	type="image/x-icon"
 	>
 	<meta name="description" content=''>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-	<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/template.css" media="screen">';?>
 	<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/general-stylesheet.css">';?>
 	<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/bootstrap.min.css">';?>
+	<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/template.css" media="screen">';?>
 	<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/lib/DataTables/datatables.min.css">';?>
 	<?php echo '<link rel="stylesheet" href="' . WEBPATH . '/web/css/datepicker.min.css">';?>
 	<?php echo '<script src="'.WEBPATH.'/web/js/jquery.js"></script>';?>
@@ -35,59 +35,58 @@
 </head>
 
 <body>
-	<div id="content" class="container">
-		<div class="row">
-			<header class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1">
-				<nav class="navbar navbar-default">
-					<div id="navbar" class="navbar-collapse">
-						<ul class="nav navbar-nav text-center">
-							<li class="col-xs-4 col-sm-4 col-md-2 menu-li">
-								<a href="<?php echo WEBPATH; ?>">Accueil</a>
-							</li>
-							<li class="col-xs-4 col-sm-4 col-md-2 menu-li">
-								<a href="<?php echo WEBPATH; ?>/gallery">Galerie</a>
-							</li>
-							<li class="col-xs-4 col-sm-4 col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/admin') echo "active"; ?>">
-								<a href="<?php echo WEBPATH; ?>/admin">Liste des concours</a>
-							</li>
-							<li class="col-xs-4 col-sm-4 col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/design') echo "active"; ?>">
-								<a href="<?php echo WEBPATH; ?>/design">Design</a>
-							</li>
-							<li class="col-xs-4 col-sm-4 col-md-2 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/export') echo "active"; ?>">
-								<a href="<?php echo WEBPATH; ?>/export">Export des données</a>
-							</li>
-							<li class="col-xs-4 col-sm-4 col-md-2 menu-li<?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
-								<a href="<?php echo WEBPATH; ?>/setting">Reglement et CGU</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</header>
+	<nav class="navbar navbar-inverse">
+		<div id="navbar" class="navbar-fluid">
+			<ul class="nav navbar-nav text-center">
+				<li>
+					<a href="<?php echo WEBPATH; ?>">Accueil</a>
+				</li>
+				<li >
+					<a href="<?php echo WEBPATH; ?>/gallery">Galerie</a>
+				</li>
+				<li class="<?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/admin') echo "active"; ?>">
+					<a href="<?php echo WEBPATH; ?>/admin">Concours</a>
+				</li>
+				<li class="<?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/design') echo "active"; ?>">
+					<a href="<?php echo WEBPATH; ?>/design">Design</a>
+				</li>
+				<li class="<?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/export') echo "active"; ?>">
+					<a href="<?php echo WEBPATH; ?>/export">Export des données</a>
+				</li>
+				<li class="<?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
+					<a href="<?php echo WEBPATH; ?>/setting">Règlement et CGU</a>
+				</li>
+			</ul>
 		</div>
+	</nav>
+</header>
+</div>
+<div id="content" class="container">
+	<input type="hidden" name="webpath" value="<?php echo WEBPATH; ?>">
+	<?php include $this->view; ?>
+</div>
 
-		<input type="hidden" name="webpath" value="<?php echo WEBPATH; ?>">
-		<?php include $this->view; ?>
-	</div>
 
-
-	<!-- Footer des pages -->
-	<footer class="footer col-md-12">
+<!-- Footer des pages -->
+<footer class="footer">
+	<div class="container">
 		<a href="<?php echo WEBPATH; ?>/rules">Règlement du concours</a> | 
 		<a href="<?php echo WEBPATH; ?>/cgu">Conditions d'utilisations</a> | 
 		<?php if(isset($isAdmin) && $isAdmin==1) :?>
 			<a href="<?php echo WEBPATH;?>/admin">Administration</a>
 		<?php endif; ?>
-	</footer>
+	</div>
+</footer>
 
-	<?php 
-	if(isset($js)){ 
-		if(is_array($js)){
-			foreach ($js as $key => $value)
-				echo '<script src="'.WEBPATH.'/web/js/'.$value.'.js"></script>';
-		}
-		else 
-			echo '<script src="'.WEBPATH.'/web/js/'.$js.'.js"></script>';
+<?php 
+if(isset($js)){ 
+	if(is_array($js)){
+		foreach ($js as $key => $value)
+			echo '<script src="'.WEBPATH.'/web/js/'.$value.'.js"></script>';
 	}
-	?>
+	else 
+		echo '<script src="'.WEBPATH.'/web/js/'.$js.'.js"></script>';
+}
+?>
 </body>
 </html>
