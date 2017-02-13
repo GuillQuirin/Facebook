@@ -1,5 +1,5 @@
-<div class="container">
-	<div class="col-md-5">
+<div class="container" id="design">
+	<div class="col-sm-5">
 		<h2 class="text-uppercase"> Selection d'un design existant </h2>
 		<form>
 			<div class="input-group">
@@ -13,64 +13,10 @@
 				</span>
 			</div><br>
 		</form>
-		<form>
-			<hr>
-			<h2 class="text-uppercase"> Création d'un design </h2>
-			<div class="form-group">
-				<label for="name">Nom du design :</label>
-				<input type="text" class="form-control" name="name" id="name" required>
-			</div>
-			<div class="form-group">
-				<label for="url">URL de l'image de fond :</label>
-				<input type="text" class="form-control" name="url" id="url" >
-			</div>
-			<div class="col-md-12 no-padding text-center">
-				<h3 class="no-margin">OU</h3>
-			</div>
-			<div class="form-group">
-				<label for="color">Couleur du fond :</label>
-				<input type="text" class="jscolor {hash:true} form-control" name="color" id="color" placeholder="#">
-			</div>
-			<div class="form-group">
-				<label for="fontColor">Couleur de la police :</label>
-				<input type="text" class="jscolor {hash:true} form-control" name="fontColor" id="fontColor" required>
-			</div>
-			<div class="form-group">
-				<label for="fontColorForm">Couleur des champs du formulaire :</label>
-				<input type="text" class="jscolor {hash:true} form-control" name="fontColorForm" id="fontColorForm" required>
-			</div>
-			<div class="form-group">
-				<label for="fontSize">Taille de la police :</label>
-				<input type="number" class="form-control" name="fontSize" id="fontSize" step="1" min="12" max="16" required>
-			</div> 
-			<div id="hsvflat"></div>
-			<div class="form-group">
-				<label for="fontStyle">Style de la police du texte :</label>
-				<select class="form-control" name="fontStyle" id="fontStyle" required>
-					<option value="Arial">Arial</option>
-					<option value="Arial, sans serif">Arial, sans serif</option> 
-					<option value="Comic Sans MS">Comic Sans MS</option> 
-					<option value="Courier New">Courier New</option> 
-					<option value="Helvetica">Helvetica</option>
-					<option value="Helvetica, sans serif">Helvetica, sans serif</option> 
-					<option value="Impact">Impact</option>                               
-				</select>
-			</div>
-			<button type="submit" id="changeDesign" class="btn btn-success">Appliquer le design</button>
-			<button type="submit" id="saveTemplate" class="btn btn-success">Enregistrer sous un nouveau template</button>
-		</form>
 	</div>
-	<div class="col-md-6 col-md-offset-1">
+	<div class="col-sm-6 col-sd-offset-1">
 		<h2 class="text-uppercase">Aperçu</h2>
-		<div class="col-md-12 apercu" id="apercu">
-			<h2 class="text-uppercase"> Selection d'un design existant </h2>
-			<div class="input-group">
-				<select class="form-control" name="designExistExemple" id="designExistExemple">                       
-				</select>
-				<span class="input-group-btn">
-					<button type="submit" class="btn btn-success">Appliquer le design</button>
-				</span>
-			</div><br>
+		<div class="col-md-12 apercu" id="apercu"><br>
 			<h2 class="text-uppercase"> Création d'un design </h2>
 			<div class="form-group">
 				<label for="name">Nom du design :</label>
@@ -89,9 +35,7 @@
 				<select class="form-control" name="fontStyle" id="fontStyle" required>
 					<option value="">Arial</option>                               
 				</select>
-			</div>
-			<button type="submit" class="btn btn-success">Appliquer le design</button>
-			<button type="submit" class="btn btn-success">Enregistrer sous un nouveau template</button><br><br>
+			</div><br>
 		</div>
 	</div>
 </div>
