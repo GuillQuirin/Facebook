@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs nav-justified">
 	<li class="active"><a data-toggle="tab" href="#concours">Liste des concours</a></li>
-	<li><a data-toggle="tab" href="#part">Liste des participants au concours actuel</a></li>
+	<li><a data-toggle="tab" href="#part">Liste des actuels participants</a></li>
 	<li><a data-toggle="tab" href="#photos">Liste des photos signalées</a></li>
 </ul>
 
@@ -152,7 +152,7 @@
 					<div class="form-group row">
 						<label for="description" class="col-xs-3 col-form-label text-left">Description</label>
 						<div class="col-xs-9">
-							<textarea class="form-control" name="description" rows="3" required></textarea>
+							<textarea class="form-control" name="description" rows="3"></textarea>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -170,13 +170,13 @@
 					<div class="form-group row">
 						<label for="prize" class="col-xs-3 col-form-label text-left">Lot à gagner</label>
 						<div class="col-xs-9">
-							<input type="text" name="prize" class="form-control" required>
+							<input type="text" name="prize" class="form-control">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="prize" class="col-xs-3 col-form-label text-left">Url du lot</label>
 						<div class="col-xs-9">
-							<input type="text" name="url_prize" class="form-control" required>
+							<input type="text" name="url_prize" class="form-control">
 						</div>
 					</div>
 					<div class="form-check row">

@@ -12,7 +12,7 @@ class settingController extends template{
 		$listSetting = $settingManager->getSetting();
 		$v->assign("listSetting", $listSetting);
 
-		$v->setView("updateCGU","templateadmin");
+		$v->setView("setting","templateadmin");
 	}
 
 	public function saveRegulationAction(){
