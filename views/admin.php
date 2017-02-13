@@ -1,35 +1,40 @@
+<ul class="nav nav-tabs nav-justified">
+	<li class="active"><a data-toggle="tab" href="#concours">Liste des concours</a></li>
+	<li><a data-toggle="tab" href="#part">Liste des participants au concours actuel</a></li>
+	<li><a data-toggle="tab" href="#photos">Liste des photos signalées</a></li>
+</ul>
 
-<h2 class="text-center text-uppercase col-sm-12 col-md-12">Liste des concours</h2>
-
-<table id="listCompetitions" class="table stripe responsive order-column text-center col-sm-12 col-md-12">
-	<thead>
-		<th>Nom</th>
-		<th>Début</th>
-		<th>Fin</th>
-		<th>Nombre de participants</th>
-		<th>Statut</th>
-		<th>Edition</th>
-	</thead>
-	<tbody>
-		<?php if(isset($listCompetitions)): ?>
-			<?php foreach ($listCompetitions as $key => $competition) { ?>
-				<tr>
-					<td name='name'> <?php echo $competition->getName(); ?></td>
-					<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())); ?></td>
-					<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())); ?></td>
-					<td name='totalParticipants' > <?php echo $competition->getTotalParticipants(); ?></td>
-					<td name='active'>
-						<?php 
+<div class="tab-content">
+	<div id="concours" class="tab-pane fade in active">
+		<table id="listCompetitions" class="table stripe responsive order-column text-center col-sm-12">
+			<thead>
+				<th>Nom</th>
+				<th>Début</th>
+				<th>Fin</th>
+				<th>Nombre de participants</th>
+				<th>Statut</th>
+				<th>Edition</th>
+			</thead>
+			<tbody>
+				<?php if(isset($listCompetitions)): ?>
+					<?php foreach ($listCompetitions as $key => $competition) { ?>
+					<tr>
+						<td name='name'> <?php echo $competition->getName(); ?></td>
+						<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())); ?></td>
+						<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())); ?></td>
+						<td name='totalParticipants' > <?php echo $competition->getTotalParticipants(); ?></td>
+						<td name='active'>
+							<?php 
 							if($competition->getActive()==1) 
 								echo "Actif"; 
 							else if($competition->getActive()==2)
 								echo "Terminé";
 							else
 								echo "En attente";
-						?>
-					</td>
-					<td>
-						<button 
+							?>
+						</td>
+						<td>
+							<button 
 							class="btn <?php echo ($competition->getActive()==2) ? "btn-success" : "btn-warning"; ?>"
 							data-toggle="modal" 
 							data-target="#ModalEdit" 
@@ -42,92 +47,88 @@
 							data-url="<?php echo $competition->getUrl_prize(); ?>"
 							data-active="<?php echo $competition->getActive(); ?>">
 							<?php echo ($competition->getActive()==2) ? "Consulter" : "Modifier"; ?>
-						</button>
-					</td>
-				</tr>
-			<?php } ?>
-		<?php endif; ?>
-	</tbody>
-</table>
-
-
-<div class="row btn-new-competition">
-	<button type="button" 
+							</button>
+						</td>
+					</tr>
+					<?php } ?>
+				<?php endif; ?>
+			</tbody>
+		</table>
+		<div class="row btn-new-competition">
+			<button type="button" 
 			data-toggle="modal" 
 			data-target="#CreateCompetition" 
 			class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 btn btn-success">
 			Créer un concours !
-	</button>
-</div>
-
-<h2 class="text-center text-uppercase col-md-12">Liste des participants du concours actuel</h2>
-<div class="col-md-12">
-<table id="listUsers" class="table stripe order-column text-center col-md-12">
-	<thead>
-		<th>Nom</th>
-		<th>Prenom</th>
-		<th>Email</th>
-		<th>Age</th>
-		<th>Emplacement</th>
-		<th>Nombre de votes</th>
-		<th>Action</th>
-	</thead>
-	<tbody>
-		<?php if(isset($listUsers)) : ?>
-			<?php foreach ($listUsers as $key => $participant) : ?>
-				<tr>
-					<td>
-						<?php echo strtoupper($participant['last_name']); ?>	
-					</td>
-					<td>
-						<?php echo ucfirst($participant['first_name']); ?>
-					</td>
-					<td>
-						<?php echo $participant['email']; ?>
-					</td>
-					<td>
-						<?php echo $participant['age_range']; ?>
-					</td>
-					<td>
-						<?php echo $participant['location']; ?>
-					</td>
-					<td>
-						<?php echo $participant['nb_votes']; ?>
-					</td>
-					<td> 
-						<button class="btn btn-success winner" data-id="<?php echo $participant['id_user']; ?>">Désigner vainqueur</button>
-					</td>
-				</tr>
-			<?php endforeach; ?>  
-		<?php endif ?>
-	</tbody>
-</table>
-</div>
-
-<h2 class="text-center text-uppercase col-md-12">Liste des photos signalées</h2>
-<div class="col-md-12">
-<table id="listReportedPhoto" class="table stripe order-column text-center col-md-12">
-	<thead>
-		<th>Nom du participant</th>
-		<th>Lien de l'image signalée</th>
-		<th>Action</th>
-	</thead>
-	<tbody>
-		<?php if(isset($listReportedPhoto)) : ?>
-			<?php foreach ($listReportedPhoto as $key => $photo) : ?>
-				<tr>
-					<td>
-						<?php echo strtoupper($photo->getLast_name())." ".ucfirst($photo->getFirst_name()); ?>	
-					</td>
-					<td><a href="<?php echo $photo->getUrl_photo(); ?>" target="_blank" name="url_photo">Lien de la photo</a></td>
-					<td> 
-						<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId_participate()."' class='btn btn-success lock_photo'>Déverrouillée</button>" : "<button id='photo-".$photo->getId_participate()."' class='btn btn-danger unlock_photo'>Verrouillée</button>"?>
-					</td>
-				</tr>
-			<?php endforeach; ?>  
-		<?php endif ?>
-	</tbody>
-</table>
+			</button>
+		</div>
+	</div>
+	<div id="part" class="tab-pane fade">
+			<table id="listUsers" class="table stripe order-column text-center col-sm-12">
+				<thead>
+					<th>Nom</th>
+					<th>Prenom</th>
+					<th>Email</th>
+					<th>Age</th>
+					<th>Emplacement</th>
+					<th>Nombre de votes</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+					<?php if(isset($listUsers)) : ?>
+						<?php foreach ($listUsers as $key => $participant) : ?>
+							<tr>
+								<td>
+									<?php echo strtoupper($participant['last_name']); ?>	
+								</td>
+								<td>
+									<?php echo ucfirst($participant['first_name']); ?>
+								</td>
+								<td>
+									<?php echo $participant['email']; ?>
+								</td>
+								<td>
+									<?php echo $participant['age_range']; ?>
+								</td>
+								<td>
+									<?php echo $participant['location']; ?>
+								</td>
+								<td>
+									<?php echo $participant['nb_votes']; ?>
+								</td>
+								<td> 
+									<button class="btn btn-success winner" data-id="<?php echo $participant['id_user']; ?>">Désigner vainqueur</button>
+								</td>
+							</tr>
+						<?php endforeach; ?>  
+					<?php endif ?>
+				</tbody>
+			</table>
+	</div>
+	<div id="photos" class="tab-pane fade">
+			<table id="listReportedPhoto" class="table stripe order-column text-center col-sm-12">
+				<thead>
+					<th>Nom du participant</th>
+					<th>Lien de l'image signalée</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+					<?php if(isset($listReportedPhoto)) : ?>
+						<?php foreach ($listReportedPhoto as $key => $photo) : ?>
+							<tr>
+								<td>
+									<?php echo strtoupper($photo->getLast_name())." ".ucfirst($photo->getFirst_name()); ?>	
+								</td>
+								<td><a href="<?php echo $photo->getUrl_photo(); ?>" target="_blank" name="url_photo">Lien de la photo</a></td>
+								<td> 
+									<?php echo ($photo->getIs_locked()==0) ? "<button id='photo-".$photo->getId_participate()."' class='btn btn-success lock_photo'>Déverrouillée</button>" : "<button id='photo-".$photo->getId_participate()."' class='btn btn-danger unlock_photo'>Verrouillée</button>"?>
+								</td>
+							</tr>
+						<?php endforeach; ?>  
+					<?php endif ?>
+				</tbody>
+			</table>
+	</div>
 </div>
 
 <!--      Modal      -->
