@@ -46,11 +46,11 @@ img {max-width: 100%; max-height: 500px;}
 
 .pbFileSize {display: none;}
 
-.cgu-link:hover {color: #730932;}
+.cgu-link:hover {color: #ad7b3a;}
 
 footer .navbar {margin-bottom: 0;}
 
-.footer-link:hover {color: #730932 !important;}
+.footer-link:hover {color: #ad7b3a !important;}
 
 .panel-default{
 	transition: all 1s;
@@ -69,4 +69,13 @@ footer .navbar {margin-bottom: 0;}
 
 textarea{
 	color:black;
+}
+
+.modal{
+	color: black;
+	font-size: 18px;
+}
+
+.modal-footer{
+	text-align : center;
 }
