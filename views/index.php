@@ -53,8 +53,8 @@
 					</a>
 				</div>
 			<?php else : //Visiteur non connecté ?>
-				<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
-					<button class="btn" id="login">Connectez-vous</button>
+				<div class="col-sm-10 col-sm-offset-1">
+					<button class="btn" id="login">Participer !</button>
 				</div>
 			<?php endif; ?>		
 		</div>

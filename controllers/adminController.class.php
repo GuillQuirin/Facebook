@@ -116,9 +116,8 @@ class adminController extends template{
 			if(!$check)
 				$upd = $competitionManager->updateCompetition($competition);
 			else
-				$error="Un concours est déjà organisé dans ce laps de temps.";		
+				$error="Un concours est déjà organisé dans ce laps de temps.";				
 		}
-
 		echo $error;
 	}
 
