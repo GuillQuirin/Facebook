@@ -5,6 +5,7 @@ $(document).ready(function() {
     var listAdmin = $('#listCompetitions').DataTable( {
         "paging":   true,
         "ordering": true,
+        "order": [[ 1, "desc" ]],
         "info":     true,
         responsive: true,
         "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Tous"]],
@@ -120,6 +121,7 @@ $(document).ready(function() {
         "ordering": true,
         "info":     true,
         responsive: true,
+        "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Tous"]],
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: -1 }
@@ -145,8 +147,8 @@ $(document).ready(function() {
                 }
             })
             .done(function(result) {
-                console.log(result);
-                //location.reload();
+                //console.log(result);
+                location.reload();
             });
         }
     });

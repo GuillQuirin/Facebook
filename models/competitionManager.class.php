@@ -70,13 +70,14 @@ class competitionManager extends basesql{
 
 	public function timeCompetition($data){
 		$sql = "SELECT * FROM ".$this->table." 
-				WHERE active=1 AND (DATEDIFF(:end_date, start_date)<0 OR DATEDIFF(:start_date, end_date)<0)";
+				WHERE active=1 
+				AND DATEDIFF(:end_date, start_date)<0 
+				AND DATEDIFF(:start_date, end_date)<0
+				AND DATEDIFF(start_date, :end_date)<0";
 		//SELECT * FROM competition WHERE active=1 AND (DATEDIFF('2017-01-27', start_date)<0 OR DATEDIFF('2017-01-31', end_date)<0)
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$sth->execute($data);
 		$r = $sth->fetchAll(PDO::FETCH_ASSOC);
-		//var_dump($sql);
-		//var_dump($data);
 		return (!empty($r)) ? new competition($r[0]) : null;
 	}
 

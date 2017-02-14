@@ -20,8 +20,12 @@
 					<?php foreach ($listCompetitions as $key => $competition) { ?>
 					<tr>
 						<td name='name'> <?php echo $competition->getName(); ?></td>
-						<td name='start_date' > <?php echo date('d/m/Y',strtotime($competition->getStart_date())); ?></td>
-						<td name='end_date' ><?php echo date('d/m/Y',strtotime($competition->getEnd_date())); ?></td>
+						<td name='start_date' data-order="<?php echo strtotime($competition->getStart_date()); ?>">
+							<?php echo date('d/m/Y',strtotime($competition->getStart_date())); ?>
+						</td>
+						<td name='end_date' data-order="<?php echo strtotime($competition->getEnd_date()); ?>">
+							<?php echo date('d/m/Y',strtotime($competition->getEnd_date())); ?>
+						</td>
 						<td name='totalParticipants' > <?php echo $competition->getTotalParticipants(); ?></td>
 						<td name='active'>
 							<?php 
@@ -64,7 +68,7 @@
 		</div>
 	</div>
 	<div id="part" class="tab-pane fade">
-			<table id="listUsers" class="table stripe order-column text-center col-sm-12">
+			<table id="listUsers" class="table stripe responsive order-column text-center col-sm-12 col-md-12">
 				<thead>
 					<th>Nom</th>
 					<th>Prenom</th>
