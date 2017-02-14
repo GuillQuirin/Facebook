@@ -9,6 +9,7 @@ body {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: left top;
+  color:white;
   
 }
 
@@ -96,6 +97,7 @@ table th, table td{
 
 table{
   background-color: #e8e8e8;
+  color:grey;
 }
 
 .bord { 
@@ -154,6 +156,7 @@ table.col-md-12{
 
 table.dataTable.no-footer{
   border: 0;
+  width:100%;
 }
 
 #export{
@@ -164,3 +167,12 @@ table.dataTable.no-footer{
   margin-left:0px;
   padding-left: 0px;
 }
+
+.padding-top-10{
+  padding-top:10px;
+}
+
+.padding-top-20{
+  padding-top:20px;
+}
+
