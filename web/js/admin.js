@@ -102,7 +102,7 @@ $(document).ready(function() {
             }
             else
                 location.reload();
-            //console.log(msg);
+                //console.log(msg);
           });
         return false;
     });

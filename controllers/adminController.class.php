@@ -51,6 +51,9 @@ class adminController extends template{
 		if($error==""){
 			$error = "ok";
 			$competition = new competition($_POST);
+			//Verification du bon format de la date
+			$competition->setStart_date($_POST['start_date'],1);
+			$competition->setEnd_date($_POST['end_date'],1);
 			$competitionManager = new competitionManager();
 			
 			if(isset($_POST['active'])){
@@ -59,7 +62,7 @@ class adminController extends template{
 			}
 			else 
 				$competition->setActive("0");
-			
+
 			if(!$check)
 				$competitionManager->insertCompetition($competition);
 			else
@@ -100,6 +103,8 @@ class adminController extends template{
 			$error = "ok";	
 			$check=false;
 			$competition = new competition($_POST);
+			$competition->setStart_date($_POST['start_date'],1);
+			$competition->setEnd_date($_POST['end_date'],1);
 			$competitionManager = new competitionManager();
 			$table = [
 				"start_date" => $_POST['start_date'],

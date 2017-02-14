@@ -162,13 +162,13 @@
 					<div class="form-group row">
 						<label for="start_date" class="col-xs-3 col-form-label text-left">Date de début</label>
 						<div class="col-xs-9">
-							<input type="date" name="start_date" class="form-control" required>
+							<input type="date" name="start_date" placeholder="jj/mm/aaaa" class="form-control" required>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="end_date" class="col-xs-3 col-form-label text-left">Date de fin</label>
 						<div class="col-xs-9">
-							<input type="date" name="end_date" class="form-control" required>
+							<input type="date" name="end_date" placeholder="jj/mm/aaaa" class="form-control" required>
 						</div>	
 					</div>
 					<div class="form-group row">
