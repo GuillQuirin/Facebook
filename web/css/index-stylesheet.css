@@ -1,11 +1,3 @@
-body{
-	background-image: url("../img/index.jpg");
-	background-size: cover;
-	background-attachment: fixed;
-	color : white;
-	font-family: 'Architects Daughter', cursive; 
-}
-
 h1, h2{
 	font-family: 'Architects Daughter', cursive;
 	font-weight: bold;
