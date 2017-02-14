@@ -34,6 +34,10 @@ h1{
   border: 1px solid white;
 }
 
+#navbar .nav>li.active a{
+  background-color: inherit;
+}
+
 .nav>li>a:hover{
   background-color: inherit;
 }
