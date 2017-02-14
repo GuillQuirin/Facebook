@@ -1,7 +1,9 @@
 body{
-	background-image: url(../img/wallpaper.png);
+	background-image: url("../img/index.jpg");
 	background-size: cover;
 	background-attachment: fixed;
+	color : white;
+	font-family: 'Architects Daughter', cursive; 
 }
 
 h1, h2{
@@ -16,7 +18,7 @@ button, .btn{
     font-size: 15px;
     margin: 10px auto;
     white-space: normal !important;
-    background-color: #730932;
+    background-color: #ad7b3a;
     color: #fff;
 }
 .btn:hover, .btn:active, .btn:focus {color: #e8ced8;}
@@ -45,14 +47,6 @@ img {max-width: 100%; max-height: 500px;}
 .pbFileSize {display: none;}
 
 .cgu-link:hover {color: #730932;}
-
-footer{
-	position: absolute;
-    bottom: 0;
-    width: 100%;
-    font-size: 18px;
-}
-
 
 footer .navbar {margin-bottom: 0;}
 
