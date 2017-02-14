@@ -33,7 +33,7 @@
 	<input type="hidden" id="isConnected" value="<?php echo (isset($_SESSION['ACCESS_TOKEN'])) ? 1 : 0; ?>">
 	<?php if(!isset($_SESSION['idFB'])) : ?>
 		<div class="row">
-			<p class="col-md-8 col-md-offset-2 text-center">Connectez-vous à l'application et admirez les chefs d'oeuvres que vous réservent les autres participants</p>
+			<h4><p class="col-sm-8 col-sm-offset-2 text-center">Connectez-vous à l'application et admirez les chefs d'oeuvres que vous réservent les autres participants !</p></h4>
 		</div>
 	<?php endif; ?>
 	<div class="row">
@@ -53,8 +53,8 @@
 					</a>
 				</div>
 			<?php else : //Visiteur non connecté ?>
-				<div class="col-sm-10 col-sm-offset-1">
-					<button class="btn" id="login">Participer !</button>
+				<div class="col-sm-6 col-sm-offset-3">
+					<button class="btn" id="login">Se connecter !</button>
 				</div>
 			<?php endif; ?>		
 		</div>
@@ -123,7 +123,7 @@
 													<div class="modal-content">
 														<div class="modal-header">
 															<p>Assurez-vous d'être le propriétaire du contenu que vous envoyez.</p> 
-															<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/cgu'; ?>" class="cgu-link">conditions d'utilisations</a>.</p>
+															<p>En participant au concours, vous acceptez les <a href="<?php echo WEBPATH.'/cgu'; ?>" class="cgu-link">conditions générales d'utilisations</a>.</p>
 														</div>
 														<div class="modal-body">
 															<img src='<?php echo $photo['source']; ?>' alt="photo de l'utilisateur">
@@ -136,7 +136,7 @@
 																	<p>Vous pouvez autoriser Facebook à enregistrer vos photos dans un album administrable afin de pouvoir y intégrer un message.</p>
 																	<button class="postPhotos">Autoriser</button>
 																<?php else: ?>
-																	<p>Rédigez un message personnalisé pour vos amis qui consulteraient votre photo</p>
+																	<p>Rédigez un message personnalisé pour vos amis qui consulteraient votre photo.</p>
 																	<textarea class="col-xs-12 col-md-12" name="message"></textarea>
 																<?php endif; ?>
 															</div>
@@ -147,7 +147,7 @@
 																<button type="submit" class="btn sendPicture">Envoyer cette photo</button>
 															</div>
 															<div class="errorSend text-left">
-																<p>Attention, certaines informations sont nécessaires pour finaliser votre participation:</p>
+																<p>Attention, certaines informations sont nécessaires pour finaliser votre participation :</p>
 																<ul class="listError">
 																</ul>
 																<p>Vous pouvez modifier vos autorisations à Facebook en cliquant <a href=""><button>ici</button></a></p>
@@ -279,8 +279,8 @@
 										<form action="<?php echo WEBPATH.'/index/submit'; ?>" id="localForm" method="post" enctype="multipart/form-data" >
 											<p><input type="file" name="file" id="i_file" required></p>
 											<input type="hidden" name="uploadFile">
-											<p>Rédiger un message personnalisé et votre participation sera publiée sur votre mur !</p>
-											<textarea name="message"></textarea>
+											<h4><p>Rédiger un message personnalisé et votre participation sera publiée sur votre mur !</p></h4>
+											<textarea name="message" rows="3" cols="60"></textarea>
 											<input type="submit" class="btn" name="upload" value="Envoyer">
 										</form>
 
