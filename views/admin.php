@@ -6,7 +6,7 @@
 
 <div class="tab-content">
 	<div id="concours" class="tab-pane fade in active">
-		<table id="listCompetitions" class="table stripe responsive order-column text-center col-sm-12">
+		<table id="listCompetitions" class="table stripe responsive order-column text-center col-sm-12 no-padding">
 			<thead>
 				<th>Nom</th>
 				<th>Début</th>
@@ -64,7 +64,7 @@
 		</div>
 	</div>
 	<div id="part" class="tab-pane fade">
-			<table id="listUsers" class="table stripe order-column text-center col-sm-12">
+			<table id="listUsers" class="table stripe order-column text-center col-sm-12 no-padding">
 				<thead>
 					<th>Nom</th>
 					<th>Prenom</th>
@@ -106,7 +106,7 @@
 			</table>
 	</div>
 	<div id="photos" class="tab-pane fade">
-			<table id="listReportedPhoto" class="table stripe order-column text-center col-sm-12">
+			<table id="listReportedPhoto" class="table stripe order-column text-center col-sm-12 no-padding">
 				<thead>
 					<th>Nom du participant</th>
 					<th>Lien de l'image signalée</th>
