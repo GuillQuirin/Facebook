@@ -66,7 +66,7 @@
 					<a href="<?php echo WEBPATH; ?>/export">Export</a>
 				</li>
 				<li class="hidden-xs col-sm-2 col-md-2 <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
-					<a href="<?php echo WEBPATH; ?>/setting">Règlement et CGU</a>
+					<a href="<?php echo WEBPATH; ?>/setting">Règlements</a>
 				</li>
 				<li class="col-xs-2 hidden-sm hidden-md hidden-lg <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/setting') echo "active"; ?>">
 					<a href="<?php echo WEBPATH; ?>/setting">Droits</a>
