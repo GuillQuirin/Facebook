@@ -1,8 +1,8 @@
 <div class="col-sm-12 padding-top-20">	
-<div class="row">
-	<div>
-		<img class="img-logo" style="width: 10%;" src="https://scontent-fra3-1.xx.fbcdn.net/v/	t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" alt="logo">
-	</div>
+	<div class="row">
+		<div>
+			<img class="img-logo" style="width: 10%;" src="https://scontent-fra3-1.xx.fbcdn.net/v/	t1.0-9/552345_420640654657180_1666928990_n.jpg?oh=7e0262fb4fa4671e45c13bfefcbfc4ef&oe=58C27523" alt="logo">
+		</div>
 		<div class="col-xs-10 col-xs-offset-1 text-center">
 			<?php if(isset($competition)) :?>
 				<h1>CONCOURS <br> <?php echo $competition->getName(); ?></h1>
@@ -173,7 +173,9 @@
 						</div>
 					<?php else: ?>
 						<p>Vous devez autoriser Facebook à récupérer les photos de vos albums</p>
-						<button class="getPhotos">Autoriser</button>
+						<div class="col-sm-6 col-sm-offset-3">
+							<button class="btn getPhotos">Autoriser</button>
+						</div>
 						<?php
 						endif;
 
@@ -281,7 +283,9 @@
 											<input type="hidden" name="uploadFile">
 											<h4><p>Rédiger un message personnalisé et votre participation sera publiée sur votre mur !</p></h4>
 											<textarea name="message" rows="3" cols="60"></textarea>
-											<input type="submit" class="btn" name="upload" value="Envoyer">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" class="btn" name="upload" value="Envoyer">
+											</div>
 										</form>
 
 										<p class="pbFileSize">Le fichier est trop gros pour l'application, il ne doit pas excèder 10 Mo</p>
@@ -295,7 +299,7 @@
 									<?php else: ?>
 
 										<p>Vous devez autoriser Facebook à enregistrer vos photos dans un album que vous pourrez ensuite administrer</p>
-										<button class="postPhotos">Autoriser</button>
+										<button class="btn col-sm-6 col-sm-offset-3 postPhotos">Autoriser</button>
 
 									<?php endif; ?>
 								</div>
@@ -307,7 +311,7 @@
 						</div>
 					</div>
 				<?php endif; ?>
-				</div>
+			</div>
 			<!-- Footer des pages -->
 			<footer class="footer col-sm-12">
 				<a href="<?php echo WEBPATH; ?>/rules" class="footer-link">Règlement du concours</a> | 
