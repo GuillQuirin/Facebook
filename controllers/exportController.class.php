@@ -54,6 +54,11 @@ class exportController extends template{
             $compet->addChild('datefin', $competition->getEnd_date());
             $compet->addChild('prix', $competition->getPrize());
             $compet->addChild('id_gagnant', $competition->getId_winner());
+            $compet->addChild('nom_gagnant', $competition->getLast_name());
+            $compet->addChild('prenom_gagnant', $competition->getFirst_name());
+            $compet->addChild('email_gagnant', $competition->getEmail());
+            $compet->addChild('emplacement_gagnant', $competition->getLocation());
+            $compet->addChild('age_gagnant', $competition->getId_winner());
             $compet->addChild('statut', $competition->getActive());
             $compet->addChild('url_prix', $competition->getUrl_prize());
             $compet->addChild('nb_participants', $competition->getTotalParticipants());

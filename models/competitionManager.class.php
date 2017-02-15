@@ -36,7 +36,7 @@ class competitionManager extends basesql{
     					COUNT(p.id_user) as totalParticipants 
     			FROM competition c 
     			LEFT OUTER JOIN participate p ON c.id_competition=p.id_competition
-                        LEFT OUTER JOIN user u WHERE c.id_winner = u.id_user
+                LEFT OUTER JOIN user u ON c.id_winner = u.id_user
     			GROUP BY c.id_competition";
 		
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));

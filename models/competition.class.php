@@ -15,6 +15,11 @@ class competition extends motherClass{
 	protected $deleted=null;
 		
 	protected $totalParticipants=null;
+	protected $last_name=null;
+	protected $first_name=null;
+	protected $email=null;
+	protected $location=null;
+	protected $age_range=null;
 
 
 
@@ -51,6 +56,12 @@ class competition extends motherClass{
 
 	public function setTotalParticipants($v){$this->totalParticipants=$v;}
 
+	public function setLast_name($v){$this->last_name=$v;}	
+	public function setFirst_name($v){$this->first_name=$v;}	
+	public function setAge_range_name($v){$this->age_range=$v;}	
+	public function setEmail($v){$this->email=$v;}	
+	public function setLocation($v){$this->location=$v;}
+
 
 	public function getId_competition(){return $this->id_competition;}
 	public function getName(){return $this->name;}
@@ -66,4 +77,10 @@ class competition extends motherClass{
 	public function getDeleted(){return $this->deleted;}
 	
 	public function getTotalParticipants(){return $this->totalParticipants;}
+
+	public function getLast_name(){return $this->last_name;}	
+	public function getFirst_name(){return $this->first_name;}	
+	public function getAge_range(){return $this->age_range;}	
+	public function getEmail(){return $this->email;}	
+	public function getLocation(){return $this->location;}
 }
