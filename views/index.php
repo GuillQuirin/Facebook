@@ -25,7 +25,7 @@
 				<h2>TENTEZ DE GAGNER <br> <?php echo $competition->getPrize(); ?></h2>
 				<?php 
 				if($competition->getUrl_prize()!==NULL)
-					echo "<div class='col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3'><img class='img-responsive' src='".$competition->getUrl_prize()."' alt='photo du prix'></div>";
+					echo "<div class='col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3'><img class='img-responsive' src='".$competition->getUrl_prize()."' alt='photo du prix'></div>";
 				?>
 			<?php endif; ?>
 		</div>
@@ -282,7 +282,7 @@
 											<p><input type="file" name="file" id="i_file" required></p>
 											<input type="hidden" name="uploadFile">
 											<h4><p>Rédiger un message personnalisé et votre participation sera publiée sur votre mur !</p></h4>
-											<textarea class="col-sm-12" name="message" rows="3" cols="60"></textarea>
+											<textarea class="col-xs-12" name="message" rows="3" cols="60"></textarea>
 											<div class="col-sm-6 col-sm-offset-3">
 												<input type="submit" class="btn" name="upload" value="Envoyer">
 											</div>
