@@ -10,7 +10,6 @@ body {
   background-repeat: no-repeat;
   background-position: left top;
   color:white;
-  
 }
 
 h2 {
@@ -139,12 +138,7 @@ table{
   font-weight: bold;
 }
 
-.apercu{
-  outline : 1px solid black;
-  font-size : 12px;
-  font-family : "Courier New";
-  background : url("http://hdwallpaper20.com/wp-content/uploads/2016/07/black-wallpapers15-1024x640.jpg");
-}
+
 
 .apercu input, .apercu select {background-color: #e5e6e8;
 }

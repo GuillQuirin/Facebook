@@ -11,6 +11,7 @@
 				<form>
 					<div class="input-group">
 						<select class="form-control" name="designExist" id="designExist">
+							<option value="">Sélectionnez un design ...</option>
 							<?php foreach ($listDesign as $key => $design) { ?>
 							<option value="<?php echo $design->getId_design();?>"><?php echo $design->getName(); ?></option>
 							<?php } ?>                            
@@ -51,43 +52,44 @@
 		<form>
 			<h2 class="text-uppercase"> Création d'un design </h2>
 			<div class="form-group col-sm-12">
-				<label for="name">Nom du design :</label>
-				<input type="text" class="form-control" name="name" id="name" required>
+				<label for="nameInsert">Nom du design :</label>
+				<input type="text" class="form-control" name="nameInsert" id="nameInsert" required>
 			</div>
 			<div class="form-group col-sm-5 padding-top-10">
-				<label for="url">URL de l'image de fond :</label>
-				<input type="text" class="form-control" name="url" id="url" >
+				<label for="urlInsert">URL de l'image de fond :</label>
+				<input type="text" class="form-control" name="urlInsert" id="urlInsert" >
 			</div>
 			<div class="col-sm-2 no-padding text-center padding-top-20">
 				<h3 class="no-margin">OU</h3>
 			</div>
 			<div class="form-group col-sm-5 padding-top-10">
-				<label for="color">Couleur du fond :</label>
-				<input type="text" class="jscolor {hash:true} form-control" name="color" id="color" placeholder="#">
+				<label for="colorInsert">Couleur du fond :</label>
+				<input type="text" class="jscolor {hash:true} form-control" name="colorInsert" id="colorInsert" placeholder="#">
 			</div>
 			<div class="form-group col-sm-5 padding-top-10">
-				<label for="fontColor">Couleur de la police :</label>
-				<input type="text" class="jscolor {hash:true} form-control" name="fontColor" id="fontColor" required>
+				<label for="fontColorInsert">Couleur de la police :</label>
+				<input type="text" class="jscolor {hash:true} form-control" name="fontColorInsert" id="fontColorInsert" required>
 			</div>
 			<div class="form-group col-sm-5 col-sm-offset-2 padding-top-10">
-				<label for="fontColorForm">Couleur des champs du formulaire :</label>
-				<input type="text" class="jscolor {hash:true} form-control" name="fontColorForm" id="fontColorForm" required>
+				<label for="fontColorFormInsert">Couleur des champs du formulaire :</label>
+				<input type="text" class="jscolor {hash:true} form-control" name="fontColorFormInsert" id="fontColorFormInsert" required>
 			</div>
 			<div class="form-group col-sm-5 padding-top-10">
-				<label for="fontSize">Taille de la police :</label>
-				<input type="number" class="form-control" name="fontSize" id="fontSize" step="1" min="12" max="16" required>
+				<label for="fontSizeInsert">Taille de la police :</label>
+				<input type="number" class="form-control" name="fontSizeInsert" id="fontSizeInsert" step="1" min="12" max="16" required>
 			</div> 
 			<div id="hsvflat"></div>
 			<div class="form-group col-sm-5 col-sm-offset-2 padding-top-10">
-				<label for="fontStyle">Style de la police du texte :</label>
-				<select class="form-control" name="fontStyle" id="fontStyle" required>
+				<label for="fontStyleInsert">Style de la police du texte :</label>
+				<select class="form-control" name="fontStyleInsert" id="fontStyleInsert" required>
 					<option value="Arial">Arial</option>
 					<option value="Arial, sans serif">Arial, sans serif</option> 
 					<option value="Comic Sans MS">Comic Sans MS</option> 
 					<option value="Courier New">Courier New</option> 
 					<option value="Helvetica">Helvetica</option>
 					<option value="Helvetica, sans serif">Helvetica, sans serif</option> 
-					<option value="Impact">Impact</option>                               
+					<option value="Impact">Impact</option>
+					<option value="Architects Daughter">Architects Daughter</option>                           
 				</select>
 			</div>
 			<div class="col-sm-12 padding-top-20">
@@ -113,7 +115,9 @@
 					$("#fontColorForm").val(listDesign[0].form_color);
 					$("#fontSize").val(listDesign[0].font_size);
 					$("#fontStyle").val(listDesign[0].font_name);
-					$("#apercu").css("backgroundColor", listDesign[0].background_color);
+					if(listDesign[0].background_color){
+						$("#apercu").css("backgroundColor", listDesign[0].background_color);
+					}
 					$("#apercu").css("color", listDesign[0].text_color);
 					$("#apercu").css("fontSize", listDesign[0].font_size);
 					$("#apercu").css("fontFamily", listDesign[0].font_name);
@@ -131,13 +135,13 @@
 					method: "POST",
 					url: $('[name="webpath"]').val()+"/design/addDesign",
 					data: {
-						name: $("#name").val(),
-						background_url: $("#url").val(),
-						background_color: $("#color").val(),
-						text_color: $("#fontColor").val(),
-						form_color: $("#fontColorForm").val(),
-						font_size: $("#fontSize").val(),
-						font_name : $("#fontStyle").val()
+						name: $("#nameInsert").val(),
+						background_url: $("#urlInsert").val(),
+						background_color: $("#colorInsert").val(),
+						text_color: $("#fontColorInsert").val(),
+						form_color: $("#fontColorFormInsert").val(),
+						font_size: $("#fontSizeInsert").val(),
+						font_name : $("#fontStyleInsert").val()
 					}
 				})
 				.done(function( msg ) {
