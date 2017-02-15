@@ -30,6 +30,10 @@ h1{
   color: white !important;
 }
 
+#listReportedPhoto a{
+  color: grey;
+}
+
 #navbar .nav>li.active{
   border: 1px solid white;
 }
