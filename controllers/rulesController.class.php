@@ -9,7 +9,8 @@ class rulesController extends template{
 		$v->assign("title", "Règlement du concours");
 		$settingManager = new settingManager();
 		$setting = $settingManager->getSetting();
-		$v->assign("setting", $setting[1]); //Règlement
+		if(is_array($setting) && isset($setting[1]))
+			$v->assign("setting", $setting[1]); //Règlement
 
         $v->setView("rules");
     }
