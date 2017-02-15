@@ -25,7 +25,7 @@
 				<h2>TENTEZ DE GAGNER <br> <?php echo $competition->getPrize(); ?></h2>
 				<?php 
 				if($competition->getUrl_prize()!==NULL)
-					echo "<div class='col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3'><img class='img-responsive' src='".$competition->getUrl_prize()."' alt='photo du prix'></div>";
+					echo "<div class='col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3'><img class='img-responsive' src='".$competition->getUrl_prize()."' alt='photo du prix'></div>";
 				?>
 			<?php endif; ?>
 		</div>
