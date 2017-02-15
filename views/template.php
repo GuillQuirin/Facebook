@@ -54,14 +54,11 @@
 			<header class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
 				<nav>
 					<ul class="col-md-12 nav nav-tabs text-center">
-						<li class="col-xs-4 col-sm-4 col-md-4 menu-li">
+						<li class="col-xs-6 col-sm-6 menu-li">
 							<a href="<?php echo WEBPATH; ?>">Accueil</a>
 						</li>
-						<li class="col-xs-4 col-sm-4 col-md-4 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/gallery') echo "active"; ?>">
+						<li class="col-xs-6 col-sm-6 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/gallery') echo "active"; ?>">
 							<a href="<?php echo WEBPATH; ?>/gallery">Galerie</a>
-						</li>
-						<li class="col-xs-4 col-sm-4 col-md-4 menu-li <?php if($_SERVER['REQUEST_URI'] == WEBPATH.'/rules') echo "active"; ?>">
-							<a href="<?php echo WEBPATH; ?>/rules">Règlement</a>
 						</li>
 					</ul>
 				</nav>	
