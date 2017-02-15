@@ -228,7 +228,7 @@ class template{
       $mail->IsHTML(true); 
 
       $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
-      $mail->SMTPDebug  = 4; 
+      //$mail->SMTPDebug  = 4; 
 
       //Expediteur (le site)
 
