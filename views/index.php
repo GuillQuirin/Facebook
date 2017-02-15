@@ -282,7 +282,7 @@
 											<p><input type="file" name="file" id="i_file" required></p>
 											<input type="hidden" name="uploadFile">
 											<h4><p>Rédiger un message personnalisé et votre participation sera publiée sur votre mur !</p></h4>
-											<textarea name="message" rows="3" cols="60"></textarea>
+											<textarea class="col-sm-12" name="message" rows="3" cols="60"></textarea>
 											<div class="col-sm-6 col-sm-offset-3">
 												<input type="submit" class="btn" name="upload" value="Envoyer">
 											</div>
