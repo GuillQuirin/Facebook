@@ -23,14 +23,14 @@ class exportController extends template{
             'Date de début du concours',
             'Date de fin du concours', 
             'Prix du gagnant',
-            'ID du gagnant',  
+            'ID du gagnant',
+            'Statut du concours',
+            'URL du prix',
             'Nom du gagnant',
             'Prenom du gagnant',
             'Email du gagnant',
             'Emplacement du gagnant',
             'Age du gagnant',
-            'Statut du concours',
-            'URL du prix',
             'Nombre de participants');
 
         fputcsv($output, $entetes, ";");
@@ -58,7 +58,7 @@ class exportController extends template{
             $compet->addChild('prenom_gagnant', $competition->getFirst_name());
             $compet->addChild('email_gagnant', $competition->getEmail());
             $compet->addChild('emplacement_gagnant', $competition->getLocation());
-            $compet->addChild('age_gagnant', $competition->getId_winner());
+            $compet->addChild('age_gagnant', $competition->getAge_range());
             $compet->addChild('statut', $competition->getActive());
             $compet->addChild('url_prix', $competition->getUrl_prize());
             $compet->addChild('nb_participants', $competition->getTotalParticipants());
