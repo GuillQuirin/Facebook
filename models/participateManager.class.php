@@ -37,7 +37,8 @@ class participateManager extends basesql{
 						(SELECT COUNT(v.id_participate) FROM vote v WHERE p.id_participate = v.id_participate ) as nb_votes
 					FROM participate p
 					LEFT OUTER JOIN user u ON p.id_user = u.id_user
-					WHERE id_competition=:id_competition AND p.is_locked = 0 "
+					WHERE id_competition=:id_competition AND p.is_locked = 0 ";
+					
 		switch($order){
 			case 1:
 				$sql.=" ORDER BY p.date_created ASC";
