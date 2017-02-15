@@ -1,6 +1,6 @@
 <div class="form-group">
   	<h1 class="text-uppercase">Règlement du concours </h1>
-  	<textarea class="summernote" id="regulation"><?php (isset($listSetting)) ? echo $listSetting[1]->getValue() : "";?></textarea> 
+  	<textarea class="summernote" id="regulation"><?php echo (isset($listSetting)) ? $listSetting[1]->getValue() : "";?></textarea> 
   	<button type="submit" id="saveRegulation" class="btn btn-success">Sauvegarder le règlement</button>
 </div><br>
 <div class="form-group">
