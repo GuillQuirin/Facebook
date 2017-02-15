@@ -178,7 +178,7 @@ class template{
   protected function checkWinner(){
     $competitionManager = new competitionManager();
     if(isset($this->competition)){
-      $competition = $this->competition;//$competitionManager->checkEndOfCompetition($this->competition);
+      $competition = $competitionManager->checkEndOfCompetition($this->competition);
       if($competition){
   
         $participationManager = new participateManager();

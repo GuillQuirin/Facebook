@@ -56,8 +56,7 @@ class competitionManager extends basesql{
 	} 
 
 	public function checkEndOfCompetition(competition $competition){
-		$sql = "SELECT * FROM ".$this->table." 
-					WHERE id_competition=:id_competition AND end_date=CURRENT_DATE() AND active=1";
+		$sql = "SELECT * FROM ".$this->table." WHERE end_date<CURRENT_DATE() AND active=1";
 		$sth = $this->pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$data = [
 			'id_competition' => $competition->getId_competition()
