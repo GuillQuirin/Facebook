@@ -81,3 +81,16 @@ span.nb_likes{
 	max-width: 30%;
 	cursor: pointer;
 }
+
+.modal{
+  color:black;
+}
+
+select{
+    color:black;
+}
+
+.selectitem{
+    padding-top:30px;
+    padding-left:30px;
+}
