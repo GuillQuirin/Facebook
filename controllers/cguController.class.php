@@ -9,7 +9,8 @@ class cguController extends template{
 		$v->assign("title", "Conditions Générales");
 		$settingManager = new settingManager();
 		$setting = $settingManager->getSetting();
-		$v->assign("setting", $setting[0]);
+		if(is_array($setting) && isset($setting[0]))
+			$v->assign("setting", $setting[0]);
 
         $v->setView("cgu");
     }
