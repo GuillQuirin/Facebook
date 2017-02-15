@@ -38,8 +38,8 @@ $(document).ready(function(){
 
 	//Affichage des erreurs
 	$('.onlineForm').submit(function(){
-		//controlDatas('.errorSend');
-		//return false;
+		controlDatas('.errorSend');
+		return false;
 	});
 
 	//Ouverture d'une pop-up image
