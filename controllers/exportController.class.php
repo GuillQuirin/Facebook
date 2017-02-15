@@ -24,6 +24,11 @@ class exportController extends template{
             'Date de fin du concours', 
             'Prix du gagnant',
             'ID du gagnant',  
+            'Nom du gagnant',
+            'Prenom du gagnant',
+            'Email du gagnant',
+            'Emplacement du gagnant',
+            'Age du gagnant',
             'Statut du concours',
             'URL du prix',
             'Nombre de participants');
